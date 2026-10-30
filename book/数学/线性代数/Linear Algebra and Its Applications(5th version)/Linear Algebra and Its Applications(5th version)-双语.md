@@ -2962,3 +2962,137 @@ $$\{1,\ t,\ t^2,\ \dots,\ t^n\}$$
 > **本节精髓**：Theorem 3 给出基的**构造性存在**——任何张成集都能瘦身成基（反之 4.5 节将证明：任何无关集都能扩充成基，且所有基大小相同 = 维数）。多项式与函数的例子提醒我们：线性无关性是个"关系"概念，与向量是什么无关，只与"怎么组合"有关。
 
 ---
+---
+
+## 4.4 坐标系 Coordinate Systems
+
+**中文讲解**：2.9 节我们在 $\mathbb{R}^n$ 中见过 $\mathcal{B}$-坐标。本节把它推广到**任意向量空间**：给定向量空间 $V$ 的一组基 $\mathcal{B}$，$V$ 中每个向量都有唯一的"坐标身份证" $[\mathbf{x}]_{\mathcal{B}} \in \mathbb{R}^n$。这把抽象的 $V$ 与具体的 $\mathbb{R}^n$ **一一对应**起来——同构（isomorphism）登场。
+
+### 唯一表示定理 THEOREM 7
+
+> 设 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$ 是向量空间 $V$ 的一组基。则对每个 $\mathbf{x} \in V$，存在**唯一**的一组标量 $c_1, \dots, c_n$ 使
+
+> $$\mathbf{x} = c_1\mathbf{b}_1 + c_2\mathbf{b}_2 + \cdots + c_n\mathbf{b}_n$$
+
+**为什么需要"基"才有坐标？**
+- **张成**保证"每个 $\mathbf{x}$ 都有表示"（存在性）
+- **无关**保证"表示只有一种"（唯一性）
+
+缺任何一条，"坐标"这个概念都会崩塌——所以基是坐标系的代名词。
+
+### $\mathcal{B}$-坐标定义
+
+**定义**：上式中的权 $c_1, \dots, c_n$ 称为 $\mathbf{x}$ 相对基 $\mathcal{B}$ 的**坐标**，向量
+
+$$[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} c_1 \\
+\vdots \\
+c_n \end{bmatrix} \in \mathbb{R}^n$$
+
+称为 $\mathbf{x}$ 的 **$\mathcal{B}$-坐标向量**。
+
+**例1（Example 1）**：设 $\mathbf{b}_1 = \begin{bmatrix} 2 \\
+1 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -1 \\
+1 \end{bmatrix}$, $\mathbf{x} = \begin{bmatrix} 4 \\
+5 \end{bmatrix}$，$\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2\}$。求 $[\mathbf{x}]_{\mathcal{B}}$。
+
+**解**：解 $c_1\mathbf{b}_1 + c_2\mathbf{b}_2 = \mathbf{x}$：
+
+$$\begin{bmatrix} 2 & -1 & 4 \\
+1 & 1 & 5 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 3 \\
+0 & 1 & 2 \end{bmatrix}$$
+
+故 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
+2 \end{bmatrix}$。**验证**：$3\mathbf{b}_1 + 2\mathbf{b}_2 = \begin{bmatrix} 6-2 \\
+3+2 \end{bmatrix} = \begin{bmatrix} 4 \\
+5 \end{bmatrix}$ ✓
+
+**图形直觉（FIGURE 1 vs FIGURE 2）**：同一向量 $\mathbf{x}$，在标准坐标纸上看是 $(4,5)$，在 $\mathcal{B}$-坐标纸（沿 $\mathbf{b}_1, \mathbf{b}_2$ 方向画网格）上看是 $(3,2)$——**换基 = 换坐标纸**：
+
+![FIGURE 1&2 坐标纸对比](img/fig44_1_2_graph_paper.png)
+
+*FIGURE 1 Standard graph paper. FIGURE 2 B-graph paper. 图1 标准坐标纸（e₁,e₂ 网格）；图2 B-坐标纸（b₁,b₂ 网格）——同一点 x，两种读数*
+
+### 坐标变换矩阵 The Change-of-Coordinates Matrix
+
+**例4（Example 4）**：接例 1，求从 $\mathcal{B}$ 到 $\mathbb{R}^2$ 标准基的**坐标变换矩阵**，并验证 $\mathbf{x} = P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}}$。
+
+**解**：把基向量按列排成矩阵：
+
+$$P_{\mathcal{B}} = \begin{bmatrix} \mathbf{b}_1 & \mathbf{b}_2 \end{bmatrix} = \begin{bmatrix} 2 & -1 \\
+1 & 1 \end{bmatrix}$$
+
+则 $P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 2 & -1 \\
+1 & 1 \end{bmatrix}\begin{bmatrix} 3 \\
+2 \end{bmatrix} = \begin{bmatrix} 4 \\
+5 \end{bmatrix} = \mathbf{x}$ ✓
+
+**核心公式 (4)**：
+
+$$\mathbf{x} = P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}}$$
+
+- $P_{\mathcal{B}}$ 的列就是 $\mathcal{B}$ 的基向量，它把"$\mathcal{B}$-坐标"翻译回"$V$ 中真实的向量"
+- 求 $[\mathbf{x}]_{\mathcal{B}}$：行化简 $[P_{\mathcal{B}}\ \ \mathbf{x}]$（例 1 的做法）
+- 因 $\mathcal{B}$ 是基，$P_{\mathcal{B}}$ 的列无关 ⟹ $P_{\mathcal{B}}$ **可逆**，故 $[\mathbf{x}]_{\mathcal{B}} = P_{\mathcal{B}}^{-1}\mathbf{x}$
+
+### 坐标映射与同构 The Coordinate Mapping
+
+把上面的一切总结为一个映射：对每个 $\mathbf{x} \in V$，
+
+$$\mathbf{x} \mapsto [\mathbf{x}]_{\mathcal{B}}$$
+
+称为**坐标映射**（FIGURE 5）：
+
+![FIGURE 5 坐标映射](img/fig44_5_coordinate_mapping.png)
+
+*FIGURE 5 The coordinate mapping from V onto $\mathbb{R}^n$. 图5 坐标映射：V 中每个向量 x 被映到它的坐标向量 $[\mathbf{x}]_{\mathcal{B}} \in \mathbb{R}^n$（一一对应、保持线性运算）*
+
+**THEOREM 8（坐标映射是同构）**：
+> 设 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$ 是向量空间 $V$ 的基。则坐标映射 $\mathbf{x} \mapsto [\mathbf{x}]_{\mathcal{B}}$ 是一个**从 $V$ 映上到 $\mathbb{R}^n$ 的一对一（onto / one-to-one）线性变换**。
+
+**定义（同构 isomorphism）**：从向量空间 $V$ 映上到向量空间 $W$ 的一对一线性变换，称为从 $V$ 到 $W$ 的**同构**。
+
+> **同构 = "结构完全相同"**：$V$ 与 $W$ 同构意味着它们在加法、数乘、线性组合等一切线性代数结构上不可区分——只是元素的"名字"不同。Theorem 8 说：**每个 n 维向量空间都同构于 $\mathbb{R}^n$**。这正是 2.9 节"任何 p 维子空间都同构于 $\mathbb{R}^p$"的完全版。
+
+**例5（Example 5）**：$\mathbb{P}_3$（次数 ≤ 3 的多项式）同构于 $\mathbb{R}^4$。映射：
+
+$$a_0 + a_1 t + a_2 t^2 + a_3 t^3 \;\mapsto\; \begin{bmatrix} a_0 \\
+a_1 \\
+a_2 \\
+a_3 \end{bmatrix}$$
+
+就是标准基 $\{1, t, t^2, t^3\}$ 下的坐标映射（FIGURE 6）：
+
+![FIGURE 6 P₃同构于R⁴](img/fig44_6_P3_isomorphic_R4.png)
+
+*FIGURE 6 The space $\mathbb{P}_3$ is isomorphic to $\mathbb{R}^4$. 图6 手机上显示的多项式 $a_0 + a_1 t + a_2 t^2 + a_3 t^3$，在笔记本电脑上变成坐标向量——同一对象，两种表示*
+
+**例6（Example 6，坐标向量验证书相关性）**：用坐标向量验证 $\mathbb{P}_2$ 中三个多项式 $1 + 2t^2$、$4 + t + 5t^2$、$3 + 2t$ 线性相关。
+
+**解**：相对标准基 $\{1, t, t^2\}$，坐标向量分别为 $(1,0,2)$、$(4,1,5)$、$(3,2,0)$。拼成矩阵行化简：
+
+$$\begin{bmatrix} 1 & 4 & 3 \\
+0 & 1 & 2 \\
+2 & 5 & 0 \end{bmatrix} \sim \begin{bmatrix} 1 & 4 & 3 \\
+0 & 1 & 2 \\
+0 & 0 & 0 \end{bmatrix}$$
+
+列相关（第 3 列 = 2×第 2 列 − 5×第 1 列）⇒ 多项式相关，且对应关系为：
+
+$$3 + 2t = 2(4 + t + 5t^2) - 5(1 + 2t^2)$$
+
+> **方法论**：验证抽象空间（$\mathbb{P}_n$、矩阵空间等）中的线性关系——**转成坐标向量在 $\mathbb{R}^n$ 中处理**，所有 $\mathbb{R}^n$ 的工具（行化简、主元、秩）直接可用。这是同构思想的实战威力。
+
+### 4.4 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Theorem 7 | 基 ⟹ 每个向量有**唯一**坐标表示（张成给存在、无关给唯一） |
+| $[\mathbf{x}]_{\mathcal{B}}$ | 向量在基 $\mathcal{B}$ 下的"坐标身份证" |
+| $P_{\mathcal{B}}$ | 坐标变换矩阵：$\mathbf{x} = P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}}$，列 = 基向量 |
+| Theorem 8 | 坐标映射是 V → Rⁿ 的同构（一一对应、保持线性） |
+| 同构 | 结构完全相同的两个空间（只换元素"名字"） |
+| 实战价值 | 抽象空间的线性问题 → 转成 Rⁿ 坐标计算 |
+
+> **本节精髓**：同构是线性代数最重要的"翻译器"——它宣告：凡 n 维向量空间，本质上都是 $\mathbb{R}^n$。第 1~3 章在 $\mathbb{R}^n$ 中建立的全部算法与定理，经由坐标映射，自动适用于多项式空间、函数空间、矩阵空间。下一节 4.5 给出维数的严格理论（所有基大小相同），完成抽象大厦的最后一块基石。
+
+---
