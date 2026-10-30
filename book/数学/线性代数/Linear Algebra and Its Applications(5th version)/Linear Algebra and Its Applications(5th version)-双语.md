@@ -4660,3 +4660,129 @@ $$\mathbf{u}\cdot\mathbf{v} = \|\mathbf{u}\|\,\|\mathbf{v}\|\cos\vartheta$$
 > **本节精髓**：内积是本章的"原子"——它统一定义了长度、距离、正交、角度。Theorem 3 把第 4 章的四个子空间织成正交网络：每个向量都能唯一拆成"$W$ 中的部分 + 垂直于 $W$ 的部分"（6.2 节）。下一节 6.2 研究**正交集**：一组两两正交的单位向量（标准正交基）为何是"最好的坐标系"。
 
 ---
+---
+
+## 6.2 正交集 Orthogonal Sets
+
+**中文讲解**：一组两两正交的非零向量，是线性代数中"最好合作"的向量组——定理 4 保证它们自动线性无关；定理 5 给出求坐标的**一行公式**（不用解方程组！）。本节还定义**正交投影**——把向量拆成"平面部分 + 垂直部分"，这是第 1 章解的存在性、6.5 节最小二乘的几何心脏。
+
+### 正交集与正交基
+
+**定义**：$\mathbb{R}^n$ 中的向量集 $\{\mathbf{u}_1, \dots, \mathbf{u}_p\}$ 称为**正交集（orthogonal set）**，若
+
+$$\mathbf{u}_i \cdot \mathbf{u}_j = 0 \quad (i \neq j)$$
+
+**例1（Example 1）**：$\mathbf{u}_1 = (3, 1, 1)$, $\mathbf{u}_2 = (-1, 2, 1)$, $\mathbf{u}_3 = (-\frac{1}{2}, -2, \frac{7}{2})$。
+
+**两两验证**：$\mathbf{u}_1\cdot\mathbf{u}_2 = -3 + 2 + 1 = 0$ ✓；$\mathbf{u}_1\cdot\mathbf{u}_3 = -\frac{3}{2} - 2 + \frac{7}{2} = 0$ ✓；$\mathbf{u}_2\cdot\mathbf{u}_3 = \frac{1}{2} - 4 + \frac{7}{2} = 0$ ✓——正交集！
+
+**THEOREM 4（正交集必无关）**：
+> 若 $S = \{\mathbf{u}_1, \dots, \mathbf{u}_p\}$ 是正交集（$\mathbf{u}_i \neq \mathbf{0}$），则 $S$ **线性无关**。
+
+**证明**：设 $c_1\mathbf{u}_1 + \cdots + c_p\mathbf{u}_p = \mathbf{0}$。对任意 $j$，两边与 $\mathbf{u}_j$ 作内积：
+
+$$0 = (c_1\mathbf{u}_1 + \cdots + c_p\mathbf{u}_p)\cdot\mathbf{u}_j = c_j(\mathbf{u}_j\cdot\mathbf{u}_j) \quad (\text{其余项正交消失})$$
+
+$\mathbf{u}_j \cdot \mathbf{u}_j > 0$ ⇒ $c_j = 0$。对所有 $j$ 成立，故无关。∎
+
+**正交基（orthogonal basis）**：子空间 $W$ 的基同时是正交集。
+
+**THEOREM 5（正交基下的坐标公式）**：
+> 设 $\{\mathbf{u}_1, \dots, \mathbf{u}_p\}$ 是 $W$ 的正交基。则 $W$ 中每个 $\mathbf{y}$ 可**唯一**写成
+
+> $$\mathbf{y} = c_1\mathbf{u}_1 + \cdots + c_p\mathbf{u}_p, \qquad c_j = \frac{\mathbf{y}\cdot\mathbf{u}_j}{\mathbf{u}_j\cdot\mathbf{u}_j}$$
+
+（证明同 Theorem 4 的内积技巧。）
+
+**例2（Example 2）**：$\mathbf{y} = (6, 1, -8)$ 用例 1 的正交基表示。
+
+**解**：$\mathbf{y}\cdot\mathbf{u}_1 = 11$, $\mathbf{y}\cdot\mathbf{u}_2 = -12$, $\mathbf{y}\cdot\mathbf{u}_3 = -33$；$\mathbf{u}_1\cdot\mathbf{u}_1 = 11$, $\mathbf{u}_2\cdot\mathbf{u}_2 = 6$, $\mathbf{u}_3\cdot\mathbf{u}_3 = \frac{33}{2}$
+
+$$\mathbf{y} = \frac{11}{11}\mathbf{u}_1 + \frac{-12}{6}\mathbf{u}_2 + \frac{-33}{33/2}\mathbf{u}_3 = \mathbf{u}_1 - 2\mathbf{u}_2 - 2\mathbf{u}_3$$
+
+**对比**：用一般基要解 3×3 方程组——正交基只需三个内积！
+
+### 正交投影 Orthogonal Projection
+
+**中文讲解**：给定直线 $L = \operatorname{Span}\{\mathbf{u}\}$ 和线外一点 $\mathbf{y}$，求 $L$ 上离 $\mathbf{y}$ 最近的点——就是"垂足" $\hat{\mathbf{y}}$。
+
+**推导**：分解 $\mathbf{y} = \hat{\mathbf{y}} + \mathbf{z}$（1），其中 $\hat{\mathbf{y}} = \alpha\mathbf{u}$、$\mathbf{z} \perp \mathbf{u}$。由 $\mathbf{z} = \mathbf{y} - \alpha\mathbf{u}$ 与 $\mathbf{u}$ 正交：
+
+$$0 = (\mathbf{y} - \alpha\mathbf{u})\cdot\mathbf{u} = \mathbf{y}\cdot\mathbf{u} - \alpha(\mathbf{u}\cdot\mathbf{u}) \quad \Rightarrow \quad \alpha = \frac{\mathbf{y}\cdot\mathbf{u}}{\mathbf{u}\cdot\mathbf{u}}$$
+
+**公式 (2)（投影公式）**：
+
+$$\hat{\mathbf{y}} = \operatorname{proj}_L \mathbf{y} = \frac{\mathbf{y}\cdot\mathbf{u}}{\mathbf{u}\cdot\mathbf{u}}\mathbf{u}, \qquad \mathbf{z} = \mathbf{y} - \hat{\mathbf{y}} \perp \mathbf{u}$$
+
+**例3（Example 3）**：$\mathbf{y} = \begin{bmatrix} 7 \\
+6 \end{bmatrix}$, $\mathbf{u} = \begin{bmatrix} 4 \\
+2 \end{bmatrix}$。求 $\mathbf{y}$ 在 $\operatorname{Span}\{\mathbf{u}\}$ 上的投影。
+
+**解**：$\mathbf{y}\cdot\mathbf{u} = 40$, $\mathbf{u}\cdot\mathbf{u} = 20$
+
+$$\hat{\mathbf{y}} = \frac{40}{20}\mathbf{u} = 2\begin{bmatrix} 4 \\
+2 \end{bmatrix} = \begin{bmatrix} 8 \\
+4 \end{bmatrix}, \qquad \mathbf{z} = \mathbf{y} - \hat{\mathbf{y}} = \begin{bmatrix} -1 \\
+2 \end{bmatrix}$$
+
+**验证**：$\hat{\mathbf{y}}\cdot\mathbf{z} = -8 + 8 = 0$ ✓（确实垂直）
+
+![FIGURE 3 直线上的投影](img/fig62_3_projection_line.png)
+
+*FIGURE 3 The orthogonal projection of y onto a line L through the origin. 图3 y 在过原点直线 L 上的正交投影 ŷ：垂线段 z = y−ŷ 与 L 垂直*
+
+**例4（Example 4，距离）**：求 $\mathbf{y}$ 到 $L$ 的距离 = $\|\mathbf{z}\| = \sqrt{(-1)^2 + 2^2} = \sqrt{5}$
+
+**几何解释 Theorem 5（FIGURE 4）**：正交基下，$\hat{\mathbf{y}}_j = \operatorname{proj}_{\mathbf{u}_j}\mathbf{y} = \frac{\mathbf{y}\cdot\mathbf{u}_j}{\mathbf{u}_j\cdot\mathbf{u}_j}\mathbf{u}_j$，且
+
+$$\mathbf{y} = \hat{\mathbf{y}}_1 + \cdots + \hat{\mathbf{y}}_p \tag{3}$$
+
+即 y 沿各正交轴"投影分量之和"——直角坐标系的推广！
+
+![FIGURE 4 沿正交轴分解](img/fig62_4_two_projections.png)
+
+*FIGURE 4 A vector decomposed into two projections. 图4 向量沿两个正交方向的分解：ŷ₁ + ŷ₂ = y（定理 5 的几何意义）*
+
+**力的分解**：物理学中把力 $\mathbf{y}$ 沿两个正交方向分解（如斜坡的平行/垂直分量），正是公式 (2)(3) 的应用（例 5.2）。
+
+### 标准正交集与正交矩阵 Orthonormal Sets
+
+**定义**：**标准正交集（orthonormal set）** = 正交集 + 每个向量单位长度。标准正交基同理。
+
+**例5（Example 5）**：例 1 的向量单位化：$\mathbf{v}_1 = \frac{1}{\sqrt{11}}(3,1,1)$, $\mathbf{v}_2 = \frac{1}{\sqrt{6}}(-1,2,1)$, $\mathbf{v}_3 = \frac{1}{\sqrt{33/2}}(-\frac{1}{2}, -2, \frac{7}{2})$。
+
+**THEOREM 6（正交矩阵的判别）**：
+> $m \times n$ 矩阵 $U$ 有标准正交列 ⟺ $U^TU = I$
+
+**证明**：$U^TU$ 的 $(i,j)$ 元 = 列 $i$ 与列 $j$ 的内积——标准正交 ⟺ 对角元 1、非对角元 0。∎
+
+**正交矩阵（orthogonal matrix）**：**方阵** $U$ 有标准正交列（则行也标准正交，练习 27-28）。此时 $U^TU = I = UU^T$，即
+
+$$U^{-1} = U^T$$
+
+**THEOREM 7（正交变换保长度保角度）**：
+> 设 $U$ 是 $m \times n$ 标准正交列矩阵，$\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$：
+> a. $\|U\mathbf{x}\| = \|\mathbf{x}\|$（长度保持）
+> b. $(U\mathbf{x})\cdot(U\mathbf{y}) = \mathbf{x}\cdot\mathbf{y}$（内积/角度保持）
+> c. $U\mathbf{x} \perp U\mathbf{y}$ ⟺ $\mathbf{x} \perp \mathbf{y}$（正交保持）
+
+**证明**：$(U\mathbf{x})\cdot(U\mathbf{y}) = (U\mathbf{x})^T(U\mathbf{y}) = \mathbf{x}^TU^TU\mathbf{y} = \mathbf{x}^T\mathbf{y}$。∎
+
+**例6（Example 6）**：例 5 的 $\mathbf{v}_1, \mathbf{v}_2$ 为列构成 $U$，验证 $\|U\mathbf{x}\| = \|\mathbf{x}\|$ 对任意 $\mathbf{x}$（旋转/反射变换的性质）。
+
+**例8（Example 8）**：$U = \begin{bmatrix} 1/\sqrt{11} & -1/\sqrt{6} & -1/\sqrt{66} \\
+1/\sqrt{11} & 2/\sqrt{6} & -4/\sqrt{66} \\
+1/\sqrt{11} & 1/\sqrt{6} & 7/\sqrt{66} \end{bmatrix}$ 是正交矩阵（验证 $U^TU = I$）。
+
+### 6.2 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 正交集 | 两两正交的非零向量——自动线性无关（Thm 4） |
+| 正交基坐标 (Thm 5) | $c_j = \mathbf{y}\cdot\mathbf{u}_j / \mathbf{u}_j\cdot\mathbf{u}_j$：一行公式，免解方程组 |
+| 正交投影 (2) | $\operatorname{proj}_L \mathbf{y} = \frac{\mathbf{y}\cdot\mathbf{u}}{\mathbf{u}\cdot\mathbf{u}}\mathbf{u}$，z = y−ŷ ⊥ L |
+| 正交矩阵 | 标准正交列方阵：$U^{-1} = U^T$（Thm 6-7：保长度、保角度、保正交） |
+
+> **本节精髓**：正交性是解线性问题的"高速公路"——Theorem 5 把坐标计算从"解方程组"简化为"算内积"；投影公式 (2) 是"垂足"的代数化身。但问题随之而来：**一般基怎么变成正交基？** 6.3 节先把投影推广到任意子空间（Best Approximation），6.4 节的 Gram-Schmidt 正交化给出构造算法，6.5 节最小二乘万事俱备。
+
+---
