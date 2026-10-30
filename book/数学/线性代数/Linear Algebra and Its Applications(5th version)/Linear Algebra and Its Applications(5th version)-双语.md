@@ -3702,3 +3702,197 @@ $$\mathbf{x}_k = A^k\mathbf{x}_0 = .125\,(1)^k\mathbf{v}_1 + .225\,(.92)^k\mathb
 > **本节精髓**：特征方程把"求特征值"变成"解多项式"——代数接管了几何。相似矩阵理论（Theorem 4）预告 5.3 节对角化：找到好的基 $P$，让 $A$ 在新基下变成对角阵 $\Lambda$，则 $A^k = P\Lambda^k P^{-1}$ 一步算出。例5 的"稳态 = 主特征向量"思想将在 5.6 节推广到 PageRank。
 
 ---
+---
+
+## 5.3 对角化 Diagonalization
+
+**中文讲解**：本节是第 5 章的计算高峰。核心思想：如果 $A$ 可以写成 $A = PDP^{-1}$（$D$ 对角），那么
+
+$$A^k = PD^kP^{-1}$$
+
+而对角矩阵的幂 $D^k$ 只是"对角线各自 $k$ 次幂"——**$A^{100}$ 从不可能变成三步乘法**。
+
+### 引入：A^k 的显式公式
+
+**例1（Example 1）**：设 $A = \begin{bmatrix} -7 & 2 \\
+-4 & 1 \end{bmatrix}$，已知 $A = PDP^{-1}$，其中 $P = \begin{bmatrix} 1 & 1 \\
+-1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} -5 & 0 \\
+0 & 3 \end{bmatrix}$。求 $A^k$ 的公式。
+
+**解**：2×2 逆矩阵公式：
+
+$$P^{-1} = \begin{bmatrix} 2 & 1 \\
+-1 & -1 \end{bmatrix}$$
+
+由乘法结合律，中间的 $P^{-1}P = I$ 层层相消：
+
+$$A^2 = (PDP^{-1})(PDP^{-1}) = PD(P^{-1}P)DP^{-1} = PD^2P^{-1}$$
+
+$$A^3 = A^2 \cdot A = (PD^2P^{-1})(PDP^{-1}) = PD^3P^{-1}$$
+
+归纳得对 $k \geq 1$：
+
+$$A^k = PD^kP^{-1} = \begin{bmatrix} 1 & 1 \\
+-1 & -2 \end{bmatrix}\begin{bmatrix} (-5)^k & 0 \\
+0 & 3^k \end{bmatrix}\begin{bmatrix} 2 & 1 \\
+-1 & -1 \end{bmatrix} = \begin{bmatrix} 2\cdot 5^k - 3^k & 5^k - 3^k \\
+2\cdot 3^k - 2\cdot 5^k & 2\cdot 3^k - 5^k \end{bmatrix}$$
+
+> **幂的要点**：$A$ 的幂 = 三个固定矩阵夹着 $D^k$——计算量与 $k$ 无关！
+
+**对角化定义**：$n \times n$ 矩阵 $A$ 称为**可对角化（diagonalizable）**的，若 $A$ 相似于对角矩阵，即存在可逆矩阵 $P$ 与对角矩阵 $D$ 使 $A = PDP^{-1}$。
+
+### 对角化定理 THEOREM 5
+
+> $n \times n$ 矩阵 $A$ **可对角化 ⟺ A 有 n 个线性无关的特征向量**。
+>
+> 事实上：$A = PDP^{-1}$（$D$ 对角）⟺ $P$ 的列是 $A$ 的 $n$ 个无关特征向量；此时 $D$ 的对角元 = 对应的特征值。
+>
+> 等价说法：$A$ 可对角化 ⟺ $\mathbb{R}^n$ 有一组由特征向量构成的基（称为**特征向量基**）。
+
+**证明思路**：设 $P = [\mathbf{v}_1 \cdots \mathbf{v}_n]$，$D = \operatorname{diag}(\lambda_1, \dots, \lambda_n)$。
+
+$$AP = A[\mathbf{v}_1 \cdots \mathbf{v}_n] = [A\mathbf{v}_1 \cdots A\mathbf{v}_n], \qquad PD = [\lambda_1\mathbf{v}_1 \cdots \lambda_n\mathbf{v}_n]$$
+
+$A = PDP^{-1} \iff AP = PD \iff A\mathbf{v}_i = \lambda_i\mathbf{v}_i$（$i = 1..n$）——即每个 $\mathbf{v}_i$ 是特征向量！$P$ 可逆 ⟺ 列无关（IMT）。∎
+
+### 对角化四步法（例3 完整实战）
+
+**例3（Example 3）**：对角化 $A = \begin{bmatrix} 1 & 3 & 3 \\
+-3 & -5 & -3 \\
+3 & 3 & 1 \end{bmatrix}$（若可能）。
+
+**Step 1：求特征值**。特征方程（5.2 节方法）：
+
+$$\det(A - \lambda I) = -\lambda^3 - 3\lambda^2 + 4 = -(\lambda - 1)(\lambda + 2)^2 = 0$$
+
+特征值：$\lambda_1 = 1$，$\lambda_2 = \lambda_3 = -2$（二重）
+
+**Step 2：求特征空间的基**。
+- $\lambda = 1$：$(A - I)\mathbf{x} = 0$ → 基 $\mathbf{v}_1 = \begin{bmatrix} 1 \\
+-1 \\
+1 \end{bmatrix}$
+- $\lambda = -2$：$(A + 2I)\mathbf{x} = 0$，**两个**自由变量 → 基 $\mathbf{v}_2 = \begin{bmatrix} -1 \\
+1 \\
+0 \end{bmatrix}$, $\mathbf{v}_3 = \begin{bmatrix} -1 \\
+0 \\
+1 \end{bmatrix}$
+
+**Step 3：组装 P**（列顺序任意）：
+
+$$P = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \mathbf{v}_3 \end{bmatrix} = \begin{bmatrix} 1 & -1 & -1 \\
+-1 & 1 & 0 \\
+1 & 0 & 1 \end{bmatrix}$$
+
+**Step 4：组装 D**（⚠️ **特征值顺序必须与 P 的列对应**；二重特征值 −2 用两次）：
+
+$$D = \begin{bmatrix} 1 & 0 & 0 \\
+0 & -2 & 0 \\
+0 & 0 & -2 \end{bmatrix}$$
+
+**验算**（避免求 $P^{-1}$，直接查 $AP = PD$）：
+
+$$AP = \begin{bmatrix} 1 & 2 & 2 \\
+-1 & -2 & 0 \\
+1 & 0 & -2 \end{bmatrix} = PD \checkmark$$
+
+### 不可对角化的例子 THEOREM 6 & 例4
+
+**例4（Example 4，对照组）**：$A = \begin{bmatrix} 2 & 4 & 3 \\
+-4 & -6 & -3 \\
+3 & 3 & 1 \end{bmatrix}$。特征方程与例 3 **完全相同**：$\lambda = 1, -2, -2$。但：
+
+- $\lambda = 1$：特征空间只有一维，$\mathbf{v}_1 = (1, -1, 1)$
+- $\lambda = -2$：特征空间也只有一维，$\mathbf{v}_2 = (-1, 1, 0)$
+
+每个特征向量都是 $\mathbf{v}_1$ 或 $\mathbf{v}_2$ 的倍数——**总共只有 2 个无关特征向量 < 3**，无法构成 $\mathbb{R}^3$ 的特征向量基，故 **$A$ 不可对角化**。
+
+> **关键教训**：例3、例4 特征多项式相同，一个可对角化一个不可——**特征值本身不决定可对角化，特征空间的维数才决定**！
+
+**THEOREM 6（充分条件）**：
+> 有 **n 个互不相同特征值** 的 $n \times n$ 矩阵必可对角化。
+
+（证明：不同特征值的特征向量无关——Theorem 5.1-2；无关特征向量够 n 个——Theorem 5。∎）
+
+**例5（Example 5）**：上三角矩阵 $A = \begin{bmatrix} 5 & -8 & 1 \\
+0 & 0 & 7 \\
+0 & 0 & -2 \end{bmatrix}$。特征值 = 对角元 5, 0, −2——三个互不相同，由 Theorem 6 立得可对角化（无需算特征向量）。
+
+### 重根情形 THEOREM 7
+
+**THEOREM 7**：
+> 设 $n \times n$ 矩阵 $A$ 的互异特征值为 $\lambda_1, \dots, \lambda_p$。
+>
+> a. 每个特征空间的维数 ≤ 对应特征值的代数重数：$\dim \operatorname{Nul}(A - \lambda_k I) \leq \lambda_k$ 的重数
+>
+> b. $A$ 可对角化 ⟺ 所有特征空间维数之和 = $n$ ⟺ **(i)** 特征多项式完全分解（无复根缺席）且 **(ii)** 每个特征空间的维数 = 其代数重数
+
+**直觉**：对角化需要"凑够 n 个无关特征向量"。重根若只贡献 1 个方向（像例4），就凑不够；重根若贡献与重数相同个数的方向（像例3 的 λ=−2 贡献 2 个），就凑得够。
+
+**例6（Example 6，4×4 重根对角化）**：某 4×4 矩阵，特征值 5（二重）与 −3（二重）。分别求特征空间基：
+
+$$\lambda = 5: \ \mathbf{v}_1 = \begin{bmatrix} -8 \\
+4 \\
+1 \\
+0 \end{bmatrix}, \ \mathbf{v}_2 = \begin{bmatrix} -16 \\
+4 \\
+0 \\
+1 \end{bmatrix}; \qquad \lambda = -3: \ \mathbf{v}_3 = \begin{bmatrix} 0 \\
+0 \\
+1 \\
+0 \end{bmatrix}, \ \mathbf{v}_4 = \begin{bmatrix} 0 \\
+0 \\
+0 \\
+1 \end{bmatrix}$$
+
+各特征空间维数 = 重数 = 2，维数和 = 4 = n ⇒ 可对角化：
+
+$$P = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \mathbf{v}_3 & \mathbf{v}_4 \end{bmatrix} = \begin{bmatrix} -8 & -16 & 0 & 0 \\
+4 & 4 & 0 & 0 \\
+1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1 \end{bmatrix}, \qquad D = \operatorname{diag}(5, 5, -3, -3)$$
+
+（$\{\mathbf{v}_1,\dots,\mathbf{v}_4\}$ 的无关性由 Theorem 7 保证——不同特征空间的基向量合在一起仍无关。）
+
+### 练习精选（Practice Problems）
+
+**题1**：$A = \begin{bmatrix} 4 & -3 \\
+2 & -1 \end{bmatrix}$，求 $A^8$。
+
+**解**：$\lambda^2 - 3\lambda + 2 = (\lambda-1)(\lambda-2)$；特征向量 $\mathbf{v}_1 = (1,1)$（λ=1）、$\mathbf{v}_2 = (3,2)$（λ=2）。$P = \begin{bmatrix} 1 & 3 \\
+1 & 2 \end{bmatrix}$, $D = \operatorname{diag}(1,2)$。
+
+$$A^8 = PD^8P^{-1} = \begin{bmatrix} 1 & 3 \\
+1 & 2 \end{bmatrix}\begin{bmatrix} 1 & 0 \\
+0 & 256 \end{bmatrix}\begin{bmatrix} -2 & 3 \\
+1 & -1 \end{bmatrix} = \begin{bmatrix} 766 & -765 \\
+510 & -509 \end{bmatrix}$$
+
+**题2**：$A = \begin{bmatrix} -3 & 12 \\
+-2 & 7 \end{bmatrix}$，$\mathbf{v}_1 = (3,1)$、$\mathbf{v}_2 = (2,1)$ 是特征向量，直接对角化。
+
+**解**：由 $A\mathbf{v}_1 = (3,1)$、$A\mathbf{v}_2 = 2(2,1)$ 读出 $\lambda_1 = 1$, $\lambda_2 = 2$：
+
+$$A = \begin{bmatrix} 3 & 2 \\
+1 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 \\
+0 & 2 \end{bmatrix}\begin{bmatrix} 1 & -2 \\
+-1 & 3 \end{bmatrix}$$
+
+**题3**：4×4 矩阵特征值 5, 3, −2，且 λ=3 的特征空间是二维。信息够判断可对角化吗？
+
+**解**：**够**。3 的特征空间维数 = 重数（2）✓；5 和 −2 是一重特征值，其特征空间维数必为 1（Theorem 7-a：1 ≤ dim ≤ 重数 = 1）✓。维数和 = 1 + 2 + 1 = 4 = n ⇒ **可对角化**。
+
+### 5.3 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 对角化 | $A = PDP^{-1}$：换到特征向量基，A 变成对角阵 |
+| Theorem 5 | 可对角化 ⟺ 有 n 个无关特征向量（特征向量基） |
+| 四步法 | 特征值 → 特征向量 → 组 P → 组 D（顺序对应！）+ 验算 AP=PD |
+| Theorem 6 | n 个互异特征值 ⟹ 可对角化（充分不必要） |
+| Theorem 7 | 特征空间维数 ≤ 重数；可对角化 ⟺ 维数和 = n ⟺ 各维数 = 重数 |
+| 例3 vs 例4 | 同特征多项式，一个可一个不可——**维数才是关键** |
+
+> **本节精髓**：对角化把矩阵幂从 $O(k)$ 次乘法变成常数次。判断可对角化的完整判据（Theorem 5 + 7）：特征多项式完全分解 + 每个重根的特征空间"长满"到与重数同维。5.4 节将揭示对角化的几何本质（线性变换的对角矩阵表示），5.6 节用它解动力系统。
+
+---
