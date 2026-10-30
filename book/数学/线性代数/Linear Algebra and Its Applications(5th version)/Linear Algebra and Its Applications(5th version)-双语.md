@@ -3282,3 +3282,119 @@ IMT 的 (m)–(r)（列构成基 / Col A = Rⁿ / dim Col A = n / rank A = n / N
 > **本节精髓**：秩定理揭示矩阵的深层对称性（行秩必等于列秩），四大子空间图预告了第 6 章正交性（Row A ⊥ Nul A）与第 7 章 SVD。至此第 4 章主体收官——从抽象定义到秩定理，$\mathbb{R}^n$ 的全部理论已推广到任意有限维向量空间。下一节 4.7《基的变换》处理"换基时坐标如何变"，是第 5 章特征值计算的必备工具。
 
 ---
+---
+
+## 4.7 基的变换 Change of Basis
+
+**中文讲解**：4.4 节建立了坐标系。实际问题常出现这样的场景：**问题用基 $\mathcal{B}$ 描述，但解法用基 $\mathcal{C}$ 才顺手**（第 5、7 章大量出现）。于是需要"翻译器"：同一个向量 $\mathbf{x}$，两套坐标 $[\mathbf{x}]_{\mathcal{B}}$ 与 $[\mathbf{x}]_{\mathcal{C}}$ 之间如何换算？
+
+### 引入：同一向量，两种读数
+
+FIGURE 1 中同一向量 $\mathbf{x}$，在 $\mathcal{B}$-坐标纸上读作 $\mathbf{x} = 3\mathbf{b}_1 + \mathbf{b}_2$（$[\mathbf{x}]_{\mathcal{B}} = (3,1)$），在 $\mathcal{C}$-坐标纸上读作 $\mathbf{x} = 6\mathbf{c}_1 + 4\mathbf{c}_2$（$[\mathbf{x}]_{\mathcal{C}} = (6,4)$）。两个坐标之间必有联系——本节找出它。
+
+![FIGURE 1 两套坐标系](img/fig47_1_two_coordinate_systems.png)
+
+*FIGURE 1 Two coordinate systems for the same vector space. 图1 同一向量空间的两个坐标系：(a) B-坐标纸读数 (3,1)；(b) C-坐标纸读数 (6,4)*
+
+**例1（Example 1，推导换算公式）**：设 $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2\}$、$\mathcal{C} = \{\mathbf{c}_1, \mathbf{c}_2\}$ 是 $V$ 的两组基，已知
+
+$$\mathbf{b}_1 = 4\mathbf{c}_1 + \mathbf{c}_2, \qquad \mathbf{b}_2 = -6\mathbf{c}_1 + \mathbf{c}_2 \tag{1}$$
+
+且 $\mathbf{x} = 3\mathbf{b}_1 + \mathbf{b}_2$（即 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
+1 \end{bmatrix}$）。求 $[\mathbf{x}]_{\mathcal{C}}$。
+
+**解**：对 $\mathbf{x}$ 施加 $\mathcal{C}$-坐标映射（线性变换，保线性组合）：
+
+$$[\mathbf{x}]_{\mathcal{C}} = [3\mathbf{b}_1 + \mathbf{b}_2]_{\mathcal{C}} = 3[\mathbf{b}_1]_{\mathcal{C}} + [\mathbf{b}_2]_{\mathcal{C}}$$
+
+写成矩阵方程（列 = 各 $\mathbf{b}_j$ 的 $\mathcal{C}$-坐标）：
+
+$$[\mathbf{x}]_{\mathcal{C}} = \begin{bmatrix} [\mathbf{b}_1]_{\mathcal{C}} & [\mathbf{b}_2]_{\mathcal{C}} \end{bmatrix}\begin{bmatrix} 3 \\
+1 \end{bmatrix} \tag{3}$$
+
+由 (1)：$[\mathbf{b}_1]_{\mathcal{C}} = \begin{bmatrix} 4 \\
+1 \end{bmatrix}$, $[\mathbf{b}_2]_{\mathcal{C}} = \begin{bmatrix} -6 \\
+1 \end{bmatrix}$，代入：
+
+$$[\mathbf{x}]_{\mathcal{C}} = \begin{bmatrix} 4 & -6 \\
+1 & 1 \end{bmatrix}\begin{bmatrix} 3 \\
+1 \end{bmatrix} = \begin{bmatrix} 6 \\
+4 \end{bmatrix}$$
+
+与 FIGURE 1(b) 的读数一致 ✓
+
+### 换基定理 THEOREM 15
+
+> 设 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$、$\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_n\}$ 是向量空间 $V$ 的两组基。则存在唯一 $n \times n$ 矩阵 $P_{\mathcal{C} \leftarrow \mathcal{B}}$ 使
+
+> $$[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C} \leftarrow \mathcal{B}}\, [\mathbf{x}]_{\mathcal{B}} \tag{4}$$
+
+> $P_{\mathcal{C} \leftarrow \mathcal{B}}$ 的列 = $\mathcal{B}$ 中各向量的 $\mathcal{C}$-坐标：
+
+> $$P_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{bmatrix} [\mathbf{b}_1]_{\mathcal{C}} & [\mathbf{b}_2]_{\mathcal{C}} & \cdots & [\mathbf{b}_n]_{\mathcal{C}} \end{bmatrix} \tag{5}$$
+
+- $P_{\mathcal{C} \leftarrow \mathcal{B}}$ 叫从 $\mathcal{B}$ 到 $\mathcal{C}$ 的**坐标变换矩阵**
+- 列线性无关（$\mathcal{B}$ 是基）⇒ 可逆（IMT）。两边左乘逆矩阵得：
+
+$$(P_{\mathcal{C} \leftarrow \mathcal{B}})^{-1}[\mathbf{x}]_{\mathcal{C}} = [\mathbf{x}]_{\mathcal{B}}$$
+
+即
+
+$$(P_{\mathcal{C} \leftarrow \mathcal{B}})^{-1} = P_{\mathcal{B} \leftarrow \mathcal{C}} \tag{6}$$
+
+**反向翻译 = 求逆矩阵**！
+
+### $\mathbb{R}^n$ 中的快捷算法
+
+在 $\mathbb{R}^n$ 中（$\mathcal{E}$ = 标准基），4.4 节的 $P_{\mathcal{B}} = [\mathbf{b}_1 \cdots \mathbf{b}_n]$ 满足 $\mathbf{x} = P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}}$。于是
+
+$$[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C}}^{-1}\mathbf{x} = P_{\mathcal{C}}^{-1}P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}} \quad \Rightarrow \quad P_{\mathcal{C} \leftarrow \mathcal{B}} = P_{\mathcal{C}}^{-1}P_{\mathcal{B}}$$
+
+**例2（Example 2，标准流程）**：$\mathbf{b}_1 = \begin{bmatrix} -9 \\
+1 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -5 \\
+-1 \end{bmatrix}$, $\mathbf{c}_1 = \begin{bmatrix} 1 \\
+-4 \end{bmatrix}$, $\mathbf{c}_2 = \begin{bmatrix} 3 \\
+-5 \end{bmatrix}$。求 $P_{\mathcal{C} \leftarrow \mathcal{B}}$。
+
+**解**：设 $[\mathbf{b}_1]_{\mathcal{C}} = (x_1, x_2)$，即 $x_1\mathbf{c}_1 + x_2\mathbf{c}_2 = \mathbf{b}_1$。两列同时解：
+
+$$\begin{bmatrix} \mathbf{c}_1 & \mathbf{c}_2 & \mathbf{b}_1 & \mathbf{b}_2 \end{bmatrix} = \begin{bmatrix} 1 & 3 & -9 & -5 \\
+-4 & -5 & 1 & -1 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 6 & 4 \\
+0 & 1 & -5 & -3 \end{bmatrix}$$
+
+故 $P_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{bmatrix} 6 & 4 \\
+-5 & -3 \end{bmatrix}$（右半即所求）
+
+> **效率提示**：直接行化简 $[P_{\mathcal{C}}\ \ P_{\mathcal{B}}] \sim [I\ \ P_{\mathcal{C}}^{-1}P_{\mathcal{B}}]$——一步同时算出 $P_{\mathcal{C}}^{-1}$ 和乘积，比先求逆再相乘快（2.2 节练习 12 的算法）。
+
+**例3（Example 3，利用逆矩阵反向翻译）**：$\mathbf{b}_1 = \begin{bmatrix} 1 \\
+-3 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -2 \\
+4 \end{bmatrix}$, $\mathbf{c}_1 = \begin{bmatrix} -7 \\
+9 \end{bmatrix}$, $\mathbf{c}_2 = \begin{bmatrix} -5 \\
+7 \end{bmatrix}$。
+
+a. 求 $P_{\mathcal{B} \leftarrow \mathcal{C}}$：
+
+$$\begin{bmatrix} \mathbf{b}_1 & \mathbf{b}_2 & \mathbf{c}_1 & \mathbf{c}_2 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 5 & 3 \\
+0 & 1 & 6 & 4 \end{bmatrix} \Rightarrow P_{\mathcal{B} \leftarrow \mathcal{C}} = \begin{bmatrix} 5 & 3 \\
+6 & 4 \end{bmatrix}$$
+
+b. 由 (6) 反转方向：
+
+$$P_{\mathcal{C} \leftarrow \mathcal{B}} = (P_{\mathcal{B} \leftarrow \mathcal{C}})^{-1} = \frac{1}{20 - 18}\begin{bmatrix} 4 & -3 \\
+-6 & 5 \end{bmatrix} = \begin{bmatrix} 2 & -3/2 \\
+-3 & 5/2 \end{bmatrix}$$
+
+### 4.7 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| $P_{\mathcal{C} \leftarrow \mathcal{B}}$ | 列 = $[\mathbf{b}_j]_{\mathcal{C}}$：把 B-坐标翻译成 C-坐标 |
+| 公式 (4) | $[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C} \leftarrow \mathcal{B}}[\mathbf{x}]_{\mathcal{B}}$ |
+| 公式 (6) | 反向翻译 = 求逆：$(P_{\mathcal{C} \leftarrow \mathcal{B}})^{-1} = P_{\mathcal{B} \leftarrow \mathcal{C}}$ |
+| Rⁿ 快捷法 | $P_{\mathcal{C} \leftarrow \mathcal{B}} = P_{\mathcal{C}}^{-1}P_{\mathcal{B}}$，或行化简 $[P_{\mathcal{C}}\ P_{\mathcal{B}}] \sim [I\ \ \cdot]$ 一步到位 |
+| 应用预告 | 第 5 章特征值、第 7 章 SVD 的"换基"都靠它 |
+
+> **本节精髓**：换基矩阵把"坐标翻译"代数化——只要知道"旧基向量用新基怎么表示"，整个翻译器就造出来了。公式 (6) 的"逆矩阵 = 反向翻译"提醒我们：基的变换是可逆的信息转换。第 4 章到此收官，下一章进入全书的计算高峰：**第 5 章 特征值与特征向量**。
+
+---
