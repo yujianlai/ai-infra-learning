@@ -2461,3 +2461,144 @@ $$\det A = (-2)(1)\begin{vmatrix} 0 & 5 \\
 > **本节精髓**：行列式是"行化简过程的记账员"——三种行变换对它的影响精确而简单。Theorem 4 把行列式接入了 IMT 的等价网络，Theorem 6 揭示它保持乘法结构。下一节 3.3 转向几何：行列式 = 面积/体积的伸缩系数，并给出克拉默法则这个"理论美、实践少用"的公式。
 
 ---
+---
+
+## 3.3 克拉默法则、体积与线性变换 Cramer's Rule, Volume, and Linear Transformations
+
+**中文讲解**：本节给出行列式的三个重要应用：解方程组的**克拉默法则**（理论美、数值计算少用）、几何中的**面积/体积公式**、以及**线性变换的伸缩系数**——后者是多元微积分雅可比行列式的原型。
+
+### 克拉默法则 Cramer's Rule
+
+**背景**：若 $A$ 可逆，$A\mathbf{x} = \mathbf{b}$ 的解 $\mathbf{x} = A^{-1}\mathbf{b}$。把 2.2 的伴随矩阵公式代入、按分量展开，每个 $x_i$ 都是**两个行列式的商**——这就是克拉默法则。
+
+**记号**：对 $n \times n$ 矩阵 $A$ 和 $\mathbf{b} \in \mathbb{R}^n$，$A_i(\mathbf{b})$ 表示"把 $A$ 的第 $i$ 列换成 $\mathbf{b}$"得到的矩阵。
+
+**THEOREM 7（Cramer's Rule）**：
+> 设 $A$ 是可逆 $n \times n$ 矩阵。对任意 $\mathbf{b} \in \mathbb{R}^n$，方程 $A\mathbf{x} = \mathbf{b}$ 的唯一解 $\mathbf{x}$ 的分量为
+
+> $$x_i = \frac{\det A_i(\mathbf{b})}{\det A}, \qquad i = 1, 2, \dots, n$$
+
+**例1（Example 1，2×2 实战）**：用克拉默法则解 $A\mathbf{x} = \mathbf{b}$：
+
+$$A = \begin{bmatrix} 3 & -2 \\
+-5 & 4 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 6 \\
+8 \end{bmatrix}$$
+
+**解**：$\det A = 12 - 10 = 2 \neq 0$，可用克拉默法则：
+
+$$A_1(\mathbf{b}) = \begin{bmatrix} 6 & -2 \\
+8 & 4 \end{bmatrix}, \qquad A_2(\mathbf{b}) = \begin{bmatrix} 3 & 6 \\
+-5 & 8 \end{bmatrix}$$
+
+$$x_1 = \frac{\det A_1(\mathbf{b})}{\det A} = \frac{24 - (-16)}{2} = \frac{40}{2} = 20$$
+
+$$x_2 = \frac{\det A_2(\mathbf{b})}{\det A} = \frac{24 - (-30)}{2} = \frac{54}{2} = 27$$
+
+### 求逆矩阵的公式 THEOREM 8（伴随矩阵公式）
+
+**THEOREM 8（逆矩阵公式）**：
+> $A^{-1} = \dfrac{1}{\det A}\operatorname{adj} A$，其中 $\operatorname{adj} A$ 是 $A$ 的**伴随矩阵（adjugate）**——$A$ 的余因子矩阵的**转置**：
+
+> $$\operatorname{adj} A = \begin{bmatrix} C_{11} & C_{21} & \cdots & C_{n1} \\
+C_{12} & C_{22} & \cdots & C_{n2} \\
+\vdots & \vdots & \ddots & \vdots \\
+C_{1n} & C_{2n} & \cdots & C_{nn} \end{bmatrix}$$
+
+（即 $(\operatorname{adj} A)_{ij} = C_{ji}$——注意**行列互换**！）
+
+> **证明思路**：由余因子展开，$A \cdot \operatorname{adj} A$ 的 $(i,j)$ 元 = $\sum_k a_{ik}C_{jk}$。$i = j$ 时是沿第 $i$ 行的展开 = $\det A$；$i \neq j$ 时相当于"把第 $j$ 行换成第 $i$ 行再展开" = 0（两行相同，行列式为 0）。故 $A \cdot \operatorname{adj} A = (\det A) I$，整理即得。∎
+
+**例2（Example 2，含参数 s 的方程组）**：用克拉默法则解：
+
+$$\begin{bmatrix} 3s & 2 \\
+6 & s \end{bmatrix}\begin{bmatrix} x_1 \\
+x_2 \end{bmatrix} = \begin{bmatrix} 4 \\
+-1 \end{bmatrix}$$
+
+**解**：$\det A = 3s^2 - 12 = 3(s+2)(s-2)$。当 $s \neq \pm 2$ 时克拉默法则适用：
+
+$$A_1(\mathbf{b}) = \begin{bmatrix} 4 & 2 \\
+-1 & s \end{bmatrix}, \quad \det A_1(\mathbf{b}) = 4s + 2$$
+
+$$A_2(\mathbf{b}) = \begin{bmatrix} 3s & 4 \\
+6 & -1 \end{bmatrix}, \quad \det A_2(\mathbf{b}) = -3s - 24$$
+
+$$x_1 = \frac{4s+2}{3(s+2)(s-2)}, \qquad x_2 = \frac{-3s-24}{3(s+2)(s-2)} = \frac{-(s+8)}{(s+2)(s-2)}$$
+
+**回代验证**：$3s\,x_1 + 2x_2 = \dfrac{s(4s+2) - 2(s+8)}{s^2-4} = \dfrac{4s^2-16}{s^2-4} = 4$ ✓；$6x_1 + s\,x_2 = \dfrac{2(4s+2) - s(s+8)}{s^2-4} = \dfrac{4-s^2}{s^2-4} = -1$ ✓
+
+> **工程价值**：克拉默法则在**符号计算**（矩阵含参数，如本例的 s）时非常有用——它能给出解的显式公式，让工程师看清参数如何影响解。但数值计算中（具体数字），行化简远比克拉默法则高效（n 阶要算 n+1 个行列式！）。
+
+### 行列式的几何意义：面积与体积
+
+**中文讲解**：现在揭晓 3.1 节导入例的答案——行列式 = 有向面积/体积。
+
+**2×2 情形**：$A = [\mathbf{a}_1\ \ \mathbf{a}_2]$，$\mathbf{a}_1, \mathbf{a}_2$ 确定的**平行四边形面积为 $|\det A|$**（FIGURE 1：矩形面积 |ad| 是特例）。
+
+![FIGURE 1 矩形面积](img/fig33_1_area_rectangle.png)
+
+*FIGURE 1 Area = |ad|. 图1 矩形面积 = |ad|（行列式几何意义的起点）*
+
+**3×3 情形**：$A = [\mathbf{u}\ \ \mathbf{v}\ \ \mathbf{w}]$（$3 \times 3$），$\mathbf{u}, \mathbf{v}, \mathbf{w}$ 确定的**平行六面体体积为 $|\det A|$**（FIGURE 3：长方体体积 |abc| 是特例）。
+
+![FIGURE 3 体积公式](img/fig33_3_volume_box.png)
+
+*FIGURE 3 Volume = |abc|. 图3 长方体体积 = |abc|（三阶行列式 = 体积）*
+
+**THEOREM 9（面积/体积公式）**：
+> 若 $A$ 是 $2 \times 2$ 矩阵，$A$ 的列确定的平行四边形面积为 $|\det A|$；若 $A$ 是 $3 \times 3$ 矩阵，$A$ 的列确定的平行六面体体积为 $|\det A|$。
+
+**证明思路（2×2）**：分三种情况。
+1. $A$ **对角** $\begin{bmatrix} a & 0 \\
+0 & d \end{bmatrix}$：矩形，面积 = $|ad| = |\det A|$ ✓
+2. $A$ 只有**一个非对角元非零**（如 $\begin{bmatrix} a & 0 \\
+c & d \end{bmatrix}$）：图 2 的"剪切"不改变面积（两平行四边形同底等高），仍有面积 = $|ad| = |\det A|$ ✓
+
+![FIGURE 2 等积平行四边形](img/fig33_2_equal_area_parallelograms.png)
+
+*FIGURE 2 Two parallelograms of equal area. 图2 剪切不改变面积：两个平行四边形等积（det 相同的直观解释）*
+
+3. **一般** $A$：列变换（$\mathbf{a}_2 \to \mathbf{a}_2 + c\mathbf{a}_1$）不改变行列式（定理 3a 的列版），而图形剪切后面积不变；反复剪切最终化到情形 2，而 $\det$ 一路不变 ⇒ 面积恒等于 $|\det A|$。3×3 情形完全类似（用体积）。∎
+
+**例4（Example 4，平移技巧）**：求顶点为 $(-2, -2)$、$(0, 3)$、$(4, -1)$、$(6, 4)$ 的平行四边形面积。
+
+**解**：顶点不在原点，先**平移**：减去 $(-2, -2)$，得新顶点 $(0,0)$、$(2,5)$、$(6,1)$、$(8,6)$（平移不改变面积，FIGURE 5）：
+
+![FIGURE 5 平移不改变面积](img/fig33_5_translating_parallelogram.png)
+
+*FIGURE 5 Translating a parallelogram does not change its area. 图5 平移平行四边形不改变面积（例4的技巧）*
+
+由相邻顶点 $(0,0)$、$(2,5)$、$(6,1)$ 构成矩阵 $A = \begin{bmatrix} 2 & 6 \\
+5 & 1 \end{bmatrix}$：
+
+$$\text{面积} = |\det A| = |2 - 30| = |-28| = \mathbf{28}$$
+
+### 线性变换与面积 THEOREM 10（变换的伸缩系数）
+
+> 设 $T: \mathbb{R}^2 \to \mathbb{R}^2$ 是由 $2 \times 2$ 矩阵 $A$ 确定的线性变换。若 $S$ 是 $\mathbb{R}^2$ 中面积有限的区域，则
+
+> $$\{T(S)\text{ 的面积}\} = |\det A| \cdot \{S\text{ 的面积}\}$$
+
+> （3×3 版本同理：体积被放大 $|\det A|$ 倍。）
+
+**理解**：$T$ 把整个平面"均匀拉伸/压缩" $|\det A|$ 倍——同一张图形无论放在哪里、什么形状，像的面积都是原面积的 $|\det A|$ 倍。
+
+**证明思路**：对单位正方形验证（显然，面积 1 → 面积 |det A|）；再把 $S$ 切成小正方形网格取极限（积分思想）。∎
+
+> **T 的作用域不必是 R²**：若 $T: \mathbb{R}^3 \to \mathbb{R}^2$（如把三维点投影到平面），$S$ 是 $\mathbb{R}^3$ 中面积有限的曲面，则 $\{T(S)\text{ 的面积}\} = |\det A^T A|^{1/2}\{S\text{ 的面积}\}$——多元微积分中**曲面面积公式**的矩阵形式！
+
+**3×3 体积版例**：平行六面体经 $T$ 作用后，体积变为原来的 $|\det A|$ 倍；若 $|\det A| = 1$，体积不变（体积保持）。
+
+### 3.3 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 克拉默法则 | $x_i = \det A_i(\mathbf{b})/\det A$（理论美；数值计算少用） |
+| 伴随矩阵 | $A^{-1} = \operatorname{adj}A/\det A$（$\operatorname{adj} A$ = 余因子矩阵的**转置**） |
+| Theorem 9 | 面积/体积 = \|det A\|（2×2 平行四边形、3×3 平行六面体） |
+| Theorem 10 | 线性变换把面积放大 \|det A\| 倍（体积同理） |
+| 平移技巧 | 顶点不在原点时先平移到原点，面积不变 |
+
+> **本节精髓**：行列式是**几何量**——面积、体积的"有向"版本。Theorem 10 的 $|\det A|$ 倍伸缩是第 5 章特征值理论（$\det(A - \lambda I)$）、第 7 章 SVD 的几何种子。第 3 章至此收官：从递归定义（3.1）到代数性质（3.2）再到几何本质（3.3），行列式完成了"数 → 代数结构 → 几何变换"的三级跳。
+
+---
