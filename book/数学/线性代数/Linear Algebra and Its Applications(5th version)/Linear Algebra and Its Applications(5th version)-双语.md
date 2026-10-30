@@ -4144,3 +4144,126 @@ $$AP = \begin{bmatrix} -.8 & -2.4 \\
 > **本节精髓**：复数不是人为的发明，而是**旋转的自然语言**——λ = a + bi 一个数同时编码了缩放（r = |λ|）和旋转（φ = arg λ）。Theorem 9 把"含复特征值的实矩阵"还原成"藏在里面的旋转"，这是分析 5.6 节离散动力系统稳定性、以及物理学中简正模（normal modes）的基本工具。
 
 ---
+---
+
+## 5.6 离散动力系统 Discrete Dynamical Systems
+
+**中文讲解**：回到本章开头的猫头鹰问题：给定 $\mathbf{x}_{k+1} = A\mathbf{x}_k$，初值 $\mathbf{x}_0$，**长期会怎样？** 若 $A$ 有 $n$ 个无关特征向量（可对角化），答案是显式公式：
+
+$$\mathbf{x}_0 = c_1\mathbf{v}_1 + \cdots + c_n\mathbf{v}_n \quad \Rightarrow \quad \mathbf{x}_k = c_1\lambda_1^k\mathbf{v}_1 + \cdots + c_n\lambda_n^k\mathbf{v}_n \tag{1,2}$$
+
+**长期行为由 $|\lambda_j|$ 最大的那个特征值主宰**——本节把原点附近的轨道分为吸引子、排斥子、鞍点三类，并给猫头鹰一个最终答案。
+
+### 例1（Example 1，猫头鹰与鼠）
+
+林中有斑点猫头鹰（捕食者）和鼠（食物）。设 $O_k, R_k$ 为第 $k$ 月数量，模型：
+
+$$\begin{aligned}
+O_{k+1} &= .5O_k + .4R_k \\
+R_{k+1} &= -p\,O_k + 1.1R_k
+\end{aligned} \quad \Rightarrow \quad \mathbf{x}_{k+1} = A\mathbf{x}_k, \quad A = \begin{bmatrix} .5 & .4 \\
+-p & 1.1 \end{bmatrix}$$
+
+其中 $-p$ 表示捕食导致鼠增长受猫头鹰数量抑制（$p > 0$）。取 $p = .104$：
+
+**特征值**：$\lambda^2 - 1.6\lambda + .55 + .0416 = \lambda^2 - 1.6\lambda + .5916 = 0$ → $\lambda_1 = 1.02$, $\lambda_2 = .58$
+
+**特征向量**：$\mathbf{v}_1 = (10, 13)$（λ₁=1.02），$\mathbf{v}_2 = (5, 1)$（λ₂=.58）
+
+**长期行为**：$.58^k \to 0$ 极快，故
+
+$$\mathbf{x}_k \approx c_1(1.02)^k\begin{bmatrix} 10 \\
+13 \end{bmatrix}$$
+
+即每月增 2%，且猫头鹰:鼠 ≈ 10:13——**种群规模爆炸式增长**（鼠太多，捕食不足以控制）。
+
+**一般规律 (6)(7)**：若 $|\lambda_1| > |\lambda_j|$（$j \geq 2$），则
+
+$$\mathbf{x}_{k+1} \approx \lambda_1\mathbf{x}_k \ (\text{ eventually}), \qquad \mathbf{x}_k \approx c_1\lambda_1^k\mathbf{v}_1$$
+
+最大特征值 = **支配特征值（dominant eigenvalue）**，其特征向量给渐近方向。
+
+### 吸引子、排斥子、鞍点 Attractors, Repellers, Saddles
+
+对 $2 \times 2$ 可对角化系统，按两个特征值的模分类：
+
+**吸引子（Attractor，两个 |λ| < 1）**：所有轨道趋向原点。
+
+**例2（Example 2）**：$A = \begin{bmatrix} .8 & 0 \\
+0 & .64 \end{bmatrix}$，λ = .8, .64。
+
+$$\mathbf{x}_k = c_1(.8)^k\mathbf{v}_1 + c_2(.64)^k\mathbf{v}_2$$
+
+由于 $.64^k$ 衰减更快，轨道**沿 $\mathbf{v}_2$ 方向先被压扁**，再沿 $\mathbf{v}_1$ 方向爬向原点（FIGURE 1）——**较小的特征值方向吸引最强**！
+
+![FIGURE 1 吸引子](img/fig56_1_attractor.png)
+
+*FIGURE 1 The origin as an attractor. 图1 原点为吸引子：轨道被"压扁"后进向原点（小特征值方向贡献先消失）*
+
+**排斥子（Repeller，两个 |λ| > 1）**：所有轨道远离原点（例3：A = diag(1.44, 1.2)，轨迹向外）。
+
+**鞍点（Saddle，一个 |λ| > 1 一个 |λ| < 1）**：例4：$A = \begin{bmatrix} 2 & 0 \\
+0 & .5 \end{bmatrix}$。
+
+$$\mathbf{x}_k = c_1 2^k\begin{bmatrix} 1 \\
+0 \end{bmatrix} + c_2 (.5)^k\begin{bmatrix} 0 \\
+1 \end{bmatrix}$$
+
+- $c_1 \neq 0$：$2^k$ 主导，轨道无限远离（大部分初值）
+- $c_1 = 0$（初值恰在 $\mathbf{v}_2$ 轴上）：$(.5)^k \to 0$，轨道被吸向原点——**鞍点：一个方向吸引、另一个方向排斥**
+
+**换元解耦（Change of Variable）**：令 $\mathbf{y}_k = P^{-1}\mathbf{x}_k$（换到特征向量基），则
+
+$$\mathbf{y}_{k+1} = P^{-1}A\mathbf{x}_k = P^{-1}AP\mathbf{y}_k = D\mathbf{y}_k$$
+
+耦合系统 $\mathbf{x}_{k+1} = A\mathbf{x}_k$ 变成**解耦**的 $\mathbf{y}_{k+1} = D\mathbf{y}_k$（每个分量独立演化）——分析完再换回来（FIGURE 5.4-4 的同款思想）。
+
+### 复特征值：螺旋轨道
+
+**例7（Example 7，例5 矩阵的修订版）**：$A = \begin{bmatrix} .8 & .5 \\
+-.1 & 1.0 \end{bmatrix}$，特征值 $.9 \pm .2i$。
+
+**模**：$r = \sqrt{.81 + .04} = \sqrt{.85} \approx .92 < 1$ → **螺旋吸引子**（每步旋转 + 缩放 .92，轨道内旋趋于原点，FIGURE 5）
+
+![FIGURE 5 螺旋吸引子](img/fig56_5_spiral.png)
+
+*FIGURE 5 The origin as a spiral attractor. 图5 复特征值 $a \pm bi$（$|\lambda| < 1$）产生螺旋轨道：旋转 + 收缩，绕圈进入原点*
+
+**分类总表**（复特征值 λ = a ± bi，r = |λ|）：
+
+| 情形 | 条件 | 轨道 |
+|---|---|---|
+| 螺旋吸引子 | r < 1 | 内旋趋原点 |
+| 中心（center） | r = 1 | 闭合椭圆 |
+| 螺旋排斥子 | r > 1 | 外旋远离 |
+
+### 斑点猫头鹰的最终命运
+
+第 5 章开头的**阶段矩阵模型**（幼鸟 $j$、亚成鸟 $s$、成鸟 $a$，年为单位）：
+
+$$A = \begin{bmatrix} 0 & 0 & .33 \\
+.18 & 0 & 0 \\
+0 & .71 & .94 \end{bmatrix} \quad \begin{aligned} j_{k+1} &= .33a_k \\ s_{k+1} &= .18j_k \\ a_{k+1} &= .71s_k + .94a_k \end{aligned}$$
+
+**特征值**（数值计算）：$\lambda_1 \approx .98$, $\lambda_{2,3} \approx -.02 \pm .21i$（$|\lambda_{2,3}| \approx .21$）。
+
+由于 **$\lambda_1 \approx .98 < 1$**：
+
+$$\mathbf{x}_k = c_1(.98)^k\mathbf{v}_1 + \cdots \to \mathbf{0}$$
+
+**模型预测：猫头鹰趋向灭绝！** 根源是 .18 = 60%（幼鸟活到次年比例）× 30%（有合适栖息地的比例）——皆伐森林破坏了栖息地。**若保护措施把 30% 提高到 50%**（.18 → .30），新矩阵的 $\lambda_1 \approx 1.01 > 1$，种群以每年约 1% 恢复增长——**生态政策的数学判决书**。
+
+### 5.6 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 显式解 (2) | 特征向量分解：$\mathbf{x}_k = \sum c_j\lambda_j^k\mathbf{v}_j$ |
+| 支配特征值 | 最大 \|λ\| 项主宰长期：$\mathbf{x}_k \approx c_1\lambda_1^k\mathbf{v}_1$ |
+| 吸引子 / 排斥子 / 鞍点 | 两 \|λ\| 都 <1 / 都 >1 / 一小一大 |
+| 换元解耦 | $\mathbf{y} = P^{-1}\mathbf{x}$ 把耦合系统拆成独立分量 |
+| 复特征值螺旋 | r<1 内旋、r=1 椭圆、r>1 外旋 |
+| 猫头鹰结局 | λ₁≈.98 < 1 灭绝；保护措施 λ₁≈1.01 > 1 恢复 |
+
+> **本节精髓**：线性动力系统的全部信息藏在谱（特征值集合）里：模定聚散、辐角定旋转。猫头鹰的灭绝与复苏只在 30% 与 50% 之间——线性代数以无可辩驳的定量方式参与公共政策。下一节 5.7 转向连续时间（微分方程 $\mathbf{x}' = A\mathbf{x}$），特征值依然主宰，工具变成 $e^{\lambda t}$。
+
+---
