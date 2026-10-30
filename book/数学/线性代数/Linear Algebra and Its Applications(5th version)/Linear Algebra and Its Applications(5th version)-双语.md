@@ -2725,3 +2725,142 @@ b \end{bmatrix} = a\begin{bmatrix} 1 \\
 > **本节精髓**：抽象化让线性代数"一次证明、处处适用"。第 1~3 章在 $\mathbb{R}^n$ 中学过的一切——子空间、张成、线性无关、基、维数——将在 4.2~4.5 节逐一推广到任意向量空间。下一节先看两个最重要的"具体对象"：矩阵的零空间与列空间在抽象框架下的样子。
 
 ---
+---
+
+## 4.2 零空间、列空间与线性变换 Null Spaces, Column Spaces, and Linear Transformations
+
+**中文讲解**：2.8 节我们在 $\mathbb{R}^n$ 中初步认识了矩阵的两大子空间（Col A 与 Nul A）。本节在抽象框架下系统展开：正确定义、子空间判定、两者的对照、以及与线性变换的核（kernel）与值域（range）的联系。
+
+### 零空间 The Null Space
+
+**定义**：$m \times n$ 矩阵 $A$ 的**零空间**是齐次方程 $A\mathbf{x} = \mathbf{0}$ 的**全部解**：
+
+$$\operatorname{Nul} A = \{\mathbf{x} : \mathbf{x} \in \mathbb{R}^n,\ A\mathbf{x} = \mathbf{0}\} \subseteq \mathbb{R}^n$$
+
+**例1（Example 1，验证向量属于 Nul A）**：设 $A = \begin{bmatrix} 1 & -3 & -2 \\
+-5 & 9 & 1 \end{bmatrix}$, $\mathbf{u} = \begin{bmatrix} 5 \\
+3 \\
+-2 \end{bmatrix}$。判断 $\mathbf{u} \in \operatorname{Nul} A$？
+
+**解**：算 $A\mathbf{u} = \begin{bmatrix} 5 - 9 + 4 \\
+-25 + 27 - 2 \end{bmatrix} = \begin{bmatrix} 0 \\
+0 \end{bmatrix} = \mathbf{0}$ ✓ 故 $\mathbf{u} \in \operatorname{Nul} A$。
+
+**THEOREM 2**：$m \times n$ 矩阵 $A$ 的零空间是 $\mathbb{R}^n$ 的子空间。
+
+（等价表述：$m$ 个方程 $n$ 个未知量的齐次线性方程组的解集是 $\mathbb{R}^n$ 的子空间。）
+
+**证明**：完全复制 2.8 定理 13 的三步（$\mathbf{0} \in \operatorname{Nul} A$；$A(\mathbf{u}+\mathbf{v}) = A\mathbf{u} + A\mathbf{v} = \mathbf{0}$；$A(c\mathbf{u}) = c\,A\mathbf{u} = \mathbf{0}$）。注意**不要求 $A$ 是方阵**！∎
+
+**例2（Example 2，隐式描述转显式）**：设 $H = \{(a, b, c, d) \in \mathbb{R}^4 : a - 2b + 5c = d,\ c - a = b\}$。判断 $H$ 是否是子空间。
+
+**解**：把定义条件重排成**齐次方程组**：
+
+$$
+\begin{aligned}
+a - 2b + 5c - d &= 0 \\
+-a - b + c \quad\;\; &= 0
+\end{aligned}
+$$
+
+系数矩阵 $A = \begin{bmatrix} 1 & -2 & 5 & -1 \\
+-1 & -1 & 1 & 0 \end{bmatrix}$，则 $H = \operatorname{Nul} A$，由 Theorem 2 是子空间 ∎
+
+> **方法论**：判断"由线性方程条件定义的集合"是否为子空间——把条件改写成**齐次**方程组，证明它就是某矩阵的零空间。注意条件必须全是"= 0"型（等号右边不能有非零常数，否则不过原点，不是子空间）。
+
+**Nul A 的显式描述（例3）**：与 2.8 节例 6 完全相同的 $3 \times 5$ 矩阵，行化简 + 参数向量形式给出基 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$——**解 $A\mathbf{x} = \mathbf{0}$ 的标准流程自动产生 Nul A 的基**（第 5 章会反复用到这个事实）。
+
+![FIGURE 1 Nul A 映到零点](img/fig42_1_nul_mapped_to_zero.png)
+
+*FIGURE 1 The null space of A: Nul A, a subspace of $\mathbb{R}^n$, is mapped into the zero vector of $\mathbb{R}^m$. 图1 零空间的几何形象：Nul A（$\mathbb{R}^n$ 的子空间）被 A 全部压到 $\mathbb{R}^m$ 的零向量*
+
+### 列空间 The Column Space
+
+**定义**：$m \times n$ 矩阵 $A$ 的**列空间**是其各列所有线性组合之集：
+
+$$\operatorname{Col} A = \operatorname{Span}\{\mathbf{a}_1, \dots, \mathbf{a}_n\} \subseteq \mathbb{R}^m$$
+
+**基本事实**：
+- $\operatorname{Col} A = \{\mathbf{b} : A\mathbf{x} = \mathbf{b} \text{ 有解}\}$（"值域"视角）
+- $\operatorname{Col} A$ 是 $\mathbb{R}^m$ 的子空间（张成集必为子空间，Theorem 4.1-1）
+
+**例4（Example 4，参数化集合 = 列空间）**：设 $W = \{(6a - b,\ a + b,\ -7a) : a, b \in \mathbb{R}\}$。证明 $W$ 是子空间。
+
+**解**：拆参数：
+
+$$\begin{bmatrix} 6a - b \\
+a + b \\
+-7a \end{bmatrix} = a\begin{bmatrix} 6 \\
+1 \\
+-7 \end{bmatrix} + b\begin{bmatrix} -1 \\
+1 \\
+0 \end{bmatrix}$$
+
+故 $W = \operatorname{Col} A$，$A = \begin{bmatrix} 6 & -1 \\
+1 & 1 \\
+-7 & 0 \end{bmatrix}$，是子空间 ∎
+
+> **方法论**：证明"由线性参数式定义的集合"为子空间——把参数式拆成**列向量的线性组合**，说明它是某矩阵的列空间。
+
+### Nul A 与 Col A 对照表（本节精华）
+
+| 性质 | $\operatorname{Nul} A$ | $\operatorname{Col} A$ |
+|---|---|---|
+| 定义 | $A\mathbf{x} = \mathbf{0}$ 的解集 | 各列的线性组合 |
+| 属于哪个空间 | $\mathbb{R}^n$（$n$ = A 的列数） | $\mathbb{R}^m$（$m$ = A 的行数） |
+| 子空间判别 | 解齐次方程组（Theorem 2） | 化为张成集（Theorem 4.1-1） |
+| 求基 | 行化简 + 参数向量形式 | **A 的主元列**（2.8 定理 14） |
+| 维数 | 自由变量数 = $n - \operatorname{rank} A$ | 主元列数 = $\operatorname{rank} A$ |
+
+**例5（Example 5，空间归属判断）**：$A = \begin{bmatrix} 2 & 4 & -2 & 1 \\
+-2 & -5 & 7 & 3 \\
+3 & 7 & -8 & 6 \end{bmatrix}$（$3 \times 4$）。
+a. 若 $\operatorname{Col} A$ 是子空间，属于哪个空间？$\operatorname{Nul} A$ 呢？
+b. 求 $\operatorname{Col} A$ 与 $\operatorname{Nul} A$ 中各一个非零向量（若存在）。
+
+**解**：
+a. $\operatorname{Col} A$ 由 $\mathbb{R}^3$ 中的列张成，故 $\operatorname{Col} A \subseteq \mathbb{R}^3$；$\operatorname{Nul} A$ 是 $A\mathbf{x} = \mathbf{0}$ 的解集，$\mathbf{x} \in \mathbb{R}^4$，故 $\operatorname{Nul} A \subseteq \mathbb{R}^4$。
+
+b. $\operatorname{Col} A$ 中任取一列，如 $(2, -2, 3)$ ✓。$\operatorname{Nul} A$：行化简 $[A\ \ \mathbf{0}]$：
+
+$$[A\ \ \mathbf{0}] \sim \begin{bmatrix} 1 & 0 & 9 & 0 & 0 \\
+0 & 1 & -5 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \end{bmatrix} \Rightarrow x_1 = -9x_3,\ x_2 = 5x_3,\ x_4 = 0\ (x_3 \text{ 自由})$$
+
+取 $x_3 = 1$，得 $\operatorname{Nul} A$ 中向量 $(-9, 5, 1, 0)$ ✓
+
+**例6（Example 6，"不同空间"的判别）**：设 $A$ 为例 5 的矩阵，$\mathbf{u} = (3, -2, -1, 0)$，$\mathbf{v} = (3, -1, 3)$。
+
+**解**：
+- $\mathbf{u} \in \operatorname{Nul} A$？算 $A\mathbf{u} = (0, -3, 3) \neq \mathbf{0}$ → **不在**（注意即便算错空间归属，先算 $A\mathbf{u}$ 总没错）
+- $\mathbf{u} \in \operatorname{Col} A$？$\mathbf{u} \in \mathbb{R}^4$ 而 $\operatorname{Col} A \subseteq \mathbb{R}^3$ → **不可能**
+- $\mathbf{v} \in \operatorname{Col} A$？解 $A\mathbf{x} = \mathbf{v}$ 行化简得相容 → **在**
+- $\mathbf{v} \in \operatorname{Nul} A$？$\mathbf{v} \in \mathbb{R}^3$ 而 $\operatorname{Nul} A \subseteq \mathbb{R}^4$ → **不可能**
+
+> **口诀**：先问"在哪个空间"，再问"满足条件吗"——空间归属错误是初学者最常见的坑。
+
+### 线性变换的核与值域 Kernel and Range of a Linear Transformation
+
+**定义**：线性变换 $T: V \to W$ 的
+- **核（kernel）**：$\operatorname{ker} T = \{\mathbf{v} \in V : T(\mathbf{v}) = \mathbf{0}\}$ —— $V$ 中被压成零的向量集
+- **值域（range）**：$\operatorname{range} T = \{T(\mathbf{v}) : \mathbf{v} \in V\}$ —— $T$ 的全部输出
+
+**联系矩阵情形**：$T(\mathbf{x}) = A\mathbf{x}$ 时，$\operatorname{ker} T = \operatorname{Nul} A$（$\mathbb{R}^n$ 的子空间），$\operatorname{range} T = \operatorname{Col} A$（$\mathbb{R}^m$ 的子空间）。一般结论：**ker T 是 V 的子空间，range T 是 W 的子空间**（证明同 Theorem 2 / 4.1-1，练习 35–37）。
+
+**例8（Example 8，微分算子的核）**：设 $\mathbb{P}_2$ 中 $T(p) = p'$（求导）。$\ker T$ = 导数为零的多项式 = **全体常数多项式**；$\operatorname{range} T = \mathbb{P}_1$（次数 ≤ 1 的多项式）。
+
+**例9（Example 9，微分方程的解空间）**：设 $C[a,b]$ 中 $T(f) = 3f'' + 4f' - 2f$（$f''$ 表示二阶导）。$\ker T$ = 满足 $3f'' + 4f' - 2f = 0$ 的全体函数——**这是一个齐次线性微分方程的解集，是子空间**（叠加原理！）。而 $T(f) = 5$ 这类非齐次方程的解集**不是**子空间（是子空间的平移）。
+
+### 4.2 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Nul A | $A\mathbf{x} = \mathbf{0}$ 的解集（$\mathbb{R}^n$ 的子空间，Thm 2） |
+| Col A | 各列的张成（$\mathbb{R}^m$ 的子空间） |
+| 判别法 | 方程条件 → Nul A；参数式 → Col A |
+| ker T / range T | 核 = "压成零的输入"（V 的子空间）；值域 = "全部输出"（W 的子空间） |
+| 统一视角 | 矩阵情形：ker T = Nul A，range T = Col A |
+
+> **本节精髓**：Nul A 与 Col A 是矩阵 $A$ 的"一体两面"——核看"哪里被压扁"，值域看"能到达哪里"。抽象为 ker T 与 range T 后，微分算子、积分算子等无穷维对象也纳入同一框架——这是泛函分析中"算子理论"的起点。下一节 4.3 把**线性无关与基**推广到任意向量空间，完成理论大厦的主体结构。
+
+---
