@@ -4267,3 +4267,144 @@ $$\mathbf{x}_k = c_1(.98)^k\mathbf{v}_1 + \cdots \to \mathbf{0}$$
 > **本节精髓**：线性动力系统的全部信息藏在谱（特征值集合）里：模定聚散、辐角定旋转。猫头鹰的灭绝与复苏只在 30% 与 50% 之间——线性代数以无可辩驳的定量方式参与公共政策。下一节 5.7 转向连续时间（微分方程 $\mathbf{x}' = A\mathbf{x}$），特征值依然主宰，工具变成 $e^{\lambda t}$。
 
 ---
+---
+
+## 5.7 微分方程的应用 Applications to Differential Equations
+
+**中文讲解**：5.6 节处理离散时间（$\mathbf{x}_{k+1} = A\mathbf{x}_k$，解 $\lambda^k$）。本节转向**连续时间**：电路、弹簧、种群在连续演化中满足**微分方程**
+
+$$\mathbf{x}'(t) = A\mathbf{x}(t) \tag{1}$$
+
+其中 $\mathbf{x}' = d\mathbf{x}/dt$。解法与离散情形**结构完全相同**——只需把 $\lambda^k$ 换成 $e^{\lambda t}$！
+
+### 解空间与通解
+
+**基本事实**：方程 (1) 的全部解构成一个**向量空间**（线性组合的导数 = 导数的线性组合）——解任何具体初值问题，只需找一组**基本解系**（基），再匹配初值。
+
+**解耦热身**：若 $A = D = \begin{bmatrix} 3 & 0 \\
+0 & -5 \end{bmatrix}$（对角），两个分量各自独立：
+
+$$x_1' = 3x_1 \Rightarrow x_1 = c_1 e^{3t}, \qquad x_2' = -5x_2 \Rightarrow x_2 = c_2 e^{-5t}$$
+
+**一般定理**：若 $A = PDP^{-1}$（$P$ 的列 $\mathbf{v}_1, \dots, \mathbf{v}_n$ 是特征向量，$D = \operatorname{diag}(\lambda_1, \dots, \lambda_n)$），则 (1) 的**通解**为
+
+$$\mathbf{x}(t) = c_1\mathbf{v}_1e^{\lambda_1 t} + c_2\mathbf{v}_2e^{\lambda_2 t} + \cdots + c_n\mathbf{v}_ne^{\lambda_n t} \tag{4}$$
+
+**验证**：$\mathbf{x}' = \sum c_j\lambda_j\mathbf{v}_je^{\lambda_j t}$，$A\mathbf{x} = \sum c_jA\mathbf{v}_je^{\lambda_j t} = \sum c_j\lambda_j\mathbf{v}_je^{\lambda_j t}$——两边相等 ✓
+
+### 例1（Example 1，RC 电路）
+
+电路模型给出 $A = \begin{bmatrix} -1.5 & .5 \\
+1 & -1 \end{bmatrix}$，初值 $\mathbf{x}(0) = \begin{bmatrix} 5 \\
+4 \end{bmatrix}$（两个电容的初始电压）。
+
+**特征值/向量**：$\lambda_1 = -.5$, $\mathbf{v}_1 = \begin{bmatrix} 1 \\
+2 \end{bmatrix}$；$\lambda_2 = -2$, $\mathbf{v}_2 = \begin{bmatrix} -1 \\
+1 \end{bmatrix}$
+
+**通解**：
+
+$$\mathbf{x}(t) = c_1\begin{bmatrix} 1 \\
+2 \end{bmatrix}e^{-.5t} + c_2\begin{bmatrix} -1 \\
+1 \end{bmatrix}e^{-2t}$$
+
+**匹配初值**：$c_1\begin{bmatrix} 1 \\
+2 \end{bmatrix} + c_2\begin{bmatrix} -1 \\
+1 \end{bmatrix} = \begin{bmatrix} 5 \\
+4 \end{bmatrix}$，解得 $c_1 = 3$, $c_2 = -2$：
+
+$$\mathbf{x}(t) = 3\begin{bmatrix} 1 \\
+2 \end{bmatrix}e^{-.5t} - 2\begin{bmatrix} -1 \\
+1 \end{bmatrix}e^{-2t} = \begin{bmatrix} 3e^{-.5t} + 2e^{-2t} \\
+6e^{-.5t} - 2e^{-2t} \end{bmatrix}$$
+
+**物理解读**：两项都指数衰减（$\lambda < 0$）——**原点是吸引子**（sink）；$\lambda_2 = -2$ 衰减更快，所以初值"先被压向 $\mathbf{v}_1$ 方向"再共同归零（FIGURE 2）。若两个电容初始电压**大小相等、符号相反**，则 $c_1 = 0$，电压以最快速度（$e^{-2t}$）衰减。
+
+![FIGURE 2 吸引子](img/fig57_2_attractor.png)
+
+*FIGURE 2 The origin as an attractor. 图2 原点是吸引子：所有电压轨迹被吸向零点（快方向 v₂ 的贡献先消失）*
+
+### 例2（Example 2，鞍点）
+
+$A = \begin{bmatrix} 4 & -5 \\
+-2 & 1 \end{bmatrix}$：$\lambda_1 = 6$（$\mathbf{v}_1 = (-5, 2)$），$\lambda_2 = -1$（$\mathbf{v}_2 = (1, 1)$）。通解
+
+$$\mathbf{x}(t) = c_1\begin{bmatrix} -5 \\
+2 \end{bmatrix}e^{6t} + c_2\begin{bmatrix} 1 \\
+1 \end{bmatrix}e^{-t}$$
+
+$e^{6t}$ 爆炸、$e^{-t}$ 消失——典型**鞍点**：$\mathbf{v}_2$ 轴上的初值被吸入原点，其余全部在有限时间内飞走。
+
+**解耦视角**：换元 $\mathbf{y} = P^{-1}\mathbf{x}$（$\mathbf{y}$ 是 $\mathbf{x}$ 在特征向量基下的坐标）把 (1) 拆成
+
+$$\mathbf{y}' = D\mathbf{y} \tag{5}$$
+
+两个独立方程 $y_k' = \lambda_k y_k$，解出 $y_k = c_ke^{\lambda_k t}$，再换回 $\mathbf{x} = P\mathbf{y}$——与 5.6 节离散情形的换元**一模一样**。
+
+### 复特征值与螺旋点
+
+若 $\lambda = a + bi$（$b \neq 0$），复值解 $\mathbf{v}e^{\lambda t}$ 的实部、虚部给出**两个实解**。利用欧拉公式
+
+$$e^{(a+bi)t} = e^{at}(\cos bt + i\sin bt) \tag{7}$$
+
+得实通解的基：
+
+$$\mathbf{y}_1(t) = \big[\operatorname{Re}\mathbf{v}\cos bt - \operatorname{Im}\mathbf{v}\sin bt\big]e^{at}$$
+
+$$\mathbf{y}_2(t) = \big[\operatorname{Re}\mathbf{v}\sin bt + \operatorname{Im}\mathbf{v}\cos bt\big]e^{at}$$
+
+**几何**：$e^{at}$ 定聚散（$a < 0$ 收缩、$a > 0$ 膨胀），$\cos/\sin bt$ 定旋转（角频率 $b$）——连续版的"旋转+缩放"！
+
+### 例4（Example 4，RLC 电路——螺旋点实战）
+
+电路（FIGURE 4：电阻 $R_1, R_2$、电容 $C$、电感 $L$）状态方程
+
+$$A = \begin{bmatrix} -R_2/L & -1/L \\
+1/C & -1/(R_1C) \end{bmatrix}$$
+
+代入 $R_1 = 5$, $R_2 = .8$, $C = .1$, $L = .4$：
+
+$$A = \begin{bmatrix} -2 & -2.5 \\
+10 & -2 \end{bmatrix}, \qquad \lambda = -2 \pm 5i$$
+
+取 $\lambda = -2 + 5i$ 的特征向量 $\mathbf{v} = \begin{bmatrix} i \\
+2 \end{bmatrix}$（Re $\mathbf{v} = (0,2)$, Im $\mathbf{v} = (1,0)$），由 (7)：
+
+$$\mathbf{x}_1(t) = \begin{bmatrix} i \\
+2 \end{bmatrix}e^{-2t}(\cos 5t + i\sin 5t)$$
+
+$$\Rightarrow\ \mathbf{y}_1(t) = \begin{bmatrix} -\sin 5t \\
+2\cos 5t \end{bmatrix}e^{-2t}, \qquad \mathbf{y}_2(t) = \begin{bmatrix} \cos 5t \\
+2\sin 5t \end{bmatrix}e^{-2t}$$
+
+**通解** $\mathbf{x} = c_1\mathbf{y}_1 + c_2\mathbf{y}_2$；初值 $\mathbf{x}(0) = \begin{bmatrix} 3 \\
+3 \end{bmatrix}$ 给出 $c_1 = 1.5$, $c_2 = 3$：
+
+$$\begin{bmatrix} i_L(t) \\
+v_C(t) \end{bmatrix} = \begin{bmatrix} -1.5\sin 5t + 3\cos 5t \\
+3\cos 5t + 6\sin 5t \end{bmatrix}e^{-2t}$$
+
+**螺旋点（spiral point）**：$e^{-2t}$ 收缩 + $\sin/\cos 5t$ 旋转 → 轨迹绕原点**内旋**（FIGURE 5）。实部 $> 0$ 则外旋；实部 $= 0$ 则为闭合椭圆。
+
+![FIGURE 4 RLC电路](img/fig57_4_circuit.png)
+
+*FIGURE 4 例4 的 RLC 电路：电阻 R₁、R₂，电容 C，电感 L——状态变量为电感电流与电容电压*
+
+![FIGURE 5 螺旋点](img/fig57_5_spiral_point.png)
+
+*FIGURE 5 The origin as a spiral point. 图5 复特征值产生螺旋点：正弦/余弦引起旋转，实部符号决定内旋/外旋/椭圆*
+
+### 5.7 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| $\mathbf{x}' = A\mathbf{x}$ | 通解 (4)：特征向量 × $e^{\lambda t}$ 的线性组合 |
+| 解耦 | $\mathbf{y} = P^{-1}\mathbf{x}$ 拆成 $y_k' = \lambda_k y_k$ |
+| 吸引子 / 鞍点 | 两 $\lambda$ 实部均 <0 / 一正一负（连续版与 5.6 离散版完全平行） |
+| 复特征值 | $e^{(a+bi)t} = e^{at}(\cos bt + i\sin bt)$：实部定聚散、虚部定转速 |
+| 螺旋点 | 连续动力系统的"复特征值轨道"：内旋 / 外旋 / 椭圆 |
+| 例4 | RLC 电路完整求解：$i_L(t), v_C(t)$ 显式公式 |
+
+> **本节精髓**：离散与连续、差分与微分，在特征值理论下**同构**：$\lambda^k \leftrightarrow e^{\lambda t}$。电路工程师分析 RLC 瞬态、生物学家分析连续种群模型，用的都是同一套"特征值定聚散、复特征值定旋转"的语言。5.8 节收尾：实际计算中特征值怎么高效估计？——幂法（power method）。
+
+---
