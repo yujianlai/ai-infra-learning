@@ -3552,3 +3552,153 @@ $$\mathbf{x}_1 = A\mathbf{x}_0 = \lambda\mathbf{x}_0, \qquad \mathbf{x}_2 = A\ma
 > **本节精髓**：特征向量是矩阵的"特征方向"——A 在这些方向上只做缩放。求特征值的正确姿势：解 $\det(A - \lambda I) = 0$（5.2 节的特征方程）；求特征向量：对 $A - \lambda I$ 行化简。猫头鹰模型的长期命运，将在 5.6 节用最大特征值揭晓。
 
 ---
+---
+
+## 5.2 特征方程 The Characteristic Equation
+
+**中文讲解**：5.1 节会"验证"某数是不是特征值。本节解决反向问题：**如何系统地求出所有特征值？** 答案藏在行列式里——$\lambda$ 是特征值 ⟺ $A - \lambda I$ 不可逆 ⟺ $\det(A - \lambda I) = 0$。这个关于 $\lambda$ 的方程就是**特征方程**。
+
+### 从 5.1 例 2 到一般方法
+
+回顾：7 是 $A$ 的特征值 ⟺ $A - 7I$ 不可逆。一般化：
+
+$$\lambda \text{ 是 } A \text{ 的特征值} \iff (A - \lambda I)\mathbf{x} = \mathbf{0} \text{ 有非平凡解} \iff A - \lambda I \text{ 不可逆} \iff \det(A - \lambda I) = 0$$
+
+**定义**：标量方程 $\det(A - \lambda I) = 0$ 称为 $A$ 的**特征方程（characteristic equation）**。
+
+**例1（Example 1，求特征值）**：求 $A = \begin{bmatrix} 2 & 3 \\
+3 & -6 \end{bmatrix}$ 的特征值。
+
+**解**：
+
+$$\det(A - \lambda I) = \begin{vmatrix} 2 - \lambda & 3 \\
+3 & -6 - \lambda \end{vmatrix} = (2-\lambda)(-6-\lambda) - 9 = \lambda^2 + 4\lambda - 21$$
+
+解 $\lambda^2 + 4\lambda - 21 = 0$（注意 $-21 = 3 \times (-7)$，和 = 4 ✓）：$(\lambda - 3)(\lambda + 7) = 0$
+
+$$\lambda = 3, \qquad \lambda = -7$$
+
+**验证**：$\det(A - 3I) = \begin{vmatrix} -1 & 3 \\
+3 & -9 \end{vmatrix} = 9 - 9 = 0$ ✓；$\det(A + 7I) = \begin{vmatrix} 9 & 3 \\
+3 & 1 \end{vmatrix} = 9 - 9 = 0$ ✓
+
+### IMT 再添两员 (s)(t)
+
+> s. 数 0 **不是** $A$ 的特征值 ⟺ $A$ 可逆
+> t. $\det A \neq 0$
+
+**几何强化**：$|\det A|$ = 列向量确定的平行六面体体积（FIGURE 1，3.3 节的结论在此回响）——特征值与体积，通过行列式连起来了。
+
+![FIGURE 1 平行六面体体积](img/fig52_1_parallelepiped_volume.png)
+
+*FIGURE 1 The parallelepiped determined by the columns of A. 图1 A 的列确定的平行六面体：体积 = |det A|（特征值 0 意味着体积坍缩为零）*
+
+**例2（Example 2，两种化简殊途同归）**：求 $\det A$，$A = \begin{bmatrix} 1 & 5 & 0 \\
+2 & 4 & -1 \\
+0 & -2 & 0 \end{bmatrix}$。
+
+**解**（两种行化简都得 $-2$）：
+$$\begin{vmatrix} 1 & 5 & 0 \\
+2 & 4 & -1 \\
+0 & -2 & 0 \end{vmatrix} = \begin{vmatrix} 1 & 5 & 0 \\
+0 & -6 & -1 \\
+0 & -2 & 0 \end{vmatrix} = 1\cdot(-2) = -2 \quad \text{（沿第一列展开）}$$
+
+### 行列式性质总表 THEOREM 3
+
+> 设 $A, B$ 是 $n \times n$ 矩阵：
+>
+> a. $A$ 可逆 ⟺ $\det A \neq 0$
+> b. $\det AB = (\det A)(\det B)$
+> c. $\det A^T = \det A$
+> d. 若 $A$ 是三角阵，$\det A$ = 对角元之积
+> e. **行替换**不改变 $\det A$；**一次行交换**使 $\det A$ 变号；**某行乘 k** 使 $\det A$ 乘 k
+
+### 特征多项式与代数重数
+
+**定义**：$\det(A - \lambda I)$ 展开后是 $\lambda$ 的 $n$ 次多项式（首项 $(-1)^n\lambda^n$），称为 $A$ 的**特征多项式（characteristic polynomial）**。特征方程的次数 = 特征值的个数（计重数）。
+
+**例3（Example 3，上三角阵）**：$A = \begin{bmatrix} 5 & -2 & 6 & -1 \\
+0 & 3 & -8 & 0 \\
+0 & 0 & 5 & 4 \\
+0 & 0 & 0 & 1 \end{bmatrix}$ 的特征方程：
+
+$$\det(A - \lambda I) = (5-\lambda)^2(3-\lambda)(1-\lambda) = 0$$
+
+展开：$\lambda^4 - 14\lambda^3 + 68\lambda^2 - 130\lambda + 75 = 0$
+
+特征值：5（**二重根**，multiplicity 2）、3、1。
+
+**例4（Example 4，大重数）**：6×6 矩阵 $A$，特征多项式为
+
+$$\lambda^6 - 4\lambda^5 - 12\lambda^4 = \lambda^4(\lambda - 6)(\lambda + 2) = 0$$
+
+特征值：0（**四重**）、6、-2。
+
+> **因式分解提示（教材技巧）**：若整数系数多项式 $a_n\lambda^n + \cdots + a_0$ 有整数根，必是常数项 $a_0$ 的因子除以首项系数 $a_n$ 的因子。例4 中 $a_0 = 0$ 立刻给出根 0；其余试 ±1, ±2, ±3, ±6…
+
+### 相似矩阵 Similarity
+
+**定义**：$n \times n$ 矩阵 $A, B$ 称为**相似（similar）**，记 $A \sim B$，若存在可逆矩阵 $P$ 使
+
+$$P^{-1}AP = B \quad \text{或等价地} \quad A = PBP^{-1}$$
+
+**直觉**：相似 = "同一个线性变换在不同基下的矩阵表示"（5.4 节详述）。变换 $\mathbf{x} \mapsto A\mathbf{x}$ 与 $\mathbf{x} \mapsto B\mathbf{x}$ 本质相同。
+
+**THEOREM 4（相似矩阵同特征值）**：
+> 若 $n \times n$ 矩阵 $A, B$ 相似，则它们有相同的特征多项式，从而相同的特征值（计重数）。
+
+**证明**：设 $B = P^{-1}AP$。
+
+$$B - \lambda I = P^{-1}AP - \lambda I = P^{-1}(A - \lambda I)P$$
+
+$$\det(B - \lambda I) = \det(P^{-1})\det(A - \lambda I)\det(P) = \det(A - \lambda I) \cdot \det(P)^{-1}\det(P) = \det(A - \lambda I)$$
+
+（用了 $\det(P^{-1}) = 1/\det P$ 与 $\det(P^{-1})\det(P) = 1$）∎
+
+> ⚠️ **两条警告**：
+> 1. **相同特征值 ≠ 相似**！如 $\begin{bmatrix} 2 & 1 \\
+> 0 & 2 \end{bmatrix}$ 与 $\begin{bmatrix} 2 & 0 \\
+> 0 & 2 \end{bmatrix}$ 特征值相同（都是 2,2）但不相似（后者是 2I，只与自己相似：$P^{-1}(2I)P = 2I$）
+> 2. **相似 ≠ 行等价**！行等价 = 左乘初等矩阵（$EA$）；相似 = 左乘 $P^{-1}$ 右乘 $P$（$P^{-1}AP$）——结构完全不同
+
+### 应用：动力系统（例5）
+
+**例5（Example 5，城市人口迁移）**：设 $A = \begin{bmatrix} .95 & .03 \\
+.05 & .97 \end{bmatrix}$ 为人口迁移矩阵（每年 5% 迁出城市、3% 迁入），$\mathbf{x}_0 = \begin{bmatrix} .60 \\
+.40 \end{bmatrix}$（初始城乡人口）。求 $\mathbf{x}_k = A^k\mathbf{x}_0$ 的长期行为。
+
+**解**：
+**第1步 特征值**：$\det(A - \lambda I) = \lambda^2 - 1.92\lambda + .92 = (\lambda - 1)(\lambda - .92)$，特征值 1 与 0.92
+
+**第2步 特征向量**：$\lambda = 1$：$(A - I)\mathbf{x} = 0$ → $\mathbf{v}_1 = \begin{bmatrix} 3 \\
+5 \end{bmatrix}$；$\lambda = .92$：$\mathbf{v}_2 = \begin{bmatrix} 1 \\
+-1 \end{bmatrix}$
+
+**第3步 分解初值**：$\mathbf{x}_0 = c_1\mathbf{v}_1 + c_2\mathbf{v}_2$ 解得 $c_1 = .125$, $c_2 = .225$
+
+**第4步 显式解**：
+
+$$\mathbf{x}_k = A^k\mathbf{x}_0 = .125\,(1)^k\mathbf{v}_1 + .225\,(.92)^k\mathbf{v}_2 = .125\begin{bmatrix} 3 \\
+5 \end{bmatrix} + .225\,(.92)^k\begin{bmatrix} 1 \\
+-1 \end{bmatrix}$$
+
+**长期行为**：$(.92)^k \to 0$，故 $\mathbf{x}_k \to .125\mathbf{v}_1 = \begin{bmatrix} .375 \\
+.625 \end{bmatrix}$——**稳态**：城市 37.5%、乡村 62.5%
+
+> **马尔可夫链视角**：$A$ 的每列和为 1 ⇒ $\lambda = 1$ 必为特征值（为什么？练习可见），稳态即对应特征向量——4.9 节马尔可夫链的理论预告。
+
+### 5.2 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 特征方程 | $\det(A - \lambda I) = 0$：解出所有特征值 |
+| 特征多项式 | $\det(A - \lambda I)$：n 次多项式，根 = 特征值（计重数） |
+| Theorem 3 | 行列式五性质总表（IMT-s、t 收入） |
+| 代数重数 | 特征多项式根的重数（例4：0 是四重） |
+| 相似 | $B = P^{-1}AP$：同一变换的不同基表示；Theorem 4 同特征值 |
+| 动力系统解法 | 分解到特征向量基 → $A^k$ 变 $\lambda^k$ → 显式解 + 长期行为 |
+
+> **本节精髓**：特征方程把"求特征值"变成"解多项式"——代数接管了几何。相似矩阵理论（Theorem 4）预告 5.3 节对角化：找到好的基 $P$，让 $A$ 在新基下变成对角阵 $\Lambda$，则 $A^k = P\Lambda^k P^{-1}$ 一步算出。例5 的"稳态 = 主特征向量"思想将在 5.6 节推广到 PageRank。
+
+---
