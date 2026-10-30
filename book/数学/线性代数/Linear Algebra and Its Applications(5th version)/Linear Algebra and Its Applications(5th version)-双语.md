@@ -2864,3 +2864,101 @@ $$[A\ \ \mathbf{0}] \sim \begin{bmatrix} 1 & 0 & 9 & 0 & 0 \\
 > **本节精髓**：Nul A 与 Col A 是矩阵 $A$ 的"一体两面"——核看"哪里被压扁"，值域看"能到达哪里"。抽象为 ker T 与 range T 后，微分算子、积分算子等无穷维对象也纳入同一框架——这是泛函分析中"算子理论"的起点。下一节 4.3 把**线性无关与基**推广到任意向量空间，完成理论大厦的主体结构。
 
 ---
+---
+
+## 4.3 线性无关集与基 Linearly Independent Sets; Bases
+
+**中文讲解**：本节把第 1 章的"线性无关"和 2.8 节的"基"推广到**任意向量空间**。定义几乎原封不动，但新例子（多项式、函数）会刷新你对这两个概念的理解。核心新定理：张成集可以"瘦身"成基（Theorem 3）。
+
+### 向量空间中的线性无关 Linear Independence
+
+**定义**：向量空间 $V$ 中向量集 $\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$（$p \geq 2$）称为**线性无关**，若向量方程
+
+$$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_p\mathbf{v}_p = \mathbf{0}$$
+
+只有**平凡解** $c_1 = \cdots = c_p = 0$。否则称为**线性相关**——即存在某个 $\mathbf{v}_j$ 是其余向量的线性组合。
+
+> 定义与 1.7 节完全一致！验证方法也一致：设线性组合等于零，论证权必须全为零。
+
+**例1（Example 1，多项式空间的相依性）**：设 $\mathbf{p}_1(t) = 1$, $\mathbf{p}_2(t) = t$, $\mathbf{p}_3(t) = 4 - t$。则 $\{\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_3\}$ 在 $\mathbb{P}$ 中**线性相关**——因为
+
+$$\mathbf{p}_3 = 4\mathbf{p}_1 - \mathbf{p}_2$$
+
+（即 $4\mathbf{p}_1 - \mathbf{p}_2 - \mathbf{p}_3 = \mathbf{0}$，存在非平凡组合）。
+
+**例2（Example 2，函数空间的无关性）**：在 $C[0, 1]$（$[0,1]$ 上连续函数空间）中：
+
+- $\{\sin t, \cos t\}$ **线性无关**：设 $c_1\sin t + c_2\cos t = 0$（零函数），分别取 $t = 0$ 得 $c_2 = 0$，取 $t = \pi/2$ 得 $c_1 = 0$——只有平凡解 ✓
+- $\{\sin t\cos t,\ \sin 2t\}$ **线性相关**：因为三角恒等式 $\sin 2t = 2\sin t\cos t$——$\sin 2t$ 是 $\sin t\cos t$ 的倍数！
+
+> **启示**：同样的两个函数，换不同的"环境"（空间），相关性结论可以不同——判断相关性永远在所讨论的向量空间内进行。
+
+### 基 Basis
+
+**定义**：向量空间 $V$ 的一个子集 $\mathcal{B}$ 称为 $V$ 的**基**，若
+
+1. $\mathcal{B}$ 是**线性无关**集
+2. $\mathcal{B}$ **张成** $V$（$\operatorname{Span}\mathcal{B} = V$）
+
+**例4（Example 4，可逆矩阵的列 = 基）**：$n \times n$ 可逆矩阵 $A$ 的列构成 $\mathbb{R}^n$ 的基——因为可逆 ⟺ 列线性无关（IMT-e）且张成 $\mathbb{R}^n$（IMT-h）。这正是 IMT 的另一种表述！
+
+**例5（Example 5，$\mathbb{R}^n$ 的标准基）**：
+
+$$\mathcal{E} = \{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$$
+
+即单位矩阵 $I_n$ 的各列。线性无关（IMT）且张成 $\mathbb{R}^n$。FIGURE 1 画出 $\mathbb{R}^3$ 的标准基：
+
+![FIGURE 1 R³的标准基](img/fig43_1_standard_basis_R3.png)
+
+*FIGURE 1 The standard basis for $\mathbb{R}^3$. 图1 $\mathbb{R}^3$ 的标准基 $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$*
+
+**例6（Example 6，$\mathbb{P}_n$ 的标准基）**：单项式集合
+
+$$\{1,\ t,\ t^2,\ \dots,\ t^n\}$$
+
+是 $\mathbb{P}_n$ 的基。**验证**：
+1. **张成**：任何次数 ≤ n 的多项式都是 $1, t, \dots, t^n$ 的线性组合（按定义！）
+2. **无关**：若 $c_0 + c_1 t + \cdots + c_n t^n = \mathbf{0}$（零多项式，即对所有 $t$ 取值为 0），则必有 $c_0 = \cdots = c_n = 0$——因为**非零的 n 次多项式至多 n 个根**，而这个多项式有无穷多个根。
+
+![FIGURE 2 P₂的标准基](img/fig43_2_standard_basis_P2.png)
+
+*FIGURE 2 The standard basis for $\mathbb{P}_2$. 图2 $\mathbb{P}_2$ 的标准基：$1, t, t^2$ 三个"坐标方向"*
+
+### 张成集定理 The Spanning Set Theorem（基的存在性构造）
+
+**THEOREM 3**：
+> 设 $S = \{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 是向量空间 $V$ 的子集，$H = \operatorname{Span}\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$。
+>
+> a. 若 $S$ 中某向量（如 $\mathbf{v}_k$）是其余向量的线性组合，则从 $S$ 中**去掉** $\mathbf{v}_k$ 后张成的空间不变。
+>
+> b. 若 $H \neq \{\mathbf{0}\}$，则 $S$ 的某个子集是 $H$ 的一组**基**。
+
+**证明要点 (a)**：若 $\mathbf{v}_k = c_1\mathbf{v}_1 + \cdots$（不含 $\mathbf{v}_k$ 的组合），则 $H$ 中任一向量代入消去 $\mathbf{v}_k$ 后，仍是其余向量的组合 ⇒ 张成集不缩小。反向显然（子集张成 ⊆ 原张成）。∎
+
+**(b) 的操作含义**：从张成集里逐个删"可被其余向量表示"的向量，直到删不动为止——剩下的就是基（无关且张成）。**张成集可"收缩"为基。**
+
+**例7（Example 7）**：设 $\mathbf{v}_1 \neq \mathbf{0}$, $\mathbf{v}_2 \in \operatorname{Span}\{\mathbf{v}_1\}$（$\mathbf{v}_2 = k\mathbf{v}_1$），$\mathbf{v}_3 = 5\mathbf{v}_1 + 3\mathbf{v}_2$。则 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\} = \operatorname{Span}\{\mathbf{v}_1\}$——后两个都是 $\mathbf{v}_1$ 的倍数，全删！
+
+![FIGURE 3 H平面](img/fig43_3_H_plane.png)
+
+*FIGURE 3 例7 图示：$H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}$ 平面上的向量收缩*
+
+### Nul A 与 Col A 的基（复习 + 推广）
+
+求基的标准流程（与 2.8 节完全一致，此处以抽象语言重述）：
+- $\operatorname{Nul} A$ 的基：解 $A\mathbf{x} = \mathbf{0}$，参数向量形式中的向量
+- $\operatorname{Col} A$ 的基：$A$ 的**主元列**（Theorem 4，注意是 A 本身的列，不是阶梯形的列！）
+
+### 4.3 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 线性无关（V 中） | $c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p = \mathbf{0}$ 只有平凡解（定义与 Rⁿ 相同） |
+| 基 | 无关 + 张成（V 的"最小骨架"） |
+| 标准基 | $\mathbb{R}^n$: $\{\mathbf{e}_i\}$；$\mathbb{P}_n$: $\{1, t, \dots, t^n\}$ |
+| Theorem 3 | 张成集删"冗余向量"可收缩为基 |
+| Col A 的基 | A 的主元列（Theorem 4） |
+
+> **本节精髓**：Theorem 3 给出基的**构造性存在**——任何张成集都能瘦身成基（反之 4.5 节将证明：任何无关集都能扩充成基，且所有基大小相同 = 维数）。多项式与函数的例子提醒我们：线性无关性是个"关系"概念，与向量是什么无关，只与"怎么组合"有关。
+
+---
