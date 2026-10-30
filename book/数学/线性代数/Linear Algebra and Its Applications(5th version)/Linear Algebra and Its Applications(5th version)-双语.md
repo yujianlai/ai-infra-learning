@@ -4902,3 +4902,136 @@ $$\operatorname{dist}(\mathbf{y}, W) = \|\mathbf{y} - \hat{\mathbf{y}}\| = \sqrt
 > **本节精髓**：正交分解 y = ŷ + z 是"降维看世界"的几何基础——最佳逼近定理宣告垂足 ŷ 是唯一最优近似。万事俱备，只欠东风：**怎么给任意子空间 W 造出正交基？** 6.4 节的 Gram-Schmidt 正交化给出算法，并顺势导出工程界广泛使用的 **QR 分解**。
 
 ---
+---
+
+## 6.4 格拉姆-施密特正交化 The Gram–Schmidt Process
+
+**中文讲解**：6.3 节的投影公式需要**正交基**——但给定的子空间往往只有普通基。本节给出把任意基变成正交基的算法：**Gram-Schmidt 正交化**（"逐次减去投影"），并顺势导出数值计算的利器 **QR 分解** $A = QR$。
+
+### 构造正交基：两个例子
+
+**例1（Example 1，二维热身）**：$W = \operatorname{Span}\{\mathbf{x}_1, \mathbf{x}_2\}$, $\mathbf{x}_1 = (3, 6, 0)$, $\mathbf{x}_2 = (1, 2, 2)$。
+
+**第一步**：取 $\mathbf{v}_1 = \mathbf{x}_1$。
+**第二步**：从 $\mathbf{x}_2$ 中减去它在 $\mathbf{v}_1$ 上的投影，剩下的部分必垂直于 $\mathbf{v}_1$（FIGURE 1）：
+
+$$\mathbf{v}_2 = \mathbf{x}_2 - \frac{\mathbf{x}_2\cdot\mathbf{v}_1}{\mathbf{v}_1\cdot\mathbf{v}_1}\mathbf{v}_1 = (1,2,2) - \frac{15}{45}(3,6,0) = (1,2,2) - (1,2,0) = \begin{bmatrix} 0 \\
+0 \\
+2 \end{bmatrix}$$
+
+**验证**：$\mathbf{v}_1\cdot\mathbf{v}_2 = 0$ ✓。$\{\mathbf{v}_1, \mathbf{v}_2\}$ 是 $W$ 的正交基！
+
+![FIGURE 1 GS构造](img/fig64_1_gs_construction.png)
+
+*FIGURE 1 Construction of an orthogonal basis {v1, v2}. 图1 Gram-Schmidt 的几何：v₂ = x₂ − p，其中 p 是 x₂ 在 Span{v₁} 上的投影——减完投影，剩下的必垂直*
+
+**例2（Example 2，四维完整流程）**：$\mathbf{x}_1 = (1,1,1,1)$, $\mathbf{x}_2 = (0,1,1,1)$, $\mathbf{x}_3 = (0,0,1,1)$。
+
+$$\mathbf{v}_1 = \mathbf{x}_1 = \begin{bmatrix} 1 \\
+1 \\
+1 \\
+1 \end{bmatrix}$$
+
+$$\mathbf{v}_2 = \mathbf{x}_2 - \frac{\mathbf{x}_2\cdot\mathbf{v}_1}{\mathbf{v}_1\cdot\mathbf{v}_1}\mathbf{v}_1 = \begin{bmatrix} 0 \\
+1 \\
+1 \\
+1 \end{bmatrix} - \frac{3}{4}\begin{bmatrix} 1 \\
+1 \\
+1 \\
+1 \end{bmatrix} = \begin{bmatrix} -3/4 \\
+1/4 \\
+1/4 \\
+1/4 \end{bmatrix}$$
+
+**技巧**：向量可任意缩放而不影响正交性（只影响张成的线）——乘以 4 去分母：$\mathbf{v}_2' = 4\mathbf{v}_2 = (-3, 1, 1, 1)$（Step 2'）。
+
+$$W_2 = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2'\}, \qquad \operatorname{proj}_{W_2}\mathbf{x}_3 = \frac{\mathbf{x}_3\cdot\mathbf{v}_1}{\mathbf{v}_1\cdot\mathbf{v}_1}\mathbf{v}_1 + \frac{\mathbf{x}_3\cdot\mathbf{v}_2'}{\mathbf{v}_2'\cdot\mathbf{v}_2'}\mathbf{v}_2'$$
+
+$$\mathbf{x}_3\cdot\mathbf{v}_1 = 2, \ \mathbf{v}_1\cdot\mathbf{v}_1 = 4; \qquad \mathbf{x}_3\cdot\mathbf{v}_2' = 2, \ \mathbf{v}_2'\cdot\mathbf{v}_2' = 12$$
+
+$$\operatorname{proj}_{W_2}\mathbf{x}_3 = \frac{2}{4}\mathbf{v}_1 + \frac{2}{12}\mathbf{v}_2' = \begin{bmatrix} 0 \\
+2/3 \\
+2/3 \\
+2/3 \end{bmatrix}$$
+
+$$\mathbf{v}_3 = \mathbf{x}_3 - \operatorname{proj}_{W_2}\mathbf{x}_3 = \begin{bmatrix} 0 \\
+-2/3 \\
+1/3 \\
+1/3 \end{bmatrix} \quad (\text{FIGURE 2：} \mathbf{v}_3 \perp W_2)$$
+
+![FIGURE 2 v₃构造](img/fig64_2_v3_construction.png)
+
+*FIGURE 2 The construction of v3 from x3 and W2. 图2 第三步：v₃ 是 x₃ 减去其在 W₂ 上投影后的"垂直残余"*
+
+### 格拉姆-施密特定理 THEOREM 11
+
+> 设 $\{\mathbf{x}_1, \dots, \mathbf{x}_p\}$ 是 $W \neq \{\mathbf{0}\}$ 的基。定义
+
+> $$\mathbf{v}_1 = \mathbf{x}_1$$
+
+> $$\mathbf{v}_2 = \mathbf{x}_2 - \operatorname{proj}_{W_1}\mathbf{x}_2, \qquad W_1 = \operatorname{Span}\{\mathbf{v}_1\}$$
+
+> $$\mathbf{v}_3 = \mathbf{x}_3 - \operatorname{proj}_{W_2}\mathbf{x}_3, \qquad W_2 = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$$
+
+> $$\vdots$$
+
+> $$\mathbf{v}_p = \mathbf{x}_p - \operatorname{proj}_{W_{p-1}}\mathbf{x}_p, \qquad W_{p-1} = \operatorname{Span}\{\mathbf{v}_1, \dots, \mathbf{v}_{p-1}\} \tag{1}$$
+
+> 则 $\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 是 $W$ 的**正交基**。
+
+**证明思路（归纳法）**：对 $p$ 归纳。$p = 1$ 平凡。设 $\{\mathbf{v}_1, \dots, \mathbf{v}_k\}$ 已正交（张成 $W_k$）。由正交分解定理（6.3 节），$\mathbf{v}_{k+1} = \mathbf{x}_{k+1} - \operatorname{proj}_{W_k}\mathbf{x}_{k+1}$ 垂直于 $W_k$——即与所有 $\mathbf{v}_j$ 正交；且 $\mathbf{v}_{k+1} \neq \mathbf{0}$（否则 $\mathbf{x}_{k+1} \in W_k$ 与线性无关矛盾）。∎
+
+> **要标准正交基？最后一步**：把每个 $\mathbf{v}_j$ 除以自身长度即可（例 2：$\mathbf{u}_j = \mathbf{v}_j/\|\mathbf{v}_j\|$）。
+
+### QR 分解 THEOREM 12
+
+**THEOREM 12（QR 分解）**：
+> 若 $m \times n$ 矩阵 $A$ 的列**线性无关**，则 $A$ 可分解为
+
+> $$A = QR$$
+
+> 其中：$Q$ 是 $m \times n$ 矩阵，列是 $\operatorname{Col} A$ 的**标准正交基**；$R$ 是 $n \times n$ **上三角可逆矩阵**，对角元全正。
+
+**构造**：
+1. 对 $A$ 的列 $\mathbf{x}_1, \dots, \mathbf{x}_n$ 做 Gram-Schmidt，得正交集 $\{\mathbf{v}_1, \dots, \mathbf{v}_n\}$
+2. 单位化：$\mathbf{u}_j = \mathbf{v}_j/\|\mathbf{v}_j\|$，令 $Q = [\mathbf{u}_1 \cdots \mathbf{u}_n]$
+3. 取 $R = Q^TA$
+
+**为什么 R 是上三角**：$R$ 的 $(i,j)$ 元 = $\mathbf{u}_i\cdot\mathbf{x}_j$。由构造（1），$\mathbf{x}_j \in W_j = \operatorname{Span}\{\mathbf{u}_1, \dots, \mathbf{u}_j\}$，而 $\mathbf{u}_i \perp W_j$ 当 $i > j$——所以 $i > j$ 时 $R_{ij} = 0$ ✓。可逆：$R$ 对角元 = $\mathbf{u}_j\cdot\mathbf{x}_j > 0$（构造保证 $\mathbf{x}_j$ 不在 $W_{j-1}$ 中，投影后仍有正分量）。
+
+**例4（Example 4，QR 完整计算）**：接例 2，
+
+$$A = \begin{bmatrix} 1 & 0 & 0 \\
+1 & 1 & 0 \\
+1 & 1 & 1 \\
+1 & 1 & 1 \end{bmatrix}, \qquad Q = \begin{bmatrix} 1/2 & -3/\sqrt{12} & 0 \\
+1/2 & 1/\sqrt{12} & -2/\sqrt{6} \\
+1/2 & 1/\sqrt{12} & 1/\sqrt{6} \\
+1/2 & 1/\sqrt{12} & 1/\sqrt{6} \end{bmatrix}$$
+
+（$Q$ 的列 = 例 2 各 $\mathbf{v}_j$ 的单位化：$\|\mathbf{v}_1\| = 2$, $\|\mathbf{v}_2'\| = \sqrt{12}$, $\|\mathbf{v}_3\| = \frac{1}{3}\sqrt{6}$，故第三列乘 3 缩放）
+
+$$R = Q^TA = \begin{bmatrix} 2 & 3/2 & 1 \\
+0 & 3/\sqrt{12} & 2/\sqrt{12} \\
+0 & 0 & 2/\sqrt{6} \end{bmatrix}$$
+
+**验算可选**：$A = QR$、$Q^TQ = I$ 均可抽查。
+
+### 数值注记（重要的实践细节）
+
+1. **舍入误差累积**：经典 Gram-Schmidt 在计算机上会因舍入误差逐渐丧失正交性。改进版 **修正 Gram-Schmidt（modified GS）**（每步立即对后续所有列减投影）可部分缓解。
+2. **Householder 反射**：实际软件（LAPACK）用 Householder 反射做 QR——数值稳定性更好，与 LU 分解地位相当。**QR 分解是解最小二乘问题的标准算法**（6.5 节）。
+
+### 6.4 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Gram-Schmidt (Thm 11) | v₁=x₁；vₖ₊₁ = xₖ₊₁ − proj_{Wₖ}xₖ₊₁（逐次减去已有方向的影子） |
+| 缩放技巧 | 中间向量可乘非零常数去分母（如 v₂' = 4v₂） |
+| QR 分解 (Thm 12) | A = QR：Q 标准正交列（Col A 的基）、R 上三角对角元正 |
+| R = QᵀA | 一行公式；上三角因为 uᵢ ⊥ Wⱼ（i > j） |
+| 数值实践 | 修正 GS 抗舍入；Householder 反射是工业标准 |
+
+> **本节精髓**：Gram-Schmidt 把"造正交基"变成机械流程——每步只做一件事：减去投影。QR 分解则是它的矩阵形态：任何列无关的 A 都能"正交化地重打包"，为 6.5 节最小二乘方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ 提供高效解法（以及 MATLAB 的核心算法）。下一节 6.5 抵达本章主角：**最小二乘问题**。
+
+---
