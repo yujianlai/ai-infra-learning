@@ -3896,3 +3896,109 @@ $$A = \begin{bmatrix} 3 & 2 \\
 > **本节精髓**：对角化把矩阵幂从 $O(k)$ 次乘法变成常数次。判断可对角化的完整判据（Theorem 5 + 7）：特征多项式完全分解 + 每个重根的特征空间"长满"到与重数同维。5.4 节将揭示对角化的几何本质（线性变换的对角矩阵表示），5.6 节用它解动力系统。
 
 ---
+---
+
+## 5.4 特征向量与线性变换 Eigenvectors and Linear Transformations
+
+**中文讲解**：对角化还有一个深刻的几何解释：**相似矩阵 = 同一线性变换在不同基下的矩阵**。本节把 4.4 节的坐标系理论用到线性变换上——每个线性变换 $T$ 相对一组基 $\mathcal{B}$ 都有一个"矩阵化身" $[T]_{\mathcal{B}}$，对角化就是找到让 $[T]_{\mathcal{B}}$ 变成对角阵的那个基。
+
+### 一般线性变换的矩阵 Matrix of a Linear Transformation
+
+**设定**：$V$（基 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$）和 $W$（基 $\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_m\}$）是向量空间，$T: V \to W$ 线性。则存在唯一 $m \times n$ 矩阵 $M$ 使
+
+$$[T(\mathbf{x})]_{\mathcal{C}} = M[\mathbf{x}]_{\mathcal{B}} \tag{3}$$
+
+$$M = \begin{bmatrix} [T(\mathbf{b}_1)]_{\mathcal{C}} & [T(\mathbf{b}_2)]_{\mathcal{C}} & \cdots & [T(\mathbf{b}_n)]_{\mathcal{C}} \end{bmatrix} \tag{4}$$
+
+**M 的构造口诀**：把 $V$ 的每个基向量喂给 $T$，把结果写成 $W$ 的 $\mathcal{C}$-坐标，按列排进 $M$。
+
+**例1（Example 1）**：设 $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2\}$（V 的基），$\mathcal{C} = \{\mathbf{c}_1, \mathbf{c}_2, \mathbf{c}_3\}$（W 的基），$T: V \to W$ 满足
+
+$$[T(\mathbf{b}_1)]_{\mathcal{C}} = \begin{bmatrix} 3 \\
+-2 \\
+5 \end{bmatrix}, \qquad [T(\mathbf{b}_2)]_{\mathcal{C}} = \begin{bmatrix} 4 \\
+7 \\
+-1 \end{bmatrix}$$
+
+则
+
+$$M = \begin{bmatrix} 3 & 4 \\
+-2 & 7 \\
+5 & -1 \end{bmatrix}, \qquad [T(\mathbf{x})]_{\mathcal{C}} = M[\mathbf{x}]_{\mathcal{B}}\ \ (\forall \mathbf{x} \in V)$$
+
+**特例**：$T$ = 恒等变换 $V \to V$ 时，$M$ 正是 4.7 节的换基矩阵 $P_{\mathcal{C} \leftarrow \mathcal{B}}$——公式 (3)(4) 把 4.4、4.7、5.3 全部统一了。
+
+### V → V 的 B-矩阵 The B-Matrix for T
+
+**定义**：$T: V \to V$，$V$ 的基 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$。$T$ 相对 $\mathcal{B}$ 的矩阵（**$\mathcal{B}$-矩阵**）：
+
+$$[T]_{\mathcal{B}} = \begin{bmatrix} [T(\mathbf{b}_1)]_{\mathcal{B}} & \cdots & [T(\mathbf{b}_n)]_{\mathcal{B}} \end{bmatrix}$$
+
+**公式 (5)**：
+
+$$[T(\mathbf{x})]_{\mathcal{B}} = [T]_{\mathcal{B}}\,[\mathbf{x}]_{\mathcal{B}}$$
+
+**例2（Example 2）**：微分算子 $D: \mathbb{P}_2 \to \mathbb{P}_2$，$D(p) = p'$。求相对 $\mathcal{B} = \{1, t, t^2\}$ 的 $[D]_{\mathcal{B}}$。
+
+**解**：
+
+$$D(1) = 0 \to (0,0,0), \qquad D(t) = 1 \to (1,0,0), \qquad D(t^2) = 2t \to (0,2,0)$$
+
+$$[D]_{\mathcal{B}} = \begin{bmatrix} 0 & 1 & 0 \\
+0 & 0 & 2 \\
+0 & 0 & 0 \end{bmatrix}$$
+
+> 微分变成"移位加缩放"矩阵——无穷微分方程的数值解法正是把这个思想离散化。
+
+### 对角化的几何本质 THEOREM 8
+
+**THEOREM 8（Diagonal Matrix Representation）**：
+> 设 $A = PDP^{-1}$（$D$ 为 $n \times n$ 对角阵），$T: \mathbb{R}^n \to \mathbb{R}^n$, $T(\mathbf{x}) = A\mathbf{x}$。若 $\mathcal{B}$ = $P$ 的各列构成的 $\mathbb{R}^n$ 的基，则 $D$ 正是 $T$ 的 $\mathcal{B}$-矩阵：
+
+> $$[T]_{\mathcal{B}} = D \tag{6}$$
+
+**证明**：由 (4)，$[T]_{\mathcal{B}}$ 的列 = $[A\mathbf{b}_j]_{\mathcal{B}}$。而 $A\mathbf{b}_j = \lambda_j\mathbf{b}_j$（$P$ 的列是特征向量）⇒ $[A\mathbf{b}_j]_{\mathcal{B}} = \lambda_j\mathbf{e}_j$，故 $[T]_{\mathcal{B}} = \operatorname{diag}(\lambda_1, \dots, \lambda_n) = D$。∎
+
+**一句话总结**：**对角化 = 换到特征向量基，让变换的矩阵变成对角阵。**
+
+**例3（Example 3）**：$A = \begin{bmatrix} 7 & 2 \\
+-4 & 1 \end{bmatrix}$，$T(\mathbf{x}) = A\mathbf{x}$。由 5.3 节已知 $A = PDP^{-1}$，$P = \begin{bmatrix} 1 & 1 \\
+-1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} 5 & 0 \\
+0 & 3 \end{bmatrix}$。特征向量基 $\mathcal{B} = \{(1,-1), (1,-2)\}$，则
+
+$$[T]_{\mathcal{B}} = P^{-1}AP = D = \begin{bmatrix} 5 & 0 \\
+0 & 3 \end{bmatrix}$$
+
+**例4（Example 4，不可对角化但仍有简化）**：$A = \begin{bmatrix} 4 & -9 \\
+4 & -8 \end{bmatrix}$，特征多项式 $(\lambda + 2)^2$——λ=−2 二重，不可对角化。但取任意方便基如 $\mathcal{B} = \{(3,2), (2,1)\}$：
+
+$$[T]_{\mathcal{B}} = P^{-1}AP = \begin{bmatrix} -1 & 2 \\
+2 & -3 \end{bmatrix}\begin{bmatrix} -6 & -1 \\
+-4 & 0 \end{bmatrix} = \begin{bmatrix} -2 & 1 \\
+0 & -2 \end{bmatrix}$$
+
+**简化仍发生**（上三角的 Jordan 形——补充题会证明：任何复方阵都相似于由这种 Jordan 块拼成的矩阵）。
+
+![FIGURE 3 B-矩阵图](img/fig54_3_B_matrix.png)
+
+*FIGURE 3 The B-matrix for T: V → V. 图3 B-矩阵的意义：x → T 的"向量语言"与 $[\mathbf{x}]_{\mathcal{B}} \to [T]_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}}$ 的"坐标语言"是同一变换的两种读法*
+
+![FIGURE 5 相似图](img/fig54_5_similarity.png)
+
+*FIGURE 5 Similarity of two matrix representations: A = PCP^{-1}. 图5 相似的本质：x 经 A 直接到 Ax（上）；或先换基（P^{-1}）、乘 C、再换回来（P）——绕路但同终点的"坐标翻译"*
+
+**数值注记**：求 $P^{-1}AP$ 的高效算法——对 $[P\ \ AP]$ 行化简得 $[I\ \ P^{-1}AP]$（省掉单独求逆）。
+
+### 5.4 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| M（V→W 的矩阵） | 列 = $[T(\mathbf{b}_j)]_{\mathcal{C}}$；公式 (3)：$[T(\mathbf{x})]_{\mathcal{C}} = M[\mathbf{x}]_{\mathcal{B}}$ |
+| $[T]_{\mathcal{B}}$ | T 在自己空间里的矩阵：公式 (5) |
+| Theorem 8 | A = PDP^{-1} ⟺ D 是特征向量基下的 B-矩阵：对角化 = 换基简化 |
+| 例4 | 不可对角化也能简化（Jordan 形 [−2 1; 0 −2]） |
+| 统一公式 | $[T]_{\mathcal{B}} = P^{-1}AP$：相似 = 同变换不同基 |
+
+> **本节精髓**：相似矩阵的几何意义终于揭晓——它们不是不同的矩阵，而是**同一个线性变换在不同坐标系下的不同写法**。对角化是换基的极致：找到变换"最自然"的基（特征向量），矩阵就现出原形。例4 的 Jordan 形预告：即使不能对角化，也能化成"近乎对角"的标准形。下一节 5.5 处理复特征值——旋转矩阵的特征值躲进了复平面，需要把数域扩大到 ℂ。
+
+---
