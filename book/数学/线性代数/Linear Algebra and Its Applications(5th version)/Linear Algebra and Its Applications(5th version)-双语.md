@@ -4408,3 +4408,109 @@ v_C(t) \end{bmatrix} = \begin{bmatrix} -1.5\sin 5t + 3\cos 5t \\
 > **本节精髓**：离散与连续、差分与微分，在特征值理论下**同构**：$\lambda^k \leftrightarrow e^{\lambda t}$。电路工程师分析 RLC 瞬态、生物学家分析连续种群模型，用的都是同一套"特征值定聚散、复特征值定旋转"的语言。5.8 节收尾：实际计算中特征值怎么高效估计？——幂法（power method）。
 
 ---
+---
+
+## 5.8 特征值的迭代估计 Iterative Estimates for Eigenvalues
+
+**中文讲解**：到目前为止，特征值都是"算出来"的（特征方程、对角化）。但对**大规模矩阵**（搜索引擎的网页矩阵、量子化学的哈密顿量），行列式/特征多项式方法完全不可行。本节介绍**迭代法**：只反复做矩阵乘法，就能逼近特征值与特征向量——幂法（power method）与逆幂法（inverse power method）。
+
+### 幂法原理 The Power Method
+
+**适用条件**：$n \times n$ 矩阵 $A$ 有**严格支配特征值（strictly dominant eigenvalue）** $\lambda_1$：
+
+$$|\lambda_1| > |\lambda_2| \geq \cdots \geq |\lambda_n|$$
+
+（由 Theorem 5.1-2，$\lambda_1$ 的特征空间必为一维。）
+
+**原理**：任取 $\mathbf{x}_0$（一般位置），写成特征向量组合 $\mathbf{x}_0 = c_1\mathbf{v}_1 + \cdots + c_n\mathbf{v}_n$，则
+
+$$\mathbf{x}_k = A^k\mathbf{x}_0 = c_1\lambda_1^k\mathbf{v}_1 + c_2\lambda_2^k\mathbf{v}_2 + \cdots + c_n\lambda_n^k\mathbf{v}_n \tag{2}$$
+
+由于 $|\lambda_j/\lambda_1| < 1$，当 $k \to \infty$：
+
+$$\mathbf{x}_k \approx c_1\lambda_1^k\mathbf{v}_1 \quad \text{方向} \to \mathbf{v}_1 \text{ 的方向}$$
+
+**每乘一次 A，其余方向被 $\lambda_1$ "碾压"一层**——这就是"幂"法的名字来源。
+
+**例1（Example 1）**：$A = \begin{bmatrix} 1.8 & .8 \\
+.2 & 1.2 \end{bmatrix}$，$\mathbf{v}_1 = (4, 1)$。取 $\mathbf{x}_0 = (1, 0)$ 迭代：
+
+| $k$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| $\mathbf{x}_k$（归一化） | (1, 0) | (1, .111) | (1, .176) | (1, .212) | (1, .229) | (1, .238) | (1, .243) | (1, .246) | (1, .248) | (1, .249) | (1, .250) |
+
+$\mathbf{x}_k \to (1, .25)$，正是 $\mathbf{v}_1 = (4,1)$ 的方向！（FIGURE 2：各倍数的向量被拉向特征线）
+
+![FIGURE 2 缩放倍数](img/fig58_2_scaled_multiples.png)
+
+*FIGURE 2 Scaled multiples of x, Ax, A²x, ..., A⁷x. 图2 幂法的几何：x, Ax, A²x, ... 缩放后全部趋向特征线（Eigenspace = Multiples of v₁）*
+
+### 幂法算法 THE POWER METHOD
+
+> 1. 选初始向量 $\mathbf{x}_0$，其最大分量为 1
+> 2. 对 $k = 0, 1, \dots$：
+>    a. 计算 $A\mathbf{x}_k$
+>    b. 设 $\mu_k$ = $A\mathbf{x}_k$ 中**绝对值最大**的分量
+>    c. 归一化：$\mathbf{x}_{k+1} = (1/\mu_k)A\mathbf{x}_k$
+> 3. 对几乎所有 $\mathbf{x}_0$ 的选择：$\mu_k \to \lambda_1$，$\mathbf{x}_k \to \mathbf{v}_1$（方向）
+
+**为什么 μk 逼近 λ1**：当 $\mathbf{x}_k \approx \mathbf{v}_1$ 时，$A\mathbf{x}_k \approx \lambda_1\mathbf{x}_k$——最大分量比 ≈ λ1。
+
+**例2（Example 2）**：$A = \begin{bmatrix} 6 & 5 \\
+1 & 2 \end{bmatrix}$，$\mathbf{x}_0 = \begin{bmatrix} 0 \\
+1 \end{bmatrix}$，k = 5 时停止：
+
+| $k$ | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+| $\mathbf{x}_k$ | (0, 1) | (1, .4) | (1, .225) | (1, .203) | (1, .2005) | (1, .20007) |
+| $\mu_k$ | 5 | 8 | 7.125 | 7.0175 | 7.0022 | 7.00028 |
+
+$\mu_5 \approx \mathbf{7}$，$\mathbf{x}_5 \approx (1, .2)$。**验证**：
+
+$$A\begin{bmatrix} 1 \\
+.2 \end{bmatrix} = \begin{bmatrix} 7 \\
+1.4 \end{bmatrix} = 7\begin{bmatrix} 1 \\
+.2 \end{bmatrix} \checkmark$$
+
+**收敛速度**：由比值 $|\lambda_2/\lambda_1|$ 决定——例2 中 $|\lambda_2/\lambda_1| = 1/7$ 很小，所以收敛飞快。
+
+**舍入误差的救命作用**：若 $\mathbf{x}_0$ 恰好使 $c_1 = 0$（理论上永远到不了 $\mathbf{v}_1$），浮点舍入误差会在迭代中"泄露"出 $\mathbf{v}_1$ 分量——误差反而救了幂法！
+
+### 逆幂法 The Inverse Power Method
+
+**目标**：估计**靠近给定数 α** 的特征值（比如最小特征值、或某区间内的特征值）。
+
+**原理**：若 $A\mathbf{v} = \lambda\mathbf{v}$，则
+
+$$(A - \alpha I)\mathbf{v} = (\lambda - \alpha)\mathbf{v} \quad \Rightarrow \quad (A-\alpha I)^{-1}\mathbf{v} = \frac{1}{\lambda - \alpha}\mathbf{v}$$
+
+即 $(A-\alpha I)^{-1}$ 的特征值为 $\frac{1}{\lambda - \alpha}$——**离 α 最近的特征值 λ 对应最大的 $\frac{1}{|\lambda-\alpha|}$，成为新矩阵的支配特征值**！
+
+**算法**：
+> 1. 选初始 $\mathbf{x}_0$（最大分量为 1）
+> 2. 对 $k = 0, 1, \dots$：
+>    a. 解 $(A - \alpha I)\mathbf{y}_k = \mathbf{x}_k$（**用 LU 分解**，每步只需回代）
+>    b. $\mu_k$ = $\mathbf{y}_k$ 的最大分量
+>    c. $\mathbf{x}_{k+1} = (1/\mu_k)\mathbf{y}_k$
+> 3. $\nu_k = \alpha + \frac{1}{\mu_k} \to \lambda$（靠近 α 的那个特征值）
+
+**例3（Example 3）**：估计某 3×3 矩阵的**最小特征值**。取 α = 1.9 启动逆幂法，几步即得 $\nu_k \approx 1.95$（精确到六位小数）。α 越接近真值，$1/(\lambda-\alpha)$ 越"支配"，收敛越快。
+
+### 数值注记
+
+幂法、逆幂法只需矩阵-向量乘法（或一次 LU + 回代），适合**稀疏巨型矩阵**。MATLAB 的 eig() 命令核心是 **QR 算法**（把 A 分解为正交阵 × 上三角，迭代使次对角元消失）——思想与幂法一脉相承，是现代科学计算的重要基石。
+
+### 5.8 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 幂法 | 反复乘 A：方向 → 支配特征向量，最大分量比 → 支配特征值 |
+| 适用条件 | 存在严格支配特征值（模严格最大） |
+| 收敛速度 | 取决于 \|λ₂/λ₁\|；舍入误差泄漏"救场" c₁=0 |
+| 逆幂法 | 解 (A−αI)y=x：把"靠近 α 的特征值"变成支配特征值 |
+| 例2/例3 | μ₅≈7 验证 A(1,.2)=7(1,.2)；最小特征值 νₖ≈1.95（六位精度） |
+| QR 算法 | MATLAB eig() 的核心（补充：现代计算的标准武器） |
+
+> **本节精髓**：迭代法是线性代数"能算"的关键——不求特征多项式，只做乘法就逼近答案。幂法把"最大者生存"的竞争机制数学化：每乘一次 A，小特征值方向就被大特征值方向压制一层。第 5 章到此收官：从特征向量的定义（5.1）到数值计算（5.8），动力系统（5.6-5.7）与对角化（5.3）是理论到应用的桥梁。下一章进入全书几何最美的部分——**第 6 章 正交性与最小二乘法**（Gram-Schmidt、QR 分解、最小二乘回归）。
+
+---
