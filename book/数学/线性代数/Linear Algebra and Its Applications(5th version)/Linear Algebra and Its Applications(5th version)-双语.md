@@ -1876,3 +1876,205 @@ y \\
 > **本节精髓**：图形学把矩阵乘法的"**变换**"本质演绎到极致——矩阵是运动，乘法是复合，逆矩阵是"撤销"。下一节的子空间理论，则把矩阵的"**结构**"本质（列空间、零空间）推向中心舞台。
 
 ---
+---
+
+## 2.8 $\mathbb{R}^n$ 的子空间 Subspaces of $\mathbb{R}^n$
+
+**中文讲解**：前面我们反复遇到两种向量集合：齐次方程 $A\mathbf{x} = \mathbf{0}$ 的解集、若干向量的张成 $\operatorname{Span}$。它们有一个共同的名字——**子空间（subspace）**。本节把第 1 章的几何直觉升级为严格定义，并引出全书最重要的两个子空间：**列空间**与**零空间**。
+
+### 子空间的定义 DEFINITION
+
+$\mathbb{R}^n$ 中的集合 $H$ 称为**子空间**，若满足三条性质：
+
+a. **零向量** $\mathbf{0}$ 在 $H$ 中
+
+b. 对 $H$ 中任意 $\mathbf{u}, \mathbf{v}$，**和** $\mathbf{u} + \mathbf{v}$ 仍在 $H$ 中（对加法封闭）
+
+c. 对 $H$ 中任意 $\mathbf{u}$ 和任意标量 $c$，**数乘** $c\mathbf{u}$ 仍在 $H$ 中（对数乘封闭）
+
+> 用一句话说：**子空间 = 包含零向量、且对加法与数乘都封闭的向量集合**。第 1 章讨论过的几乎所有向量集合都是子空间。
+
+**例1（Example 1）**：若 $\mathbf{v}_1, \mathbf{v}_2 \in \mathbb{R}^n$，则 $H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 是 $\mathbb{R}^n$ 的子空间。
+
+**验证**：零向量在 $H$ 中（$0\mathbf{v}_1 + 0\mathbf{v}_2$ 是线性组合）；任取 $\mathbf{u} = s_1\mathbf{v}_1 + s_2\mathbf{v}_2$、$\mathbf{v} = t_1\mathbf{v}_1 + t_2\mathbf{v}_2$，则
+
+$$\mathbf{u} + \mathbf{v} = (s_1+t_1)\mathbf{v}_1 + (s_2+t_2)\mathbf{v}_2 \in H$$
+
+$$c\mathbf{u} = (cs_1)\mathbf{v}_1 + (cs_2)\mathbf{v}_2 \in H$$
+
+三条性质全满足，故 $H$ 是子空间。几何上，它就是**过原点的平面**（或直线）：
+
+![FIGURE 1 张成平面](img/fig28_1_span_plane.png)
+
+*FIGURE 1 Span{v1, v2} as a plane through the origin. 图1 张成集是过原点的平面（子空间的典型形象）*
+
+**例3（Example 3，反例）**：**不过原点的直线 $L$ 不是子空间**——它不含零向量，破坏性质 (a)；而且看图就知道：$L$ 上两向量之和可能跑出 $L$（$\mathbf{u}+\mathbf{v}$ 不在 $L$ 上），倍数也可能跑出（$2\mathbf{w}$ 不在 $L$ 上）——加法、数乘都不封闭！
+
+![FIGURE 2 非子空间直线](img/fig28_2_line_not_subspace.png)
+
+*FIGURE 2 A line L not through the origin is not a subspace. 图2 不过原点的直线不是子空间：u+v 与 2w 都不在 L 上（加法、数乘均不封闭）*
+
+> **记忆要点**：1.5 节我们学过"非齐次方程的解集 = 特解 + 齐次通解（平移）"。平移后的集合**不再是子空间**（不过原点）——这正呼应了例3。
+
+**THEOREM 12**：对任意 $\mathbf{v}_1, \dots, \mathbf{v}_p \in \mathbb{R}^n$，集合 $\operatorname{Span}\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 是 $\mathbb{R}^n$ 的子空间。我们称它为**由 $\mathbf{v}_1, \dots, \mathbf{v}_p$ 张成（生成）的子空间**。
+
+**两个特殊子空间**：
+- $\mathbb{R}^n$ 本身（显然满足三条）
+- **零子空间** $\{\mathbf{0}\}$（只含零向量）
+
+### 列空间 Column Space of a Matrix
+
+**定义**：$m \times n$ 矩阵 $A$ 的**列空间** $\operatorname{Col} A$ 是其各列所有线性组合构成的集合：
+
+$$\operatorname{Col} A = \operatorname{Span}\{\mathbf{a}_1, \dots, \mathbf{a}_n\}$$
+
+- 若 $A$ 的列在 $\mathbb{R}^m$ 中，则 $\operatorname{Col} A$ 是 $\mathbb{R}^m$ 的子空间（由 Theorem 12）
+- **关键联系**：$\operatorname{Col} A = \mathbb{R}^m$ ⟺ $A$ 的列张成 $\mathbb{R}^m$；否则 $\operatorname{Col} A$ 只是 $\mathbb{R}^m$ 的一部分
+- **方程组视角**：$\mathbf{b} \in \operatorname{Col} A$ ⟺ 方程 $A\mathbf{x} = \mathbf{b}$ **有解**（这正是 1.4 定理 4 的语言！）
+
+**例4（Example 4）**：判断 $\mathbf{b}$ 是否在 $A$ 的列空间中：
+
+$$A = \begin{bmatrix} 1 & -3 & -4 \\
+-4 & 6 & -2 \\
+-3 & 7 & 6 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 3 \\
+3 \\
+-4 \end{bmatrix}$$
+
+**解**：$\mathbf{b}$ 是 $A$ 各列的线性组合 ⟺ 存在 $\mathbf{x}$ 使 $A\mathbf{x} = \mathbf{b}$。对增广矩阵行化简：
+
+$$
+\left[\begin{array}{rrrr} 1 & -3 & -4 & 3 \\
+-4 & 6 & -2 & 3 \\
+-3 & 7 & 6 & -4 \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & -3 & -4 & 3 \\
+0 & -6 & -18 & 15 \\
+0 & -2 & -6 & 5 \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & -3 & -4 & 3 \\
+0 & -6 & -18 & 15 \\
+0 & 0 & 0 & 0 \end{array}\right]
+$$
+
+第三行全零、无矛盾方程，系统**相容** ⇒ **$\mathbf{b}$ 在 $\operatorname{Col} A$ 中**（且因 $x_3$ 自由，表示方法无穷多种）。
+
+> **Col A 的妙用**：$\operatorname{Col} A$ 就是"方程 $A\mathbf{x} = \mathbf{b}$ 有解"的所有 $\mathbf{b}$ 构成的集合——它把"解的存在性"翻译成了"向量属于某个子空间"。
+
+### 零空间 Null Space of a Matrix
+
+**定义**：$m \times n$ 矩阵 $A$ 的**零空间** $\operatorname{Nul} A$ 是齐次方程 $A\mathbf{x} = \mathbf{0}$ 的**全部解**构成的集合：
+
+$$\operatorname{Nul} A = \{\mathbf{x} \in \mathbb{R}^n : A\mathbf{x} = \mathbf{0}\}$$
+
+**THEOREM 13**：$m \times n$ 矩阵 $A$ 的零空间是 $\mathbb{R}^n$ 的子空间。
+
+**证明**：
+1. 零向量：$A\mathbf{0} = \mathbf{0}$，故 $\mathbf{0} \in \operatorname{Nul} A$
+2. 加法：若 $A\mathbf{u} = \mathbf{0}$、$A\mathbf{v} = \mathbf{0}$，则 $A(\mathbf{u} + \mathbf{v}) = A\mathbf{u} + A\mathbf{v} = \mathbf{0} + \mathbf{0} = \mathbf{0}$，故 $\mathbf{u} + \mathbf{v} \in \operatorname{Nul} A$
+3. 数乘：$A(c\mathbf{u}) = c(A\mathbf{u}) = c\mathbf{0} = \mathbf{0}$，故 $c\mathbf{u} \in \operatorname{Nul} A$ ∎
+
+> **两种描述方式**：
+> - $\operatorname{Nul} A$ 由"必须逐向量检验的条件 $A\mathbf{x} = \mathbf{0}$"定义，叫**隐式（implicit）描述**
+> - $\operatorname{Col} A$ 可由各列**构造（线性组合）**出来，叫**显式（explicit）描述**
+> - 想给 $\operatorname{Nul} A$ 一个显式描述？解 $A\mathbf{x} = \mathbf{0}$，写成**参数向量形式**即可（见例 6）
+
+### 基 Basis for a Subspace
+
+**中文讲解**：子空间通常含**无穷多个**向量。问题："能否找一组'骨干'向量，既线性无关、又能张成整个子空间？"——这就是**基（basis）**。
+
+**定义**：$\mathbb{R}^n$ 中子空间 $H$ 的一组**基** = $H$ 中满足两个条件的向量集 $\mathcal{B} = \{\mathbf{v}_1, \dots, \mathbf{v}_p\}$：
+
+1. $\mathcal{B}$ 是**线性无关**集
+2. $H = \operatorname{Span}\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$（$\mathcal{B}$ 张成 $H$）
+
+> **直观**：基是子空间的"最小生成集"——不多不少，恰好够用。第 4 章会证明：**每个子空间的基含向量个数相同**（= 维数）。
+
+**求 $\operatorname{Nul} A$ 的基（标准流程，例 6/7）**：
+
+**例6（Example 6）**：求 $\operatorname{Nul} A$ 的基，其中
+
+$$A = \begin{bmatrix} -3 & 6 & -1 & 1 & -7 \\
+1 & -2 & 2 & 3 & -1 \\
+2 & -4 & 5 & 8 & -4 \end{bmatrix}$$
+
+**解**：解 $A\mathbf{x} = \mathbf{0}$，行化简到简化阶梯形：
+
+$$A \sim \begin{bmatrix} 1 & -2 & 0 & -1 & 3 \\
+0 & 0 & 1 & 2 & -2 \\
+0 & 0 & 0 & 0 & 0 \end{bmatrix}$$
+
+对应方程组：$x_1 - 2x_2 - x_4 + 3x_5 = 0$，$x_3 + 2x_4 - 2x_5 = 0$（$x_2, x_4, x_5$ 自由）。
+
+**通解的参数向量形式**：
+
+$$
+\begin{bmatrix} x_1 \\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5 \end{bmatrix} = \begin{bmatrix} 2x_2 + x_4 - 3x_5 \\
+x_2 \\
+-2x_4 + 2x_5 \\
+x_4 \\
+x_5 \end{bmatrix} = x_2\begin{bmatrix} 2 \\
+1 \\
+0 \\
+0 \\
+0 \end{bmatrix} + x_4\begin{bmatrix} 1 \\
+0 \\
+-2 \\
+1 \\
+0 \end{bmatrix} + x_5\begin{bmatrix} -3 \\
+0 \\
+2 \\
+0 \\
+1 \end{bmatrix} = x_2\mathbf{u} + x_4\mathbf{v} + x_5\mathbf{w}
+$$
+
+**结论**：
+- $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ 生成 $\operatorname{Nul} A$（每个解都是它们的线性组合）
+- 它们**自动线性无关**：若 $x_2\mathbf{u} + x_4\mathbf{v} + x_5\mathbf{w} = \mathbf{0}$，看第 2、4、5 个分量立得 $x_2 = x_4 = x_5 = 0$
+
+故 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ 是 $\operatorname{Nul} A$ 的一组**基**。
+
+> **例6 的方法论**：解 $A\mathbf{x} = \mathbf{0}$ 的标准化简**自动**给出 $\operatorname{Nul} A$ 的基——参数向量形式中的每个向量（自由变量依次取 1）都是基成员。这个事实第 5 章会反复使用！
+
+**求 $\operatorname{Col} A$ 的基（主元列定理，例 8/9）**：
+
+**例8（Example 8）**：$B$ 已是简化阶梯形，求 $\operatorname{Col} B$ 的基：
+
+$$B = \begin{bmatrix} 1 & 0 & -3 & 5 & 0 \\
+0 & 1 & 2 & -1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 \end{bmatrix}$$
+
+**解**：主元在第 1、2、5 列。观察非主元列：$\mathbf{b}_3 = -3\mathbf{b}_1 + 2\mathbf{b}_2$，$\mathbf{b}_4 = 5\mathbf{b}_1 - \mathbf{b}_2$——非主元列都能由主元列线性表示。所以去掉 $\mathbf{b}_3, \mathbf{b}_4$ 不损失任何张成能力，而 $\{\mathbf{b}_1, \mathbf{b}_2, \mathbf{b}_5\}$ 线性无关（阶梯形中主元列必无关）。故 $\{\mathbf{b}_1, \mathbf{b}_2, \mathbf{b}_5\}$ 是 $\operatorname{Col} B$ 的基。
+
+**例9（Example 9）**：一般矩阵 $A$ 与例 8 的 $B$ 行等价，
+
+$$A = \begin{bmatrix} \mathbf{a}_1 & \mathbf{a}_2 & \mathbf{a}_3 & \mathbf{a}_4 & \mathbf{a}_5 \end{bmatrix} = \begin{bmatrix} 1 & 3 & 3 & 2 & -9 \\
+-2 & -2 & 2 & -8 & 2 \\
+2 & 3 & 0 & 7 & 1 \\
+3 & 4 & -1 & 11 & -8 \end{bmatrix}$$
+
+**关键原理**：行变换**不改变列之间的线性相关关系**——$A\mathbf{x} = \mathbf{0}$ 与 $B\mathbf{x} = \mathbf{0}$ 同解！所以
+
+$$\mathbf{a}_3 = -3\mathbf{a}_1 + 2\mathbf{a}_2, \qquad \mathbf{a}_4 = 5\mathbf{a}_1 - \mathbf{a}_2$$
+
+（读者可自行验证成立）$\Rightarrow$ $\mathbf{a}_3, \mathbf{a}_4$ 多余，$\{\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_5\}$ 线性无关且张成 $\operatorname{Col} A$，是 $\operatorname{Col} A$ 的基。
+
+**THEOREM 14（主元列定理，Pivot Columns Theorem）**：
+> 矩阵 $A$ 的**主元列**构成 $\operatorname{Col} A$ 的一组基。
+
+> ⚠️ **警告（Warning）**：务必用 **$A$ 本身的主元列**，而不是阶梯形 $B$ 的列！$B$ 的列常在 $\operatorname{Col} A$ 之外（例 8、9 中 $B$ 的列末分量全为 0，无法生成 $A$ 的列）。**用法**：化到阶梯形只为"看"主元列在**哪些列**，然后**回到原矩阵 $A$** 取这些列。
+
+### 2.8 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 子空间 | 含零向量、对加法/数乘封闭的向量集（过原点的平面/直线） |
+| Col A | A 各列的张成；$\mathbf{b} \in \operatorname{Col} A$ ⟺ $A\mathbf{x} = \mathbf{b}$ 有解 |
+| Nul A | $A\mathbf{x} = \mathbf{0}$ 的解集；子空间（Theorem 13） |
+| 基 | 线性无关的生成集（子空间的"最小骨架"） |
+| Nul A 的基 | 解 $A\mathbf{x} = \mathbf{0}$ 取参数向量形式（自动得基） |
+| Col A 的基 | **A 的主元列**（Theorem 14；注意不是 B 的列！） |
+
+> **本节精髓**：Col A 与 Nul A 是矩阵的"**一体两面**"——列空间看"能到达哪里"（值域），零空间看"哪里被压扁"（核）。Theorem 14 的主元列定理把第 1 章的"主元位置"概念升华成了子空间的基，是 2.9 节**秩（Rank）**定义的桥梁。
+
+---
