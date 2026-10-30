@@ -4514,3 +4514,149 @@ $$(A - \alpha I)\mathbf{v} = (\lambda - \alpha)\mathbf{v} \quad \Rightarrow \qua
 > **本节精髓**：迭代法是线性代数"能算"的关键——不求特征多项式，只做乘法就逼近答案。幂法把"最大者生存"的竞争机制数学化：每乘一次 A，小特征值方向就被大特征值方向压制一层。第 5 章到此收官：从特征向量的定义（5.1）到数值计算（5.8），动力系统（5.6-5.7）与对角化（5.3）是理论到应用的桥梁。下一章进入全书几何最美的部分——**第 6 章 正交性与最小二乘法**（Gram-Schmidt、QR 分解、最小二乘回归）。
 
 ---
+---
+
+# 第六章 正交性与最小二乘法
+# Chapter 6 Orthogonality and Least Squares
+
+**导入例子：北美基准与 GPS 导航**
+**INTRODUCTORY EXAMPLE: The North American Datum and GPS Navigation**
+
+1974 年，美国国家大地测量局启动了一项预计耗时十年的浩大工程：更新北美大地基准（NAD）——横跨北美大陆、格陵兰、夏威夷等地的 268,000 个精密参考点网络。到 1983 年数据收集完成时，需要解一个 **1,800,000 方程 × 900,000 未知量** 的线性系统。由于测量误差，这个系统**没有通常意义的解**——但它的**最小二乘解**为所有参考点赋予了与 180 万次观测最佳吻合的经纬度。这就是本章主题：当方程组无解时，如何找到"最像样的解"？答案是**正交性**——几何中最朴素的概念（垂直），将在这里变成数据拟合的强大武器。
+
+---
+
+## 6.1 内积、长度与正交性 Inner Product, Length, and Orthogonality
+
+**中文讲解**：长度、距离、垂直——这些 $\mathbb{R}^2$ 和 $\mathbb{R}^3$ 中的几何常识，本节把它们严格定义在 $\mathbb{R}^n$ 中，并揭示一个惊人事实：垂直（正交）可以用**内积 = 0** 一句话代数化。
+
+### 内积 The Inner Product
+
+**定义**：$\mathbb{R}^n$ 中向量 $\mathbf{u}, \mathbf{v}$ 的**内积（inner product）**（也叫点积 dot product）：
+
+$$\mathbf{u} \cdot \mathbf{v} = \mathbf{u}^T\mathbf{v} = \begin{bmatrix} u_1 & u_2 & \cdots & u_n \end{bmatrix}\begin{bmatrix} v_1 \\
+v_2 \\
+\vdots \\
+v_n \end{bmatrix} = u_1v_1 + u_2v_2 + \cdots + u_nv_n$$
+
+**例1（Example 1）**：$\mathbf{u} = (2, -5, -1)$, $\mathbf{v} = (3, 2, -3)$：
+
+$$\mathbf{u}\cdot\mathbf{v} = (2)(3) + (-5)(2) + (-1)(-3) = 6 - 10 + 3 = \mathbf{-1}$$
+
+交换计算 $\mathbf{v}\cdot\mathbf{u} = 6 - 10 + 3 = -1$——**内积可交换**，一般成立。
+
+**THEOREM 1（内积的性质）**：设 $\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{R}^n$，$c$ 标量：
+a. $\mathbf{u}\cdot\mathbf{v} = \mathbf{v}\cdot\mathbf{u}$（交换律）
+b. $(\mathbf{u}+\mathbf{v})\cdot\mathbf{w} = \mathbf{u}\cdot\mathbf{w} + \mathbf{v}\cdot\mathbf{w}$（分配律）
+c. $(c\mathbf{u})\cdot\mathbf{v} = c(\mathbf{u}\cdot\mathbf{v}) = \mathbf{u}\cdot(c\mathbf{v})$（齐次）
+d. $\mathbf{u}\cdot\mathbf{u} \geq 0$，且 $\mathbf{u}\cdot\mathbf{u} = 0 \iff \mathbf{u} = \mathbf{0}$（正定性）
+
+（证明来自转置运算性质，2.1 节练习 21-22。）
+
+### 向量的长度 The Length of a Vector
+
+**定义**：$\mathbf{v} = (v_1, \dots, v_n)$ 的**长度（范数，norm）**：
+
+$$\|\mathbf{v}\| = \sqrt{\mathbf{v}\cdot\mathbf{v}} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}, \qquad \|\mathbf{v}\|^2 = \mathbf{v}\cdot\mathbf{v}$$
+
+- $\|\mathbf{v}\| = 1$ 的向量叫**单位向量（unit vector）**
+- 对非零 $\mathbf{v}$，$\frac{1}{\|\mathbf{v}\|}\mathbf{v}$ 是与 $\mathbf{v}$ 同向的单位向量——叫**单位化（normalizing）**
+
+**例2（Example 2）**：$\mathbf{v} = (1, -2, 2, 0)$，求同向单位向量。
+
+$$\|\mathbf{v}\|^2 = 1 + 4 + 4 + 0 = 9, \qquad \|\mathbf{v}\| = 3$$
+
+$$\mathbf{u} = \frac{1}{3}\mathbf{v} = \begin{bmatrix} 1/3 \\
+-2/3 \\
+2/3 \\
+0 \end{bmatrix}$$
+
+**验证**：$\|\mathbf{u}\|^2 = \frac{1}{9} + \frac{4}{9} + \frac{4}{9} + 0 = 1$ ✓
+
+**例4（Example 4）**：$W = \operatorname{Span}\{\mathbf{x}\}$, $\mathbf{x} = (-2/3, 1)$。先"去分数"：$\mathbf{y} = 3\mathbf{x} = (-2, 3)$（$\|\mathbf{y}\|^2 = 4 + 9 = 13$），单位化：
+
+$$\mathbf{z} = \frac{1}{\sqrt{13}}(-2, 3) = \left(-\frac{2}{\sqrt{13}}, \frac{3}{\sqrt{13}}\right)$$
+
+即 $W$ 的一组"单位基"。（反向 $(2/\sqrt{13}, -3/\sqrt{13})$ 也是单位向量。）
+
+### 距离 Distance
+
+**定义**：$\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$ 的**距离**：
+
+$$\operatorname{dist}(\mathbf{u}, \mathbf{v}) = \|\mathbf{u} - \mathbf{v}\|$$
+
+**例5（Example 5）**：$\mathbf{u} = (7, 1)$, $\mathbf{v} = (3, 2)$：
+
+$$\mathbf{u} - \mathbf{v} = (4, -1), \qquad \operatorname{dist}(\mathbf{u},\mathbf{v}) = \sqrt{16 + 1} = \sqrt{17}$$
+
+几何上：$\mathbf{u} - \mathbf{v}$ 加在 $\mathbf{v}$ 上就得到 $\mathbf{u}$——距离 = 差向量的长度，与 $\mathbb{R}^2/\mathbb{R}^3$ 的欧氏距离完全一致。
+
+### 正交向量 Orthogonal Vectors
+
+**推导（几何 → 代数）**：$\mathbb{R}^2$ 中两线垂直 ⟺ $\operatorname{dist}(\mathbf{u}, \mathbf{v}) = \operatorname{dist}(\mathbf{u}, -\mathbf{v})$（FIGURE 5 思想）。计算（1）：
+
+$$\|\mathbf{u}-\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\mathbf{u}\cdot\mathbf{v}$$
+
+$$\|\mathbf{u}+\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 + 2\mathbf{u}\cdot\mathbf{v}$$
+
+两距离相等 ⟺ $\mathbf{u}\cdot\mathbf{v} = 0$——**垂直完全代数化了！**
+
+**定义**：$\mathbb{R}^n$ 中 $\mathbf{u}, \mathbf{v}$ **正交（orthogonal）** ⟺ $\mathbf{u}\cdot\mathbf{v} = 0$。
+
+**注意**：零向量与一切向量正交（$\mathbf{0}^T\mathbf{v} = 0$）。
+
+**THEOREM 2（勾股定理 Pythagorean Theorem）**：
+> $\mathbf{u} \perp \mathbf{v}$ ⟺ $\|\mathbf{u} + \mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2$
+
+（证明即上面的计算：交叉项 $2\mathbf{u}\cdot\mathbf{v}$ 消失。直角三角形的代数版！）
+
+### 正交互补 Orthogonal Complements
+
+**定义**：子空间 $W \subseteq \mathbb{R}^n$ 的**正交互补**：
+
+$$W^\perp = \{\mathbf{z} \in \mathbb{R}^n : \mathbf{z} \cdot \mathbf{w} = 0 \text{ 对所有 } \mathbf{w} \in W\}$$
+
+即"垂直于整个 $W$"的向量全体。$W^\perp$ 也是子空间（练习 23：含零向量、对加法/数乘封闭）。
+
+**THEOREM 3（四大子空间的正交对）**：
+> 设 $A$ 是 $m \times n$ 矩阵，则
+
+> $$(\operatorname{Row} A)^\perp = \operatorname{Nul} A, \qquad (\operatorname{Col} A)^\perp = \operatorname{Nul} A^T$$
+
+**证明**：$\mathbf{x} \in \operatorname{Nul} A$ ⟺ $A\mathbf{x} = \mathbf{0}$ ⟺ $\mathbf{x}$ 与 $A$ 的每一行正交 ⟺ $\mathbf{x}$ 与 $\operatorname{Row} A$ 的所有向量正交（行的线性组合）。第二式对 $A^T$ 用第一式，注意 $\operatorname{Row} A^T = \operatorname{Col} A$。∎
+
+![FIGURE 8 四大子空间](img/fig61_8_fundamental_subspaces.png)
+
+*FIGURE 8 The fundamental subspaces determined by an $m \times n$ matrix A. 图8 矩阵 A 确定的四大基本子空间：定义域中 Row A ⊥ Nul A；值域中 Col A ⊥ Nul Aᵀ——4.6 节的维数结论现在升级为正交关系*
+
+> **本章路线图**：$\mathbb{R}^n = W \oplus W^\perp$（6.2 节详证）——正交投影 $W$ + 正交互补 $W^\perp$ 直和分解整个空间。这正是"离 $W$ 最近的点"（6.3 节）与"最小二乘解"（6.5 节）的几何基础。
+
+### 夹角公式（选学）Angles in $\mathbb{R}^2$ and $\mathbb{R}^3$
+
+**公式 (2)**：非零向量 $\mathbf{u}, \mathbf{v}$ 的夹角 $\vartheta$：
+
+$$\mathbf{u}\cdot\mathbf{v} = \|\mathbf{u}\|\,\|\mathbf{v}\|\cos\vartheta$$
+
+**验证**：余弦定理 $\|\mathbf{u}-\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\|\mathbf{u}\|\|\mathbf{v}\|\cos\vartheta$ 与展开式对比即得（FIGURE 9）。
+
+- $\vartheta = 90°$：$\cos\vartheta = 0$ ⟺ $\mathbf{u}\cdot\mathbf{v} = 0$——正交！
+- 一般 $\mathbb{R}^n$ 中此公式**定义**两向量的夹角
+
+![FIGURE 9 向量夹角](img/fig61_9_angle_vectors.png)
+
+*FIGURE 9 The angle between two vectors. 图9 向量夹角：余弦定理推出 u·v = ‖u‖‖v‖cosθ，θ 为 u 与 v 的夹角*
+
+### 6.1 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 内积 $\mathbf{u}\cdot\mathbf{v}$ | 对应分量乘积之和（= $\mathbf{u}^T\mathbf{v}$）；交换、分配、正定 |
+| 长度 $\|\mathbf{v}\|$ | $\sqrt{\mathbf{v}\cdot\mathbf{v}}$；单位化 = 除以自身长度 |
+| 距离 | $\|\mathbf{u}-\mathbf{v}\|$——差向量的长度 |
+| 正交 | $\mathbf{u}\cdot\mathbf{v} = 0$：垂直概念的完全代数化 |
+| 勾股定理 (Thm 2) | 正交 ⟺ 平方和保持（直角三角形的代数版） |
+| Theorem 3 | (Row A)⊥=Nul A、(Col A)⊥=Nul Aᵀ：四大子空间的正交配对 |
+
+> **本节精髓**：内积是本章的"原子"——它统一定义了长度、距离、正交、角度。Theorem 3 把第 4 章的四个子空间织成正交网络：每个向量都能唯一拆成"$W$ 中的部分 + 垂直于 $W$ 的部分"（6.2 节）。下一节 6.2 研究**正交集**：一组两两正交的单位向量（标准正交基）为何是"最好的坐标系"。
+
+---
