@@ -24,17 +24,31 @@
 
 **中文讲解**：含有变量 $x_1, \dots, x_n$ 的**线性方程**是可以写成下面形式的方程：
 
-$$a_1x_1 + a_2x_2 + \cdots + a_nx_n = b$$
+$$
+a_1x_1 + a_2x_2 + \cdots + a_nx_n = b
+$$
 
 其中 $b$ 和系数 $a_1, \dots, a_n$ 是已知实数或复数。直观判断标准：**变量只以一次幂出现，没有相乘、没有根号**。
 
 是线性的（可整理成标准形式）：
 
-$$4x_1 - 5x_2 + 2 = x_1 \;\Rightarrow\; 3x_1 - 5x_2 = -2, \qquad x_2 = 2(\sqrt{6} - x_1) + x_3 \;\Rightarrow\; 2x_1 + x_2 - x_3 = 2\sqrt{6}$$
+$$
+4x_1 - 5x_2 + 2 = x_1 \ \Rightarrow\  3x_1 - 5x_2 = -2,
+$$
+
+$$
+x_2 = 2(\sqrt{6} - x_1) + x_3 \ \Rightarrow\  2x_1 + x_2 - x_3 = 2\sqrt{6}
+$$
 
 不是线性的：
 
-$$4x_1 - 5x_2 = x_1x_2 \quad (\text{出现 } x_1x_2 \text{ 乘积}), \qquad x_2 = 2\sqrt{x_1} - 6 \quad (\text{出现根号})$$
+$$
+4x_1 - 5x_2 = x_1x_2 \quad (\text{出现 } x_1x_2 \text{ 乘积}),
+$$
+
+$$
+x_2 = 2\sqrt{x_1} - 6 \quad (\text{出现根号})
+$$
 
 **英文原文**：
 > A **linear equation** in the variables $x_1, \dots, x_n$ is an equation that can be written in the form $a_1x_1 + a_2x_2 + \cdots + a_nx_n = b$, where $b$ and the **coefficients** $a_1, \dots, a_n$ are real or complex numbers, usually known in advance.
@@ -43,7 +57,13 @@ $$4x_1 - 5x_2 = x_1x_2 \quad (\text{出现 } x_1x_2 \text{ 乘积}), \qquad x_2 
 
 **中文讲解**：**线性方程组**（也叫线性系统 linear system）就是**同一组变量**满足的一个或多个线性方程的集合。例如：
 
-$$2x_1 - x_2 + 1.5x_3 = 8 \qquad x_1 \quad\;\; - 4x_3 = -7$$
+$$
+2x_1 - x_2 + 1.5x_3 = 8
+$$
+
+$$
+x_1 \quad\  - 4x_3 = -7
+$$
 
 - **解（solution）**：一组数 $(s_1, s_2, \dots, s_n)$，代入后使每个方程都成立。例如 $(5, 6.5, 3)$ 就是上面方程组的一个解。
 - **解集（solution set）**：所有解的集合。
@@ -53,7 +73,13 @@ $$2x_1 - x_2 + 1.5x_3 = 8 \qquad x_1 \quad\;\; - 4x_3 = -7$$
 
 求两个二元线性方程的解，就是找**两条直线的交点**：
 
-$$x_1 - 2x_2 = -1 \qquad -x_1 + 3x_2 = 3$$
+$$
+x_1 - 2x_2 = -1
+$$
+
+$$
+-x_1 + 3x_2 = 3
+$$
 
 解是唯一点 $(3, 2)$：
 
@@ -78,11 +104,27 @@ $$x_1 - 2x_2 = -1 \qquad -x_1 + 3x_2 = 3$$
 
 **中文讲解**：把方程组的核心信息压缩进一个矩形数组——**矩阵（matrix）**。对系统：
 
-$$x_1 - 2x_2 + \;\;x_3 = \;0 \qquad 2x_2 - 8x_3 = \;8 \qquad 5x_1 \quad\;\; - 5x_3 = 10$$
+$$
+x_1 - 2x_2 + \ x_3 = \ 0
+$$
+
+$$
+2x_2 - 8x_3 = \ 8
+$$
+
+$$
+5x_1 \quad\  - 5x_3 = 10
+$$
 
 系数矩阵与增广矩阵：
 
-$$\begin{bmatrix} 1 & -2 & 1 \\ 0 & 2 & -8 \\ 5 & 0 & -5 \end{bmatrix} \qquad \left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\ 0 & 2 & -8 & 8 \\ 5 & 0 & -5 & 10 \end{array}\right]$$
+$$
+\begin{bmatrix} 1 & -2 & 1 \\
+0 & 2 & -8 \\
+5 & 0 & -5 \end{bmatrix} \qquad \left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\
+0 & 2 & -8 & 8 \\
+5 & 0 & -5 & 10 \end{array}\right]
+$$
 
 - **系数矩阵（coefficient matrix）**：只装未知数的系数
 - **增广矩阵（augmented matrix）**：系数矩阵右边再加一列常数项
@@ -103,25 +145,45 @@ $$\begin{bmatrix} 1 & -2 & 1 \\ 0 & 2 & -8 \\ 5 & 0 & -5 \end{bmatrix} \qquad \l
 
 **例1（Example 1）求解系统**：
 
-$$\begin{aligned} x_1 - 2x_2 + \;\;x_3 &= 0 \\ 2x_2 - 8x_3 &= 8 \\ 5x_1 \quad\;\; - 5x_3 &= 10 \end{aligned}$$
+$$
+\begin{aligned} x_1 - 2x_2 + \ x_3 &= 0 \\
+2x_2 - 8x_3 &= 8 \\
+5x_1 \quad\  - 5x_3 &= 10 \end{aligned}
+$$
 
 **步骤（左边是方程，右边是对应增广矩阵，教材并排列出）**：
 
 第1步：用第1方程消去其他方程的 $x_1$。第3行 += (−5)×第1行：
 
-$$\left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\ 0 & 2 & -8 & 8 \\ 0 & 10 & -10 & 10 \end{array}\right]$$
+$$
+\left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\
+0 & 2 & -8 & 8 \\
+0 & 10 & -10 & 10 \end{array}\right]
+$$
 
 第2步：第2行 × $\frac{1}{2}$，使 $x_2$ 系数变为 1：
 
-$$\left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\ 0 & 1 & -4 & 4 \\ 0 & 10 & -10 & 10 \end{array}\right]$$
+$$
+\left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\
+0 & 1 & -4 & 4 \\
+0 & 10 & -10 & 10 \end{array}\right]
+$$
 
 第3步：用第2行消去第3行的 $10x_2$。第3行 += (−10)×第2行，得 $30x_3 = -30$，再 × $\frac{1}{30}$：
 
-$$\left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\ 0 & 1 & -4 & 4 \\ 0 & 0 & 1 & -1 \end{array}\right] \quad \text{（三角形式 triangular form）}$$
+$$
+\left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\
+0 & 1 & -4 & 4 \\
+0 & 0 & 1 & -1 \end{array}\right] \quad \text{（三角形式 triangular form）}
+$$
 
 第4步（**回代 backward**，从下往上）：用 $x_3$ 消去上方方程中的 $x_3$ 项；再用 $x_2$ 消去第1方程中的 $-2x_2$。最终：
 
-$$\left[\begin{array}{rrrr} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & -1 \end{array}\right] \;\Rightarrow\; x_1 = 1,\quad x_2 = 0,\quad x_3 = -1$$
+$$
+\left[\begin{array}{rrrr} 1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & -1 \end{array}\right] \ \Rightarrow\  x_1 = 1,\quad x_2 = 0,\quad x_3 = -1
+$$
 
 **验证**：$1(1) - 2(0) + 1(-1) = 0$；$2(0) - 8(-1) = 8$；$5(1) - 5(-1) = 10$
 
@@ -139,17 +201,31 @@ $$\left[\begin{array}{rrrr} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & -1 \en
 
 **例3（Example 3）判断系统是否相容**：
 
-$$x_2 - \;4x_3 = 8 \qquad 2x_1 - 3x_2 + \;2x_3 = 1 \qquad 4x_1 - 8x_2 + 12x_3 = 1$$
+$$
+x_2 - \ 4x_3 = 8
+$$
+
+$$
+2x_1 - 3x_2 + \ 2x_3 = 1
+$$
+
+$$
+4x_1 - 8x_2 + 12x_3 = 1
+$$
 
 增广矩阵行变换：交换1、2行 → 第3行 += (−2)×第1行 → 第3行 += 2×第2行：
 
-$$\left[\begin{array}{rrrr} 2 & -3 & 2 & 1 \\ 0 & 1 & -4 & 8 \\ 0 & 0 & 0 & 15 \end{array}\right] \;\Rightarrow\; 0 = 15 \;\text{矛盾！}$$
+$$
+\left[\begin{array}{rrrr} 2 & -3 & 2 & 1 \\
+0 & 1 & -4 & 8 \\
+0 & 0 & 0 & 15 \end{array}\right] \ \Rightarrow\  0 = 15 \ \text{矛盾！}
+$$
 
 最后一行 $0 = 15$ 是 $0x_1+0x_2+0x_3=15$ 的简写，永远不成立。**系统不相容（无解）**。
 
 ![三平面无公共点](img/fig04_planes_no_point.png)
 
-> 记住：三角形式中若出现 $[\,0\;\cdots\;0\;\;b\,]$（$b\neq0$）这样的行，系统就不相容。
+> 记住：三角形式中若出现 $[0\ \cdots\ 0\ b]$（$b\neq0$）这样的行，系统就不相容。
 
 **数值注记（Numerical Note）**：现实中计算机用**浮点算术（floating point arithmetic）**，数字以 ±.d1...dp×10^r 存储，会产生舍入误差（roundoff error），但通常不会造成问题。
 
@@ -157,7 +233,11 @@ $$\left[\begin{array}{rrrr} 2 & -3 & 2 & 1 \\ 0 & 1 & -4 & 8 \\ 0 & 0 & 0 & 15 \
 
 **判断 $(3,4,-2)$ 是否为下列系统的解**（Practice Problem 3）：
 
-$$\begin{aligned} 5x_1 - \;x_2 + 2x_3 &= 7 \\ -2x_1 + 6x_2 + 9x_3 &= 0 \\ -7x_1 + 5x_2 - 3x_3 &= -7 \end{aligned}$$
+$$
+\begin{aligned} 5x_1 - \ x_2 + 2x_3 &= 7 \\
+-2x_1 + 6x_2 + 9x_3 &= 0 \\
+-7x_1 + 5x_2 - 3x_3 &= -7 \end{aligned}
+$$
 
 代入 $x_1=3, x_2=4, x_3=-2$：
 - $5(3)-(4)+2(-2) = 15-4-4 = 7$ 成立
@@ -169,11 +249,23 @@ $$\begin{aligned} 5x_1 - \;x_2 + 2x_3 &= 7 \\ -2x_1 + 6x_2 + 9x_3 &= 0 \\ -7x_1 
 ![点(3,4,-2)只满足前两个方程](img/fig05_planes_partial.png)
 
 **$h, k$ 取何值时系统相容？**（Practice Problem 4）：
-$$2x_1 - x_2 = h \qquad -6x_1 + 3x_2 = k$$
+$$
+2x_1 - x_2 = h
+$$
+
+$$
+-6x_1 + 3x_2 = k
+$$
 第2行 += 3×第1行，得 $0 = k + 3h$。**当且仅当 $k + 3h = 0$ 时系统相容**。
 
 **练习题 1**：
-$$x_1 + 5x_2 = 7 \qquad -2x_1 - 7x_2 = -5$$
+$$
+x_1 + 5x_2 = 7
+$$
+
+$$
+-2x_1 - 7x_2 = -5
+$$
 第2行 += 2×第1行：$3x_2 = 9 \Rightarrow x_2 = 3$，回代 $x_1 = 7 - 15 = -8$。**解：$(-8, 3)$**
 
 ---
@@ -210,11 +302,24 @@ $$x_1 + 5x_2 = 7 \qquad -2x_1 - 7x_2 = -5$$
 
 **例2（Example 2）**：把 $A$ 行化简到阶梯形并找出主元列：
 
-$$A = \begin{bmatrix} 0 & -3 & -6 & 4 & 9 \\ -1 & -2 & -1 & 3 & 1 \\ -2 & -3 & 0 & 3 & -1 \\ 1 & 4 & 5 & -9 & -7 \end{bmatrix}$$
+$$
+A = \begin{bmatrix} 0 & -3 & -6 & 4 & 9 \\
+-1 & -2 & -1 & 3 & 1 \\
+-2 & -3 & 0 & 3 & -1 \\
+1 & 4 & 5 & -9 & -7 \end{bmatrix}
+$$
 
 最左非零列是主元列，把非零主元换到顶部（交换1、4行）→ 主元下方消零 → 对子矩阵重复……最终：
 
-$$\begin{bmatrix} 1 & 4 & 5 & -9 & -7 \\ 0 & 2 & 4 & -6 & -6 \\ 0 & 0 & 0 & -5 & 0 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix} \quad\text{一般形式：}\; \begin{bmatrix} \blacksquare & * & * & * & * \\ 0 & \blacksquare & * & * & * \\ 0 & 0 & 0 & \blacksquare & * \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}$$
+$$
+\begin{bmatrix} 1 & 4 & 5 & -9 & -7 \\
+0 & 2 & 4 & -6 & -6 \\
+0 & 0 & 0 & -5 & 0 \\
+0 & 0 & 0 & 0 & 0 \end{bmatrix} \quad\text{一般形式：}\  \begin{bmatrix} \blacksquare & * & * & * & * \\
+0 & \blacksquare & * & * & * \\
+0 & 0 & 0 & \blacksquare & * \\
+0 & 0 & 0 & 0 & 0 \end{bmatrix}
+$$
 
 $A$ 的主元列是**第 1、2、4 列**。
 
@@ -232,17 +337,29 @@ $A$ 的主元列是**第 1、2、4 列**。
 
 **例3（Example 3）完整示范**：
 
-$$\begin{bmatrix} 0 & 3 & -6 & 6 & 4 & -5 \\ 3 & -7 & 8 & -5 & 8 & 9 \\ 3 & -9 & 12 & -9 & 6 & 15 \end{bmatrix}$$
+$$
+\begin{bmatrix} 0 & 3 & -6 & 6 & 4 & -5 \\
+3 & -7 & 8 & -5 & 8 & 9 \\
+3 & -9 & 12 & -9 & 6 & 15 \end{bmatrix}
+$$
 
 1. 最左非零列是第1列 → 交换1、3行使主元 3 到顶部
 2. 第2行 += (−1)×第1行
 3. 子矩阵中第2列是新主元列，主元 2；第3行 += (−3/2)×第2行：
 
-$$\begin{bmatrix} 3 & -9 & 12 & -9 & 6 & 15 \\ 0 & 2 & -4 & 4 & 2 & -6 \\ 0 & 0 & 0 & 0 & 1 & 4 \end{bmatrix} \;\text{（阶梯形）}$$
+$$
+\begin{bmatrix} 3 & -9 & 12 & -9 & 6 & 15 \\
+0 & 2 & -4 & 4 & 2 & -6 \\
+0 & 0 & 0 & 0 & 1 & 4 \end{bmatrix} \ \text{（阶梯形）}
+$$
 
 4. 后向阶段：第1行 += (−6)×第3行，第2行 += (−2)×第3行；第2行 ×1/2；第1行 += 9×第2行；第1行 ×1/3：
 
-$$\begin{bmatrix} 1 & 0 & -2 & 3 & 0 & -24 \\ 0 & 1 & -2 & 2 & 0 & -7 \\ 0 & 0 & 0 & 0 & 1 & 4 \end{bmatrix} \;\text{（简化阶梯形，唯一）}$$
+$$
+\begin{bmatrix} 1 & 0 & -2 & 3 & 0 & -24 \\
+0 & 1 & -2 & 2 & 0 & -7 \\
+0 & 0 & 0 & 0 & 1 & 4 \end{bmatrix} \ \text{（简化阶梯形，唯一）}
+$$
 
 > **数值注记**：计算机通常选列中绝对值最大的元素作主元，这叫**部分主元法（partial pivoting）**，可减小舍入误差。
 
@@ -254,27 +371,51 @@ $$\begin{bmatrix} 1 & 0 & -2 & 3 & 0 & -24 \\ 0 & 1 & -2 & 2 & 0 & -7 \\ 0 & 0 &
 
 例如增广矩阵化简为：
 
-$$\left[\begin{array}{rrrr} 1 & 0 & -5 & 1 \\ 0 & 1 & 1 & 4 \\ 0 & 0 & 0 & 0 \end{array}\right] \;\Rightarrow\; \begin{aligned} x_1 \quad\;\; - 5x_3 &= 1 \\ x_2 + \;\;x_3 &= 4 \\ 0 &= 0 \end{aligned}$$
+$$
+\left[\begin{array}{rrrr} 1 & 0 & -5 & 1 \\
+0 & 1 & 1 & 4 \\
+0 & 0 & 0 & 0 \end{array}\right] \ \Rightarrow\  \begin{aligned} x_1 \quad\  - 5x_3 &= 1 \\
+x_2 + \ x_3 &= 4 \\
+0 &= 0 \end{aligned}
+$$
 
 $x_1, x_2$ 是基本变量，$x_3$ 是自由变量。把基本变量用自由变量表示：
 
-$$\begin{cases} x_1 = 1 + 5x_3 \\ x_2 = 4 - x_3 \\ x_3 \text{ 自由（free）} \end{cases}$$
+$$
+\begin{cases} x_1 = 1 + 5x_3 \\
+x_2 = 4 - x_3 \\
+x_3 \text{ 自由（free）} \end{cases}
+$$
 
 $x_3$ 每取一个值就得到一个解：$x_3=0 \Rightarrow (1,4,0)$；$x_3=1 \Rightarrow (6,3,1)$。**不同的 $x_3$ 选择给出不同的解，每个解都由 $x_3$ 的取值决定**——这就是"无穷多解"的具体样子。这种写法叫解集的**参数描述（parametric description）**。
 
 **例4（Example 4）**：增广矩阵（已化到阶梯形）：
 
-$$\left[\begin{array}{rrrrrr} 1 & 6 & 2 & -5 & -2 & -4 \\ 0 & 0 & 2 & -8 & -1 & 3 \\ 0 & 0 & 0 & 0 & 1 & 7 \end{array}\right]$$
+$$
+\left[\begin{array}{rrrrrr} 1 & 6 & 2 & -5 & -2 & -4 \\
+0 & 0 & 2 & -8 & -1 & 3 \\
+0 & 0 & 0 & 0 & 1 & 7 \end{array}\right]
+$$
 
 继续化成简化阶梯形：
 
-$$\sim \left[\begin{array}{rrrrrr} 1 & 6 & 0 & 3 & 0 & 0 \\ 0 & 0 & 1 & -4 & 0 & 5 \\ 0 & 0 & 0 & 0 & 1 & 7 \end{array}\right]$$
+$$
+\sim \left[\begin{array}{rrrrrr} 1 & 6 & 0 & 3 & 0 & 0 \\
+0 & 0 & 1 & -4 & 0 & 5 \\
+0 & 0 & 0 & 0 & 1 & 7 \end{array}\right]
+$$
 
 主元列是 1、3、5，基本变量 $x_1, x_3, x_5$；自由变量 $x_2, x_4$。通解：
 
-$$\begin{cases} x_1 = -6x_2 - 3x_4 \\ x_2 \text{ 自由} \\ x_3 = 5 + 4x_4 \\ x_4 \text{ 自由} \\ x_5 = 7 \end{cases}$$
+$$
+\begin{cases} x_1 = -6x_2 - 3x_4 \\
+x_2 \text{ 自由} \\
+x_3 = 5 + 4x_4 \\
+x_4 \text{ 自由} \\
+x_5 = 7 \end{cases}
+$$
 
-> 写通解时必须**每个变量都写出**，并明确标注哪些是自由变量。$\{x_1 = -3+8x_3,\; x_2 = -1+x_3,\; x_3 = 1+x_2\}$ 是**错误**的写法，因为它错误地暗示 $x_2$ 和 $x_3$ 都是自由变量。
+> 写通解时必须**每个变量都写出**，并明确标注哪些是自由变量。$\{x_1 = -3+8x_3,\  x_2 = -1+x_3,\  x_3 = 1+x_2\}$ 是**错误**的写法，因为它错误地暗示 $x_2$ 和 $x_3$ 都是自由变量。
 
 **回代（Back-Substitution）**：计算机程序通常只化到（非简化）阶梯形，再用回代求解：从最下方的方程解出最后一个基本变量，逐层向上代入。手算时教材建议**统一使用简化阶梯形**，矩阵格式能大幅减少出错。
 
@@ -283,7 +424,7 @@ $$\begin{cases} x_1 = -6x_2 - 3x_4 \\ x_2 \text{ 自由} \\ x_3 = 5 + 4x_4 \\ x_
 ### 存在性与唯一性定理 THEOREM 2
 
 **Existence and Uniqueness Theorem 存在唯一性定理**：
-> 线性系统**相容**，当且仅当增广矩阵的最右列**不是**主元列——即其阶梯形中没有 $[\,0\;\cdots\;0\;\;b\,]$（$b\neq 0$）这样的行。
+> 线性系统**相容**，当且仅当增广矩阵的最右列**不是**主元列——即其阶梯形中没有 $[0\ \cdots\ 0\ b]$（$b\neq 0$）这样的行。
 > 若系统相容，则解集要么 (i) **唯一**（无自由变量），要么 (ii) **无穷多**（至少有一个自由变量）。
 
 **用行化简解线性系统的标准流程（USING ROW REDUCTION TO SOLVE A LINEAR SYSTEM）**：
@@ -303,11 +444,17 @@ $$\begin{cases} x_1 = -6x_2 - 3x_4 \\ x_2 \text{ 自由} \\ x_3 = 5 + 4x_4 \\ x_
 
 **练习 3**：行化简到简化阶梯形并圈出主元位置。
 
-$$\begin{bmatrix} 1 & 2 & 3 & 4 \\ 4 & 5 & 6 & 7 \\ 6 & 7 & 8 & 9 \end{bmatrix} \Rightarrow \begin{bmatrix} 1 & 0 & -1 & -2 \\ 0 & 1 & 2 & 3 \\ 0 & 0 & 0 & 0 \end{bmatrix}$$
+$$
+\begin{bmatrix} 1 & 2 & 3 & 4 \\
+4 & 5 & 6 & 7 \\
+6 & 7 & 8 & 9 \end{bmatrix} \Rightarrow \begin{bmatrix} 1 & 0 & -1 & -2 \\
+0 & 1 & 2 & 3 \\
+0 & 0 & 0 & 0 \end{bmatrix}
+$$
 
 主元在第1、2列（原矩阵中对应位置圈出）。
 
-**练习 19**：$x_1 + hx_2 = 2,\;\; 4x_1 + 8x_2 = k$
+**练习 19**：$x_1 + hx_2 = 2,\  4x_1 + 8x_2 = k$
 - (a) 无解：第2行是第1行的倍数但常数不符，如 $h = 4$ 且 $k \neq 8$
 - (b) 唯一解：$h \neq 4$
 - (c) 无穷多解：$h = 4$ 且 $k = 8$（第2行 = 4×第1行）
@@ -331,16 +478,21 @@ $$\begin{bmatrix} 1 & 2 & 3 & 4 \\ 4 & 5 & 6 & 7 \\ 6 & 7 & 8 & 9 \end{bmatrix} 
 
 - 只有一列的矩阵叫**列向量（column vector）**，简称**向量**：
 
-$$\mathbf{u} = \begin{bmatrix} 3 \\ -1 \end{bmatrix}, \qquad \mathbf{v} = \begin{bmatrix} .2 \\ .3 \end{bmatrix}, \qquad \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \end{bmatrix}$$
+$$
+\mathbf{u} = \begin{bmatrix} 3 \\
+-1 \end{bmatrix}, \qquad \mathbf{v} = \begin{bmatrix} .2 \\
+.3 \end{bmatrix}, \qquad \mathbf{w} = \begin{bmatrix} w_1 \\
+w_2 \end{bmatrix}
+$$
 
 - 所有"两个分量的向量"组成的集合记作 $\mathbb{R}^2$（r-two）
-- **相等**：对应分量相等才算相等。$\begin{bmatrix} 4 \\ 7 \end{bmatrix} \neq \begin{bmatrix} 7 \\ 4 \end{bmatrix}$——向量是**有序**的！
+- **相等**：对应分量相等才算相等。$\begin{bmatrix} 4 \\\\ 7 \end{bmatrix} \neq \begin{bmatrix} 7 \\\\ 4 \end{bmatrix}$——向量是**有序**的！
 
 ### 向量的几何表示：点还是箭头？
 
 **中文讲解**：向量有两种看图方式，都常用：
 
-1. **看作点**：$\begin{bmatrix} -2 \\ 1 \end{bmatrix}$ 就是平面上坐标为 $(-2, 1)$ 的点
+1. **看作点**：$\begin{bmatrix} -2 \\\\ 1 \end{bmatrix}$ 就是平面上坐标为 $(-2, 1)$ 的点
 2. **看作箭头**：从原点 $(0,0)$ 指向点 $(-2,1)$ 的有向线段
 
 ![FIGURE 1 向量即点](img/fig13_1_vectors_as_points.png)
@@ -363,7 +515,13 @@ $$\mathbf{u} = \begin{bmatrix} 3 \\ -1 \end{bmatrix}, \qquad \mathbf{v} = \begin
 
 **例1（Example 1）**：
 
-$$\mathbf{u} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}, \quad \mathbf{v} = \begin{bmatrix} 2 \\ -2 \end{bmatrix} \;\Rightarrow\; \mathbf{u} + \mathbf{v} = \begin{bmatrix} 1+2 \\ 2+(-2) \end{bmatrix} = \begin{bmatrix} 3 \\ 0 \end{bmatrix}$$
+$$
+\mathbf{u} = \begin{bmatrix} 1 \\
+2 \end{bmatrix}, \quad \mathbf{v} = \begin{bmatrix} 2 \\
+-2 \end{bmatrix} \ \Rightarrow\  \mathbf{u} + \mathbf{v} = \begin{bmatrix} 1+2 \\
+2+(-2) \end{bmatrix} = \begin{bmatrix} 3 \\
+0 \end{bmatrix}
+$$
 
 ![FIGURE 4 例1的向量加法](img/fig13_4_example2.png)
 
@@ -402,15 +560,23 @@ $$\mathbf{u} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}, \quad \mathbf{v} = \begin{b
 
 **中文讲解**：给定向量 $\mathbf{v}_1, \dots, \mathbf{v}_p \in \mathbb{R}^n$ 和标量 $c_1, \dots, c_p$，向量
 
-$$\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_p\mathbf{v}_p$$
+$$
+\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_p\mathbf{v}_p
+$$
 
 称为 $\mathbf{v}_1, \dots, \mathbf{v}_p$ 的**线性组合（linear combination）**，其中 $c_1, \dots, c_p$ 叫**权（weights）**。
 
 > 英文原文：Given vectors $\mathbf{v}_1, \dots, \mathbf{v}_p$ in $\mathbb{R}^n$ and given scalars $c_1, \dots, c_p$, the vector $\mathbf{y} = c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p$ is called a **linear combination** of $\mathbf{v}_1, \dots, \mathbf{v}_p$ with **weights** $c_1, \dots, c_p$. Note that weights in a linear combination can be any real numbers, including zero.
 
-**例2（Example 2）**：设 $\mathbf{v}_1 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$，求 $\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2$、$0\mathbf{v}_1$、$1.5\mathbf{v}_1 - 2\mathbf{v}_2$。
+**例2（Example 2）**：设 $\mathbf{v}_1 = \begin{bmatrix} -1 \\\\ 1 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} 2 \\\\ 1 \end{bmatrix}$，求 $\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2$、$0\mathbf{v}_1$、$1.5\mathbf{v}_1 - 2\mathbf{v}_2$。
 
-$$\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2 = \begin{bmatrix} -1/2+2 \\ 1/2+1 \end{bmatrix} = \begin{bmatrix} 3/2 \\ 3/2 \end{bmatrix}, \qquad 0\mathbf{v}_1 = \begin{bmatrix} 0 \\ 0 \end{bmatrix}, \qquad 1.5\mathbf{v}_1 - 2\mathbf{v}_2 = \begin{bmatrix} -5.5 \\ -0.5 \end{bmatrix}$$
+$$
+\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2 = \begin{bmatrix} -1/2+2 \\
+1/2+1 \end{bmatrix} = \begin{bmatrix} 3/2 \\
+3/2 \end{bmatrix}, \qquad 0\mathbf{v}_1 = \begin{bmatrix} 0 \\
+0 \end{bmatrix}, \qquad 1.5\mathbf{v}_1 - 2\mathbf{v}_2 = \begin{bmatrix} -5.5 \\
+-0.5 \end{bmatrix}
+$$
 
 **例3（Example 3）图释**：两个不平行的向量 $\mathbf{v}_1, \mathbf{v}_2$ 的所有整数线性组合，铺满了整个平面的网格——每个格点都是一个线性组合：
 
@@ -422,23 +588,43 @@ $$\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2 = \begin{bmatrix} -1/2+2 \\ 1/2+1 \end{
 
 **中文讲解**：一个基本而重要的问题：
 
-$$\mathbf{b} \text{ 能否写成 } \mathbf{a}_1, \dots, \mathbf{a}_n \text{ 的线性组合？}$$
+$$
+\mathbf{b} \text{ 能否写成 } \mathbf{a}_1, \dots, \mathbf{a}_n \text{ 的线性组合？}
+$$
 
 即是否存在 $x_1, \dots, x_n$ 使
 
-$$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n = \mathbf{b}$$
+$$
+x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n = \mathbf{b}
+$$
 
 这个**向量方程（vector equation）**有解，当且仅当对应的**线性方程组**有解——把每个 $\mathbf{a}_j$ 的分量按列排开，$x_j$ 就是方程组的未知量！
 
-> 英文原文：A vector equation $x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n = \mathbf{b}$ has the same solution set as the linear system whose augmented matrix is $[\,\mathbf{a}_1\ \ \mathbf{a}_2\ \ \cdots\ \ \mathbf{a}_n\ \ \mathbf{b}\,]$. In particular, $\mathbf{b}$ can be generated by a linear combination of $\mathbf{a}_1, \dots, \mathbf{a}_n$ if and only if there exists a solution to the linear system corresponding to the matrix.
+> 英文原文：A vector equation $x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n = \mathbf{b}$ has the same solution set as the linear system whose augmented matrix is $[\mathbf{a}_1\ \mathbf{a}_2\ \cdots\ \mathbf{a}_n\ \mathbf{b}]$. In particular, $\mathbf{b}$ can be generated by a linear combination of $\mathbf{a}_1, \dots, \mathbf{a}_n$ if and only if there exists a solution to the linear system corresponding to the matrix.
 
-**例4（Example 4）**：设 $\mathbf{a}_1 = \begin{bmatrix} 1 \\ -2 \\ -5 \end{bmatrix}$, $\mathbf{a}_2 = \begin{bmatrix} 2 \\ 5 \\ 6 \end{bmatrix}$, $\mathbf{b} = \begin{bmatrix} 7 \\ 4 \\ -3 \end{bmatrix}$。判断 $\mathbf{b}$ 能否写成 $\mathbf{a}_1, \mathbf{a}_2$ 的线性组合，即解：
+**例4（Example 4）**：设 $\mathbf{a}_1 = \begin{bmatrix} 1 \\\\ -2 \\\\ -5 \end{bmatrix}$, $\mathbf{a}_2 = \begin{bmatrix} 2 \\\\ 5 \\\\ 6 \end{bmatrix}$, $\mathbf{b} = \begin{bmatrix} 7 \\\\ 4 \\\\ -3 \end{bmatrix}$。判断 $\mathbf{b}$ 能否写成 $\mathbf{a}_1, \mathbf{a}_2$ 的线性组合，即解：
 
-$$x_1\begin{bmatrix} 1 \\ -2 \\ -5 \end{bmatrix} + x_2\begin{bmatrix} 2 \\ 5 \\ 6 \end{bmatrix} = \begin{bmatrix} 7 \\ 4 \\ -3 \end{bmatrix}$$
+$$
+x_1\begin{bmatrix} 1 \\
+-2 \\
+-5 \end{bmatrix} + x_2\begin{bmatrix} 2 \\
+5 \\
+6 \end{bmatrix} = \begin{bmatrix} 7 \\
+4 \\
+-3 \end{bmatrix}
+$$
 
 对应增广矩阵行化简：
 
-$$\left[\begin{array}{rrr} 1 & 2 & 7 \\ -2 & 5 & 4 \\ -5 & 6 & -3 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 2 & 7 \\ 0 & 9 & 18 \\ 0 & 16 & 32 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 2 & 7 \\ 0 & 1 & 2 \\ 0 & 0 & 0 \end{array}\right]$$
+$$
+\left[\begin{array}{rrr} 1 & 2 & 7 \\
+-2 & 5 & 4 \\
+-5 & 6 & -3 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 2 & 7 \\
+0 & 9 & 18 \\
+0 & 16 & 32 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 2 & 7 \\
+0 & 1 & 2 \\
+0 & 0 & 0 \end{array}\right]
+$$
 
 得 $x_2 = 2$, $x_1 = 3$。**$\mathbf{b} = 3\mathbf{a}_1 + 2\mathbf{a}_2$**，向量方程有唯一解。
 
@@ -453,9 +639,17 @@ $$\left[\begin{array}{rrr} 1 & 2 & 7 \\ -2 & 5 & 4 \\ -5 & 6 & -3 \end{array}\ri
 - $\operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$（$\mathbf{u},\mathbf{v}$ 不平行）：过原点的整张平面
 - 问"$\mathbf{b}$ 是否在 $\operatorname{Span}\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 中" = 问"$\mathbf{b}$ 能否由它们线性表示" = 问"对应的方程组是否有解"
 
-**例5（Example 5）**：设 $\mathbf{v}_1 = \begin{bmatrix} 1 \\ -2 \\ 3 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} 5 \\ -13 \\ -3 \end{bmatrix}$, $\mathbf{b} = \begin{bmatrix} -3 \\ 8 \\ 1 \end{bmatrix}$。判断 $\mathbf{b}$ 是否在 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中：
+**例5（Example 5）**：设 $\mathbf{v}_1 = \begin{bmatrix} 1 \\\\ -2 \\\\ 3 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} 5 \\\\ -13 \\\\ -3 \end{bmatrix}$, $\mathbf{b} = \begin{bmatrix} -3 \\\\ 8 \\\\ 1 \end{bmatrix}$。判断 $\mathbf{b}$ 是否在 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中：
 
-$$\left[\begin{array}{rrr} 1 & 5 & -3 \\ -2 & -13 & 8 \\ 3 & -3 & 1 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 5 & -3 \\ 0 & -3 & 2 \\ 0 & -18 & 10 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 5 & -3 \\ 0 & -3 & 2 \\ 0 & 0 & -2 \end{array}\right]$$
+$$
+\left[\begin{array}{rrr} 1 & 5 & -3 \\
+-2 & -13 & 8 \\
+3 & -3 & 1 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 5 & -3 \\
+0 & -3 & 2 \\
+0 & -18 & 10 \end{array}\right] \sim \left[\begin{array}{rrr} 1 & 5 & -3 \\
+0 & -3 & 2 \\
+0 & 0 & -2 \end{array}\right]
+$$
 
 第三行 $0 = -2$ 矛盾，**无解**——$\mathbf{b}$ 不在 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中。
 
@@ -488,31 +682,56 @@ $$\left[\begin{array}{rrr} 1 & 5 & -3 \\ -2 & -13 & 8 \\ 3 & -3 & 1 \end{array}\
 
 若 $A$ 是 $m \times n$ 矩阵，列为 $\mathbf{a}_1, \dots, \mathbf{a}_n$，$\mathbf{x}$ 在 $\mathbb{R}^n$ 中，则 $A$ 与 $\mathbf{x}$ 的**乘积（product）**记作 $A\mathbf{x}$，是 $A$ 的各列以 $\mathbf{x}$ 中对应元素为权的**线性组合**：
 
-$$A\mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n$$
+$$
+A\mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n \end{bmatrix} \begin{bmatrix} x_1 \\
+x_2 \\
+\vdots \\
+x_n \end{bmatrix} = x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n
+$$
 
 > 注意：$A\mathbf{x}$ 只有当 $A$ 的**列数**等于 $\mathbf{x}$ 的**分量个数**时才有定义（即 $\mathbf{x} \in \mathbb{R}^n$，$A$ 是 $m\times n$）。
 
 **例1（Example 1）**：
 
-$$\text{a. } \begin{bmatrix} 1 & 2 & -1 \\ 0 & -5 & 3 \end{bmatrix} \begin{bmatrix} 4 \\ 3 \\ 7 \end{bmatrix} = 4\begin{bmatrix} 1 \\ 0 \end{bmatrix} + 3\begin{bmatrix} 2 \\ -5 \end{bmatrix} + 7\begin{bmatrix} -1 \\ 3 \end{bmatrix} = \begin{bmatrix} 4 \\ 0 \end{bmatrix} + \begin{bmatrix} 6 \\ -15 \end{bmatrix} + \begin{bmatrix} -7 \\ 21 \end{bmatrix} = \begin{bmatrix} 3 \\ 6 \end{bmatrix}$$
+$$
+\text{a. } \begin{bmatrix} 1 & 2 & -1 \\
+0 & -5 & 3 \end{bmatrix} \begin{bmatrix} 4 \\
+3 \\
+7 \end{bmatrix} = 4\begin{bmatrix} 1 \\
+0 \end{bmatrix} + 3\begin{bmatrix} 2 \\
+-5 \end{bmatrix} + 7\begin{bmatrix} -1 \\
+3 \end{bmatrix} = \begin{bmatrix} 4 \\
+0 \end{bmatrix} + \begin{bmatrix} 6 \\
+-15 \end{bmatrix} + \begin{bmatrix} -7 \\
+21 \end{bmatrix} = \begin{bmatrix} 3 \\
+6 \end{bmatrix}
+$$
 
-**例2（Example 2）**：把线性组合 $3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$ 写成矩阵乘向量：设 $A = [\,\mathbf{v}_1\ \ \mathbf{v}_2\ \ \mathbf{v}_3\,]$，$\mathbf{x} = (3, -5, 7)$，则 $A\mathbf{x} = 3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$。
+**例2（Example 2）**：把线性组合 $3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$ 写成矩阵乘向量：设 $A = [\mathbf{v}_1\ \mathbf{v}_2\ \mathbf{v}_3]$，$\mathbf{x} = (3, -5, 7)$，则 $A\mathbf{x} = 3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$。
 
 ### THEOREM 3（矩阵方程、向量方程、方程组三合一）
 
 **中文讲解**：下面三个问题有**完全相同的解集**——这是全书的"交通枢纽"：
 1. 矩阵方程 $A\mathbf{x} = \mathbf{b}$
 2. 向量方程 $x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n = \mathbf{b}$
-3. 以 $[\,\mathbf{a}_1\ \mathbf{a}_2\ \cdots\ \mathbf{a}_n\ \ \mathbf{b}\,]$ 为增广矩阵的线性方程组
+3. 以 $[\mathbf{a}_1\ \mathbf{a}_2\ \cdots\ \mathbf{a}_n\ \mathbf{b}]$ 为增广矩阵的线性方程组
 
 > **Existence of Solutions 解的存在性**：
 > 方程 $A\mathbf{x} = \mathbf{b}$ 有解，当且仅当 $\mathbf{b}$ 是 $A$ 各列的线性组合。
 
-**例3（Example 3）**：设 $A = \begin{bmatrix} 1 & 5 & -3 \\ -4 & 1 & 3 \\ -2 & -7 & 0 \end{bmatrix}$, $\mathbf{b} = \begin{bmatrix} -4 \\ 3 \\ h \end{bmatrix}$。$h$ 取何值时方程 $A\mathbf{x}=\mathbf{b}$ 有解？
+**例3（Example 3）**：设 $A = \begin{bmatrix} 1 & 5 & -3 \\\\ -4 & 1 & 3 \\\\ -2 & -7 & 0 \end{bmatrix}$, $\mathbf{b} = \begin{bmatrix} -4 \\\\ 3 \\\\ h \end{bmatrix}$。$h$ 取何值时方程 $A\mathbf{x}=\mathbf{b}$ 有解？
 
 增广矩阵行化简：
 
-$$\left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\ -4 & 1 & 3 & 3 \\ -2 & -7 & 0 & h \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\ 0 & 1 & -2 & -1 \\ 0 & 3 & -6 & h-8 \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\ 0 & 1 & -2 & -1 \\ 0 & 0 & 0 & h-5 \end{array}\right]$$
+$$
+\left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\
+-4 & 1 & 3 & 3 \\
+-2 & -7 & 0 & h \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\
+0 & 1 & -2 & -1 \\
+0 & 3 & -6 & h-8 \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\
+0 & 1 & -2 & -1 \\
+0 & 0 & 0 & h-5 \end{array}\right]
+$$
 
 当且仅当第4列没有主元时系统相容，即 **$h = 5$**。此时 $\mathbf{b} \in \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}$。
 
@@ -536,13 +755,28 @@ $$\left[\begin{array}{rrrr} 1 & 5 & -3 & -4 \\ -4 & 1 & 3 & 3 \\ -2 & -7 & 0 & h
 
 若 $A$ 的各**行**为 $\mathbf{r}_1, \dots, \mathbf{r}_m$，则：
 
-$$A\mathbf{x} = \begin{bmatrix} \mathbf{r}_1 \\ \vdots \\ \mathbf{r}_m \end{bmatrix} \mathbf{x} = \begin{bmatrix} \mathbf{r}_1 \cdot \mathbf{x} \\ \vdots \\ \mathbf{r}_m \cdot \mathbf{x} \end{bmatrix} = \begin{bmatrix} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n \\ \vdots \\ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n \end{bmatrix}$$
+$$
+A\mathbf{x} = \begin{bmatrix} \mathbf{r}_1 \\
+\vdots \\
+\mathbf{r}_m \end{bmatrix} \mathbf{x} = \begin{bmatrix} \mathbf{r}_1 \cdot \mathbf{x} \\
+\vdots \\
+\mathbf{r}_m \cdot \mathbf{x} \end{bmatrix} = \begin{bmatrix} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n \\
+\vdots \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n \end{bmatrix}
+$$
 
 即 **$A\mathbf{x}$ 的每个分量 = $A$ 的对应行与 $\mathbf{x}$ 的点积（dot product）**。
 
 **例4（Example 4）**：
 
-$$\begin{bmatrix} 1 & 2 & -1 \\ 0 & -5 & 3 \end{bmatrix} \begin{bmatrix} 4 \\ 3 \\ 7 \end{bmatrix} = \begin{bmatrix} 1\cdot4 + 2\cdot3 + (-1)\cdot7 \\ 0\cdot4 + (-5)\cdot3 + 3\cdot7 \end{bmatrix} = \begin{bmatrix} 3 \\ 6 \end{bmatrix}$$
+$$
+\begin{bmatrix} 1 & 2 & -1 \\
+0 & -5 & 3 \end{bmatrix} \begin{bmatrix} 4 \\
+3 \\
+7 \end{bmatrix} = \begin{bmatrix} 1\cdot4 + 2\cdot3 + (-1)\cdot7 \\
+0\cdot4 + (-5)\cdot3 + 3\cdot7 \end{bmatrix} = \begin{bmatrix} 3 \\
+6 \end{bmatrix}
+$$
 
 两种算法（列的线性组合 / 行向量法则）结果一致，互为验证。
 
@@ -550,7 +784,11 @@ $$\begin{bmatrix} 1 & 2 & -1 \\ 0 & -5 & 3 \end{bmatrix} \begin{bmatrix} 4 \\ 3 
 
 主对角线（从左上到右下）全为 1、其余全为 0 的 $n\times n$ 矩阵叫**单位矩阵（identity matrix）**，记作 $I_n$。例如：
 
-$$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
+$$
+I_3 = \begin{bmatrix} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \end{bmatrix}
+$$
 
 **关键性质**：对任何 $\mathbf{x} \in \mathbb{R}^3$，有 $I_3\mathbf{x} = \mathbf{x}$。单位矩阵是矩阵乘法中的"1"。
 
@@ -584,15 +822,43 @@ $$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
 
 **例1（Example 1）**：判断下列齐次系统是否有非平凡解，并描述其解集：
 
-$$3x_1 + 5x_2 - 4x_3 = 0 \qquad -3x_1 - 2x_2 + 4x_3 = 0 \qquad 6x_1 + \;x_2 - 8x_3 = 0$$
+$$
+3x_1 + 5x_2 - 4x_3 = 0
+$$
+
+$$
+-3x_1 - 2x_2 + 4x_3 = 0
+$$
+
+$$
+6x_1 + \ x_2 - 8x_3 = 0
+$$
 
 增广矩阵（右端全 0，可省略）行化简到阶梯形再化到简化阶梯形：
 
-$$\begin{bmatrix} 3 & 5 & -4 & 0 \\ -3 & -2 & 4 & 0 \\ 6 & 1 & -8 & 0 \end{bmatrix} \sim \begin{bmatrix} 3 & 5 & -4 & 0 \\ 0 & 3 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & -\frac{4}{3} & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}$$
+$$
+\begin{bmatrix} 3 & 5 & -4 & 0 \\
+-3 & -2 & 4 & 0 \\
+6 & 1 & -8 & 0 \end{bmatrix} \sim \begin{bmatrix} 3 & 5 & -4 & 0 \\
+0 & 3 & 0 & 0 \\
+0 & 0 & 0 & 0 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & -\frac{4}{3} & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 \end{bmatrix}
+$$
 
 $x_3$ 自由，$x_1 = \frac{4}{3}x_3$, $x_2 = 0$。通解写成向量形式并把 $x_3$ 提出来：
 
-$$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{4}{3}x_3 \\ 0 \\ x_3 \end{bmatrix} = x_3 \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix} = x_3\mathbf{v}, \quad \mathbf{v} = \begin{bmatrix} 4/3 \\ 0 \\ 1 \end{bmatrix}$$
+$$
+\mathbf{x} = \begin{bmatrix} x_1 \\
+x_2 \\
+x_3 \end{bmatrix} = \begin{bmatrix} \frac{4}{3}x_3 \\
+0 \\
+x_3 \end{bmatrix} = x_3 \begin{bmatrix} \frac{4}{3} \\
+0 \\
+1 \end{bmatrix} = x_3\mathbf{v}, \quad \mathbf{v} = \begin{bmatrix} 4/3 \\
+0 \\
+1 \end{bmatrix}
+$$
 
 **每个解都是 $\mathbf{v}$ 的倍数，解集 = $\operatorname{Span}\{\mathbf{v}\}$**——几何上是 $\mathbb{R}^3$ 中过原点的一条直线（除 $\mathbf{x}=\mathbf{0}$ 外的点全是非平凡解）：
 
@@ -610,7 +876,9 @@ $$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix}
 
 **中文讲解**：上例中"把自由变量作为公因子提出来"的技巧可以推广。若齐次系统通解为
 
-$$\mathbf{x} = s\mathbf{u} + t\mathbf{v}$$
+$$
+\mathbf{x} = s\mathbf{u} + t\mathbf{v}
+$$
 
 （$s,t$ 自由），解集就是 $\operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$——过原点的平面。这种把解写成自由变量的向量和的形式，叫解集的**参数向量形式**。
 
@@ -625,15 +893,29 @@ $$\mathbf{x} = s\mathbf{u} + t\mathbf{v}$$
 
 *FIGURE 3 Adding $\mathbf{p}$ to $\mathbf{v}$ translates $\mathbf{v}$ to $\mathbf{v}+\mathbf{p}$. 图3 把每个向量都加上 $\mathbf{p}$，等于把整条线平移*
 
-**例2（Example 2）**：描述 $A\mathbf{x}=\mathbf{b}$ 的解集，其中 $A$ 为例1 的系数矩阵，$\mathbf{b} = \begin{bmatrix} 7 \\ -4 \\ -4 \end{bmatrix}$。
+**例2（Example 2）**：描述 $A\mathbf{x}=\mathbf{b}$ 的解集，其中 $A$ 为例1 的系数矩阵，$\mathbf{b} = \begin{bmatrix} 7 \\\\ -4 \\\\ -4 \end{bmatrix}$。
 
 增广矩阵行化简：
 
-$$\left[\begin{array}{rrrr} 3 & 5 & -4 & 7 \\ -3 & -2 & 4 & -4 \\ 6 & 1 & -8 & -4 \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & 0 & -\frac{4}{3} & -1 \\ 0 & 1 & 0 & 2 \\ 0 & 0 & 0 & 0 \end{array}\right]$$
+$$
+\left[\begin{array}{rrrr} 3 & 5 & -4 & 7 \\
+-3 & -2 & 4 & -4 \\
+6 & 1 & -8 & -4 \end{array}\right] \sim \left[\begin{array}{rrrr} 1 & 0 & -\frac{4}{3} & -1 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 0 & 0 \end{array}\right]
+$$
 
 $x_3$ 自由，通解：
 
-$$\mathbf{x} = \begin{bmatrix} -1 + \frac{4}{3}x_3 \\ 2 \\ x_3 \end{bmatrix} = \begin{bmatrix} -1 \\ 2 \\ 0 \end{bmatrix} + x_3 \begin{bmatrix} 4/3 \\ 0 \\ 1 \end{bmatrix} = \mathbf{p} + x_3\mathbf{v}$$
+$$
+\mathbf{x} = \begin{bmatrix} -1 + \frac{4}{3}x_3 \\
+2 \\
+x_3 \end{bmatrix} = \begin{bmatrix} -1 \\
+2 \\
+0 \end{bmatrix} + x_3 \begin{bmatrix} 4/3 \\
+0 \\
+1 \end{bmatrix} = \mathbf{p} + x_3\mathbf{v}
+$$
 
 即 **$\mathbf{x} = \mathbf{p} + t\mathbf{v}$（$t \in \mathbb{R}$）**——解集是过 $\mathbf{p}$、平行于 $\mathbf{v}$ 的直线（不过原点！）：
 
@@ -643,7 +925,15 @@ $$\mathbf{x} = \begin{bmatrix} -1 + \frac{4}{3}x_3 \\ 2 \\ x_3 \end{bmatrix} = \
 
 **例3（Example 3）**：单个方程 $10x_1 - 3x_2 - 2x_3 = 0$ 的解集。把 $x_1$ 用自由变量表示：$x_1 = .3x_2 + .2x_3$，
 
-$$\mathbf{x} = \begin{bmatrix} .3x_2 + .2x_3 \\ x_2 \\ x_3 \end{bmatrix} = x_2\begin{bmatrix} .3 \\ 1 \\ 0 \end{bmatrix} + x_3\begin{bmatrix} .2 \\ 0 \\ 1 \end{bmatrix} = x_2\mathbf{u} + x_3\mathbf{v}$$
+$$
+\mathbf{x} = \begin{bmatrix} .3x_2 + .2x_3 \\
+x_2 \\
+x_3 \end{bmatrix} = x_2\begin{bmatrix} .3 \\
+1 \\
+0 \end{bmatrix} + x_3\begin{bmatrix} .2 \\
+0 \\
+1 \end{bmatrix} = x_2\mathbf{u} + x_3\mathbf{v}
+$$
 
 解集是 $\operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$（过原点的平面）。对非齐次版本 $10x_1 - 3x_2 - 2x_3 = b$（$b\neq 0$），解集是**平行平面** $\mathbf{p} + \operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$。
 
