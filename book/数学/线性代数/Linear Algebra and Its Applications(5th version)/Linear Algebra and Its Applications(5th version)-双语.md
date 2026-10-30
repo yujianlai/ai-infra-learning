@@ -3398,3 +3398,157 @@ $$P_{\mathcal{C} \leftarrow \mathcal{B}} = (P_{\mathcal{B} \leftarrow \mathcal{C
 > **本节精髓**：换基矩阵把"坐标翻译"代数化——只要知道"旧基向量用新基怎么表示"，整个翻译器就造出来了。公式 (6) 的"逆矩阵 = 反向翻译"提醒我们：基的变换是可逆的信息转换。第 4 章到此收官，下一章进入全书的计算高峰：**第 5 章 特征值与特征向量**。
 
 ---
+---
+
+# 第五章 特征值与特征向量
+# Chapter 5 Eigenvalues and Eigenvectors
+
+**导入例子：动力系统与斑点猫头鹰**
+**INTRODUCTORY EXAMPLE: Dynamical Systems and Spotted Owls**
+
+1990 年，北方斑点猫头鹰（一种濒临灭绝的鸟类）激起美国西北部关于原始森林采伐的全国性争论。环境学家建立的猫头鹰种群动力学模型中，种群向量 $\mathbf{x}_k = (j_k, s_k, a_k)$（幼鸟、亚成鸟、成鸟数量）随年份演化：
+
+$$\mathbf{x}_{k+1} = A\mathbf{x}_k$$
+
+数学上，这个模型的**长期命运**完全由 $A$ 的**特征值**决定：若最大特征值的绝对值小于 1，种群趋向灭绝；否则可能存续。本章的主角——**特征值与特征向量**——是分析一切线性动力系统（种群、电路、经济、搜索引擎）的钥匙。
+
+---
+
+## 5.1 特征向量与特征值 Eigenvectors and Eigenvalues
+
+**中文讲解**：矩阵 $A\mathbf{x}$ 通常会把向量 $\mathbf{x}$ 旋转到全新方向。但有一类特殊向量：**方向不变、只被拉伸/压缩**——这就是**特征向量**，伸缩的倍数就是**特征值**。它们揭示了矩阵最本质的作用方式。
+
+### 定义 DEFINITION
+
+非零向量 $\mathbf{x}$ 称为 $n \times n$ 矩阵 $A$ 的**特征向量（eigenvector）**，若
+
+$$A\mathbf{x} = \lambda\mathbf{x}$$
+
+对某个标量 $\lambda$ 成立。这个 $\lambda$ 称为对应于 $\mathbf{x}$ 的**特征值（eigenvalue）**。
+
+> ⚠️ **特征向量必须非零**：零向量平凡满足 $A\mathbf{0} = \lambda\mathbf{0}$，无信息量。但**特征值可以为 0**！
+
+**例1（Example 1，验证）**：设 $A = \begin{bmatrix} 1 & 6 \\
+5 & 2 \end{bmatrix}$，$\mathbf{u} = \begin{bmatrix} 6 \\
+-5 \end{bmatrix}$, $\mathbf{v} = \begin{bmatrix} 3 \\
+-2 \end{bmatrix}$。$\mathbf{u}$ 和 $\mathbf{v}$ 是 $A$ 的特征向量吗？
+
+**解**：
+
+$$A\mathbf{u} = \begin{bmatrix} 1 & 6 \\
+5 & 2 \end{bmatrix}\begin{bmatrix} 6 \\
+-5 \end{bmatrix} = \begin{bmatrix} 6 - 30 \\
+30 - 10 \end{bmatrix} = \begin{bmatrix} -24 \\
+20 \end{bmatrix} = \mathbf{-4}\begin{bmatrix} 6 \\
+-5 \end{bmatrix} = -4\mathbf{u}$$
+
+$\mathbf{u}$ 是特征向量，对应 $\lambda = -4$ ✓（$\lambda < 0$ 表示方向反转）
+
+$$A\mathbf{v} = \begin{bmatrix} 1 & 6 \\
+5 & 2 \end{bmatrix}\begin{bmatrix} 3 \\
+-2 \end{bmatrix} = \begin{bmatrix} 3 - 12 \\
+15 - 4 \end{bmatrix} = \begin{bmatrix} -9 \\
+11 \end{bmatrix} \neq \lambda\mathbf{v}$$
+
+$\mathbf{v}$ **不是**特征向量（$A\mathbf{v}$ 与 $\mathbf{v}$ 不成倍数）✗
+
+### 特征空间 The Eigenspace
+
+给定特征值 $\lambda$，其全部特征向量加零向量构成子空间：
+
+$$\lambda \text{ 的特征空间} = \operatorname{Nul}(A - \lambda I)$$
+
+**验证思路**：$A\mathbf{x} = \lambda\mathbf{x} \iff (A - \lambda I)\mathbf{x} = \mathbf{0}$——所以特征空间就是矩阵 $A - \lambda I$ 的零空间（Theorem 4.2-2 保证是子空间）。
+
+**例2（Example 2，求特征空间）**：证明 7 是 $A = \begin{bmatrix} 1 & 6 \\
+5 & 2 \end{bmatrix}$ 的特征值，并求其特征向量。
+
+**解**：计算
+
+$$A - 7I = \begin{bmatrix} 1 & 6 \\
+5 & 2 \end{bmatrix} - \begin{bmatrix} 7 & 0 \\
+0 & 7 \end{bmatrix} = \begin{bmatrix} -6 & 6 \\
+5 & -5 \end{bmatrix}$$
+
+$A - 7I$ 的列相关（第二列 = −第一列）⇒ 不可逆 ⇒ $\operatorname{Nul}(A-7I) \neq \{\mathbf{0}\}$ ⇒ 存在非零 $\mathbf{x}$ 使 $(A-7I)\mathbf{x} = \mathbf{0}$，即 $A\mathbf{x} = 7\mathbf{x}$ ∎
+
+解齐次方程组：$\begin{bmatrix} -6 & 6 \\
+5 & -5 \end{bmatrix} \sim \begin{bmatrix} 1 & -1 \\
+0 & 0 \end{bmatrix}$，得 $x_1 = x_2$，通解 $x_2\begin{bmatrix} 1 \\
+1 \end{bmatrix}$。
+
+$$\text{7 的特征空间} = \operatorname{Span}\left\{\begin{bmatrix} 1 \\
+1 \end{bmatrix}\right\}$$
+
+即所有 $(1,1)$ 的倍数都是对应 $\lambda = 7$ 的特征向量。
+
+> ⚠️ **警告（教材明示）**：**行化简不能用来求特征值**！对 $A$ 做行变换会改变特征值（变成另一个矩阵）。正确流程：先猜/算特征值 $\lambda$，再对 $A - \lambda I$ 行化简求特征向量。
+
+![FIGURE 1 特征空间](img/fig51_1_eigenspaces.png)
+
+*FIGURE 1 Eigenspaces for $\lambda = -4$ and $\lambda = 7$. 图1 例2 的两个特征空间：A 在两条特征线上分别做 ×7 和 ×(−4) 的缩放（负值含方向反转）*
+
+**例3（Example 3，三维特征空间）**：求 $A = \begin{bmatrix} 4 & -1 & 6 \\
+2 & 1 & 6 \\
+2 & -1 & 8 \end{bmatrix}$ 对应 $\lambda = 2$ 的特征空间。
+
+**解**：
+
+$$A - 2I = \begin{bmatrix} 2 & -1 & 6 \\
+2 & -1 & 6 \\
+2 & -1 & 8 \end{bmatrix} \sim \begin{bmatrix} 2 & -1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0 \end{bmatrix} \Rightarrow x_2 = 2x_1,\ x_3 = 0\ (x_1 \text{ 自由})$$
+
+通解：$x_1\begin{bmatrix} 1/2 \\
+1 \\
+0 \end{bmatrix}$。特征空间基为 $\{(1/2, 1, 0)\}$，也可取 $\{(1, 2, 0)\}$——**特征空间是二维的！**（FIGURE 2 中 A 在此平面上做 ×2 的"膨胀"）
+
+![FIGURE 2 特征空间上的膨胀](img/fig51_2_dilation_eigenspace.png)
+
+*FIGURE 2 A acts as a dilation on the eigenspace. 图2 A 在特征空间（本例为过 x₁x₂ 平面的子空间）上作用为 ×2 膨胀：特征向量只伸长、不转向*
+
+### 特征值的性质 THEOREM 1 & 2
+
+**THEOREM 1（三角矩阵的特征值）**：
+> 三角矩阵的特征值就是其**主对角线元素**（计重数）。
+
+**例4（Example 4）**：
+
+$$A = \begin{bmatrix} 3 & 6 & -8 \\
+0 & 0 & 6 \\
+0 & 0 & 2 \end{bmatrix}, \qquad B = \begin{bmatrix} 4 & 0 & 0 \\
+-2 & 1 & 0 \\
+5 & 3 & 4 \end{bmatrix}$$
+
+$A$ 的特征值：3, 0, 2（上三角，直接读对角）✓；$B$ 的特征值：4（二重）, 1 ✓
+
+**重要推论**：$\lambda = 0$ 是 $A$ 的特征值 ⟺ $A\mathbf{x} = \mathbf{0}$ 有非平凡解 ⟺ $A$ **不可逆**——IMT 又添一员！
+
+**THEOREM 2（不同特征值的特征向量无关）**：
+> 若 $\mathbf{v}_1, \dots, \mathbf{v}_r$ 是对应于**互不相同**特征值 $\lambda_1, \dots, \lambda_r$ 的特征向量，则 $\{\mathbf{v}_1, \dots, \mathbf{v}_r\}$ **线性无关**。
+
+（归纳法证明，教材从略。）
+
+### 特征向量与差分方程 Difference Equations
+
+一阶线性差分方程 $\mathbf{x}_{k+1} = A\mathbf{x}_k$（猫头鹰模型的原型！）若初值 $\mathbf{x}_0$ 是特征向量（$A\mathbf{x}_0 = \lambda\mathbf{x}_0$），则解有显式公式：
+
+$$\mathbf{x}_1 = A\mathbf{x}_0 = \lambda\mathbf{x}_0, \qquad \mathbf{x}_2 = A\mathbf{x}_1 = \lambda^2\mathbf{x}_0, \qquad \dots, \qquad \mathbf{x}_k = \lambda^k\mathbf{x}_0$$
+
+**直觉**：系统沿特征向量方向做"几何级数"演化——5.6 节将证明：一般初值可分解为特征向量的组合，长期行为由**最大特征值**主导。
+
+### 5.1 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 特征向量 | 方向不变的非零向量：$A\mathbf{x} = \lambda\mathbf{x}$ |
+| 特征值 | 伸缩倍数 $\lambda$（可负、可为 0） |
+| 特征空间 | $\operatorname{Nul}(A - \lambda I)$：对应 $\lambda$ 的全部特征向量 + 零向量 |
+| Theorem 1 | 三角阵特征值 = 对角线元素 |
+| Theorem 2 | 不同特征值 ⟹ 特征向量无关 |
+| 差分方程 | 特征向量初值 ⟹ $\mathbf{x}_k = \lambda^k\mathbf{x}_0$（动力系统显式解） |
+
+> **本节精髓**：特征向量是矩阵的"特征方向"——A 在这些方向上只做缩放。求特征值的正确姿势：解 $\det(A - \lambda I) = 0$（5.2 节的特征方程）；求特征向量：对 $A - \lambda I$ 行化简。猫头鹰模型的长期命运，将在 5.6 节用最大特征值揭晓。
+
+---
