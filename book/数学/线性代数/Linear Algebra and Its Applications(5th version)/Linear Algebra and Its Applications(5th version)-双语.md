@@ -2602,3 +2602,126 @@ $$\text{面积} = |\det A| = |2 - 30| = |-28| = \mathbf{28}$$
 > **本节精髓**：行列式是**几何量**——面积、体积的"有向"版本。Theorem 10 的 $|\det A|$ 倍伸缩是第 5 章特征值理论（$\det(A - \lambda I)$）、第 7 章 SVD 的几何种子。第 3 章至此收官：从递归定义（3.1）到代数性质（3.2）再到几何本质（3.3），行列式完成了"数 → 代数结构 → 几何变换"的三级跳。
 
 ---
+---
+
+# 第四章 向量空间
+# Chapter 4 Vector Spaces
+
+**导入例子：空间飞行与控制系统**
+**INTRODUCTORY EXAMPLE: Space Flight and Control Systems**
+
+1995 年 2 月，数学家李成龙（Thomas Luczak）设计的姿态控制问题成功应用于航天飞机：系统需要把机体旋转到指定方向，同时满足燃料约束，最终化为**带约束的优化问题**——其核心是解数千个方程构成的线性系统。这类工程问题中的"向量"往往不是简单的数字列表，而可能是**函数、信号、矩阵**。本章把第 1~3 章的理论从 $\mathbb{R}^n$ 推广到**任意向量空间**——这是线性代数抽象力量的巅峰。
+
+---
+
+## 4.1 向量空间与子空间 Vector Spaces and Subspaces
+
+**中文讲解**：前两章的向量是 $\mathbb{R}^n$ 中的"有序数列"。现在我们抽象出**向量空间的本质**——它只是一个**集合 + 两种运算（加法、数乘）**，满足 10 条公理。判断"一个集合能不能做线性代数"，只看这 10 条。
+
+### 向量空间的定义 DEFINITION
+
+**向量空间（vector space）**是一个非空集合 $V$，其上定义了两种运算——**加法**（把 $V$ 中两元素 $\mathbf{u}, \mathbf{v}$ 映到 $V$ 中元素 $\mathbf{u} + \mathbf{v}$）和**标量乘法**（把标量 $c$ 与 $\mathbf{v} \in V$ 映到 $c\mathbf{v} \in V$）——并满足以下十条公理（对所有 $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$、所有标量 $c, d$）：
+
+1. $\mathbf{u} + \mathbf{v} \in V$（加法封闭）
+2. $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$（加法交换律）
+3. $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$（加法结合律）
+4. 存在**零向量** $\mathbf{0} \in V$ 使 $\mathbf{u} + \mathbf{0} = \mathbf{u}$
+5. 对每个 $\mathbf{u}$ 存在**逆元** $-\mathbf{u}$ 使 $\mathbf{u} + (-\mathbf{u}) = \mathbf{0}$
+6. $c\mathbf{u} \in V$（数乘封闭）
+7. $c(\mathbf{u} + \mathbf{v}) = c\mathbf{u} + c\mathbf{v}$（分配律）
+8. $(c + d)\mathbf{u} = c\mathbf{u} + d\mathbf{u}$（分配律）
+9. $c(d\mathbf{u}) = (cd)\mathbf{u}$（数乘结合律）
+10. $1\mathbf{u} = \mathbf{u}$（单位元）
+
+> **要点**：公理 1、6 是"封闭性"要求（运算结果必须留在 $V$ 中），其余 8 条是"运算规则"。**$V$ 中的元素叫向量，但完全可以不是"数组"**——可以是函数、多项式、信号、矩阵、甚至箭头。
+
+### 关键例子（新向量空间的动物园）
+
+**例1/2（Example 1, 2）**：$n$ 维欧氏空间 $\mathbb{R}^n$（$n \geq 1$）——我们最熟悉的向量空间，10 条公理全部验证过（1.3 节）。特别地，$\mathbb{R}^1$ 的"向量"就是实数。
+
+**例3（Example 3）**：**箭头向量**——平面上从同一起点出发的所有箭头，按"平行四边形法则"相加、按长度缩放。加法结合律由图 2/3 的平行四边形几何保证。
+
+**例4（Example 4，多项式空间 $\mathbb{P}_n$）**：**次数 ≤ n 的实系数多项式**全体构成的集合，按多项式通常的加法与数乘。例：$\mathbb{P}_2$ 中的元素形如
+
+$$p(t) = a_0 + a_1 t + a_2 t^2$$
+
+（注意"次数 ≤ n"——包括次数更小的，如常数多项式。）
+
+**例6（Example 6，函数空间 $\mathbb{C}[a, b]$）**：定义在闭区间 $[a, b]$ 上的**实值连续函数**全体，按"逐点相加" $(f + g)(t) = f(t) + g(t)$、"逐点缩放" $(cf)(t) = c\,f(t)$。连续函数的和与倍数仍连续，故封闭性满足。这是泛函分析的出发点。
+
+**例5（Example 5，离散信号空间）**：定义在整数集上的实值"双无穷序列" $\{y_k\}$（$k \in \mathbb{Z}$）——模拟离散时间信号。加法、数乘均**逐点**进行（图 4 可视化一个离散信号）。这是**数字信号处理**的数学舞台。
+
+> **其他重要例子**（教材列举）：全体 $m \times n$ 矩阵、全体实值函数……线性代数在几何、分析、工程等一切"可加可缩放"的对象上通行无阻。
+
+### 子空间 Subspaces
+
+**定义**：向量空间 $V$ 的子集 $H$ 称为**子空间**，若 $H$ 满足（对 $\mathbf{u}, \mathbf{v} \in H$、标量 $c$）：
+
+a. **零向量** $\mathbf{0} \in H$
+
+b. $\mathbf{u} + \mathbf{v} \in H$（加法封闭）
+
+c. $c\mathbf{u} \in H$（数乘封闭）
+
+> 与 2.8 节 $\mathbb{R}^n$ 的定义一模一样！**子空间本身也是一个向量空间**（10 条公理由 $V$ 继承，自动成立）。每个向量空间 $V$ 至少有两个子空间：$V$ 本身和零子空间 $\{\mathbf{0}\}$。
+
+![FIGURE 6 V的子空间](img/fig41_6_subspace_of_V.png)
+
+*FIGURE 6 A subspace of V. 图6 V 的子空间 H（过原点的平面/直线形象在抽象空间同样成立）*
+
+**例7/8/9（常用子空间速览）**：
+- 仅含**零向量**的集 $\{\mathbf{0}\}$：任何向量空间的（零）子空间
+- $\mathbb{P}_2$（次数 ≤ 2 的多项式）：$\mathbb{P}$（全体多项式）的子空间——次数 ≤ 2 的和与倍数次数仍 ≤ 2，封闭 ✓
+- $[a, b]$ 上连续函数集：函数空间的子空间（连续函数的和与倍数仍连续）
+
+**几何对照**（在 $\mathbb{R}^3$ 中巩固直觉）：
+
+![FIGURE 7 x1x2平面](img/fig41_7_plane_in_R3.png)
+
+*FIGURE 7 The x1x2-plane as a subspace of $\mathbb{R}^3$. 图7 $x_1x_2$ 平面（$x_3 = 0$）是 $\mathbb{R}^3$ 的子空间：过原点、含零向量 ✓*
+
+![FIGURE 8 非子空间直线](img/fig41_8_line_not_subspace.png)
+
+*FIGURE 8 A line that is not a vector space. 图8 不过原点的直线不是子空间：不含零向量，加法/数乘都会跑出 H*
+
+![FIGURE 9 子空间示例](img/fig41_9_subspace_examples.png)
+
+*FIGURE 9 An example of a subspace. 图9 子空间示例：$H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$（过原点平面）*
+
+**THEOREM 1**：若 $\mathbf{v}_1, \dots, \mathbf{v}_p$ 在向量空间 $V$ 中，则 $\operatorname{Span}\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 是 $V$ 的子空间。
+
+（证明与 2.8 节例 1 完全相同：零向量在 Span 中；线性组合的和与倍数仍是线性组合。∎）
+
+**例10（Example 10）**：$V$ 中任意 $\mathbf{v}_1, \mathbf{v}_2$，$H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 是子空间（Theorem 1 直接给出）。
+
+**例11（Example 11，参数化描述）**：设 $H = \{(a - 3b,\ b - a,\ a,\ b) : a, b \in \mathbb{R}\}$。证明 $H$ 是 $\mathbb{R}^4$ 的子空间。
+
+**解**：把参数形式拆成向量的线性组合：
+
+$$\begin{bmatrix} a - 3b \\
+b - a \\
+a \\
+b \end{bmatrix} = a\begin{bmatrix} 1 \\
+-1 \\
+1 \\
+0 \end{bmatrix} + b\begin{bmatrix} -3 \\
+1 \\
+0 \\
+1 \end{bmatrix} = a\mathbf{v}_1 + b\mathbf{v}_2$$
+
+故 $H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$，由 Theorem 1 是子空间 ∎
+
+> **方法论**：证明"H 是子空间"的最快路径——把 $H$ 写成**若干向量的张成**（参数化拆向量），再引用 Theorem 1。这与 2.8 节例 11 一脉相承。
+
+### 4.1 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 向量空间 | 集合 + 加法 + 数乘 + 10 条公理（元素不必是数组！） |
+| 子空间 | 含零向量、对加法/数乘封闭（继承 V 的全部公理） |
+| Theorem 1 | 任意向量组的张成是子空间（最通用的构造法） |
+| 新例子 | $\mathbb{P}_n$（多项式）、$\mathbb{C}[a,b]$（连续函数）、信号空间 |
+
+> **本节精髓**：抽象化让线性代数"一次证明、处处适用"。第 1~3 章在 $\mathbb{R}^n$ 中学过的一切——子空间、张成、线性无关、基、维数——将在 4.2~4.5 节逐一推广到任意向量空间。下一节先看两个最重要的"具体对象"：矩阵的零空间与列空间在抽象框架下的样子。
+
+---
