@@ -3188,3 +3188,97 @@ $$\dim \operatorname{Col} A = 2, \qquad \dim \operatorname{Nul} A = 3$$
 > **本节精髓**：维数是向量空间的"**指纹**"——两个同构的空间维数相同，反之有限维空间中维数相同即同构。Theorem 11（扩充为基）与 4.3 的 Theorem 3（收缩为基）一收一放，宣告了基的极大灵活性。至此，第 4 章的抽象理论主体完成：向量空间（4.1）→ 子空间（4.1-4.2）→ 无关与基（4.3）→ 坐标与同构（4.4）→ 维数（4.5）。下一节 4.6 把**秩**的概念推广到抽象空间（行空间、线性变换的秩），第 4 章收官。
 
 ---
+---
+
+## 4.6 秩 Rank
+
+**中文讲解**：我们已经知道 $\operatorname{Col} A$ 的维数叫秩。本节引入矩阵的第三个子空间——**行空间 Row A**，并证明一个深刻事实：**行秩 = 列秩**（Theorem 14）。例 4 把四个子空间（Row A、Nul A、Col A、Nul Aᵀ）画在同一张图上，是理解矩阵结构的"全景图"。
+
+### 行空间 The Row Space
+
+**定义**：$m \times n$ 矩阵 $A$ 的**行空间**是其各行（看作 $\mathbb{R}^n$ 中的向量）所有线性组合之集：
+
+$$\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \dots, \mathbf{r}_m\} \subseteq \mathbb{R}^n$$
+
+**例1（Example 1）**：$A = \begin{bmatrix} -2 & -5 & 8 & 0 & -17 \\
+1 & 3 & -5 & 1 & 5 \\
+3 & 11 & -19 & 7 & 1 \\
+1 & 7 & -13 & 5 & -3 \end{bmatrix}$，$\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3, \mathbf{r}_4\}$（$\mathbb{R}^5$ 的子空间）。
+
+**求 Row A 的基（THEOREM 13）**：
+> 若两个矩阵**行等价**，则它们的行空间相同；进一步，**阶梯形的非零行**构成其行空间的一组基。
+
+**为什么**：行变换 = 对行向量做线性组合，既不丢也不添张成能力（2.1 节视角）。
+
+**例2（Example 2）**：求 $A$ 的行空间、列空间、零空间的基。
+
+**解**：
+- 行化简 $A \sim B$（阶梯形）。$B$ 的非零行 $\{(1,0,-1,5,0),\ (0,1,-1,1,0),\ (0,0,0,1,1)\}$ = $\operatorname{Row} A$ 的基
+- $\operatorname{Col} A$ 的基 = **$A$ 的主元列**（第 1、2、4 列）——注意取 **$A$** 的列，不是 $B$ 的
+- $\operatorname{Nul} A$ 的基：解 $A\mathbf{x} = \mathbf{0}$ 得参数向量形式（3 个向量）
+
+> ⚠️ **警告**：$B$ 的前 3 行无关 ≠ $A$ 的前 3 行无关！行等价保持整个行空间，但不保持"哪些行无关"——必须回到原矩阵判断。
+
+### 秩定理 THEOREM 14
+
+**THEOREM 14（Rank Theorem）**：
+> $m \times n$ 矩阵 $A$：
+>
+> $$\dim \operatorname{Col} A = \dim \operatorname{Row} A = \operatorname{rank} A = \text{主元数}$$
+>
+> $$\operatorname{rank} A + \dim \operatorname{Nul} A = n \quad (A\text{ 的列数})$$
+
+**"行秩 = 列秩"的意义**：一个矩阵的"行方向数"和"列方向数"必然相等——表面上看行与列完全不同，深层结构却对称。
+
+**例3（Example 3，秩的约束）**：
+a. 9 列矩阵 $A$，$\dim \operatorname{Nul} A = 2$，则 $\operatorname{rank} A = 9 - 2 = \mathbf{7}$
+b. 6×9 矩阵 $A$ 能有 $\dim \operatorname{Nul} A = 2$ 吗？——$\operatorname{rank} A = 7$ 但行数仅 6，秩 ≤ 6 → **不可能**！
+
+**例5（Example 5，应用）**：某科学家解 40 个方程 42 个未知量的系统。若系数矩阵秩为 40（≤ 行数 ✓），则 $\dim \operatorname{Nul} A = 42 - 40 = 2$，齐次方程有两个自由变量——非齐次方程若相容则有无穷多解。
+
+### 四大子空间全景 THEOREM + FIGURE 1
+
+对 $m \times n$ 矩阵 $A$，四个基本子空间及其正交关系：
+
+| 子空间 | 位置 | 维数 |
+|---|---|---|
+| $\operatorname{Row} A$ | $\mathbb{R}^n$（定义域） | $\operatorname{rank} A$ |
+| $\operatorname{Nul} A$ | $\mathbb{R}^n$（定义域） | $n - \operatorname{rank} A$ |
+| $\operatorname{Col} A$ | $\mathbb{R}^m$（值域） | $\operatorname{rank} A$ |
+| $\operatorname{Nul} A^T$ | $\mathbb{R}^m$（值域） | $m - \operatorname{rank} A$ |
+
+**例4（Example 4，完整计算）**：$A = \begin{bmatrix} 3 & 0 & -1 \\
+3 & 0 & -1 \\
+4 & 0 & 5 \end{bmatrix}$。
+
+- $\operatorname{Nul} A = \operatorname{Span}\{(0,1,0)\}$（$x_2$ 轴）：$\dim = 1$
+- $\operatorname{Row} A = x_1x_3$ 平面（$x_2 = 0$）：$\dim = 2$
+- $\operatorname{Col} A = \{x_1 - x_2 = 0\}$ 平面：$\dim = 2$
+- $\operatorname{Nul} A^T = \operatorname{Span}\{(1,-1,0)\}$（垂直于 Col A 的方向）：$\dim = 1$
+
+验证秩定理：$2 + 1 = 3$ ✓（两边都是）FIGURE 1 画出全景：
+
+![FIGURE 1 四大子空间](img/fig46_1_four_subspaces.png)
+
+*FIGURE 1 Subspaces determined by a matrix A. 图1 矩阵 A 确定的四大子空间：定义域 $\mathbb{R}^n$ 中 Row A 与 Nul A 正交互补；值域 $\mathbb{R}^m$ 中 Col A 与 Nul Aᵀ 正交互补——A 把 Row A 一一映满 Col A，把 Nul A 全部压成 0*
+
+> **深刻图景**：$A$ 的作用 = "在 Row A 上是可逆的（一一映到 Col A），在 Nul A 上是零映射"。第 7 章 SVD 会把这张图推广成"沿奇异方向逐一缩放"的终极版本。
+
+### IMT 续篇与数值注记
+
+IMT 的 (m)–(r)（列构成基 / Col A = Rⁿ / dim Col A = n / rank A = n / Nul A = {0} / dim Nul A = 0）已在 2.9 节完整给出——本节秩理论让它们有了第四、五章的抽象版本支撑。
+
+**数值注记**：秩对舍入误差敏感，实践中由 **SVD（7.4 节）** 确定有效秩。
+
+### 4.6 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Row A | 各行的张成；行等价保行空间；阶梯形非零行 = 基（Thm 13） |
+| 秩定理 (Thm 14) | 行秩 = 列秩 = rank A；rank + dim Nul A = n |
+| 四大子空间 | Row/Nul A 在 Rⁿ、Col/Nul Aᵀ 在 Rᵐ；维数由 rank A 与 m,n 决定 |
+| 例4 全景图 | A 在 Row A 上一一映到 Col A，在 Nul A 上压成 0 |
+
+> **本节精髓**：秩定理揭示矩阵的深层对称性（行秩必等于列秩），四大子空间图预告了第 6 章正交性（Row A ⊥ Nul A）与第 7 章 SVD。至此第 4 章主体收官——从抽象定义到秩定理，$\mathbb{R}^n$ 的全部理论已推广到任意有限维向量空间。下一节 4.7《基的变换》处理"换基时坐标如何变"，是第 5 章特征值计算的必备工具。
+
+---
