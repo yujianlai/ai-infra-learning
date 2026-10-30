@@ -4002,3 +4002,145 @@ $$[T]_{\mathcal{B}} = P^{-1}AP = \begin{bmatrix} -1 & 2 \\
 > **本节精髓**：相似矩阵的几何意义终于揭晓——它们不是不同的矩阵，而是**同一个线性变换在不同坐标系下的不同写法**。对角化是换基的极致：找到变换"最自然"的基（特征向量），矩阵就现出原形。例4 的 Jordan 形预告：即使不能对角化，也能化成"近乎对角"的标准形。下一节 5.5 处理复特征值——旋转矩阵的特征值躲进了复平面，需要把数域扩大到 ℂ。
 
 ---
+---
+
+## 5.5 复特征值 Complex Eigenvalues
+
+**中文讲解**：到目前为止我们一直在实数域 $\mathbb{R}$ 中工作。但看一个最朴素的变换——旋转 $A = \begin{bmatrix} 0 & -1 \\
+1 & 0 \end{bmatrix}$（逆时针 90°）：**任何向量都被转了方向**，没有实特征向量！然而旋转明明是个简单变换——问题不在变换，而在数域。把数域扩大到复数 $\mathbb{C}$，一切豁然开朗。
+
+### 旋转矩阵的特征值 例1
+
+**例1（Example 1）**：求 $A = \begin{bmatrix} 0 & -1 \\
+1 & 0 \end{bmatrix}$ 的特征值。
+
+**解**：特征方程 $\lambda^2 + 1 = 0$——在实数域无解，在复数域：
+
+$$\lambda = \pm i$$
+
+**求特征向量**（λ = i）：
+
+$$(A - iI)\mathbf{x} = \begin{bmatrix} -i & -1 \\
+1 & -i \end{bmatrix}\begin{bmatrix} x_1 \\
+x_2 \end{bmatrix} = \begin{bmatrix} 0 \\
+0 \end{bmatrix} \Rightarrow -ix_1 = x_2$$
+
+取 $\mathbf{x} = \begin{bmatrix} 1 \\
+-i \end{bmatrix}$（或任意非零倍数）✓ 验证：$A\mathbf{x} = \begin{bmatrix} i \\
+1 \end{bmatrix} = i\begin{bmatrix} 1 \\
+-i \end{bmatrix}$ ✓
+
+> **复数必需**：特征方程在实数域可能无解（如 λ²+1=0），但**n 次多项式在 ℂ 恒有 n 个根**（代数学基本定理）——ℂ 是"完备"的数域。特征值为 ±i 表示"旋转 90°"这种纯旋转没有实方向，但复方向 (1, ∓i) 上它表现为 ×(±i)（旋转 90° 恰是乘以 i！）。
+
+### 例2：带复特征值的 2×2
+
+**例2（Example 2）**：$A = \begin{bmatrix} .5 & -.6 \\
+.75 & 1.1 \end{bmatrix}$ 的特征值？
+
+**解**：$\lambda^2 - 1.6\lambda + 1 = 0$，求根公式：
+
+$$\lambda = \frac{1.6 \pm \sqrt{1.6^2 - 4}}{2} = .8 \pm .6i$$
+
+**求 λ = .8 − .6i 的特征向量**：
+
+$$(A - (.8-.6i)I)\mathbf{x} = \begin{bmatrix} -.3 + .6i & -.6 \\
+.75 & .3 + .6i \end{bmatrix}\begin{bmatrix} x_1 \\
+x_2 \end{bmatrix} = \begin{bmatrix} 0 \\
+0 \end{bmatrix}$$
+
+由第一行：$(-.3+.6i)x_1 = .6x_2$。取 $x_2 = 5$（去小数）：$x_1 = -2 - 4i$。
+
+$$\mathbf{v}_1 = \begin{bmatrix} -2 - 4i \\
+5 \end{bmatrix}$$
+
+由对称性（见下），$\lambda = .8 + .6i$ 的特征向量为 $\mathbf{v}_2 = \begin{bmatrix} -2 + 4i \\
+5 \end{bmatrix} = \overline{\mathbf{v}}_1$
+
+### 例3：迭代的椭圆轨道
+
+**例3（Example 3）**：对例2 的 $A$，取 $\mathbf{x}_0 = (2, 2.5)$，计算迭代 $\mathbf{x}_{k+1} = A\mathbf{x}_k$。
+
+由 5.1 节的公式（特征向量分解）：$\mathbf{x}_0$ 可分解为 $\mathbf{v}_1, \mathbf{v}_2$ 的组合，
+
+$$\mathbf{x}_k = c_1(.8 - .6i)^k\mathbf{v}_1 + c_2(.8 + .6i)^k\mathbf{v}_2$$
+
+每个复特征值的模 $r = \sqrt{.8^2 + .6^2} = 1$（旋转但不缩放），辐角 $\varphi = \arccos .8 \approx 37°$——**轨道是椭圆**（FIGURE 1）：
+
+![FIGURE 1 椭圆轨道](img/fig55_1_elliptical_orbit.png)
+
+*FIGURE 1 The iterates of a point under the action of a real matrix with a complex eigenvalue. 图1 复特征值作用下点的迭代轨道：椭圆（r=1 纯旋转）*
+
+### 实矩阵的共轭对性质
+
+**中文讲解**：实矩阵的特征方程是**实系数**多项式。实系数多项式的复根必成**共轭对**出现。因此：
+
+**基本事实**：若实矩阵 $A$ 有复特征值 $\lambda = a + bi$，则 $\overline{\lambda} = a - bi$ 也是特征值，且对应特征向量互为共轭：$A\overline{\mathbf{v}} = \overline{\lambda}\,\overline{\mathbf{v}}$。
+
+### 核心构造 C = [a −b; b a] 例7
+
+**例7（Example 7，复数的本质）**：矩阵 $C = \begin{bmatrix} a & -b \\
+b & a \end{bmatrix}$ 的特征值？
+
+**解**：$\lambda^2 - 2a\lambda + (a^2 + b^2) = 0$，$\lambda = a \pm bi$。
+
+**几何**：$C$ 是**旋转 + 缩放**的组合——设 $r = \sqrt{a^2+b^2}$，$\varphi$ 满足 $\cos\varphi = a/r$, $\sin\varphi = b/r$，则
+
+$$C = r\begin{bmatrix} a/r & -b/r \\
+b/r & a/r \end{bmatrix} = r\begin{bmatrix} \cos\varphi & -\sin\varphi \\
+\sin\varphi & \cos\varphi \end{bmatrix} = rR_\varphi$$
+
+**复特征值 $a \pm bi$ ⟺ 旋转角 ±φ + 缩放 r**——这就是复特征值的几何意义！
+
+### THEOREM 9（2×2 复特征值的标准形）
+
+> 设实 2×2 矩阵 $A$ 有复特征值 $\lambda = a - bi$（$b \neq 0$）及对应特征向量 $\mathbf{v} \in \mathbb{C}^2$。则
+
+> $$A = PCP^{-1}, \qquad P = \begin{bmatrix} \operatorname{Re}\mathbf{v} & \operatorname{Im}\mathbf{v} \end{bmatrix}, \qquad C = \begin{bmatrix} a & -b \\
+> b & a \end{bmatrix}$$
+
+**直觉**：$\mathbf{v}$ 的实部、虚部两个实向量张成一个平面，$A$ 在这个平面上 = **旋转 φ + 缩放 r**。
+
+**例8（Example 8，完整验证）**：接例 2，$\mathbf{v}_1 = (-2-4i,\ 5)$，$\lambda = .8 - .6i$（故 $a = .8$, $b = .6$）。
+
+$$P = \begin{bmatrix} \operatorname{Re}\mathbf{v}_1 & \operatorname{Im}\mathbf{v}_1 \end{bmatrix} = \begin{bmatrix} -2 & -4 \\
+5 & 0 \end{bmatrix}, \qquad C = \begin{bmatrix} .8 & -.6 \\
+.6 & .8 \end{bmatrix}$$
+
+验证 $A = PCP^{-1}$（即 $PC = AP$）：
+
+$$AP = \begin{bmatrix} -.8 & -2.4 \\
+2.6 & -3.0 \end{bmatrix}, \qquad PC = \begin{bmatrix} -.8 & -2.4 \\
+2.6 & -3.0 \end{bmatrix} \checkmark$$
+
+**含义**：原系统中藏着旋转！$|\lambda| = 1$ 时轨道闭合（椭圆）；$|\lambda| < 1$ 时向心螺旋；$|\lambda| > 1$ 时离心螺旋——动力系统稳定性判据（5.6 节详述）。
+
+![FIGURE 3 旋转+缩放](img/fig55_3_rotation_scaling.png)
+
+*FIGURE 3 A rotation followed by a scaling. 图3 复特征值的作用 = 旋转 φ（辐角）+ 缩放 r（模）*
+
+![FIGURE 4 换元旋转图](img/fig55_4_rotation_diagram.png)
+
+*FIGURE 4 Rotation due to a complex eigenvalue. 图4 换元揭示旋转：直接乘 A（上）= 在 P 坐标系里乘 C（下，纯旋转），再换回来*
+
+### 例9：3×3 的分块结构
+
+**例9（Example 9）**：$A = \begin{bmatrix} .8 & -.6 & 0 \\
+.6 & .8 & 0 \\
+0 & 0 & 1.07 \end{bmatrix}$——左上 2×2 块是旋转缩放（λ = .8±.6i，r=1），右下 1.07 是沿 x₃ 的拉伸。
+
+- $x_3 = 0$ 平面：**不变平面**（A 把它旋进自己），其上纯旋转
+- 一般轨道：平面内旋转 + 沿 x₃ 指数增长（$1.07^k$）→ **螺旋上升**
+
+### 5.5 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 复特征值 | 实矩阵旋转的"复方向"：λ = a ± bi ⟺ 旋转 φ + 缩放 r |
+| 共轭对 | 实矩阵复特征值、特征向量必成共轭对 |
+| C = [a −b; b a] | 复特征值的本质矩阵：r = √(a²+b²)，φ = arg(a+bi) |
+| Theorem 9 | A = PCP^{-1}：P = [Re v, Im v]，A 在 span{Re v, Im v} 上 = 旋转+缩放 |
+| 稳定性预告 | r < 1 向心（衰减），r = 1 椭圆，r > 1 离心（增长） |
+
+> **本节精髓**：复数不是人为的发明，而是**旋转的自然语言**——λ = a + bi 一个数同时编码了缩放（r = |λ|）和旋转（φ = arg λ）。Theorem 9 把"含复特征值的实矩阵"还原成"藏在里面的旋转"，这是分析 5.6 节离散动力系统稳定性、以及物理学中简正模（normal modes）的基本工具。
+
+---
