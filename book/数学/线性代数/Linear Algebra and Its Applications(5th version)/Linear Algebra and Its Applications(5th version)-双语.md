@@ -4786,3 +4786,119 @@ $$U^{-1} = U^T$$
 > **本节精髓**：正交性是解线性问题的"高速公路"——Theorem 5 把坐标计算从"解方程组"简化为"算内积"；投影公式 (2) 是"垂足"的代数化身。但问题随之而来：**一般基怎么变成正交基？** 6.3 节先把投影推广到任意子空间（Best Approximation），6.4 节的 Gram-Schmidt 正交化给出构造算法，6.5 节最小二乘万事俱备。
 
 ---
+---
+
+## 6.3 正交投影 Orthogonal Projections
+
+**中文讲解**：6.2 节把向量投影到**一条直线**上。本节推广到**任意子空间** $W$——核心是两个定理：**正交分解定理**（任何向量 = W 中的部分 + 垂直于 W 的部分）和**最佳逼近定理**（W 中离 y 最近的点就是投影点）。这两个定理是整个最小二乘理论的几何心脏。
+
+### 正交分解定理 THEOREM 8
+
+> 设 $W$ 是 $\mathbb{R}^n$ 的子空间。则每个 $\mathbf{y} \in \mathbb{R}^n$ 可**唯一**写成
+
+> $$\mathbf{y} = \hat{\mathbf{y}} + \mathbf{z} \tag{1}$$
+
+> 其中 $\hat{\mathbf{y}} \in W$、$\mathbf{z} \in W^\perp$。事实上，若 $\{\mathbf{u}_1, \dots, \mathbf{u}_p\}$ 是 $W$ 的任意**正交基**，则
+
+> $$\hat{\mathbf{y}} = \operatorname{proj}_W \mathbf{y} = \frac{\mathbf{y}\cdot\mathbf{u}_1}{\mathbf{u}_1\cdot\mathbf{u}_1}\mathbf{u}_1 + \cdots + \frac{\mathbf{y}\cdot\mathbf{u}_p}{\mathbf{u}_p\cdot\mathbf{u}_p}\mathbf{u}_p \tag{2}$$
+
+> 且 $\mathbf{z} = \mathbf{y} - \hat{\mathbf{y}}$。$\hat{\mathbf{y}}$ 称为 $\mathbf{y}$ 在 $W$ 上的**正交投影**。
+
+**证明**：$\hat{\mathbf{y}}$ 是基向量的组合，故 $\hat{\mathbf{y}} \in W$。验证 $\mathbf{z} \perp W$：对任意基向量 $\mathbf{u}_1$，
+
+$$\mathbf{z}\cdot\mathbf{u}_1 = (\mathbf{y} - \hat{\mathbf{y}})\cdot\mathbf{u}_1 = \mathbf{y}\cdot\mathbf{u}_1 - \left(\frac{\mathbf{y}\cdot\mathbf{u}_1}{\mathbf{u}_1\cdot\mathbf{u}_1}\right)\mathbf{u}_1\cdot\mathbf{u}_1 - 0 - \cdots - 0 = \mathbf{y}\cdot\mathbf{u}_1 - \mathbf{y}\cdot\mathbf{u}_1 = 0$$
+
+（其余各项因 $\mathbf{u}_1 \perp \mathbf{u}_j$ 全消失）——$\mathbf{z}$ 与每个基向量正交 ⟹ 与 $W$ 中一切向量正交。**唯一性**：若 $\mathbf{y} = \hat{\mathbf{y}}_1 + \mathbf{z}_1$ 是另一分解，则 $\hat{\mathbf{y}} - \hat{\mathbf{y}}_1 = \mathbf{z}_1 - \mathbf{z}$ 既在 $W$ 又在 $W^\perp$ ⟹ 与自身正交 ⟹ 为零向量。∎
+
+> **重要推论**：分解 (1) 唯一 ⟹ **投影只依赖于 $W$，与所用正交基无关**。
+
+![FIGURE 2 投影到W](img/fig63_2_projection_onto_W.png)
+
+*FIGURE 2 The orthogonal projection of y onto W. 图2 正交投影的几何：ŷ 是 y 在 W 上的"垂足影子"，z = y − ŷ 垂直于整个 W*
+
+**例1（Example 1）**：$\{\mathbf{u}_1, \dots, \mathbf{u}_5\}$ 是 $\mathbb{R}^5$ 的正交基，$W = \operatorname{Span}\{\mathbf{u}_1, \mathbf{u}_2\}$。设 $\mathbf{y} = \sum_{i=1}^5 c_i\mathbf{u}_i$，把 $\mathbf{y}$ 拆成 $W$ 中向量 + $W^\perp$ 中向量。
+
+**解**：$\mathbf{y} = \underbrace{c_1\mathbf{u}_1 + c_2\mathbf{u}_2}_{\in W} + \underbrace{c_3\mathbf{u}_3 + c_4\mathbf{u}_4 + c_5\mathbf{u}_5}_{\in W^\perp}$（后三项与 $\mathbf{u}_1, \mathbf{u}_2$ 正交）。
+
+**例2（Example 2）**：$\mathbf{u}_1 = (2, 5, -1)$, $\mathbf{u}_2 = (-2, 1, 1)$，$W = \operatorname{Span}\{\mathbf{u}_1, \mathbf{u}_2\}$，$\mathbf{y} = (1, 2, 3)$。分解 $\mathbf{y}$。
+
+**解**：先验证正交：$\mathbf{u}_1\cdot\mathbf{u}_2 = -4 + 5 - 1 = 0$ ✓。计算：
+
+$$\mathbf{y}\cdot\mathbf{u}_1 = 9, \quad \mathbf{u}_1\cdot\mathbf{u}_1 = 30; \qquad \mathbf{y}\cdot\mathbf{u}_2 = 3, \quad \mathbf{u}_2\cdot\mathbf{u}_2 = 6$$
+
+$$\hat{\mathbf{y}} = \frac{9}{30}\mathbf{u}_1 + \frac{3}{6}\mathbf{u}_2 = \begin{bmatrix} -2/5 \\
+2 \\
+1/5 \end{bmatrix}, \qquad \mathbf{z} = \mathbf{y} - \hat{\mathbf{y}} = \begin{bmatrix} 7/5 \\
+0 \\
+14/5 \end{bmatrix}$$
+
+**验证**：$\mathbf{z}\cdot\mathbf{u}_1 = \frac{14}{5} + 0 - \frac{14}{5} = 0$ ✓，$\mathbf{z}\cdot\mathbf{u}_2 = -\frac{14}{5} + 0 + \frac{14}{5} = 0$ ✓
+
+### 投影的性质
+
+- $\mathbf{y} \in W$ ⟹ $\operatorname{proj}_W \mathbf{y} = \mathbf{y}$（基下坐标公式与 Theorem 5 一致，6.2 节已证）
+- 线性性：$\operatorname{proj}_W(c\mathbf{u} + \mathbf{v}) = c\,\operatorname{proj}_W\mathbf{u} + \operatorname{proj}_W\mathbf{v}$
+- $\mathbb{R}^n = W \oplus W^\perp$：直和分解（存在性 = Theorem 8，唯一性已证）
+
+### 最佳逼近定理 THEOREM 9
+
+> 设 $W$ 是 $\mathbb{R}^n$ 的子空间，$\mathbf{y} \in \mathbb{R}^n$，$\hat{\mathbf{y}} = \operatorname{proj}_W\mathbf{y}$。则 $\hat{\mathbf{y}}$ 是 $W$ 中**离 $\mathbf{y}$ 最近**的点：
+
+> $$\|\mathbf{y} - \hat{\mathbf{y}}\| < \|\mathbf{y} - \mathbf{v}\| \quad \text{对所有 } \mathbf{v} \in W,\ \mathbf{v} \neq \hat{\mathbf{y}} \tag{3}$$
+
+**证明（勾股定理！）**：对任意 $\mathbf{v} \in W$ 且 $\mathbf{v} \neq \hat{\mathbf{y}}$：
+
+$$\mathbf{y} - \mathbf{v} = (\mathbf{y} - \hat{\mathbf{y}}) + (\hat{\mathbf{y}} - \mathbf{v})$$
+
+其中 $\mathbf{y} - \hat{\mathbf{y}} \in W^\perp$、$\hat{\mathbf{y}} - \mathbf{v} \in W$——**两项正交**（FIGURE 4 彩色直角三角形）。由勾股定理：
+
+$$\|\mathbf{y} - \mathbf{v}\|^2 = \|\mathbf{y} - \hat{\mathbf{y}}\|^2 + \|\hat{\mathbf{y}} - \mathbf{v}\|^2 > \|\mathbf{y} - \hat{\mathbf{y}}\|^2$$
+
+（严格大于，因为 $\|\hat{\mathbf{y}} - \mathbf{v}\| > 0$。）∎
+
+![FIGURE 4 最佳逼近](img/fig63_4_best_approximation.png)
+
+*FIGURE 4 The orthogonal projection of y onto W is the closest point in W to y. 图4 最佳逼近定理：y−v 是直角三角形的斜边，必然长于直角边 y−ŷ*
+
+> **应用语境**：用 $W$ 中的向量 $\mathbf{v}$"替代/近似"$\mathbf{y}$ 时，误差 $\|\mathbf{y} - \mathbf{v}\|$ 在 $\mathbf{v} = \hat{\mathbf{y}}$ 处最小——统计学**回归直线**、信号处理**滤波**、NAD 基准平差，全是这一句话的实例（6.5-6.6 节展开）。
+
+**例3（Example 3）**：例2 中 $W$ 上离 $\mathbf{y} = (1,2,3)$ 最近的点是 $\hat{\mathbf{y}} = (-2/5, 2, 1/5)$。
+
+**例4（Example 4，距离）**：$\mathbf{y} = (-1, -5, 10)$，$W = \operatorname{Span}\{\mathbf{u}_1, \mathbf{u}_2\}$，$\mathbf{u}_1 = (5, -2, 1)$, $\mathbf{u}_2 = (1, 2, -1)$（验证正交 ✓）。求 $\mathbf{y}$ 到 $W$ 的距离。
+
+**解**：$\mathbf{y}\cdot\mathbf{u}_1 = 15$, $\mathbf{u}_1\cdot\mathbf{u}_1 = 30$；$\mathbf{y}\cdot\mathbf{u}_2 = -21$, $\mathbf{u}_2\cdot\mathbf{u}_2 = 6$：
+
+$$\hat{\mathbf{y}} = \frac{15}{30}\mathbf{u}_1 + \frac{-21}{6}\mathbf{u}_2 = \begin{bmatrix} -1 \\
+-8 \\
+4 \end{bmatrix}, \qquad \mathbf{y} - \hat{\mathbf{y}} = \begin{bmatrix} 0 \\
+3 \\
+6 \end{bmatrix}$$
+
+$$\operatorname{dist}(\mathbf{y}, W) = \|\mathbf{y} - \hat{\mathbf{y}}\| = \sqrt{0 + 9 + 36} = \sqrt{45} = 3\sqrt{5}$$
+
+### 标准正交基的简化 THEOREM 10
+
+**THEOREM 10**：
+> 若 $\{\mathbf{u}_1, \dots, \mathbf{u}_p\}$ 是 $W$ 的**标准正交**基，则
+
+> $$\operatorname{proj}_W\mathbf{y} = (\mathbf{y}\cdot\mathbf{u}_1)\mathbf{u}_1 + \cdots + (\mathbf{y}\cdot\mathbf{u}_p)\mathbf{u}_p \tag{4}$$
+
+> 若 $U = [\mathbf{u}_1 \cdots \mathbf{u}_p]$，则
+
+> $$\operatorname{proj}_W\mathbf{y} = UU^T\mathbf{y} \quad (\forall\mathbf{y} \in \mathbb{R}^n) \tag{5}$$
+
+（分母 $\mathbf{u}_j\cdot\mathbf{u}_j = 1$ 全消失——标准正交基让公式最简。6.5 节的最小二乘将直接使用 (5)。）
+
+### 6.3 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Theorem 8（正交分解） | y = ŷ + z 唯一，ŷ∈W、z∈W⊥；公式 (2) 需正交基 |
+| Theorem 9（最佳逼近） | ŷ = proj_W y 是 W 中离 y 最近的点；勾股定理一步证明 |
+| Theorem 10 | 标准正交基：proj = Σ(y·uj)uj = UUᵀy |
+| 例2/例4 | 分解与距离计算完整实战（z 双向验证正交） |
+| 应用预告 | 回归/滤波/平差 = "用 W 中向量近似 y"的最佳逼近问题 |
+
+> **本节精髓**：正交分解 y = ŷ + z 是"降维看世界"的几何基础——最佳逼近定理宣告垂足 ŷ 是唯一最优近似。万事俱备，只欠东风：**怎么给任意子空间 W 造出正交基？** 6.4 节的 Gram-Schmidt 正交化给出算法，并顺势导出工程界广泛使用的 **QR 分解**。
+
+---
