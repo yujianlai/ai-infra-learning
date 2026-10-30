@@ -3714,9 +3714,9 @@ $$A^k = PD^kP^{-1}$$
 
 ### 引入：A^k 的显式公式
 
-**例1（Example 1）**：设 $A = \begin{bmatrix} -7 & 2 \\
+**例1（Example 1）**：设 $A = \begin{bmatrix} 7 & 2 \\
 -4 & 1 \end{bmatrix}$，已知 $A = PDP^{-1}$，其中 $P = \begin{bmatrix} 1 & 1 \\
--1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} -5 & 0 \\
+-1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} 5 & 0 \\
 0 & 3 \end{bmatrix}$。求 $A^k$ 的公式。
 
 **解**：2×2 逆矩阵公式：
