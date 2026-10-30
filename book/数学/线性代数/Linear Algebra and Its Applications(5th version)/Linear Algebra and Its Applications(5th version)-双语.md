@@ -968,3 +968,243 @@ $$
 ## 第一章完 Chapter 1 Complete
 
 至此第 1 章核心脉络完整：**解方程组（1.1–1.2）→ 线性组合与 Span（1.3）→ 矩阵方程 $A\mathbf{x}=\mathbf{b}$（1.4）→ 解集的结构：特解 + 齐次通解（1.5）**。接下来第 2 章将进入**矩阵代数**（逆矩阵、矩阵分解），第 1 章的一切都是它的地基。
+---
+
+## 2.2 逆矩阵 The Inverse of a Matrix
+
+**中文讲解**：数的"倒数"概念推广到矩阵。回忆：5 的乘法逆元是 $5^{-1} = \frac{1}{5}$，满足 $5^{-1} \cdot 5 = 1$ 且 $5 \cdot 5^{-1} = 1$。矩阵推广需要**两个**方程都成立（因为矩阵乘法**不交换**），而且只有**方阵**才谈逆矩阵。
+
+### 定义：可逆矩阵 DEFINITION
+
+$n \times n$ 矩阵 $A$ 称为**可逆的（invertible）**，若存在 $n \times n$ 矩阵 $C$ 使
+
+$$CA = I \quad \text{且} \quad AC = I$$
+
+其中 $I = I_n$ 是 $n \times n$ 单位矩阵。这个 $C$ 由 $A$ **唯一决定**（证明：若 $B$ 也是逆，则 $B = BI = B(AC) = (BA)C = IC = C$），称为 $A$ 的逆，记作 $A^{-1}$：
+
+$$A^{-1}A = I \quad \text{且} \quad AA^{-1} = I$$
+
+- **奇异矩阵（singular）** = 不可逆矩阵；**非奇异矩阵（nonsingular）** = 可逆矩阵
+
+**例1（Example 1）**：验证 $C = A^{-1}$
+
+$$A = \begin{bmatrix} 2 & 5 \\
+-3 & -7 \end{bmatrix}, \qquad C = \begin{bmatrix} -7 & -5 \\
+3 & 2 \end{bmatrix}$$
+
+$$AC = \begin{bmatrix} 1 & 0 \\
+0 & 1 \end{bmatrix} = I \quad \text{且} \quad CA = \begin{bmatrix} 1 & 0 \\
+0 & 1 \end{bmatrix} = I$$
+
+两个方向都成立，所以 $C = A^{-1}$。
+
+### THEOREM 4（2×2 矩阵的逆公式 + 判别法）
+
+设
+
+$$A = \begin{bmatrix} a & b \\
+c & d \end{bmatrix}$$
+
+若 $ad - bc \neq 0$，则 $A$ 可逆，且
+
+$$A^{-1} = \frac{1}{ad-bc}\begin{bmatrix} d & -b \\
+-c & a \end{bmatrix}$$
+
+若 $ad - bc = 0$，则 $A$ 不可逆。
+
+**行列式登场**：量 $ad - bc$ 称为 $A$ 的**行列式（determinant）**，记作 $\det A = ad - bc$。定理 4 说：**2×2 矩阵 $A$ 可逆 ⟺ $\det A \neq 0$**。
+
+**例2（Example 2）**：求 $A = \begin{bmatrix} 3 & 4 \\
+5 & 6 \end{bmatrix}$ 的逆。
+
+$$\det A = 3(6) - 4(5) = -2 \neq 0 \Rightarrow A \text{ 可逆}$$
+
+$$A^{-1} = \frac{1}{-2}\begin{bmatrix} 6 & -4 \\
+-5 & 3 \end{bmatrix} = \begin{bmatrix} -3 & 2 \\
+5/2 & -3/2 \end{bmatrix}$$
+
+### THEOREM 5（可逆矩阵 ⇒ 方程组唯一解）
+
+**中文讲解**：可逆矩阵在解方程时的作用，相当于"数的倒数解一元一次方程"。
+
+> 若 $A$ 是可逆 $n \times n$ 矩阵，则对每个 $\mathbf{b} \in \mathbb{R}^n$，方程 $A\mathbf{x} = \mathbf{b}$ 有**唯一解** $\mathbf{x} = A^{-1}\mathbf{b}$。
+
+**证明（小白版）**：存在性：代入 $\mathbf{x} = A^{-1}\mathbf{b}$，得 $A(A^{-1}\mathbf{b}) = (AA^{-1})\mathbf{b} = I\mathbf{b} = \mathbf{b}$ ✓。唯一性：若 $A\mathbf{u} = \mathbf{b}$，两边左乘 $A^{-1}$：$A^{-1}A\mathbf{u} = A^{-1}\mathbf{b} \Rightarrow I\mathbf{u} = A^{-1}\mathbf{b} \Rightarrow \mathbf{u} = A^{-1}\mathbf{b}$，即任何解都必等于 $A^{-1}\mathbf{b}$。
+
+**例3（Example 3，工程应用）**：水平弹性梁两端支撑，在 1、2、3 点受力（FIGURE 1）。设 $\mathbf{f} \in \mathbb{R}^3$ 记录三点的力，$\mathbf{y} \in \mathbb{R}^3$ 记录三点的**挠度（deflection）**（梁的弯曲位移）。由物理学的胡克定律：
+
+$$\mathbf{y} = D\mathbf{f}$$
+
+$D$ 叫**柔度矩阵（flexibility matrix）**，其逆 $D^{-1}$ 叫**刚度矩阵（stiffness matrix）**。问：$D$ 和 $D^{-1}$ 的各列各有什么物理意义？
+
+![FIGURE 1 弹性梁的挠度](img/fig22_1_elastic_beam.png)
+
+*FIGURE 1 Deflection of an elastic beam. 图1 弹性梁在三点受力产生挠度*
+
+**解答**：把 $I_3$ 按列拆开：$D = DI_3 = \begin{bmatrix} D\mathbf{e}_1 & D\mathbf{e}_2 & D\mathbf{e}_3 \end{bmatrix}$。
+
+- $D$ 的第 1 列 $D\mathbf{e}_1$：在点 1 施加**单位力**（1 磅，向下）时，三个点的挠度各是多少。第 2、3 列同理。
+- 再看 $D^{-1} = D^{-1}I_3 = \begin{bmatrix} D^{-1}\mathbf{e}_1 & D^{-1}\mathbf{e}_2 & D^{-1}\mathbf{e}_3 \end{bmatrix}$：$D^{-1}\mathbf{e}_1$ 是使点 1 产生**单位挠度**、其余两点挠度为零所需的三个力。
+- 若柔度单位是"英寸/磅"，则刚度矩阵的单位是"磅/英寸"。
+
+> ⚠️ **注意**：定理 5 的公式 $\mathbf{x} = A^{-1}\mathbf{b}$ 在**数值计算中很少用**——对 $[A\ \ \mathbf{b}]$ 做行化简几乎总是更快、更准（避免舍入误差累积）。唯一例外是 2×2 情形，用心算公式有时更快（例4）。
+
+**例4（Example 4）**：用例2 的逆矩阵解方程组
+
+$$
+\begin{aligned}
+3x_1 + 4x_2 &= 3 \\
+5x_1 + 6x_2 &= 7
+\end{aligned}
+$$
+
+即 $A\mathbf{x} = \mathbf{b}$，$\mathbf{b} = \begin{bmatrix} 3 \\
+7 \end{bmatrix}$，所以
+
+$$\mathbf{x} = A^{-1}\mathbf{b} = \begin{bmatrix} -3 & 2 \\
+5/2 & -3/2 \end{bmatrix}\begin{bmatrix} 3 \\
+7 \end{bmatrix} = \begin{bmatrix} 5 \\
+-3 \end{bmatrix}$$
+
+**验证**：$3(5) + 4(-3) = 3$ ✓；$5(5) + 6(-3) = 7$ ✓
+
+### THEOREM 6（逆矩阵的三条运算律）
+
+a. 若 $A$ 可逆，则 $A^{-1}$ 也可逆，且 $(A^{-1})^{-1} = A$
+
+b. 若 $A, B$ 都是 $n \times n$ 可逆矩阵，则 $AB$ 也可逆，且**逆的顺序反过来**：
+
+$$(AB)^{-1} = B^{-1}A^{-1}$$
+
+c. 若 $A$ 可逆，则 $A^T$ 也可逆，且 $(A^T)^{-1} = (A^{-1})^T$
+
+> **直觉记忆 (b)**：穿衣与脱衣——先穿袜子再穿鞋，脱的时候必须先鞋后袜（顺序反转）。这条"**穿脱衣法则**"在全书反复出现。
+
+推广：任意 $n \times n$ 可逆矩阵的乘积仍可逆，逆 = 各逆矩阵按**相反顺序**的乘积。
+
+### 初等矩阵 Elementary Matrices
+
+**定义**：对**单位矩阵**做一次初等行变换得到的矩阵，叫**初等矩阵（elementary matrix）**。三种行变换对应三种初等矩阵。
+
+**例5（Example 5）**：
+
+$$E_1 = \begin{bmatrix} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+-4 & 0 & 1 \end{bmatrix}, \qquad E_2 = \begin{bmatrix} 0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 1 \end{bmatrix}, \qquad E_3 = \begin{bmatrix} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 5 \end{bmatrix}$$
+
+$$A = \begin{bmatrix} a & b & c \\
+d & e & f \\
+g & h & i \end{bmatrix}$$
+
+计算 $E_1A$、$E_2A$、$E_3A$：
+
+$$E_1A = \begin{bmatrix} a & b & c \\
+d & e & f \\
+g-4a & h-4b & i-4c \end{bmatrix}, \qquad E_2A = \begin{bmatrix} d & e & f \\
+a & b & c \\
+g & h & i \end{bmatrix}, \qquad E_3A = \begin{bmatrix} a & b & c \\
+d & e & f \\
+5g & 5h & 5i \end{bmatrix}$$
+
+**发现（重要！）**：左乘 $E_1$ = "第3行加 −4 倍第1行"；左乘 $E_2$ = "交换1、2行"；左乘 $E_3$ = "第3行乘 5"。**左乘初等矩阵的效果 = 对 A 做同样的行变换！**
+
+### THEOREM 7（初等矩阵与行变换的桥梁）
+
+> 若对 $m \times n$ 矩阵 $A$ 施行一次初等行变换，所得矩阵等于 $EA$，其中 $E$ 是对 $I_m$ 施行**同一行变换**得到的初等矩阵。
+
+**推论**：每个初等矩阵 $E$ 都可逆，且 $E^{-1}$ 就是把 $E$ 变回 $I$ 的那个行变换对应的初等矩阵（行变换可逆 ⇒ 初等矩阵可逆）。
+
+**例6（Example 6）**：
+
+$$E_1 = \begin{bmatrix} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+-4 & 0 & 1 \end{bmatrix} \quad \Rightarrow \quad E_1^{-1} = \begin{bmatrix} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+4 & 0 & 1 \end{bmatrix}$$
+
+（验证：$E_1^{-1}E_1 = I$ ✓）
+
+### THEOREM 8（可逆 ⟺ 行等价于单位矩阵）
+
+> $n \times n$ 矩阵 $A$ 可逆，**当且仅当** $A$ 行等价于 $I_n$。此时，任何把 $A$ 化简到 $I_n$ 的初等行变换序列，同时把 $I_n$ 变成 $A^{-1}$。
+
+**这就是求逆矩阵的算法来源**：把 $A$ 和 $I$ 并排，对 $[A\ \ I]$ 行化简——左边变成 $I$ 的同时，右边自动变成 $A^{-1}$。
+
+### 求 $A^{-1}$ 的算法 ALGORITHM
+
+> 对增广矩阵 $[A\ \ I]$ 做行化简。若 $A$ 行等价于 $I$，则 $[A\ \ I]$ 行等价于 $[I\ \ A^{-1}]$；否则 $A$ 不可逆。
+
+**例7（Example 7）**：求 $A = \begin{bmatrix} 0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8 \end{bmatrix}$ 的逆（若存在）。
+
+$$
+\left[\begin{array}{ccc|ccc} 0 & 1 & 2 & 1 & 0 & 0 \\
+1 & 0 & 3 & 0 & 1 & 0 \\
+4 & -3 & 8 & 0 & 0 & 1 \end{array}\right] \sim \left[\begin{array}{ccc|ccc} 1 & 0 & 3 & 0 & 1 & 0 \\
+0 & 1 & 2 & 1 & 0 & 0 \\
+4 & -3 & 8 & 0 & 0 & 1 \end{array}\right] \sim \left[\begin{array}{ccc|ccc} 1 & 0 & 3 & 0 & 1 & 0 \\
+0 & 1 & 2 & 1 & 0 & 0 \\
+0 & -3 & -4 & 0 & -4 & 1 \end{array}\right]
+$$
+
+（交换1、2行；第3行 += −4×第1行）
+
+$$
+\sim \left[\begin{array}{ccc|ccc} 1 & 0 & 3 & 0 & 1 & 0 \\
+0 & 1 & 2 & 1 & 0 & 0 \\
+0 & 0 & 2 & 3 & -4 & 1 \end{array}\right] \sim \left[\begin{array}{ccc|ccc} 1 & 0 & 3 & 0 & 1 & 0 \\
+0 & 1 & 2 & 1 & 0 & 0 \\
+0 & 0 & 1 & 3/2 & -2 & 1/2 \end{array}\right]
+$$
+
+（第3行 += 3×第2行；第3行 × 1/2）
+
+$$
+\sim \left[\begin{array}{ccc|ccc} 1 & 0 & 0 & -9/2 & 7 & -3/2 \\
+0 & 1 & 0 & -2 & 4 & -1 \\
+0 & 0 & 1 & 3/2 & -2 & 1/2 \end{array}\right] = \left[\begin{array}{ccc|ccc} I & A^{-1} \end{array}\right]
+$$
+
+（第1行 += −3×第3行；第2行 += −2×第3行）
+
+$$A^{-1} = \begin{bmatrix} -9/2 & 7 & -3/2 \\
+-2 & 4 & -1 \\
+3/2 & -2 & 1/2 \end{bmatrix}$$
+
+**验算**（好习惯）：
+
+$$AA^{-1} = \begin{bmatrix} 0 & 1 & 2 \\
+1 & 0 & 3 \\
+4 & -3 & 8 \end{bmatrix}\begin{bmatrix} -9/2 & 7 & -3/2 \\
+-2 & 4 & -1 \\
+3/2 & -2 & 1/2 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \end{bmatrix} = I \checkmark$$
+
+### 求逆的另一种视角 Another View of Matrix Inversion
+
+把 $I_n$ 的列记为 $\mathbf{e}_1, \dots, \mathbf{e}_n$。则 $[A\ \ I] \sim [I\ \ A^{-1}]$ 可看作**同时解 $n$ 个方程组**：
+
+$$A\mathbf{x} = \mathbf{e}_1, \qquad A\mathbf{x} = \mathbf{e}_2, \qquad \cdots, \qquad A\mathbf{x} = \mathbf{e}_n$$
+
+这 $n$ 个方程组的解正好就是 $A^{-1}$ 的各列——因为 $AA^{-1} = I$ 按列看就是 $A \times (A^{-1}\text{ 的第 } j \text{ 列}) = \mathbf{e}_j$。
+
+### 2.2 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| $A^{-1}$ | 满足 $A^{-1}A = AA^{-1} = I$ 的唯一矩阵（方阵才有） |
+| $\det A = ad-bc$ | 2×2 可逆 ⟺ 行列式非零 |
+| Theorem 5 | $A$ 可逆 ⟹ $A\mathbf{x}=\mathbf{b}$ 唯一解 $\mathbf{x}=A^{-1}\mathbf{b}$ |
+| Theorem 6(b) | $(AB)^{-1} = B^{-1}A^{-1}$（**穿脱衣法则**：顺序反转） |
+| 初等矩阵 | 对 $I$ 做一次行变换；左乘它 = 对 $A$ 做同样变换 |
+| Theorem 8 + 算法 | $A$ 可逆 ⟺ $A \sim I$；$[A\ \ I] \sim [I\ \ A^{-1}]$ 求逆 |
+
+> **本节精髓**：逆矩阵是"倒数"思想的矩阵化。行变换与初等矩阵的对应（Theorem 7）把"解方程"与"矩阵乘法"焊接在一起，直接催生出行化简求逆算法——这是线性代数"**计算**"与"**代数结构**"两条主线的重要交汇点。2.3 节的**可逆矩阵定理（IMT）**将给出 20+ 个等价条件，把全章知识一网打尽。
+
+---
