@@ -3,6 +3,7 @@
 
 > 基于 Lay, Lay & McDonald 经典教材（Pearson 2016），小白友好的双语精讲。
 > ⚠️ 注意：第 9 章（优化）与第 10 章（马尔可夫链）是"在线章节"，不在本书 PDF 中——需访问出版社网站获取。
+> 📝 **自测入口**：[自测题库-Self-Test.md](自测题库-Self-Test.md)（8 章 55 题 + 完整解析）
 > 📌 **速查入口**：[速查手册-Quick-Reference.md](速查手册-Quick-Reference.md)（51 节一句话理解 + 公式卡 + 完整 IMT + 考前流程，11.8 KB）
 > 讲稿主体：[Linear Algebra and Its Applications(5th version)-双语.md](Linear%20Algebra%20and%20Its%20Applications(5th%20version)-双语.md)（约 367 KB，51 节：第 1-8 章全部 + 附录 B）
 > 插图：`img/` 目录（108 张，与教材 PDF 逐像素一致）
