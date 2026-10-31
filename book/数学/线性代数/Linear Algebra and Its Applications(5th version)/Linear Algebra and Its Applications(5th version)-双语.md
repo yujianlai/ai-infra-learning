@@ -5371,3 +5371,120 @@ y_n \end{bmatrix}$$
 > **本节精髓**：线性代数把统计学"回归"从公式记忆升华为**统一框架**——直线、抛物线、平面、交互模型，全是 $X\boldsymbol\beta \approx \mathbf{y}$ 的最小二乘解。这也是数据科学（机器学习特征工程、神经网络线性层）的共同语言。下一节 6.7 把内积推广到**函数空间**（$\mathbb{C}[a,b]$ 上的积分内积），为 6.8 节的傅里叶级数做准备。
 
 ---
+---
+
+## 6.7 内积空间 Inner Product Spaces
+
+**中文讲解**：$\mathbb{R}^n$ 的点积只是内积的一种。本节把内积**公理化**（4 条公理），让"长度、正交、投影"的概念延伸到**多项式空间、函数空间**——这是 4.1 节向量空间抽象化的收官之作，也是 6.8 节傅里叶级数的地基。
+
+### 内积的定义 DEFINITION
+
+向量空间 $V$ 上的**内积（inner product）**是一个函数：对每对 $\mathbf{u}, \mathbf{v} \in V$，指定一个数 $\langle\mathbf{u}, \mathbf{v}\rangle$，满足 4 条公理（对所有 $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$、所有标量 $c$）：
+
+1. $\langle\mathbf{u}, \mathbf{v}\rangle = \langle\mathbf{v}, \mathbf{u}\rangle$（对称性）
+2. $\langle\mathbf{u}+\mathbf{v}, \mathbf{w}\rangle = \langle\mathbf{u}, \mathbf{w}\rangle + \langle\mathbf{v}, \mathbf{w}\rangle$（第一变量线性）
+3. $\langle c\mathbf{u}, \mathbf{v}\rangle = c\langle\mathbf{u}, \mathbf{v}\rangle$（齐次）
+4. $\langle\mathbf{u}, \mathbf{u}\rangle \geq 0$，且 $\langle\mathbf{u}, \mathbf{u}\rangle = 0 \iff \mathbf{u} = \mathbf{0}$（正定性）
+
+带有内积的向量空间称为**内积空间（inner product space）**。
+
+**例1（Example 1，赋权内积）**：$\mathbb{R}^2$ 上定义 $\langle\mathbf{u}, \mathbf{v}\rangle = 4u_1v_1 + 5u_2v_2$。
+
+**验证**：4 条公理显然满足（正定性：$4u_1^2 + 5u_2^2 = 0 ⟺ u_1 = u_2 = 0$）。这是一个**赋权内积**——加权最小二乘问题使用这种内积（权重 4、5 反映数据可信度差异）。
+
+**例2（Example 2，求值内积）**：$\mathbb{P}_n$（次数 ≤ n 的多项式）上，取 $n+1$ 个互异点 $t_0, \dots, t_n$，定义
+
+$$\langle p, q\rangle = p(t_0)q(t_0) + p(t_1)q(t_1) + \cdots + p(t_n)q(t_n)$$
+
+（验证：对称 ✓、线性 ✓；正定性用例2的结论——若 $\langle p, p\rangle = 0$ 则 $p$ 在 $n+1$ 个点全为 0，而**非零 n 次多项式至多 n 个根**，故 $p = \mathbf{0}$ ✓。）
+
+**例3（Example 3）**：$\mathbb{P}_2$ 取 $t_0 = 0, t_1 = \frac{1}{2}, t_2 = 1$。$p = 12t^2$, $q = 2t - 1$：
+
+$$\langle p, q\rangle = 0 + 3\cdot 0 + 12\cdot 1 = \mathbf{12}, \qquad \langle q, q\rangle = 1 + 0 + 1 = \mathbf{2}$$
+
+### 长度、距离、正交（内积空间版）
+
+**定义**：在任意内积空间 $V$ 中
+
+$$\|\mathbf{v}\| = \sqrt{\langle\mathbf{v}, \mathbf{v}\rangle}, \qquad \operatorname{dist}(\mathbf{u}, \mathbf{v}) = \|\mathbf{u} - \mathbf{v}\|, \qquad \mathbf{u} \perp \mathbf{v} \iff \langle\mathbf{u}, \mathbf{v}\rangle = 0$$
+
+且 6.1 节的 Theorem 1、勾股定理、正交分解定理、Gram-Schmidt、最佳逼近定理**全部逐字成立**（证明只用到 4 条公理，与 $V$ 是 $\mathbb{R}^n$ 无关）——这是抽象的威力。
+
+**例5/例6（Example 5/6，求值内积下的 Gram-Schmidt 与最佳逼近）**：$V = \mathbb{P}_4$（$t_j = -2, -1, 0, 1, 2$ 五点求值内积），对子空间 $\mathbb{P}_2 = \operatorname{Span}\{1, t, t^2\}$ 做 Gram-Schmidt：
+
+$$p_0 = 1, \qquad p_1 = t, \qquad p_2 = t^2 - 2$$
+
+（$\langle t^2, p_0\rangle = 10, \langle p_0, p_0\rangle = 5$ → 减 2；$\langle t^2, p_1\rangle = 0$ 已正交）
+
+设 $p(t) = 5t - \frac{1}{6}t^3$（在 $V$ 中但不在 $\mathbb{P}_2$ 中）。由最佳逼近定理，$\mathbb{P}_2$ 中离 $p$ 最近的是投影：
+
+$$\langle p, p_0\rangle = 8, \quad \langle p, p_1\rangle = 0, \quad \langle p, p_2\rangle = -31; \qquad \langle p_0, p_0\rangle = 5, \quad \langle p_1, p_1\rangle = 10, \quad \langle p_2, p_2\rangle = 14$$
+
+$$\hat{p} = \operatorname{proj}_{\mathbb{P}_2} p = \frac{8}{5}p_0 + \frac{0}{10}p_1 + \frac{-31}{14}p_2 = \frac{8}{5} - \frac{31}{14}(t^2 - 2)$$
+
+"在五点 $t_j$ 处最近"的多项式（FIGURE 1：黑曲线 $p$ 与蓝抛物线 $\hat{p}$）。
+
+![FIGURE 1 最佳逼近多项式](img/fig67_1_best_approximation.png)
+
+*FIGURE 1 例6 的最佳逼近：p(t)（黑）与其在 P₂ 中的投影 p̂(t)（蓝）——在五个求值点上差距最小（范数意义）*
+
+> **统计注记**：例 5/6 中的 $p_0, p_1, p_2$ 属于统计学中的**正交多项式（orthogonal polynomials）**——在指定求值点集上两两正交，用于实验设计与回归的方差分析。
+
+### 两大不等式 THEOREM 16 & 17
+
+**THEOREM 16（柯西-施瓦茨不等式 Cauchy–Schwarz Inequality）**：
+> 内积空间 $V$ 中任意 $\mathbf{u}, \mathbf{v}$：
+
+> $$|\langle\mathbf{u}, \mathbf{v}\rangle| \leq \|\mathbf{u}\|\,\|\mathbf{v}\| \tag{4}$$
+
+**证明**：对任意标量 $t$：
+
+$$0 \leq \|\mathbf{u} + t\mathbf{v}\|^2 = \langle\mathbf{u} + t\mathbf{v}, \mathbf{u} + t\mathbf{v}\rangle = \|\mathbf{u}\|^2 + 2t\langle\mathbf{u}, \mathbf{v}\rangle + t^2\|\mathbf{v}\|^2$$
+
+这是关于 $t$ 的二次多项式，恒非负 ⇒ 判别式 $\leq 0$：
+
+$$4\langle\mathbf{u}, \mathbf{v}\rangle^2 - 4\|\mathbf{u}\|^2\|\mathbf{v}\|^2 \leq 0 \quad \Rightarrow \quad (4) \checkmark$$
+
+等号成立 ⟺ $\mathbf{u}, \mathbf{v}$ 线性相关。∎
+
+**THEOREM 17（三角不等式 Triangle Inequality）**：
+> $$\|\mathbf{u} + \mathbf{v}\| \leq \|\mathbf{u}\| + \|\mathbf{v}\|$$
+
+**证明**：$\|\mathbf{u}+\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + 2\langle\mathbf{u},\mathbf{v}\rangle + \|\mathbf{v}\|^2 \leq \|\mathbf{u}\|^2 + 2\|\mathbf{u}\|\|\mathbf{v}\| + \|\mathbf{v}\|^2 = (\|\mathbf{u}\|+\|\mathbf{v}\|)^2$（中间用了柯西-施瓦茨）。∎
+
+![FIGURE 2 勾股分解](img/fig67_2_pythagorean_decomp.png)
+
+*FIGURE 2 The hypotenuse is the longest side. 图2 勾股定理的几何：‖v‖² = ‖proj_W v‖² + ‖v − proj_W v‖²——柯西-施瓦茨与三角不等式的共同源头*
+
+### C[a, b]：连续函数的内积空间
+
+**关键例子**：对 $f, g \in \mathbb{C}[a, b]$（$[a,b]$ 上实值连续函数），定义**积分内积**
+
+$$\langle f, g\rangle = \int_a^b f(t)\,g(t)\,dt$$
+
+**为什么是内积**（由黎曼和逼近）：把 $[a,b]$ $n$ 等分，取样点 $t_1, \dots, t_n$。$\mathbb{R}^n$ 的点积 $\sum f(t_j)g(t_j)\Delta t$ 随 $n \to \infty$ 趋于 $\int_a^b fg\,dt$——$\mathbb{R}^n$ 内积的连续极限！公理 1-3 逐条成立；公理 4：$\langle f, f\rangle = \int f^2 \geq 0$，且连续函数 $\int f^2 = 0 ⟹ f = 0$（练习 36）。
+
+**例9（Example 9，积分内积下的 Gram-Schmidt）**：$V = \mathbb{C}[0,1]$，$W = \mathbb{P}_2$，基 $p_1 = 1, p_2 = 2t - 1, p_3 = 12t^2$，内积 $\langle f, g\rangle = \int_0^1 fg\,dt$。
+
+- $\langle p_2, q_1\rangle = \int_0^1(2t-1)dt = 0$ —— 已正交，$q_2 = p_2 = 2t - 1$
+- $\langle p_3, q_1\rangle = \int_0^1 12t^2\,dt = 4$, $\langle q_1, q_1\rangle = 1$；$\langle p_3, q_2\rangle = \int_0^1 12t^2(2t-1)dt = 2$, $\langle q_2, q_2\rangle = \int_0^1(2t-1)^2 dt = \frac{1}{3}$
+
+$$\operatorname{proj}_W p_3 = \frac{4}{1}q_1 + \frac{2}{1/3}q_2 = 4q_1 + 6q_2$$
+
+$$q_3 = p_3 - 4q_1 - 6q_2 = 12t^2 - 12t + 2$$
+
+$\{1,\ 2t-1,\ 12t^2-12t+2\}$ 是 $\mathbb{P}_2$ 的（积分内积下）正交基——**勒让德多项式的平移版**（6.8 节傅里叶展开的函数正是这类正交函数）！
+
+### 6.7 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 内积公理 (4 条) | 对称 + 线性 + 齐次 + 正定；一切旧定理自动继承 |
+| 求值内积 | 有限个点上的"采样点积"；正定性靠"非零 n 次式至多 n 根" |
+| 积分内积 | $\int_a^b fg$：$\mathbb{R}^n$ 点积的连续极限；$\mathbb{C}[a,b]$ 成为内积空间 |
+| 柯西-施瓦茨 (Thm 16) | $\|\langle u,v\rangle\| \leq \|u\|\|v\|$：二次多项式非负 ⇒ 判别式 ≤ 0 |
+| 例6/例9 | Gram-Schmidt 在多项式空间的实战：求值版（正交多项式）与积分版（Legendre 平移） |
+
+> **本节精髓**：内积空间是"几何"的终极抽象——只要 4 条公理，长度、角度、垂直、投影、最佳逼近全部有意义。例 9 的正交多项式 {1, 2t−1, 12t²−12t+2} 只是冰山一角：{1, cos t, sin t, cos 2t, ...} 在 [−π, π] 上同样正交——6.8 节的傅里叶级数将揭示：信号 = 向正交基的投影之和。
+
+---
