@@ -5488,3 +5488,116 @@ $\{1,\ 2t-1,\ 12t^2-12t+2\}$ 是 $\mathbb{P}_2$ 的（积分内积下）正交�
 > **本节精髓**：内积空间是"几何"的终极抽象——只要 4 条公理，长度、角度、垂直、投影、最佳逼近全部有意义。例 9 的正交多项式 {1, 2t−1, 12t²−12t+2} 只是冰山一角：{1, cos t, sin t, cos 2t, ...} 在 [−π, π] 上同样正交——6.8 节的傅里叶级数将揭示：信号 = 向正交基的投影之和。
 
 ---
+---
+
+## 6.8 内积空间的应用 Applications of Inner Product Spaces
+
+**中文讲解**：6.7 节搭建了内积空间的一般框架，本节展示它的两大威力：**加权最小二乘**（数据可信度不同的回归）与**傅里叶级数**（信号的正交分解——全书几何理论的最高华彩）。
+
+### 加权最小二乘 Weighted Least Squares
+
+**问题**：数据点可信度不同（如精密仪器 vs 粗测），希望高可信数据的残差获得更大权重。方法：给每个方程乘权重 $w_j$，即左乘**权重矩阵** $W$（对角元为 $w_j$），对 $W\mathbf{y} \approx WX\boldsymbol\beta$ 做普通最小二乘：
+
+$$(WX)^T(WX)\hat{\boldsymbol\beta} = (WX)^TW\mathbf{y}$$
+
+**例1（Example 1，完整实战）**：数据 $y = (3, 5, 5, 4, 3)$ 对应 $x = (-2, -1, 0, 1, 2)$，前三个点权重 2、后两个权重 1（$W = \operatorname{diag}(2,2,2,1,1)$）。
+
+$$X = \begin{bmatrix} 1 & -2 \\
+1 & -1 \\
+1 & 0 \\
+1 & 1 \\
+1 & 2 \end{bmatrix}, \qquad WX = \begin{bmatrix} 2 & -4 \\
+2 & -2 \\
+2 & 0 \\
+1 & 1 \\
+1 & 2 \end{bmatrix}, \qquad W\mathbf{y} = \begin{bmatrix} 6 \\
+10 \\
+10 \\
+4 \\
+3 \end{bmatrix}$$
+
+$$(WX)^T(WX) = \begin{bmatrix} 14 & -9 \\
+-9 & 25 \end{bmatrix}, \qquad (WX)^TW\mathbf{y} = \begin{bmatrix} 59 \\
+-34 \end{bmatrix}$$
+
+$$\hat{\boldsymbol\beta} = \begin{bmatrix} 14 & -9 \\
+-9 & 25 \end{bmatrix}^{-1}\begin{bmatrix} 59 \\
+-34 \end{bmatrix} = \begin{bmatrix} 4.3 \\
+.20 \end{bmatrix} \Rightarrow \boxed{y = 4.3 + .2x}$$
+
+**对照**：普通最小二乘给出 $y = 4.0 - .1x$——权重把直线拉向更可信的前三个点（FIGURE 1）。
+
+![FIGURE 1 加权直线](img/fig68_1_weighted_lines.png)
+
+*FIGURE 1 Weighted and ordinary least-squares lines. 图1 加权 vs 普通最小二乘直线：加权直线（y = 4.3 + .2x）更贴近高权重的数据点*
+
+### 趋势分析 Trend Analysis of Data
+
+实际问题常需分离数据的不同"趋势成分"：如汽车测试中的**线性趋势**（初速度）与**二次趋势**（加速度）。方法：在求值内积（6.7 例2）下构造正交多项式基 $\{p_0, p_1, p_2, p_3\}$（Gram-Schmidt），则
+
+$$g = \frac{\langle g, p_0\rangle}{\langle p_0, p_0\rangle}p_0 + \frac{\langle g, p_1\rangle}{\langle p_1, p_1\rangle}p_1 + \cdots$$
+
+各系数**独立**（正交性）：$\hat{\beta}_j$ 的二次项混有其他成分时，正交基下的趋势系数 $c_j$ 是"纯"的——统计学**方差分析（ANOVA）**的代数本质。
+
+### 傅里叶级数 Fourier Series（本节的华彩）
+
+**中文讲解**：任意函数 $f(t)$（如声音、电压）可分解为**三角多项式**的叠加——正交投影在函数空间的直接应用！
+
+**n 阶三角多项式**：
+
+$$a_0 + a_1\cos t + \cdots + a_n\cos nt + b_1\sin t + \cdots + b_n\sin nt \tag{4}$$
+
+**正交性（关键）**：在 $C[0, 2\pi]$ 的积分内积 (6) 下，
+
+$$\{1,\ \cos t,\ \cos 2t,\ \dots,\ \cos nt,\ \sin t,\ \sin 2t,\ \dots,\ \sin nt\}$$
+
+是**正交集**！验证示例：
+
+$$\int_0^{2\pi}\cos mt\cos nt\,dt = 0 \ (m \neq n), \qquad \int_0^{2\pi}\cos^2 mt\,dt = \pi, \qquad \int_0^{2\pi}1\,dt = 2\pi$$
+
+（积化和差公式：$\cos mt\cos nt = \frac{1}{2}[\cos(m+n)t + \cos(m-n)t]$，$m \neq n$ 时各项积分为 0。）
+
+**傅里叶系数（正交基下的坐标公式直接给出）**：
+
+$$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}f(t)\,dt, \qquad a_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\cos kt\,dt, \qquad b_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\sin kt\,dt$$
+
+**例4（Example 4，完整实战）**：求 $f(t) = t$（$0 \leq t \leq 2\pi$）的 n 阶傅里叶逼近。
+
+**解**：
+
+$$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}t\,dt = \pi$$
+
+$$a_k = \frac{1}{\pi}\int_0^{2\pi}t\cos kt\,dt = \frac{1}{\pi}\left[\frac{1}{k^2}\cos kt + \frac{t}{k}\sin kt\right]_0^{2\pi} = \mathbf{0}$$
+
+$$b_k = \frac{1}{\pi}\int_0^{2\pi}t\sin kt\,dt = \frac{1}{\pi}\left[\frac{1}{k^2}\sin kt - \frac{t}{k}\cos kt\right]_0^{2\pi} = -\frac{2}{k}$$
+
+**n 阶傅里叶逼近**：
+
+$$\pi - 2\sin t - \sin 2t - \frac{2}{3}\sin 3t - \cdots - \frac{2}{n}\sin nt$$
+
+（FIGURE 3：三阶与四阶逼近的波形——锯齿越来越接近直线 $y = t$，但端点处永远差一截，即著名的**吉布斯现象**。）
+
+![FIGURE 3 傅里叶逼近](img/fig68_3_fourier_approximations.png)
+
+*FIGURE 3 Fourier approximations of the function f(t) = t. 图3 三阶（a）与四阶（b）傅里叶逼近：正弦波的叠加逼近锯齿函数，端点处的过冲 = 吉布斯现象*
+
+**傅里叶级数（n → ∞）**：当阶数升高，**均方误差** $\frac{1}{2\pi}\int_0^{2\pi}[f(t) - g(t)]^2dt \to 0$，形式上写出
+
+$$f(t) = \frac{a_0}{2} + \sum_{m=1}^{\infty}(a_m\cos mt + b_m\sin mt)$$
+
+**投影解释（6.5-6.7 节的大团圆）**：每一项 $a_m\cos mt$ 正是 $f$ 在**一维子空间** $\operatorname{Span}\{\cos mt\}$ 上的正交投影——傅里叶级数 = 把函数向无穷正交基"逐轴投影"求和！信号处理中的**频谱**就是这组坐标 $(a_m, b_m)$，**MP3 压缩**丢弃的就是人耳不敏感的"高阶投影"。
+
+### 6.8 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 加权最小二乘 | 左乘权重矩阵 W，正规方程作用于 WX、Wy（例1：4.3+.2x vs 4.0-.1x） |
+| 趋势分析 | 正交多项式基让各阶趋势"解耦"，系数各自独立（ANOVA 的代数本质） |
+| 三角正交集 | {1, cos t, ..., sin nt} 在 [0,2π] 上正交（积化和差验证） |
+| 傅里叶系数 | 内积公式的直接翻译：aₖ、bₖ = f 与 cos kt、sin kt 的内积 ÷ 范数² |
+| 例4 | f(t)=t：a₀/2=π、aₖ=0、bₖ=−2/k，显式逼近式 + 吉布斯现象 |
+| 大团圆 | 傅里叶级数 = 正交投影 + 正交基坐标——第 6 章全部概念的一次性总应用 |
+
+> **第 6 章收官精髓**：正交性是贯穿线性代数后半部的金线：内积（6.1）→ 正交基（6.2）→ 投影与最佳逼近（6.3）→ 造正交基的算法（6.4）→ 回归应用（6.5-6.6）→ 抽象内积空间（6.7）→ 傅里叶级数（6.8）。NAD 平差、GPS 导航、MP3 压缩、信号频谱——同一套几何，遍地开花。下一章进入**第 7 章 对称矩阵与二次型**：正交对角化、二次型、SVD（奇异值分解）——全书的巅峰与收官。
+
+---
