@@ -6581,3 +6581,124 @@ $$\mathbf{p} = \frac{3}{2}\mathbf{v}_1 - \mathbf{v}_2 + \frac{1}{2}\mathbf{v}_3 
 > **本节精髓**：仿射组合是"线性组合的平移版本"——Theorem 1 把仿射问题化归线性问题，Theorem 4 用齐次坐标把几何升维成线性代数。这解释了 1.5 节"解集 = 特解 + 齐次通解"的全部几何（解集是 flat）。下一节 8.2 研究**仿射无关性**——flat 的"维数"如何由仿射组合的唯一性刻画（类比线性无关）。
 
 ---
+---
+
+## 8.2 仿射无关性 Affine Independence
+
+**中文讲解**：线性无关刻画"子空间的维数"，仿射无关刻画"flat 的维数"。核心类比：**仿射无关 ⟺ 平移到原点后线性无关**。这一节还引出几何与图形学的瑰宝——**重心坐标（barycentric coordinates）**。
+
+### 仿射无关的定义
+
+**定义**：$\mathbb{R}^n$ 中点集 $\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$（$p \geq 1$）称为**仿射相关（affinely dependent）**，若存在标量 $c_1, \dots, c_p$，**不全为零**，使
+
+$$c_1 + \cdots + c_p = \mathbf{0}, \qquad c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p = \mathbf{0} \tag{1}$$
+
+否则称为**仿射无关（affinely independent）**——即 (1) 只有平凡解。
+
+**基本事实**（练习 3-6）：
+- 仿射相关 ⟹ 线性相关（更严格的条件）
+- 单点集总是仿射无关
+- 两点仿射相关 ⟺ **两点相等**
+
+### THEOREM 5（三个等价条件）
+
+> $\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$（$p \geq 2$）仿射相关 ⟺ 下列任一成立：
+>
+> a. 某 $\mathbf{v}_j$ 是其余各点的仿射组合
+>
+> c. 平移集 $\{\mathbf{v}_2 - \mathbf{v}_1, \dots, \mathbf{v}_p - \mathbf{v}_1\}$ **线性相关**
+>
+> d. 齐次形式集 $\left\{\begin{bmatrix} \mathbf{v}_1 \\ 1 \end{bmatrix}, \dots, \begin{bmatrix} \mathbf{v}_p \\ 1 \end{bmatrix}\right\}$ **线性相关**（$\mathbb{R}^{n+1}$ 中）
+
+**证明思路**：(1) 中的两个方程合起来正是齐次形式的相关关系（d）；(c) 由 8.1 定理 1（仿射 ⟺ 平移后线性）直接对出。∎
+
+> **记忆**：仿射无关的三个面孔——"无点可被其余点仿射表示"、"平移后线性无关"、"齐次形式线性无关"。三者一回事（8.1 定理 1/4 的推论）。
+
+**例2（Example 2，仿射无关）**：$\mathbf{v}_1 = (1,3,7)$, $\mathbf{v}_2 = (2,7,6.5)$, $\mathbf{v}_3 = (0,4,7)$。
+
+**解**：$\mathbf{v}_2 - \mathbf{v}_1 = (1,4,-0.5)$，$\mathbf{v}_3 - \mathbf{v}_1 = (-1,1,0)$——显然**不成倍数**（线性无关）⇒ 三点仿射无关 ⇒ $\operatorname{aff}\{\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\}$ 是**平面**（2 维 flat）。
+
+![FIGURE 2 平移平面](img/fig82_2_translated_plane.png)
+
+*FIGURE 2 The translated set {v2-v1, v3-v1} spans a plane. 图2 仿射无关的几何：绿色平面 Span{v₂−v₁, v₃−v₁}（过原点）平移到 v₁ 得蓝色平面 aff{v₁,v₂,v₃}——平面是"子空间的平移"即 flat*
+
+**例3（Example 3，加一个点就相关）**：$\mathbf{v}_4 = (0, 14, 6)$。由 8.1 例2 知 $\mathbf{v}_4 = -4\mathbf{v}_1 + 2\mathbf{v}_2 + 3\mathbf{v}_3$（权和 1）⇒ $\mathbf{v}_4 \in \operatorname{aff}\{\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\}$ ⇒ **仿射相关**（Theorem 5-a）。
+
+### THEOREM 6（唯一表示定理）
+
+> $\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 仿射无关 ⟺ 每个 $\mathbf{p} \in \operatorname{aff}\{\mathbf{v}_1, \dots, \mathbf{v}_p\}$ 的仿射组合表示**唯一**。
+
+（证明即 8.1 例1：表示不唯一 ⟺ 存在权和为 0 的非平凡组合。）仿射无关集称为 flat 的**仿射基（affine basis）**，其点数 − 1 = flat 的维数。
+
+### 重心坐标 Barycentric Coordinates
+
+**定义**：设 $S = \{\mathbf{v}_1, \dots, \mathbf{v}_k\}$ 是仿射无关集。$S$ 张成 flat 中每点 $\mathbf{p}$ 的**唯一**仿射表示
+
+$$\mathbf{p} = c_1\mathbf{v}_1 + \cdots + c_k\mathbf{v}_k, \qquad \sum c_i = 1$$
+
+的权 $(c_1, \dots, c_k)$ 称为 $\mathbf{p}$ 的**重心坐标（barycentric coordinates）**。
+
+**计算（齐次形式）**：解 $n+1$ 元系统
+
+$$c_1\begin{bmatrix} \mathbf{v}_1 \\
+1 \end{bmatrix} + \cdots + c_k\begin{bmatrix} \mathbf{v}_k \\
+1 \end{bmatrix} = \begin{bmatrix} \mathbf{p} \\
+1 \end{bmatrix}$$
+
+**例4（Example 4，三角形中的重心坐标）**：$\mathbf{a} = (1,7)$, $\mathbf{b} = (3,0)$, $\mathbf{c} = (9,3)$，求 $\mathbf{p} = (5,3)$ 的重心坐标。
+
+**解**：
+
+$$\begin{bmatrix} 1 & 3 & 9 & 5 \\
+7 & 0 & 3 & 3 \\
+1 & 1 & 1 & 1 \end{bmatrix} \sim \cdots \Rightarrow \left(c_1, c_2, c_3\right) = \left(\frac{1}{4}, \frac{1}{3}, \frac{5}{12}\right)$$
+
+（权和 $\frac{3}{12} + \frac{4}{12} + \frac{5}{12} = 1$ ✓）
+
+**物理意义（Moebius 1827）**：把 $c_1, c_2, c_3$ 看作放在三角形三顶点的**质量**，则 $\mathbf{p}$ 是三角形 $\mathbf{a}\mathbf{b}\mathbf{c}$ 的**重心**（质心）。
+
+**符号与位置（FIGURE 5）**：三顶点的重心坐标是 $(1,0,0), (0,1,0), (0,0,1)$；**三角形内部 ⟺ 三个坐标全正**；某坐标为 0 ⟺ 点在对边上（$c_1 = 0$ ⟺ $\mathbf{p}$ 在过 $\mathbf{b},\mathbf{c}$ 的直线上）。这在碰撞检测、有限元方法中是基础工具。
+
+![FIGURE 5 重心坐标符号区](img/fig82_5_barycentric_regions.png)
+
+*FIGURE 5 Barycentric coordinates of a point p. 图5 重心坐标的符号分区：三角形 abc 内三坐标全正；每条 r=0 / s=0 / t=0 线是对应顶点对边所在直线——重心坐标天然编码"点在三角形内/外"*
+
+### 计算机图形学中的重心坐标
+
+**颜色插值原理**：把顶点颜色当作"质量"，三角形内部任一点的颜色 = 重心坐标加权的顶点颜色。**线性插值**使 GPU 可用极低成本渲染渐变。
+
+**例5（Example 5，颜色插值实战）**：三角形顶点 $\mathbf{v}_1 = (3,1)$（品红）、$\mathbf{v}_2 = (4,3)$（浅品红）、$\mathbf{v}_3 = (1,5)$（紫），顶点颜色
+
+$$\mathbf{v}_1: (1, 0, 1), \qquad \mathbf{v}_2: (1, .4, 1), \qquad \mathbf{v}_3: (.6, 0, 1)$$
+
+求 $\mathbf{p} = (3,3)$ 处的插值颜色。
+
+**解（两步）**：
+
+**第1步 重心坐标**：解 $\begin{bmatrix} 3 & 4 & 1 & 3 \\
+1 & 3 & 5 & 3 \\
+1 & 1 & 1 & 1 \end{bmatrix}$，得 $(c_1, c_2, c_3) = \left(\frac{1}{4}, \frac{1}{2}, \frac{1}{4}\right)$
+
+**第2步 颜色插值**：
+
+$$\mathbf{c} = \frac{1}{4}(1,0,1) + \frac{1}{2}(1,.4,1) + \frac{1}{4}(.6,0,1) = \left(0.9,\ 0.2,\ 1.0\right)$$
+
+——从品红到紫的平滑渐变（FIGURE 6）。
+
+![FIGURE 6 插值颜色](img/fig82_6_interpolated_colors.png)
+
+*FIGURE 6 Interpolated colors at a vertex p. 图6 重心坐标颜色插值：三角形内任一点颜色 = 顶点颜色按重心坐标加权——GPU 渲染渐变的数学*
+
+### 8.2 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 仿射无关 | 权和为 0 的非平凡组合不存在（比线性无关严格） |
+| Theorem 5 | 三点等价判据：无点可仿射表示 ⟺ 平移集线性无关 ⟺ 齐次形式线性无关 |
+| Theorem 6 | 仿射无关 ⟺ 仿射表示唯一（仿射基、维数 = 点数−1） |
+| 重心坐标 | 唯一仿射表示的权；解齐次系统即得；全正 ⟺ 在三角形内 |
+| 例5 | 颜色插值 = 重心坐标加权顶点颜色（GPU 渲染原理） |
+
+> **本节精髓**：重心坐标是"仿射基下的坐标"——把重心力学（1827）与 GPU 渲染（21 世纪）统一在同一个线性系统里。符号判别（全正 = 内部）是计算几何的瑞士军刀。下一节 8.3 引入**凸组合**（权重非负的仿射组合）——单纯形、Carathéodory 定理，以及线性规划可行域的几何。
+
+---
