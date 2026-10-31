@@ -7092,3 +7092,122 @@ Bézier 曲线的"局部控制版"：每段曲线只由相邻 4 个控制点决�
 > **第 8 章收官精髓**：从仿射组合（8.1）到 Bézier 曲线（8.6），一条主线贯穿——**复杂形状 = 简单元素（凸组合、线性插值）的受控叠加**。这是线性代数从"解方程"走向"设计世界"的完整旅程：字体、汽车、飞机的形状，归根结底都是权与组合。
 
 ---
+---
+
+# 附录 B 复数 Complex Numbers
+
+> 本附录为 5.5 节（复特征值）所需的全部复数预备知识。核心一句话：**复数 = 平面向量 + 旋转的乘法**——这正是 5.5 节"复特征值 ⟺ 旋转 + 缩放"的几何根基。
+
+## B.1 定义与四则运算
+
+**定义**：**复数（complex number）**是形如
+
+$$z = a + bi$$
+
+的表达式，其中 $a, b$ 为实数，$i$ 是**虚数单位**（$i^2 = -1$）。$a$ 为**实部（real part）**，$b$ 为**虚部（imaginary part）**。
+
+**加法（1）**（分量相加，同向量）：
+
+$$(a + bi) + (c + di) = (a + c) + (b + d)i$$
+
+**乘法（2）**（展开 + $i^2 = -1$）：
+
+$$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
+
+**例**：
+
+$$(2 - 5i)(1 + 3i) = 2 + 6i - 5i - 15i^2 = \mathbf{17 + i}$$
+
+## B.2 共轭与模 Conjugate and Absolute Value
+
+**定义**：$\mathbf{z}$ 的**共轭复数（complex conjugate）** $\bar{z} = a - bi$（虚部反号）；**模（绝对值，modulus）**
+
+$$|z| = \sqrt{a^2 + b^2}, \qquad |z|^2 = z\bar{z} = a^2 + b^2$$
+
+**运算性质**（所有 $w, z \in \mathbb{C}$）：
+
+1. $\overline{w + z} = \bar{w} + \bar{z}$
+2. $\overline{wz} = \bar{w}\bar{z}$
+3. $|wz| = |w||z|$（模的乘性——旋转缩放保持，5.5 节要用！）
+4. $\overline{\bar{z}} = z$
+5. $z$ 为实数 ⟺ $\bar{z} = z$；$z$ 为纯虚数 ⟺ $\bar{z} = -z$
+6. $z + \bar{z} = 2\,\mathrm{Re}\, z$；$z - \bar{z} = 2i\,\mathrm{Im}\, z$
+
+**除法（有理化技巧）**：
+
+$$\frac{1}{z} = \frac{\bar{z}}{z\bar{z}} = \frac{\bar{z}}{|z|^2}, \qquad \frac{w}{z} = \frac{w\bar{z}}{|z|^2}$$
+
+**例**：
+
+$$\frac{1 + 2i}{3 + 5i} = \frac{(1+2i)(3-5i)}{3^2+5^2} = \frac{13 + i}{34} = \frac{13}{34} + \frac{1}{34}i$$
+
+（分母乘共轭变实——与"有理化分母"同源。）
+
+## B.3 复平面：几何视角
+
+复数 $z = a + bi$ ↔ 复平面（complex plane）的点 $(a, b)$（横轴实部、纵轴虚部）：
+
+- **共轭 = 关于实轴的镜像反射**（$3+i \leftrightarrow 3-i$）
+- **加法 = 向量加法**（平行四边形法则，FIGURE 2）
+- **模 = 到原点的距离**
+
+## B.4 极形式 Polar Form（本附录的核心）
+
+**定义**：非零复数 $z = a + bi$ 的**极形式（polar form）**
+
+$$z = r(\cos\vartheta + i\sin\vartheta), \qquad r = |z|, \qquad \vartheta = \arg z \in (-\pi, \pi]$$
+
+$\vartheta$ 称**辐角（argument）**：$z$ 与正实轴的夹角。由三角学 $a = r\cos\vartheta$, $b = r\sin\vartheta$。
+
+**乘法（公式 4，极形式下极美）**：
+
+$$wz = |w||z|\big[\cos(\vartheta + \varphi) + i\sin(\vartheta + \varphi)\big]$$
+
+> **复数乘法的几何意义**：**模相乘、辐角相加**——乘法 = **旋转 + 缩放**！
+
+![FIGURE 4 极坐标乘法](img/figappB_4_multiplication_polar.png)
+
+*FIGURE 4 Multiplication with polar coordinates. 图4 极形式乘法：wz 的辐角 = ϑ + φ（两辐角相加）、模 = |w||z|（两模相乘）——乘法即"旋转 + 缩放"*
+
+**除法**：模相除、辐角相减。
+
+**特例：乘以 i（FIGURE 5）**——$|i| = 1$、$\arg i = \frac{\pi}{2}$，故 **乘 i = 旋转 90°**：
+
+$$(3 + i)\,i = -1 + 3i \qquad (\text{旋转 } \tfrac{\pi}{2})$$
+
+![乘 i 旋转](img/figappB_mult_by_i.png)
+
+*Multiplication by i. 图5 乘以 i：$z = 3+i$ 逆时针旋转 $\frac{\pi}{2}$ 得 $iz = -1+3i$——这就是 5.1 节旋转矩阵特征值 $\pm i$ 的几何背景！*
+
+**De Moivre 定理（公式 5）**：
+
+$$z^k = r^k(\cos k\vartheta + i\sin k\vartheta) \qquad (k = 1, 2, \dots)$$
+
+**例**：$z = 1 + i$：$|z| = \sqrt{2}$, $\arg z = \frac{\pi}{4}$，故
+
+$$z^2 = 2\left(\cos\tfrac{\pi}{2} + i\sin\tfrac{\pi}{2}\right) = 2i$$
+
+## B.5 ℂ 与 ℝ² 的本质区别
+
+$\mathbb{C}$ 与 $\mathbb{R}^2$ **作为实向量空间同构**（对应 $(a, b) \leftrightarrow a + bi$）——但 $\mathbb{C}$ 上有**乘法**而 $\mathbb{R}^2$ 没有（点积输出标量、叉积只存在于 3 维）。**乘 i = 旋转**让 $\mathbb{C}$ 成为研究旋转与振动的天然语言（5.5 节动力系统、5.7 节 RLC 电路的 $\sin/\cos$ 解、量子力学的波函数——同一个数学）。
+
+## B.6 与 5.5 节的联系（全书呼应）
+
+5.5 节核心事实：实矩阵的复特征值 $a \pm bi$（$b \neq 0$）对应"**旋转 + 缩放**"，旋转角 $\varphi = \arg(a + bi)$、缩放率 $r = |a + bi|$（Theorem 5.5-9）。本附录正是其工具箱：
+
+$$e^{(a+bi)t} = e^{at}(\cos bt + i\sin bt) \quad \Rightarrow \quad \text{实部/虚部给出 5.7 节微分方程的两个实解}$$
+
+---
+
+## 附录 B 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| $z = a+bi$ | 实部 + 虚部·i（$i^2 = -1$） |
+| 共轭 $\bar z$ | 虚部反号；$\|z\|^2 = z\bar z$；除法 = 乘共轭/模平方 |
+| 极形式 | $z = r(\cos\vartheta + i\sin\vartheta)$：模 r = 长度、辐角 ϑ = 方向 |
+| 乘法（公式 4） | 模相乘、辐角相加 = **旋转 + 缩放**；乘 i = 转 90° |
+| De Moivre | $z^k = r^k(\cos k\vartheta + i\sin k\vartheta)$ |
+| 与主线联系 | 复数乘法 = 5.5 节旋转矩阵特征值 $\pm i$ 的几何本质 |
+
+---
