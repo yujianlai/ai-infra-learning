@@ -5035,3 +5035,219 @@ $$R = Q^TA = \begin{bmatrix} 2 & 3/2 & 1 \\
 > **本节精髓**：Gram-Schmidt 把"造正交基"变成机械流程——每步只做一件事：减去投影。QR 分解则是它的矩阵形态：任何列无关的 A 都能"正交化地重打包"，为 6.5 节最小二乘方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ 提供高效解法（以及 MATLAB 的核心算法）。下一节 6.5 抵达本章主角：**最小二乘问题**。
 
 ---
+---
+
+## 6.5 最小二乘问题 Least-Squares Problems
+
+**中文讲解**：本章开头 NAD 基准的问题：方程组 $A\mathbf{x} = \mathbf{b}$ **无解**（测量误差导致不相容）。但工程上必须给出"最佳答案"——本节的思想：**不要求精确解，改求让残差 $\|\mathbf{b} - A\mathbf{x}\|$ 最小的 $\hat{\mathbf{x}}$**。由 6.3 节最佳逼近定理，答案已经呼之欲出：$\mathbf{b}$ 在 $\operatorname{Col} A$ 上的**投影**！
+
+### 最小二乘解的几何
+
+$A$ 是 $m \times n$ 矩阵。$A\mathbf{x}$ 遍历 $\operatorname{Col} A$（$\mathbb{R}^m$ 的子空间）。$\mathbf{b}$ 不在其中时，问题转化为：
+
+> **求 $\mathbf{x} \in \mathbb{R}^n$ 使 $\|\mathbf{b} - A\mathbf{x}\| \leq \|\mathbf{b} - A\mathbf{x}'\|$ 对所有 $\mathbf{x}'$ 成立**
+
+由**最佳逼近定理（6.3 定理 9）**：$\operatorname{Col} A$ 中离 $\mathbf{b}$ 最近的点是 $\hat{\mathbf{b}} = \operatorname{proj}_{\operatorname{Col} A}\mathbf{b}$。故最小二乘解满足
+
+$$A\hat{\mathbf{x}} = \hat{\mathbf{b}} \tag{1}$$
+
+**核心方程 (2)**：残差 $\mathbf{b} - A\hat{\mathbf{x}} = \mathbf{b} - \hat{\mathbf{b}}$ 垂直于 $\operatorname{Col} A$，即与 $A$ 的每一列正交：
+
+$$A^T(\mathbf{b} - A\hat{\mathbf{x}}) = \mathbf{0} \tag{2}$$
+
+**正规方程（Normal Equations）(3)**：
+
+$$\boxed{A^TA\,\hat{\mathbf{x}} = A^T\mathbf{b}}$$
+
+**THEOREM 13**：
+> 方程组 $A\mathbf{x} = \mathbf{b}$ 的**最小二乘解集 = 正规方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ 的解集**（该集合非空）。
+
+![FIGURE 1 最近点](img/fig65_1_closer_to_xhat.png)
+
+*FIGURE 1 The vector b is closer to Ax̂ than to Ax for other x. 图1 最小二乘的几何：b 到 Col A 的垂线是 b − Ax̂（最短距离），Ax̂ 是垂足*
+
+![FIGURE 2 x̂在Rⁿ中](img/fig65_2_xhat_in_Rn.png)
+
+*FIGURE 2 The least-squares solution x̂ is in $\mathbb{R}^n$. 图2 注意：x̂ 属于定义域 $\mathbb{R}^n$，而投影 b̂ = Ax̂ 属于 $\mathbb{R}^m$*
+
+### 例1（Example 1，正规方程实战）
+
+$$A = \begin{bmatrix} 4 & 0 \\
+0 & 2 \\
+1 & 1 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 2 \\
+0 \\
+11 \end{bmatrix}$$
+
+**解**：
+
+$$A^TA = \begin{bmatrix} 17 & 1 \\
+1 & 5 \end{bmatrix}, \qquad A^T\mathbf{b} = \begin{bmatrix} 19 \\
+11 \end{bmatrix}$$
+
+$A^TA$ 可逆（$\det = 84 \neq 0$）：
+
+$$\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b} = \frac{1}{84}\begin{bmatrix} 5 & -1 \\
+-1 & 17 \end{bmatrix}\begin{bmatrix} 19 \\
+11 \end{bmatrix} = \frac{1}{84}\begin{bmatrix} 84 \\
+168 \end{bmatrix} = \begin{bmatrix} 1 \\
+2 \end{bmatrix}$$
+
+**验证**：$A\hat{\mathbf{x}} = (4, 4, 3)$。$A^T(\mathbf{b} - A\hat{\mathbf{x}}) = A^T(-2, -4, 8)^T$：第一列 $4(-2)+0+8 = 0$ ✓；第二列 $0+2(-4)+8 = 0$ ✓
+
+### 例2（Example 2，多解情形）
+
+$$A = \begin{bmatrix} 1 & 1 & 0 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 0 & 1 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} -3 \\
+-1 \\
+0 \\
+2 \\
+5 \\
+1 \end{bmatrix}$$
+
+（$A$ 的列线性相关——$A$ 有重复行模式。）
+
+$$A^TA = \begin{bmatrix} 6 & 2 & 2 & 2 \\
+2 & 2 & 0 & 0 \\
+2 & 0 & 2 & 0 \\
+2 & 0 & 0 & 2 \end{bmatrix}, \qquad A^T\mathbf{b} = \begin{bmatrix} 4 \\
+-4 \\
+2 \\
+6 \end{bmatrix}$$
+
+增广矩阵行化简：
+
+$$\begin{bmatrix} 1 & 0 & 0 & 1 & 3 \\
+0 & 1 & 0 & -1 & -5 \\
+0 & 0 & 1 & -1 & -2 \\
+0 & 0 & 0 & 0 & 0 \end{bmatrix} \Rightarrow \begin{cases} x_1 = 3 - x_4 \\ x_2 = -5 + x_4 \\ x_3 = -2 + x_4 \\ x_4 \text{ 自由} \end{cases}$$
+
+**最小二乘通解**：
+
+$$\hat{\mathbf{x}} = \begin{bmatrix} 3 \\
+-5 \\
+-2 \\
+0 \end{bmatrix} + x_4\begin{bmatrix} -1 \\
+1 \\
+1 \\
+1 \end{bmatrix} \quad (x_4 \in \mathbb{R})$$
+
+（尽管有无穷多解，但 $A\hat{\mathbf{x}}$ 唯一——都给出同一个投影！）
+
+### 唯一性 THEOREM 14
+
+> 下列命题逻辑等价：
+> a. 对每个 $\mathbf{b}$，$A\mathbf{x} = \mathbf{b}$ 有**唯一**最小二乘解
+> b. $A$ 的列**线性无关**
+> c. $A^TA$ **可逆**
+>
+> 此时唯一解为 $\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}$ (4)
+
+**重要警告（数值注记）**：$A^TA$ 的条件数可能很差（$\kappa(A^TA) = \kappa(A)^2$）——实践中更推荐 **QR 分解**（例5）。这正是 6.4 节数值注记提到的 Golub-Van Loan 结论。
+
+### 例3（Example 3，最小二乘误差）
+
+接例 1：$A\hat{\mathbf{x}} = (4,4,3)$，残差 $\mathbf{b} - A\hat{\mathbf{x}} = (-2,-4,8)$，**最小二乘误差**：
+
+$$\|\mathbf{b} - A\hat{\mathbf{x}}\| = \sqrt{4 + 16 + 64} = \sqrt{84}$$
+
+即 $\mathbf{b}$ 到 $\operatorname{Col} A$ 的最短距离（FIGURE 3）。任何其他 $\mathbf{x}$ 给出 $A\mathbf{x}$ 离 $\mathbf{b}$ 更远。
+
+![FIGURE 3 最小二乘误差](img/fig65_3_least_squares_error.png)
+
+*FIGURE 3 例3 的最小二乘误差：‖b − Ax̂‖ = √84 是 b 到 Col A 平面的垂直距离*
+
+### 例4（Example 4，列正交的捷径）
+
+$A = \begin{bmatrix} 1 & -6 \\
+1 & -2 \\
+1 & 1 \\
+1 & 7 \end{bmatrix}$（两列正交！），$\mathbf{b} = (-1, 2, 1, 6)$。
+
+**解**：直接投影（6.3 公式 2）：
+
+$$\hat{\mathbf{b}} = \frac{\mathbf{b}\cdot\mathbf{a}_1}{\mathbf{a}_1\cdot\mathbf{a}_1}\mathbf{a}_1 + \frac{\mathbf{b}\cdot\mathbf{a}_2}{\mathbf{a}_2\cdot\mathbf{a}_2}\mathbf{a}_2 = \frac{8}{4}\mathbf{a}_1 + \frac{45}{90}\mathbf{a}_2$$
+
+**一眼读出** $\hat{\mathbf{x}} = \begin{bmatrix} 8/4 \\
+45/90 \end{bmatrix} = \begin{bmatrix} 2 \\
+1/2 \end{bmatrix}$——正交列时无需解正规方程，权重即投影系数。（回归分析中常见这种结构，6.6 节展开。）
+
+### QR 分解解法 THEOREM 15
+
+**THEOREM 15**：
+> 设 $m \times n$ 矩阵 $A$ 列线性无关，$A = QR$ 为 QR 分解。则对每个 $\mathbf{b} \in \mathbb{R}^m$，$A\mathbf{x} = \mathbf{b}$ 有唯一最小二乘解
+
+> $$\hat{\mathbf{x}} = R^{-1}Q^T\mathbf{b} \tag{6}$$
+
+**证明**：代入正规方程：
+
+$$A^TA = (QR)^T(QR) = R^TQ^TQR = R^TR \quad (\text{Thm 6.2-6：} Q^TQ = I)$$
+
+$$R^TR\hat{\mathbf{x}} = R^TQ^T\mathbf{b}$$
+
+$R$ 可逆，左乘 $R^{-1}$ 即得 (6)。∎
+
+**实际操作不回代 $R^{-1}$，而是解三角方程组（回代）**：
+
+$$R\hat{\mathbf{x}} = Q^T\mathbf{b} \tag{7}$$
+
+**例5（Example 5，QR 实战）**：$A = \begin{bmatrix} 1 & 3 & 5 \\
+1 & 1 & 0 \\
+1 & 1 & 2 \\
+1 & 3 & 3 \end{bmatrix}$, $\mathbf{b} = (3,5,7,-3)$。已知 QR 分解（由 6.4 节方法求得）：
+
+$$Q^T\mathbf{b} = \begin{bmatrix} 6 \\
+-6 \\
+4 \end{bmatrix}, \qquad R = \begin{bmatrix} 2 & 4 & 5 \\
+0 & 2 & 3 \\
+0 & 0 & 2 \end{bmatrix}$$
+
+解 $R\hat{\mathbf{x}} = Q^T\mathbf{b}$（回代，O(n²)）：
+
+$$2x_3 = 4 \Rightarrow x_3 = 2; \qquad 2x_2 + 6 = -6 \Rightarrow x_2 = -6$$
+
+$$2x_1 + 4(-6) + 5(2) = 6 \Rightarrow 2x_1 = 20 \Rightarrow x_1 = 10$$
+
+$$\hat{\mathbf{x}} = \begin{bmatrix} 10 \\
+-6 \\
+2 \end{bmatrix}$$
+
+**效率**：正规方程法需 $O(mn^2)$ + 可能病态；QR 法一次分解 $O(mn^2)$ + 每次回代 $O(n^2)$，稳定且可复用（同一 $A$、多个 $\mathbf{b}$ 时优势明显——如批量平差）。
+
+### 练习精选（Practice Problems）
+
+**题1**：$A = \begin{bmatrix} 1 & -3 & -3 \\
+1 & 5 & 1 \\
+1 & 7 & 2 \end{bmatrix}$, $\mathbf{b} = (5, -3, -5)$。求最小二乘解。
+
+**解**：正规方程化简后第三行全零——$A$ 的列相关（$\mathbf{a}_3 = -\frac{3}{2}\mathbf{a}_1 + \frac{1}{2}\mathbf{a}_2$），解集为
+
+$$\hat{\mathbf{x}} = \begin{bmatrix} -1 \\
+0 \\
+-2 \end{bmatrix} + s\begin{bmatrix} -3 \\
+1 \\
+-2 \end{bmatrix} \quad (s \in \mathbb{R})$$
+
+**彩蛋**：$A(-1, 0, -2) = (5, -3, -5) = \mathbf{b}$——$\mathbf{b}$ 其实**在** $\operatorname{Col} A$ 中！系统相容，最小二乘解就是精确解（残差为 0）。
+
+**题2**：若 $\mathbf{b}$ 与 $A$ 的每一列都正交，最小二乘解是？
+
+**解**：$\hat{\mathbf{b}} = \operatorname{proj}_{\operatorname{Col} A}\mathbf{b} = \mathbf{0}$ ⇒ $A\hat{\mathbf{x}} = \mathbf{0}$。列无关时 $\hat{\mathbf{x}} = \mathbf{0}$，最小误差 = $\|\mathbf{b}\|$——$\mathbf{b}$ 已"完全无法被 $A$ 表示"，最佳近似是零向量。
+
+### 6.5 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 最小二乘解 | 使 ‖b − Ax‖ 最小的 x̂：Ax̂ = proj_{Col A} b |
+| 正规方程 (3) | AᵀAx̂ = Aᵀb：残差 ⟂ Col A 的代数翻译（Thm 13） |
+| Theorem 14 | 唯一 ⟺ 列无关 ⟺ AᵀA 可逆 |
+| 误差 | ‖b − Ax̂‖ = b 到 Col A 的距离 |
+| 正交列捷径 | 权重 = 投影系数（回归模型结构） |
+| QR 解法 (Thm 15) | x̂ = R⁻¹Qᵀb：解 R x̂ = Qᵀb 回代，稳定高效 |
+
+> **本节精髓**：最小二乘是最佳逼近定理（6.3）对"解方程组"问题的直接应用——正规方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ 是全部统计回归的理论源头。当 $A$ 列相关时解不唯一但投影唯一；数值实践中 QR 分解稳定压倒正规方程法。6.6 节把这套工具用到统计学**线性回归**（拟合直线/曲线、多元回归），你会看到最小二乘如何"发明"回归系数。
+
+---
