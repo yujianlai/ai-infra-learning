@@ -5913,3 +5913,107 @@ $= -\lambda^3 + 18\lambda^2 - 75\lambda + 14$
 > **本节精髓**：主轴定理 = 谱定理的几何兑现——特征向量给出曲面最自然的坐标系（主轴），特征值决定开口方向与宽窄。正定性的特征值判据（Theorem 5）是优化、统计、物理中稳定性的代数核心。下一节 7.3 用它解决**约束优化**：$Q(\mathbf{x})$ 在单位球面上的最大/最小值恰为最大/最小特征值（瑞利商），这就是 PCA 选主成分的数学原理。
 
 ---
+---
+
+## 7.3 约束优化 Constrained Optimization
+
+**中文讲解**：工程与经济中的经典问题：**目标函数 $Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}$ 在单位球面 $\|\mathbf{x}\| = 1$ 上的最值是多少？在哪个方向取得？** 7.2 节的谱理论给出惊人简洁的答案：**最值就是特征值，最优方向就是特征向量**。这是瑞利商（Rayleigh quotient）理论的核心，也是 PCA 选择主成分的数学原理。
+
+### 例1/例2（对角阵热身）
+
+**例1（Example 1）**：$A = \begin{bmatrix} 3 & 0 \\
+0 & 7 \end{bmatrix}$, $Q = 3x_1^2 + 7x_2^2$。
+
+**几何**（FIGURE 1、2）：$z = Q(x_1, x_2)$ 是开口向上的椭圆抛物面；约束 $x_1^2 + x_2^2 = 1$ 是竖直圆柱——**两者的交线**上：
+
+- 最高点 $(0, \pm1, 7)$：$\lambda = 7$ 的方向
+- 最低点 $(\pm1, 0, 3)$：$\lambda = 3$ 的方向
+
+**例2（Example 2）**同理（对角元 3 与 7）。
+
+![FIGURE 1 曲面](img/fig73_1_surface.png)
+
+*FIGURE 1 z = 3x₁² + 7x₂². 图1 椭圆抛物面：约束单位圆（红）在底面，交线决定 Q 的取值范围*
+
+![FIGURE 2 圆柱交线](img/fig73_2_cylinder_intersection.png)
+
+*FIGURE 2 The intersection of z = 3x₁² + 7x₂² and the cylinder x₁² + x₂² = 1. 图2 约束优化 = 找交线的最高/最低点：(0,1,7) 与 (1,0,3)——恰为最大/最小特征值*
+
+### THEOREM 6（单位球面上的最值 = 特征值）
+
+> 设 $A$ 对称，特征值（从小到大）为 $m = \lambda_1 \leq \cdots \leq \lambda_n = M$。则
+
+> $$m \leq \mathbf{x}^TA\mathbf{x} \leq M \quad \text{对所有单位向量 } \mathbf{x} \tag{2}$$
+
+> 且 $M$ 在对应 $M$ 的单位特征向量 $\mathbf{u}_n$ 处取得（最小值同理在 $\mathbf{u}_1$ 处）。
+
+**证明**（换元 + 平方和估计）：令 $\mathbf{x} = P\mathbf{y}$（主轴替换，$\|\mathbf{x}\| = \|\mathbf{y}\|$）：
+
+$$\mathbf{x}^TA\mathbf{x} = \mathbf{y}^TD\mathbf{y} = \lambda_1y_1^2 + \cdots + \lambda_ny_n^2 \leq M(y_1^2 + \cdots + y_n^2) = M\|\mathbf{y}\|^2 = M$$
+
+下界同理。取 $\mathbf{y} = \mathbf{e}_n$（即 $\mathbf{x} = \mathbf{u}_n$）时等号成立。∎
+
+**例3（Example 3）**：某对称矩阵最大特征值 $\lambda = 6$，单位特征向量 $\mathbf{u}_1 = (1,1,1)/\sqrt{3}$。则 $Q(\mathbf{x})$ 在 $\|\mathbf{x}\| = 1$ 上的**最大值为 6**，在 $\pm\mathbf{u}_1$ 处取得——无需知道 $A$ 的完整形式！
+
+### 逐级约束 THEOREM 7 & 8
+
+**问题升级**：最大值在 $\mathbf{u}_1$ 取得，那**第二大的值**呢？加约束：与 $\mathbf{u}_1$ 正交。
+
+**THEOREM 7（二维情形）**：$Q$ 在 $\mathbf{x}^T\mathbf{u}_1 = 0$ 下的最大值 = 第二大特征值 $\lambda_2$，在 $\mathbf{u}_2$ 处取得。
+
+**例4（Example 4）**：$Q = 9x_1^2 + 4x_2^2 + 3x_3^2$，$\mathbf{u}_1 = (1,0,0)$（$\lambda_1 = 9$）。约束 $\mathbf{x}\perp\mathbf{u}_1$ 即 $x_1 = 0$，问题变为 $4x_2^2 + 3x_3^2$ 在 $x_2^2 + x_3^2 = 1$ 上的最大 = **4**，在 $(0,1,0)$ 取得。
+
+**THEOREM 8（一般情形）**：
+> 设 $A$ 对称，特征值 $\lambda_1 \leq \cdots \leq \lambda_n$，对应单位特征向量 $\mathbf{u}_1, \dots, \mathbf{u}_n$。则 $\lambda_k$ = $Q(\mathbf{x})$ 在约束
+
+> $$\mathbf{x}^T\mathbf{u}_1 = 0, \quad \mathbf{x}^T\mathbf{u}_2 = 0, \quad \dots, \quad \mathbf{x}^T\mathbf{u}_{k-1} = 0$$
+
+> 下的最大值，在 $\mathbf{x} = \mathbf{u}_k$ 处取得。
+
+**直觉**：每次"封掉"已找到的最优方向，剩下的最优解就沿下一个特征向量。这正是 **PCA 逐级提取主成分**的数学原理（第 7 章导入例的 Landsat 应用）！
+
+### 例5（Example 5，县政工程预算分配）
+
+县政府规划公共工程：**道路桥梁**与**公园休闲**两类项目，预算约束 $4x^2 + 9y^2 \leq 36$（$x$ = 百英里道路，$y$ = 百英亩公园），**效用函数** $q(x, y) = xy$ 衡量公众满意度。求最优分配。
+
+**解（三步换元）**：
+
+**第1步：把椭球约束变单位球**。令 $x_1 = x/3$, $x_2 = y/2$（即 $x = 3x_1$, $y = 2x_2$），约束成 $x_1^2 + x_2^2 \leq 1$——边界最优（效用对 $x,y$ 单调增），故化为等式约束。
+
+**第2步：目标函数变二次型**：
+
+$$q(3x_1, 2x_2) = 6x_1x_2 = \begin{bmatrix} x_1 & x_2 \end{bmatrix}\begin{bmatrix} 0 & 3 \\
+3 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\
+x_2 \end{bmatrix} = Q(\mathbf{x})$$
+
+**第3步：定理 6 出手**。$A = \begin{bmatrix} 0 & 3 \\
+3 & 0 \end{bmatrix}$ 特征值 $\pm3$，对应特征向量 $(1, 1)/\sqrt{2}$（$\lambda = 3$）。最大值 **3**，在 $x_1 = x_2 = 1/\sqrt{2}$ 取得。
+
+**回原变量**：
+
+$$x = 3x_1 = \frac{3}{\sqrt{2}} \approx 2.1 \text{（百英里）}, \qquad y = 2x_2 = \sqrt{2} \approx 1.4 \text{（百英亩）}$$
+
+**经济学解读**（FIGURE 4）：最优解在**约束曲线 $4x^2 + 9y^2 = 36$ 与最高无差异曲线 $q = 3$ 相切**处——与 $\mathbf{u}_1$ 方向成 45° 的分配比例。
+
+![FIGURE 4 无差异曲线](img/fig73_4_indifference_curves.png)
+
+*FIGURE 4 The optimum public works schedule is (2.1, 1.4). 图4 例5 的经济学图解：约束椭圆 4x²+9y²=36 与无差异曲线 q(x,y)=2,3,4；q=3 与椭圆相切于 (2.1, 1.4) = 最优公共工程方案*
+
+### 数值注记（算法的角度）
+
+Theorem 6 也是**计算最大特征值**的理论基础：瑞利商 $R(\mathbf{x}) = \frac{\mathbf{x}^TA\mathbf{x}}{\mathbf{x}^T\mathbf{x}}$ 在 $\mathbf{x} \to \mathbf{u}_n$ 时趋近 $\lambda_{\max}$——配合幂法（5.8 节）就是实用的特征值算法。（瑞利商迭代比纯幂法收敛更快。）
+
+### 7.3 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 约束优化问题 | Q(x) 在 ‖x‖=1 上的最值 |
+| Theorem 6 | 最大值 = 最大特征值 M，最小值 = 最小特征值 m，最优方向 = 对应特征向量 |
+| Theorem 7/8 | 逐级加正交约束：第 k 大特征值 = 排除前 k−1 个方向后的最大值 |
+| 例5 | 椭球约束 → 单位球换元；xy 效用 → 二次型；定理6 三步求解 (2.1, 1.4) |
+| PCA 原理 | 逐级正交约束提取主成分 = Theorem 8 的应用 |
+| 瑞利商 | R(x) = xᵀAx/xᵀx：特征值计算的算法基础 |
+
+> **本节精髓**：二次型的谱 = 它在各方向的"增长率"。最大特征值及其特征向量回答了"哪个方向增长最快"——PCA、材料最优取向、投资组合风险（协方差矩阵最大方差方向）都是同一个定理。下一节 7.4 抵达全书巅峰：**奇异值分解（SVD）**——把谱定理推广到任意（甚至非方阵）矩阵，给出数据的最佳低秩近似与几何的终极描述。
+
+---
