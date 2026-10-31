@@ -6017,3 +6017,195 @@ Theorem 6 也是**计算最大特征值**的理论基础：瑞利商 $R(\mathbf{
 > **本节精髓**：二次型的谱 = 它在各方向的"增长率"。最大特征值及其特征向量回答了"哪个方向增长最快"——PCA、材料最优取向、投资组合风险（协方差矩阵最大方差方向）都是同一个定理。下一节 7.4 抵达全书巅峰：**奇异值分解（SVD）**——把谱定理推广到任意（甚至非方阵）矩阵，给出数据的最佳低秩近似与几何的终极描述。
 
 ---
+---
+
+## 7.4 奇异值分解 The Singular Value Decomposition
+
+**中文讲解**：第 5、7 章的对角化都要求**对称/方阵**——但现实中的数据矩阵几乎都不是。SVD 是谱定理的推广之王：**任意 $m \times n$ 矩阵** $A$ 都能分解为
+
+$$A = U\Sigma V^T$$
+
+（$U, V$ 正交，$\Sigma$ 对角）——把任意线性变换分解为"旋转 + 拉伸 + 旋转"。这是 MATLAB/NumPy 最常被调用的分解，数据科学（PCA、推荐系统、图像压缩）的数学心脏。
+
+### 动机：单位球变成椭球
+
+设 $A$ 是 $m \times n$（$m \geq n$）。$A$ 把 $\mathbb{R}^n$ 的单位球变成 $\mathbb{R}^m$ 中的椭球（FIGURE 1）。问题是：**哪个输入方向 $\mathbf{v}_1$ 被拉得最长**？即最大化 $\|A\mathbf{x}\|$（$\|\mathbf{x}\| = 1$）。
+
+**关键技巧**：$\|A\mathbf{x}\|^2 = (A\mathbf{x})^T(A\mathbf{x}) = \mathbf{x}^T(A^TA)\mathbf{x}$——**$A^TA$ 是对称的！** 第 7 章的全部理论可用。
+
+**例1（Example 1）**：$A = \begin{bmatrix} 4 & 11 & 14 \\
+8 & 7 & -2 \end{bmatrix}$。
+
+$$A^TA = \begin{bmatrix} 80 & 100 & 40 \\
+100 & 170 & 140 \\
+40 & 140 & 200 \end{bmatrix}$$
+
+特征值 **360, 90, 0**，对应单位特征向量
+
+$$\mathbf{v}_1 = \frac{1}{3}\begin{bmatrix} 1 \\
+2 \\
+2 \end{bmatrix}, \qquad \mathbf{v}_2 = \frac{1}{3}\begin{bmatrix} 2 \\
+-2 \\
+1 \end{bmatrix}, \qquad \mathbf{v}_3 = \frac{1}{3}\begin{bmatrix} 2 \\
+1 \\
+-2 \end{bmatrix}$$
+
+由 7.3 定理 6：$\|A\mathbf{x}\|^2$ 在 $\mathbf{x} = \pm\mathbf{v}_1$ 处取最大值 360，即
+
+$$\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\| = \sqrt{360} = \mathbf{6\sqrt{10}}, \qquad A\mathbf{v}_1 = \begin{bmatrix} 18 \\
+6 \end{bmatrix} \ (\text{椭球长轴端点})$$
+
+![FIGURE 1 球变椭球](img/fig74_1_sphere_ellipse.png)
+
+*FIGURE 1 A transformation from $\mathbb{R}^3$ to $\mathbb{R}^2$. 图1 奇异值的几何来源：单位球（左）被 A 压成椭圆（右）；最长输出方向 = 6√10·（单位向量），最短 = 3√10*
+
+### 奇异值与定理 9
+
+**定义**：$A$ 的**奇异值（singular values）**是 $A^TA$ 特征值的算术平方根，记 $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0$。
+
+由 $A^TA\mathbf{v}_i = \lambda_i\mathbf{v}_i$ 得（2）：
+
+$$\|A\mathbf{v}_i\|^2 = \mathbf{v}_i^TA^TA\mathbf{v}_i = \lambda_i \quad \Rightarrow \quad \|A\mathbf{v}_i\| = \sigma_i$$
+
+**例2（Example 2）**：例1 中 $\sigma_1 = \sqrt{360} = 6\sqrt{10}$, $\sigma_2 = \sqrt{90} = 3\sqrt{10}$, $\sigma_3 = 0$。
+
+**THEOREM 9（秩 = 非零奇异值个数）**：
+> 设 $A$ 的奇异值 $\sigma_1 \geq \cdots \geq \sigma_r > 0$，$\sigma_{r+1} = \cdots = 0$。则
+> a. $\operatorname{rank} A = r$
+> b. $\{A\mathbf{v}_1, \dots, A\mathbf{v}_r\}$ 是 $\operatorname{Col} A$ 的**正交基**（张成、正交、非零）
+
+**数值注记（有效秩）**：实践中 $\sigma_r/\sigma_1$ 小于机器精度时，把 $\sigma_r$ 当 0 处理——**有效秩（effective rank）由奇异值断崖决定**（5.2 节注记的严格化，这是 SVD 比行列式/行化简稳定得多的原因）。
+
+### SVD 分解 THEOREM
+
+> 设 $A$ 为 $m \times n$ 矩阵，秩 $r$。则存在 $m \times n$ "对角"矩阵 $\Sigma$（对角元 $\sigma_1, \dots, \sigma_r$ 及其余为 0）、$m$ 阶正交阵 $U = [\mathbf{u}_1 \cdots \mathbf{u}_m]$、$n$ 阶正交阵 $V = [\mathbf{v}_1 \cdots \mathbf{v}_n]$，使
+
+> $$A = U\Sigma V^T \tag{3}$$
+
+**构造**：取 $V$ = $A^TA$ 的特征向量（标准正交）；$\Sigma$ 放奇异值；$\mathbf{u}_i = \frac{1}{\sigma_i}A\mathbf{v}_i$（$i \leq r$）单位化——由 Theorem 9 它们正交；剩余 $\mathbf{u}_{r+1}, \dots, \mathbf{u}_m$ 用 Gram-Schmidt 补齐。
+
+**证明 (3)**：$U\Sigma$ 的第 $i$ 列 = $\sigma_i\mathbf{u}_i = A\mathbf{v}_i$（$i \leq r$）、$\mathbf{0}$（$i > r$）；故
+
+$$U\Sigma V^T = [A\mathbf{v}_1 \cdots A\mathbf{v}_r\ \mathbf{0} \cdots \mathbf{0}]\begin{bmatrix} \mathbf{v}_1^T \\
+\vdots \\
+\mathbf{v}_n^T \end{bmatrix} = \sum_{i=1}^r A\mathbf{v}_i\mathbf{v}_i^T = A\left(\sum_{i=1}^r \mathbf{v}_i\mathbf{v}_i^T\right) = A$$
+
+（$\{\mathbf{v}_1, \dots, \mathbf{v}_r\}$ 是 $\operatorname{Row} A$ 的标准正交基，$\sum_{i=1}^r \mathbf{v}_i\mathbf{v}_i^T$ = 投影到 Row A，对任意 $\mathbf{x}$ 作用等于恒等——见 6.3 定理 10。）∎
+
+**例3（Example 3，三步构造）**：接例 1，$A = \begin{bmatrix} 4 & 11 & 14 \\
+8 & 7 & -2 \end{bmatrix}$。
+
+**第1步**（V 来自 $A^TA$）：$V = \frac{1}{3}\begin{bmatrix} 1 & 2 & 2 \\
+2 & -2 & 1 \\
+2 & 1 & -2 \end{bmatrix}$（例1 已得）
+
+**第2步**（$\Sigma$ 放奇异值）：
+
+$$\Sigma = \begin{bmatrix} 6\sqrt{10} & 0 & 0 \\
+0 & 3\sqrt{10} & 0 \end{bmatrix}$$
+
+**第3步**（$U$ 的单位向量）：
+
+$$\mathbf{u}_1 = \frac{A\mathbf{v}_1}{\sigma_1} = \frac{(18, 6)}{6\sqrt{10}} = \frac{1}{\sqrt{10}}\begin{bmatrix} 3 \\
+1 \end{bmatrix}, \qquad \mathbf{u}_2 = \frac{A\mathbf{v}_2}{\sigma_2} = \frac{1}{\sqrt{10}}\begin{bmatrix} 1 \\
+-3 \end{bmatrix}$$
+
+$$A = U\Sigma V^T = \frac{1}{\sqrt{10}}\begin{bmatrix} 3 & 1 \\
+1 & -3 \end{bmatrix}\begin{bmatrix} 6\sqrt{10} & 0 & 0 \\
+0 & 3\sqrt{10} & 0 \end{bmatrix}\left(\frac{1}{3}\begin{bmatrix} 1 & 2 & 2 \\
+2 & -2 & 1 \\
+2 & 1 & -2 \end{bmatrix}\right)^T$$
+
+**例4（Example 4，U 需扩充）**：$A = \begin{bmatrix} 1 & -1 \\
+-2 & 2 \\
+2 & -2 \end{bmatrix}$。
+
+$$A^TA = \begin{bmatrix} 9 & -9 \\
+-9 & 9 \end{bmatrix} \Rightarrow \lambda = 18, 0; \quad \mathbf{v}_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\
+-1 \end{bmatrix}, \ \sigma_1 = 3\sqrt{2}$$
+
+$$\mathbf{u}_1 = \frac{A\mathbf{v}_1}{\sigma_1} = \frac{1}{3}\begin{bmatrix} 1 \\
+-2 \\
+2 \end{bmatrix}$$
+
+$\{\mathbf{u}_1\}$ 只张成 $\operatorname{Col} A$（一维），需扩充为 $\mathbb{R}^3$ 的标准正交基：$\operatorname{Nul} A^T$ 的基 $(2,1,0), (-2,0,1)$ 上 Gram-Schmidt（6.4 节）得
+
+$$\mathbf{u}_2 = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 \\
+1 \\
+0 \end{bmatrix}, \qquad \mathbf{u}_3 = \frac{1}{3\sqrt{5}}\begin{bmatrix} -2 \\
+4 \\
+5 \end{bmatrix}$$
+
+$$A = \begin{bmatrix} \mathbf{u}_1 & \mathbf{u}_2 & \mathbf{u}_3 \end{bmatrix}\begin{bmatrix} 3\sqrt{2} & 0 \\
+0 & 0 \\
+0 & 0 \end{bmatrix}\begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 \end{bmatrix}^T \quad (\text{可直接验算 } U\Sigma V^T = A)$$
+
+### 四子空间与 IMT 终结篇
+
+SVD 一次性揭示四大子空间（6.1/6.6 节的正交对在此全部显形）：
+
+| 子空间 | 基 | 维数 |
+|---|---|---|
+| $\operatorname{Row} A$ | $\{\mathbf{v}_1, \dots, \mathbf{v}_r\}$ | $r$ |
+| $\operatorname{Nul} A$ | $\{\mathbf{v}_{r+1}, \dots, \mathbf{v}_n\}$ | $n - r$ |
+| $\operatorname{Col} A$ | $\{\mathbf{u}_1, \dots, \mathbf{u}_r\}$ | $r$ |
+| $\operatorname{Nul} A^T$ | $\{\mathbf{u}_{r+1}, \dots, \mathbf{u}_m\}$ | $m - r$ |
+
+![FIGURE 4 四子空间3D](img/fig74_4subspaces_3d.png)
+
+*FIGURE 4 The fundamental subspaces in Example 4. 图4 例4 的三维图景：行空间（绿盘，v₁ 方向）、零空间（蓝线，垂直于绿盘）、列空间（蓝面上的线，Av₁ 方向）、Col A⊥（整个蓝面）*
+
+![FIGURE 4 映射图](img/fig74_4_mapping_diagram.png)
+
+*FIGURE 4 The four fundamental subspaces and the action of A. 图4 A 的作用全景：Row A 中的 vᵢ 被映为 Col A 中的 σᵢuᵢ（按奇异值缩放）；Nul A 被压为 0；A 在 Row A 上是"可逆的"（缩放版恒等）*
+
+**IMT 收官（(u)–(x)）**：
+> u. $(\operatorname{Col} A)^\perp = \{\mathbf{0}\}$；v. $(\operatorname{Nul} A)^\perp = \mathbb{R}^n$；w. $\operatorname{Row} A = \mathbb{R}^n$；x. **A 有 n 个非零奇异值**
+
+### 降秩 SVD、伪逆与最小二乘
+
+**外积展开**：由 (3) 的列-行形式（2.4 定理 10），
+
+$$A = \sigma_1\mathbf{u}_1\mathbf{v}_1^T + \sigma_2\mathbf{u}_2\mathbf{v}_2^T + \cdots + \sigma_r\mathbf{u}_r\mathbf{v}_r^T \tag{7.4-8}$$
+
+——$A$ 是 $r$ 个秩 1 矩阵之和（每个 $\sigma_i\mathbf{u}_i\mathbf{v}_i^T$ 秩恰为 1）！**取前 $k$ 项 = 秩 k 最佳近似**（Eckart-Young 定理）：图像压缩（JPEG 的精神）、降噪、推荐系统的核心。
+
+**降秩分解（reduced SVD）**：只保留非零部分，
+
+$$A = U_r D V_r^T \tag{9}$$
+
+（$U_r = [\mathbf{u}_1 \cdots \mathbf{u}_r]$ 等，$D = \operatorname{diag}(\sigma_1, \dots, \sigma_r)$。）
+
+**伪逆（Pseudoinverse）**：
+
+$$A^+ = V_r D^{-1} U_r^T \tag{10}$$
+
+（$D^{-1} = \operatorname{diag}(1/\sigma_i)$——"最小二乘意义下的逆"。）
+
+**例5（Example 5，伪逆解最小二乘）**：$A\mathbf{x} = \mathbf{b}$ 的最小范数最小二乘解
+
+$$\hat{\mathbf{x}} = A^+\mathbf{b} = V_r D^{-1} U_r^T\mathbf{b}$$
+
+验证几何：$A\hat{\mathbf{x}} = U_r U_r^T\mathbf{b} = \operatorname{proj}_{\operatorname{Col} A}\mathbf{b}$（6.3 定理 10 的 SVD 版）——正是正规方程的目标！SVD 解最小二乘**无需 $A^TA$ 可逆**，病态问题（$\sigma_{\min} \approx 0$）可用截断小奇异值稳定求解（比 QR/正规方程更鲁棒）。
+
+### 数值注记与全书意义
+
+1. **算法**：现代 SVD 算法（Golub-Kahan）：先双对角化，再隐式 QR 迭代——稳定、高效，是 LAPACK/MATLAB 的核心。
+2. **条件数**：$\kappa(A) = \sigma_1/\sigma_r$（$A^TA$ 条件数的平方根，远小于直接法）。
+3. **应用全景**：PCA（7.3 定理 8 = 取最大奇异值方向）、图像压缩（8 式截断）、推荐系统（Netflix Prize 的矩阵分解）、潜在语义分析（LSA）、数据降维——**一切"找主要方向"的问题都是 SVD**。
+
+### 7.4 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 奇异值 | σᵢ = √λᵢ(AᵀA)：单位球被拉成椭球的半轴长 |
+| Theorem 9 | rank A = 非零奇异值数；{Avᵢ} 是 Col A 正交基 |
+| SVD (3) | A = UΣVᵀ：任意矩阵的"旋转-缩放-旋转"分解 |
+| 四子空间 | Row A/Nul A（v 的列）、Col A/Nul Aᵀ（u 的列）——一张图全看清 |
+| 外积展开 (8) | A = Σσᵢuᵢvᵢᵀ：秩 1 叠加，截断 = 最佳低秩近似 |
+| 伪逆 (10) | A⁺ = VᵣD⁻¹Uᵣᵀ：病态最小二乘的稳定解 |
+| IMT 收官 | (u)–(x)：四子空间正交对与 n 个非零奇异值 |
+
+> **本节精髓**：SVD 是线性代数全部理论的"总收官"——对称化（AᵀA）接谱定理，正交性（u、v 向量）接第 6 章，秩与四子空间接第 4 章，伪逆接最小二乘。Eckart-Young 定理宣告：**任何矩阵都是若干"秩 1 方向"的加权和，大奇异值方向是数据的骨架**——这就是数据科学的"原子理论"。第 7 章至此收官，全书核心内容讲解完毕！
+
+---
