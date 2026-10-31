@@ -2198,6 +2198,138 @@ $$\mathbf{a}_3 = -3\mathbf{a}_1 + 2\mathbf{a}_2, \qquad \mathbf{a}_4 = 5\mathbf{
 ---
 ---
 
+---
+
+## 2.9 维数与秩 Dimension and Rank
+
+**中文讲解**：2.8 节建立了子空间与基。本节回答两个自然问题：基的向量个数由什么决定？（**维数**）矩阵的两个核心子空间（Col A 与 Nul A）大小有什么关系？（**秩定理**）——答案将给出可逆矩阵定理的最后 6 条等价条件，第 2 章至此完美收官。
+
+### $\mathcal{B}$-坐标向量 Coordinate Vector
+
+**定义**：设 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_p\}$ 是子空间 $H$ 的一组基。对 $H$ 中任一向量 $\mathbf{x}$，**$\mathbf{x}$ 相对基 $\mathcal{B}$ 的坐标**是使
+
+$$\mathbf{x} = c_1\mathbf{b}_1 + \cdots + c_p\mathbf{b}_p$$
+
+成立的权 $c_1, \dots, c_p$（由基的线性无关性，这些权**唯一**），而 $\mathbb{R}^p$ 中的向量
+
+$$[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} c_1 \\
+\vdots \\
+c_p \end{bmatrix}$$
+
+称为 $\mathbf{x}$ 的 **$\mathcal{B}$-坐标向量（coordinate vector）**。
+
+**例1（Example 1）**：设 $\mathbf{v}_1 = \begin{bmatrix} 3 \\
+6 \\
+2 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} -1 \\
+0 \\
+1 \end{bmatrix}$, $\mathbf{x} = \begin{bmatrix} 3 \\
+12 \\
+7 \end{bmatrix}$, $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2\}$。判断 $\mathbf{x}$ 是否在 $H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中，若是，求 $[\mathbf{x}]_{\mathcal{B}}$。
+
+**解**：$\mathbf{x} \in H$ ⟺ 向量方程 $c_1\mathbf{v}_1 + c_2\mathbf{v}_2 = \mathbf{x}$ 相容：
+
+$$\begin{bmatrix} 3 & -1 & 3 \\
+6 & 0 & 12 \\
+2 & 1 & 7 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 2 \\
+0 & 1 & 3 \\
+0 & 0 & 0 \end{bmatrix}$$
+
+得 $c_1 = 2$, $c_2 = 3$，即 $\mathbf{x} = 2\mathbf{v}_1 + 3\mathbf{v}_2$，故
+
+$$[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 2 \\
+3 \end{bmatrix}$$
+
+> **同构（isomorphism）**：对应 $\mathbf{x} \mapsto [\mathbf{x}]_{\mathcal{B}}$ 是 $H$ 与 $\mathbb{R}^p$ 之间**保持线性组合**的一一对应——任何 $p$ 维子空间都"同构于" $\mathbb{R}^p$（4.4 节详述）——这正是"维数"概念的深层含义。
+
+### 子空间的维数 The Dimension of a Subspace
+
+**定义**：非零子空间 $H$ 的**维数（dimension）** $\dim H$ = $H$ 的任意一组基所含向量的个数（可证明：$H$ 的每组基都恰好含 $p$ 个向量，见练习 27、28）。零子空间 $\{\mathbf{0}\}$ 的维数定义为 0。
+
+- $\dim \mathbb{R}^n = n$（$\mathbb{R}^n$ 的每组基都含 $n$ 个向量）
+- 过原点的平面是 2 维；过原点的直线是 1 维
+
+**例3（Example 3，维数 = 自由变量个数）**：2.8 节例 6 中 $\operatorname{Nul} A$ 的基含 3 个向量，故 $\dim \operatorname{Nul} A = 3$。观察：每个基向量恰对应 $A\mathbf{x} = \mathbf{0}$ 的**一个自由变量**——我们的构造法永远如此。所以：**求 $\dim \operatorname{Nul} A$，只需数自由变量的个数**。
+
+### 矩阵的秩 Rank of a Matrix
+
+**定义**：矩阵 $A$ 的**秩（rank）** = 其列空间的维数：
+
+$$\operatorname{rank} A = \dim \operatorname{Col} A$$
+
+### THEOREM 15（秩定理 The Rank Theorem）
+
+> 若 $A$ 有 $n$ 列，则
+
+> $$\operatorname{rank} A + \dim \operatorname{Nul} A = n$$
+
+**理解**：$n$ 列 = 主元列 + 非主元列。主元列数 = $\dim \operatorname{Col} A = \operatorname{rank} A$；每个非主元列对应 $A\mathbf{x} = \mathbf{0}$ 的一个自由变量 = $\dim \operatorname{Nul} A$ 的一个基向量。两边相加恰好是总列数——**列空间与零空间"瓜分"了 $\mathbb{R}^n$**。
+
+### THEOREM 16（基定理 The Basis Theorem）
+
+> 设 $H$ 是 $\mathbb{R}^n$ 的 $p$ 维子空间：
+>
+> a. $H$ 中任何**恰好 $p$ 个向量的线性无关集**自动是 $H$ 的基
+>
+> b. $H$ 中任何**恰好 $p$ 个向量且张成 $H$ 的集合**自动是 $H$ 的基
+
+**直觉**：$p$ 维子空间同构于 $\mathbb{R}^p$；而 $\mathbb{R}^p$ 中 $p$ 个向量线性无关 ⟺ 张成 $\mathbb{R}^p$（IMT）。（严格证明见 4.5 节。）
+
+### IMT 续篇（可逆矩阵定理 (m)–(r)）
+
+> 设 $A$ 是 $n \times n$ 矩阵，下列命题各自等价于"$A$ 可逆"（接 2.3 节的 (a)–(l)）：
+>
+> m. $A$ 的各列构成 $\mathbb{R}^n$ 的一组**基**
+>
+> n. $\operatorname{Col} A = \mathbb{R}^n$
+>
+> o. $\dim \operatorname{Col} A = n$
+>
+> p. $\operatorname{rank} A = n$
+>
+> q. $\operatorname{Nul} A = \{\mathbf{0}\}$
+>
+> r. $\dim \operatorname{Nul} A = 0$
+
+**证明线索**：(m) ⟺ (e)+(h)（列既无关又张成）；(n)(o)(p) 本质相同（n 列张成 ⟺ n 个主元列 ⟺ 秩为 n）；(q)(r) 说"零空间缩成一点" ⟺ (d) 平凡解。由 (d)⇔(g) 与 IMT 主体衔接，证毕。
+
+### 数值注记（有效秩 Effective Rank）
+
+手算求秩 = 化阶梯形数主元，但**大规模实际问题上此法不可靠**：舍入误差会让计算机把"本该是零"的数当成非零（例：矩阵中 $x$ 若未精确存为 7，$x - 7$ 可能被当作 0 或非 0，秩就在 1 与 2 之间摇摆）。实践中**有效秩由奇异值分解（SVD，7.4 节）确定**。
+
+### 练习精选（Practice Problems）
+
+**题1**：求 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}$ 的维数（$\mathbf{v}_1 = (2,-8,6)$, $\mathbf{v}_2 = (3,-7,-1)$, $\mathbf{v}_3 = (-1,6,-7)$）。
+
+**解**：先找基——行化简 $A = [\mathbf{v}_1\ \mathbf{v}_2\ \mathbf{v}_3]$ 发现列相关（$\mathbf{v}_3$ 可由前两列表示），主元列 2 个 ⇒ $\dim H = 2$。
+
+**题2**：$\mathcal{B} = \left\{\begin{bmatrix} -1 \\
+2 \end{bmatrix}, \begin{bmatrix} -2 \\
+1 \end{bmatrix}\right\}$ 是 $\mathbb{R}^2$ 的基，若 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
+2 \end{bmatrix}$，求 $\mathbf{x}$。
+
+**解**：$\mathbf{x} = 3\mathbf{b}_1 + 2\mathbf{b}_2 = 3\begin{bmatrix} -1 \\
+2 \end{bmatrix} + 2\begin{bmatrix} -2 \\
+1 \end{bmatrix} = \begin{bmatrix} -7 \\
+8 \end{bmatrix}$
+
+**题3**：$\mathbb{R}^3$ 可能含有 4 维子空间吗？
+
+**解**：**不可能**。$\mathbb{R}^3$ 的任何子空间基的向量必在 $\mathbb{R}^3$ 中、必线性无关，至多 3 个（超过 3 个的 $\mathbb{R}^3$ 向量集必相关），故维数 ≤ 3。
+
+### 2.9 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| $[\mathbf{x}]_{\mathcal{B}}$ | 基 $\mathcal{B}$ 下的"坐标身份证"，$p$ 维子空间的点由 $p$ 个数决定 |
+| $\dim H$ | 任意基的向量个数（well-defined！） |
+| $\operatorname{rank} A$ | $= \dim \operatorname{Col} A$ = 主元列数 |
+| 秩定理 (Thm 15) | $\operatorname{rank} A + \dim \operatorname{Nul} A = n$（列空间与零空间瓜分列数） |
+| 基定理 (Thm 16) | $p$ 维子空间：$p$ 个无关向量自动是基；$p$ 个张成向量自动是基 |
+| IMT (m)–(r) | 可逆 ⟺ 秩满 ⟺ 零空间为零 ⟺ 列构成基（6 条新等价条件） |
+
+> **本节精髓（第 2 章收官）**：从 1.1 节"解一个方程组"出发，我们走到了"矩阵的两个子空间如何瓜分 $\mathbb{R}^n$"。秩定理 rank + nullity = n 与 IMT 的 18 条等价条件，是线性代数核心主线（方程组 → 向量空间 → 秩与维数）的第一次大汇合。下一章（第 3 章 行列式）将从另一个完全不同的角度（体积、有向体积）重新解读"可逆"这个概念。
+
+
 # 第三章 行列式
 # Chapter 3 Determinants
 
