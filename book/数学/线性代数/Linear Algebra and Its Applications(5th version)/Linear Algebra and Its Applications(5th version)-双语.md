@@ -6459,3 +6459,125 @@ $$\hat{\mathbf{x}} = A^+\mathbf{b} = V_r D^{-1} U_r^T\mathbf{b}$$
 > **本节精髓**：SVD 是线性代数全部理论的"总收官"——对称化（AᵀA）接谱定理，正交性（u、v 向量）接第 6 章，秩与四子空间接第 4 章，伪逆接最小二乘。Eckart-Young 定理宣告：**任何矩阵都是若干"秩 1 方向"的加权和，大奇异值方向是数据的骨架**——这就是数据科学的"原子理论"。第 7 章至此收官，全书核心内容讲解完毕！
 
 ---
+---
+
+# 第八章 向量空间的几何（在线章节）
+# Chapter 8 The Geometry of Vector Spaces (Online)
+
+> 本章把第 1-7 章的代数工具用于**几何**：仿射组合（平移的子空间）、凸组合（几何图形）、超平面与多胞形（线性规划的舞台）、Bézier 曲线（计算机字体的数学）。这是"线性代数"走向"计算几何"的桥梁。
+
+---
+
+## 8.1 仿射组合 Affine Combinations
+
+**中文讲解**：1.3 节学过**线性组合**（权任意）、1.5 节见过**特解 + 齐次通解**（平移的解集）。本节把"平移"概念一般化：**仿射组合 = 权重之和为 1 的线性组合**——几何上，"过原点的子空间"平移后变成"不过原点的 flat"。
+
+### 仿射组合与仿射包 Affine Combinations
+
+**定义**：给定点 $\mathbf{v}_1, \dots, \mathbf{v}_p \in \mathbb{R}^n$ 与标量 $c_1, \dots, c_p$，若
+
+$$c_1 + c_2 + \cdots + c_p = \mathbf{1}$$
+
+则线性组合 $c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p$ 称为 $\mathbf{v}_1, \dots, \mathbf{v}_p$ 的**仿射组合（affine combination）**。
+
+- 两点情形（公式 1）：$\mathbf{y} = (1-t)\mathbf{v}_1 + t\mathbf{v}_2 = \mathbf{v}_1 + t(\mathbf{v}_2 - \mathbf{v}_1)$（$t \in \mathbb{R}$）——$t = 0$ 在 $\mathbf{v}_1$、$t = 1$ 在 $\mathbf{v}_2$，**整条直线**！
+
+**定义**：集合 $S$ 中点的所有仿射组合构成 $S$ 的**仿射包（affine hull / affine span）**，记 $\operatorname{aff} S$。
+
+**$\operatorname{aff}\{\mathbf{v}_1, \mathbf{v}_2\}$ 的两种看法**（FIGURE 1/2）：
+- $\mathbf{y} = \mathbf{p} + t\mathbf{u}$（$\mathbf{p} = \mathbf{v}_1$, $\mathbf{u} = \mathbf{v}_2 - \mathbf{v}_1$）：过 $\mathbf{p}$ 平行于 $\operatorname{Span}\{\mathbf{u}\}$ 的直线——**$\operatorname{Span}\{\mathbf{u}\}$ 平移 $\mathbf{p}$**！
+- 直接：过 $\mathbf{v}_1, \mathbf{v}_2$ 的直线
+
+![FIGURE 2 仿射包直线](img/fig81_2_affine_hull_line.png)
+
+*FIGURE 2 aff{v1, v2} as the line through v1 and v2. 图2 仿射包 = 过两点的直线：y = v₁ + t(v₂−v₁)，蓝线是 Span{v₂−v₁} 平移 v₁ 的结果*
+
+### THEOREM 1（仿射 = 平移后的线性）
+
+> $\mathbb{R}^n$ 中 $\mathbf{y}$ 是 $\mathbf{v}_1, \dots, \mathbf{v}_p$ 的仿射组合 ⟺ $\mathbf{y} - \mathbf{v}_1$ 是平移点 $\mathbf{v}_2 - \mathbf{v}_1, \dots, \mathbf{v}_p - \mathbf{v}_1$ 的线性组合。
+
+**证明**：$\mathbf{y} = c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p$（$\sum c_i = 1$）⟺
+
+$$\mathbf{y} - \mathbf{v}_1 = (c_1 - 1)\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_p\mathbf{v}_p = c_2(\mathbf{v}_2 - \mathbf{v}_1) + \cdots + c_p(\mathbf{v}_p - \mathbf{v}_1)$$
+
+（用了 $c_1 - 1 = -c_2 - \cdots - c_p$）——平移后权和约束自动消失。∎
+
+**例1（Example 1，完整实战）**：把 $\mathbf{y} = (4, 1)$ 写成 $\mathbf{v}_1 = (1,2)$, $\mathbf{v}_2 = (2,5)$, $\mathbf{v}_3 = (1,3)$, $\mathbf{v}_4 = (-2,2)$ 的仿射组合。
+
+**解**（用 Theorem 1，取 $\mathbf{v}_1$ 为"锚点"）：$\mathbf{y} - \mathbf{v}_1 = (3, -1)$；$\mathbf{v}_2 - \mathbf{v}_1 = (1, 3)$, $\mathbf{v}_3 - \mathbf{v}_1 = (0, 1)$, $\mathbf{v}_4 - \mathbf{v}_1 = (-3, 0)$。解
+
+$$\begin{bmatrix} 1 & 0 & -3 & 3 \\
+3 & 1 & 0 & -1 \end{bmatrix} \sim \cdots \Rightarrow \begin{cases} c_2 = 3 + 3c_4 \\ c_3 = -10 - 9c_4 \\ c_1 = 8 + 5c_4 \end{cases} \ (c_4 \text{ 自由})$$
+
+**特解**（$c_4 = 0$）：$\mathbf{y} = 8\mathbf{v}_1 + 3\mathbf{v}_2 - 10\mathbf{v}_3 + 0\mathbf{v}_4$（权和 $8+3-10+0 = 1$ ✓，验证 $8(1,2)+3(2,5)-10(1,3) = (4,1)$ ✓）
+
+（$c_4 = 1$ 得另一解 $\mathbf{y} = 13\mathbf{v}_1 + 6\mathbf{v}_2 - 19\mathbf{v}_3 + \mathbf{v}_4$ ✓——仿射组合一般不唯一！）
+
+**例2（Example 2，是否仿射的快速判别）**：$\mathbf{b}_1 = (4,0,3)$, $\mathbf{b}_2 = (0,4,2)$, $\mathbf{b}_3 = (5,2,4)$。
+
+$$\mathbf{p}_1 = (2,0,0) = \mathbf{b}_1 + \mathbf{b}_2 - \mathbf{b}_3 \ (\text{权和} = 1+1-1 = -1 \neq 1) \Rightarrow \mathbf{p}_1 \notin \operatorname{aff}\{\mathbf{b}_1,\mathbf{b}_2,\mathbf{b}_3\}$$
+
+$$\mathbf{p}_2 = (1,2,2) = \frac{2}{3}\mathbf{b}_1 + \frac{2}{3}\mathbf{b}_2 - \frac{1}{3}\mathbf{b}_3 \ (\text{权和} = \frac{2}{3}+\frac{2}{3}-\frac{1}{3} = 1) \Rightarrow \mathbf{p}_2 \in \operatorname{aff}\{\mathbf{b}_1,\mathbf{b}_2,\mathbf{b}_3\}$$
+
+> **快速心算**：先解线性表示，再看权和是否为 1——权和 ≠ 1 ⟹ 必非仿射（Theorem 1 保证此判别合法）。
+
+### 仿射集与 Flat Affine Sets and Flats
+
+**定义**：$S \subseteq \mathbb{R}^n$ 称为**仿射集（affine set）**，若对任意 $\mathbf{p}, \mathbf{q} \in S$，**过它们的直线全在 $S$ 中**——即
+
+$$(1 - t)\mathbf{p} + t\mathbf{q} \in S \quad (\forall t \in \mathbb{R})$$
+
+**THEOREM 2**：$S$ 是仿射集 ⟺ $S = \operatorname{aff} S$（归纳法证明：仿射集含其所有点的仿射组合）。
+
+**定义**：子空间 $W$ 的**平移** $W + \mathbf{p} = \{\mathbf{w} + \mathbf{p} : \mathbf{w} \in W\}$ 称为**flat**（平直集）。两个 flat **平行**若一个是另一个的平移。
+
+**维度**：$\dim(W + \mathbf{p}) = \dim W$。1 维 flat = 直线；$n-1$ 维 flat = **超平面（hyperplane）**。
+
+**THEOREM 3**：$S$ 是仿射集 ⟺ $S$ 是 flat。
+
+（证明思路：$S$ 仿射 ⟹ $W = S - \mathbf{p}_0$（$\mathbf{p}_0 \in S$）是子空间（过原点 + 加法/数乘封闭），$S = W + \mathbf{p}_0$。）
+
+![FIGURE 3 仿射包平面](img/fig81_3_affine_hull_plane.png)
+
+*FIGURE 3 The affine hull of {b1, b2, b3}. 图3 三个点的仿射包 = 过它们的平面（2 维 flat）：p₂ 在平面内（是仿射组合），p₁ 在平面外（不是）*
+
+**例3（Example 3，解集 = 仿射集）**：$A\mathbf{x} = \mathbf{b}$ 的解集 = $\{\mathbf{x}_3\mathbf{u} + \mathbf{p}\} = \operatorname{aff}\{\mathbf{p},\ \mathbf{u}+\mathbf{p}\}$——这正是 1.5 节的"特解 + 齐次通解 = 平移的解集"！取 $\mathbf{v}_1 = \mathbf{p} = (2, 0, -3)$, $\mathbf{v}_2 = \mathbf{u} + \mathbf{p} = (6, -3, -2)$，解集 = $\operatorname{aff}\{\mathbf{v}_1, \mathbf{v}_2\}$：$\mathbf{x} = (1-x_3)\mathbf{v}_1 + x_3\mathbf{v}_2$ ✓
+
+### THEOREM 4（齐次形式——与 2.7 节呼应！）
+
+> $\mathbf{y}$ 是 $\mathbf{v}_1, \dots, \mathbf{v}_p$ 的仿射组合 ⟺ **齐次形式**（homogeneous form）
+
+> $$\tilde{\mathbf{y}} = \begin{bmatrix} \mathbf{y} \\
+> 1 \end{bmatrix} \in \operatorname{Span}\left\{\begin{bmatrix} \mathbf{v}_1 \\
+> 1 \end{bmatrix}, \dots, \begin{bmatrix} \mathbf{v}_p \\
+> 1 \end{bmatrix}\right\}$$
+
+（证明一行：权和约束 $\sum c_i = 1$ 正是最后一个分量 $\sum c_i \cdot 1 = 1$。）
+
+> **联系 2.7 节**：2.7 节的齐次坐标 $(x, y, 1)$ 正是这里"齐次形式"的几何化身——**仿射几何 = 齐次坐标下的线性几何**。这是计算机图形学（2.7）与计算几何（8.1）的统一视角。
+
+**例4（Example 4，齐次形式实战）**：$\mathbf{v}_1 = (3,1,1)$, $\mathbf{v}_2 = (1,2,2)$, $\mathbf{v}_3 = (1,7,1)$, $\mathbf{p} = (4,3,0)$。把 $\mathbf{p}$ 写成仿射组合。
+
+**解**（解 4×4 系统，权约束编入第 4 行）：
+
+$$\begin{bmatrix} 3 & 1 & 1 & 4 \\
+1 & 2 & 7 & 3 \\
+1 & 2 & 1 & 0 \\
+1 & 1 & 1 & 1 \end{bmatrix} \sim \cdots \Rightarrow c_3 = \frac{1}{2},\ c_2 = -1,\ c_1 = \frac{3}{2}$$
+
+$$\mathbf{p} = \frac{3}{2}\mathbf{v}_1 - \mathbf{v}_2 + \frac{1}{2}\mathbf{v}_3 \quad \left(\text{权和 } \frac{3}{2} - 1 + \frac{1}{2} = 1 \checkmark\right)$$
+
+### 8.1 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 仿射组合 | 线性组合 + **权和 = 1**（两点情形 = 过两点的直线） |
+| 仿射包 aff S | 所有仿射组合的集合（子空间的平移 = flat） |
+| Theorem 1 | 仿射 ⟺ 减锚点后线性（权和约束自动消失） |
+| Theorem 2/3 | 仿射集 ⟺ 含自身仿射包 ⟺ flat（子空间的平移） |
+| Theorem 4 | 齐次形式：仿射组合 = 升维后的线性组合（2.7 节呼应） |
+| 例3 | 非齐次方程的解集 = 仿射集（1.5 节平移的几何化） |
+
+> **本节精髓**：仿射组合是"线性组合的平移版本"——Theorem 1 把仿射问题化归线性问题，Theorem 4 用齐次坐标把几何升维成线性代数。这解释了 1.5 节"解集 = 特解 + 齐次通解"的全部几何（解集是 flat）。下一节 8.2 研究**仿射无关性**——flat 的"维数"如何由仿射组合的唯一性刻画（类比线性无关）。
+
+---
