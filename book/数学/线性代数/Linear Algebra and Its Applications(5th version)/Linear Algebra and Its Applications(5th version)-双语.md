@@ -6804,3 +6804,98 @@ $$\mathbf{p} = \frac{17}{48}\mathbf{v}_1 + \frac{4}{48}\mathbf{v}_2 + \frac{27}{
 > **本节精髓**：凸性把"没有凹陷"这个几何直觉代数化，Carathéodory 定理用仿射无关（8.2）给出维数上限——凸包的点永远只需要 n+1 个"原料"。这解释了为什么线性规划（第 9 章）的最优解必在顶点（单纯形的角）取得，也预告了 Bézier 曲线的凸包性质。下一节 8.4 研究**超平面**——把 $\mathbb{R}^n$ 切成两半的 n−1 维 flat，线性规划约束的几何形态。
 
 ---
+---
+
+## 8.4 超平面 Hyperplanes
+
+**中文讲解**：超平面是**$n-1$ 维的 flat**——$\mathbb{R}^2$ 中的直线、$\mathbb{R}^3$ 中的平面。它是"把空间切成两半"的最小切割，也是线性规划约束 $\mathbf{a}\cdot\mathbf{x} \leq b$ 的几何形态。本节核心：**分离超平面定理**——不相交的凸集可以被超平面分开（对偶理论的摇篮）。
+
+### 超平面与线性泛函
+
+**定义**：**线性泛函（linear functional）**是 $\mathbb{R}^n \to \mathbb{R}$ 的线性变换 $f$（由行向量 $[\mathbf{a}\ \ \mathbf{b}]$ 实现：$f(\mathbf{x}) = a_1x_1 + \cdots + a_nx_n$）。对 $d \in \mathbb{R}$，定义**超平面**
+
+$$[f : d] = \{\mathbf{x} \in \mathbb{R}^n : f(\mathbf{x}) = d\}$$
+
+**两种形态**（Theorem 6 of 1.5 的应用）：
+- $[f : 0] = \operatorname{Nul} A$——过原点的超平面（子空间）
+- $[f : d] = [f : 0] + \mathbf{p}$（$f(\mathbf{p}) = d$）——$[f : 0]$ 的平移（parallel hyperplane）
+
+**法向量形式 (4)**：写成 $f(\mathbf{x}) = \mathbf{n}\cdot\mathbf{x}$，则
+
+$$[f : d] = \{\mathbf{x} : \mathbf{n}\cdot\mathbf{x} = d\}$$
+
+$\mathbf{n}$ 称为**法向量（normal vector）**——垂直于超平面（$\nabla f$ 方向，水平集/等值面语言）。
+
+**例1（Example 1，平行直线族）**：$\mathbf{n} = (3, 4)$, $f = 3x + 4y$。
+
+$$H = [f : 12], \qquad H_0 = [f : 0], \qquad H_1 = [f : -9]$$
+
+三条平行直线（FIGURE 2），法向量 $\mathbf{n}$ 垂直于每条线。
+
+![FIGURE 2 平行超平面](img/fig84_2_parallel_hyperplanes.png)
+
+*FIGURE 2 The plane with normal n. 图2 例1：法向量 n = (3,4) 垂直于平行直线族 H = [f:12]、H₀ = [f:0]、H₁ = [f:−9]——改变 d 只平移直线，不改变方向*
+
+**例2（Example 2，参数化直线）**：$x - 4y = 13$。把 $y$ 当自由变量：$\mathbf{x} = \begin{bmatrix} 13 + 4y \\
+y \end{bmatrix} = \begin{bmatrix} 13 \\
+0 \end{bmatrix} + y\begin{bmatrix} 4 \\
+1 \end{bmatrix} = \mathbf{p} + y\mathbf{q}$——过 $(13, 0)$ 方向 $(4,1)$ 的直线（$\mathbf{n} = (1,-4) \perp \mathbf{q}$ ✓）。
+
+**例3（Example 3，求过两点的直线方程）**：$\mathbf{v}_1 = (1,2)$, $\mathbf{v}_2 = (6,0)$。
+
+**解**：平移集 $\mathbf{v}_2 - \mathbf{v}_1 = (5,-2)$；法向量须满足 $\mathbf{n}\cdot(5,-2) = 0$。**观察得** $\mathbf{n} = (2,5)$（$10 - 10 = 0$ ✓）。$d = f(\mathbf{v}_1) = 2(1) + 5(2) = 12$。
+
+$$\boxed{2x + 5y = 12} \qquad (\text{验算 } f(\mathbf{v}_2) = 12 \checkmark)$$
+
+**例4（Example 4，过三点的平面）**：$\mathbf{v}_1 = (1,1,1)$, $\mathbf{v}_2 = (2,-1,4)$, $\mathbf{v}_3 = (3,1,2)$。
+
+**解**：$\mathbf{v}_2 - \mathbf{v}_1 = (1,-2,3)$, $\mathbf{v}_3 - \mathbf{v}_1 = (2,0,1)$。$\mathbf{n}$ 须与两者都垂直：
+
+$$\mathbf{n}\cdot(1,-2,3) = 0, \qquad \mathbf{n}\cdot(2,0,1) = 0 \quad \Rightarrow \quad \mathbf{n} = (-2, 5, 4) \ (\text{叉乘} \checkmark)$$
+
+$$f = -2x_1 + 5x_2 + 4x_3, \qquad d = f(\mathbf{v}_1) = 7$$
+
+$$\boxed{-2x_1 + 5x_2 + 4x_3 = 7} \qquad (\text{三点代入全为 7 } \checkmark\checkmark\checkmark)$$
+
+> **一般方法**：过 $\mathbf{v}_1,\dots,\mathbf{v}_n$（仿射无关）的超平面方程 = 解齐次系统 + 定 $d$；$\mathbb{R}^3$ 中 $\mathbf{n}$ = 两平移向量的**叉乘**。
+
+### 分离超平面定理 THEOREM 12 & 13
+
+**定义**：超平面 $H = [f : d]$ **分离（separates）**集合 $A, B$，若
+
+$$f(A) \leq d \quad \text{且} \quad f(B) \geq d \qquad (\text{或反向})$$
+
+即 $A, B$ 落在 $H$ 的两侧（可接触 $H$）。若全部用严格不等号，则称**严格分离（strictly separates）**。
+
+> **反例（FIGURE 4）**：$A = \{(x,y) : x \geq \frac{1}{2},\ \frac{1}{x} \leq y \leq 2\}$（双曲线上方区域）与 $B = \{(x,y) : x \geq 0,\ y = 0\}$（$x$ 轴射线）——**不相交的闭凸集，但无法严格分离**：$A$ 的边界渐近逼近 $x$ 轴，任何分隔线必在某处接触 $B$。
+
+![FIGURE 4 不可分离反例](img/fig84_4_disjoint_convex.png)
+
+*FIGURE 4 Disjoint closed convex sets. 图4 反例：双曲线区域 A 与 x 轴射线 B 不相交，但 A 无限逼近 B——不存在严格分离的超平面（紧致性不可缺！）*
+
+**THEOREM 12（分离超平面定理）**：
+> 设 $A, B$ 非空凸集，**$A$ 紧致、$B$ 闭**。则存在超平面**严格分离** $A$ 与 $B$ ⟺ $A \cap B = \varnothing$。
+
+（证明思路：取 $\mathbf{a} \in A$ 到 $B$ 的最近点 $\mathbf{b}$（最佳逼近定理 6.3 保证存在唯一），超平面垂直平分线段 $\mathbf{a}\mathbf{b}$ 并稍微平移，即可严格分开两集。）
+
+**THEOREM 13**：
+> 设 $A, B$ 非空**紧致**集。则存在超平面严格分离 $A$ 与 $B$ ⟺ $\boxed{(\operatorname{conv} A) \cap (\operatorname{conv} B) = \varnothing}$。
+
+（"两个点集可被分开 ⟺ 它们的凸包不相交"——把分离问题完全化归为凸包相交问题。）
+
+> **对线性规划的意义**：第 9 章将看到，"原问题可行且对偶问题可行"的对偶定理，几何上正是"原问题可行域与某个变换后的集合可被超平面分离"。
+
+### 8.4 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 超平面 $[f:d]$ | $\{\mathbf{x} : \mathbf{n}\cdot\mathbf{x} = d\}$：n−1 维 flat（$\mathbb{R}^2$ 直线、$\mathbb{R}^3$ 平面） |
+| 法向量 $\mathbf{n}$ | 垂直于超平面；改 $d$ 只平移不改变方向 |
+| 例3/例4 | 过两点直线 2x+5y=12；过三点平面 −2x₁+5x₂+4x₃=7（叉乘法向量） |
+| 分离 / 严格分离 | 两侧（可接触）/ 两侧且不接触 |
+| Theorem 12/13 | 紧致+闭 ⟹ 可严格分离 ⟺ 不相交；紧致集 ⟺ 凸包不相交 |
+| 反例启示 | 紧致性条件不可省（双曲线渐近 x 轴） |
+
+> **本节精髓**：超平面 = 内积方程的水平集（法向量定方向、d 定位置）；分离定理宣告"凸且不相交 ⟹ 可被直线/平面切开"——这是优化对偶理论的雏形，也是支撑 SVM（支持向量机）的几何直觉。下一节 8.5 进入**多胞形（polytope）**：有界多面体 = 有限半空间的交 = 有限点的凸包（两幅面孔！），线性规划可行域的标准形态。
+
+---
