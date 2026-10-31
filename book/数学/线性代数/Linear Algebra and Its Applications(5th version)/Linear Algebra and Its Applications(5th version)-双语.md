@@ -970,6 +970,124 @@ $$
 至此第 1 章核心脉络完整：**解方程组（1.1–1.2）→ 线性组合与 Span（1.3）→ 矩阵方程 $A\mathbf{x}=\mathbf{b}$（1.4）→ 解集的结构：特解 + 齐次通解（1.5）**。接下来第 2 章将进入**矩阵代数**（逆矩阵、矩阵分解），第 1 章的一切都是它的地基。
 ---
 
+---
+
+## 2.1 矩阵运算 Matrix Operations
+
+**中文讲解**：第 1 章中矩阵主要用于"记账"（记方程组的系数）。本章开始把矩阵当作**有运算规则的代数对象**——可以相加、数乘、相乘。矩阵乘法是重点也是难点，请慢慢消化。
+
+### 矩阵的加法与数乘 Sums and Scalar Multiples
+
+**定义（与向量完全类似）**：两个**同规模**（同样 $m\times n$）的矩阵相加，就是对应元素相加；矩阵乘标量 $r$，就是每个元素乘 $r$。
+
+**例1（Example 1）**：
+
+$$A = \begin{bmatrix} 4 & 0 & 5 \\
+-1 & 3 & 2 \end{bmatrix}, \qquad B = \begin{bmatrix} 1 & 1 & 1 \\
+3 & 5 & 7 \end{bmatrix}$$
+
+$$A + B = \begin{bmatrix} 5 & 1 & 6 \\
+2 & 8 & 9 \end{bmatrix}, \qquad 2B = \begin{bmatrix} 2 & 2 & 2 \\
+6 & 10 & 14 \end{bmatrix}, \qquad A - 2B = \begin{bmatrix} 2 & -2 & 3 \\
+-7 & -7 & -12 \end{bmatrix}$$
+
+> 不同规模的矩阵**不能**相加/相减。
+
+**THEOREM 1（矩阵加法的性质）**：设 $A,B,C$ 是同规模矩阵，$r,s$ 是标量：
+1. $A + B = B + A$（交换律）
+2. $(A + B) + C = A + (B + C)$（结合律）
+3. $A + 0 = A$（零矩阵：元素全 0）
+4. $r(A + B) = rA + rB$（分配律）
+5. $(r + s)A = rA + sA$（分配律）
+6. $r(sA) = (rs)A$（结合律）
+
+### 矩阵乘法 Matrix Multiplication
+
+**中文讲解**：为什么要定义矩阵乘法？核心动机：**复合线性变换**。
+
+当矩阵 $B$ 乘向量 $\mathbf{x}$，把它变成 $B\mathbf{x}$；再用矩阵 $A$ 乘，得到 $A(B\mathbf{x})$。这是两个变换的**复合（composition）**。我们想用一个矩阵 $AB$ 直接表示这个复合变换：
+
+$$A(B\mathbf{x}) = (AB)\mathbf{x}$$
+
+![FIGURE 2 先乘B再乘A](img/fig21_2_multiply_B_then_A.png)
+
+*FIGURE 2 Multiplication by $B$ and then $A$. 图2 先经 $B$ 变换、再经 $A$ 变换*
+
+![FIGURE 3 用AB一次完成](img/fig21_3_multiplication_by_AB.png)
+
+*FIGURE 3 Multiplication by $AB$. 图3 复合变换 = 乘以一个矩阵 $AB$*
+
+**定义（列的视角）**：若 $A$ 是 $m\times n$ 矩阵，$B$ 是 $n\times p$ 矩阵，$B$ 的列为 $\mathbf{b}_1,\dots,\mathbf{b}_p$，则乘积 $AB$ 是 $m\times p$ 矩阵，其**各列是 $A$ 分别乘 $B$ 的各列**：
+
+$$AB = A\begin{bmatrix} \mathbf{b}_1 & \mathbf{b}_2 & \cdots & \mathbf{b}_p \end{bmatrix} = \begin{bmatrix} A\mathbf{b}_1 & A\mathbf{b}_2 & \cdots & A\mathbf{b}_p \end{bmatrix}$$
+
+> **规模条件（小白最常错的地方！）**：$A$ 的**列数**必须等于 $B$ 的**行数**——即中间维度必须"咬合"：$(m\times \boxed{n})(\boxed{n}\times p) = m\times p$。
+
+**行-列法则 Row-Column Rule（手算神器）**：$AB$ 的第 $i$ 行第 $j$ 列元素 = $A$ 的第 $i$ **行** 与 $B$ 的第 $j$ **列** 对应元素乘积之和（点积）：
+
+$$(AB)_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}$$
+
+**例（验证）**：
+
+$$\begin{bmatrix} 2 & 3 \\
+1 & -5 \end{bmatrix} \begin{bmatrix} 4 & 3 & 6 \\
+1 & -2 & 3 \end{bmatrix} = \begin{bmatrix} 2(4)+3(1) & 2(3)+3(-2) & 2(6)+3(3) \\
+1(4)+(-5)(1) & 1(3)+(-5)(-2) & 1(6)+(-5)(3) \end{bmatrix} = \begin{bmatrix} 11 & 0 & 21 \\
+-1 & 13 & -9 \end{bmatrix}$$
+
+### THEOREM 2（矩阵乘法的性质）
+
+设运算都有定义（规模匹配），则：
+1. $A(BC) = (AB)C$（结合律）
+2. $A(B + C) = AB + AC$（左分配律）
+3. $(B + C)A = BA + CA$（右分配律）
+4. $r(AB) = (rA)B = A(rB)$（标量位置任意）
+5. $I_m A = A = A I_n$（单位矩阵是"乘法 1"）
+
+### ⚠️ 矩阵乘法的"怪脾气"（新手必看！）
+
+**中文讲解**：矩阵乘法**不满足交换律**，且"乘积为零"推不出"因子为零"——这是它和数的乘法的两大本质区别！
+
+**例7（Example 7）**：$AB \neq BA$
+
+$$A = \begin{bmatrix} 5 & 1 \\
+3 & -2 \end{bmatrix}, \quad B = \begin{bmatrix} 2 & 0 \\
+4 & 3 \end{bmatrix}$$
+
+$$AB = \begin{bmatrix} 14 & 3 \\
+-2 & -6 \end{bmatrix}, \qquad BA = \begin{bmatrix} 10 & 2 \\
+29 & -2 \end{bmatrix} \quad (AB \neq BA \text{！})$$
+
+**消去律不成立**：$AB = AC$ **推不出** $B = C$；$AB = 0$ **推不出** $A = 0$ 或 $B = 0$。
+
+**例（书内警示）**：
+
+$$\begin{bmatrix} 2 & -3 \\
+-4 & 6 \end{bmatrix} \begin{bmatrix} 3 \\
+2 \end{bmatrix} = \begin{bmatrix} 0 \\
+0 \end{bmatrix}, \qquad \begin{bmatrix} 2 & -3 \\
+-4 & 6 \end{bmatrix} \begin{bmatrix} 3 \\
+2 \end{bmatrix} = \begin{bmatrix} 2 & -3 \\
+-4 & 6 \end{bmatrix} \begin{bmatrix} 6 \\
+4 \end{bmatrix} \;\text{但}\; \begin{bmatrix} 3 \\
+2 \end{bmatrix} \neq \begin{bmatrix} 6 \\
+4 \end{bmatrix}$$
+
+> **记忆口诀**：矩阵乘法"**不可交换、不可消去**"，但结合律和分配律都成立。
+
+### 2.1 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| $A + B$、$rA$ | 同规模矩阵对应元素运算（与向量一致） |
+| $AB$ 列视角 | $AB$ 的第 $j$ 列 = $A \times (B$ 的第 $j$ 列） |
+| 行-列法则 | $(AB)_{ij}$ = $A$ 的第 $i$ 行 · $B$ 的第 $j$ 列 |
+| 规模条件 | $A_{m\times n} B_{n\times p}$，中间维度必须相等 |
+| 两大怪脾气 | 无交换律、无消去律（$AB=0 \nRightarrow A=0$） |
+
+> **本节精髓**：矩阵乘法源于**复合线性变换**的需求（$A(B\mathbf{x}) = (AB)\mathbf{x}$）——矩阵乘法的定义不是任意的，而是"变换复合"的必然结果。2.2 节的逆矩阵则是"变换的反向操作"。
+
+
 ## 2.2 逆矩阵 The Inverse of a Matrix
 
 **中文讲解**：数的"倒数"概念推广到矩阵。回忆：5 的乘法逆元是 $5^{-1} = \frac{1}{5}$，满足 $5^{-1} \cdot 5 = 1$ 且 $5 \cdot 5^{-1} = 1$。矩阵推广需要**两个**方程都成立（因为矩阵乘法**不交换**），而且只有**方阵**才谈逆矩阵。
