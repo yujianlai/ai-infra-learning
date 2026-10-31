@@ -5251,3 +5251,123 @@ $$\hat{\mathbf{x}} = \begin{bmatrix} -1 \\
 > **本节精髓**：最小二乘是最佳逼近定理（6.3）对"解方程组"问题的直接应用——正规方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ 是全部统计回归的理论源头。当 $A$ 列相关时解不唯一但投影唯一；数值实践中 QR 分解稳定压倒正规方程法。6.6 节把这套工具用到统计学**线性回归**（拟合直线/曲线、多元回归），你会看到最小二乘如何"发明"回归系数。
 
 ---
+---
+
+## 6.6 线性模型的应用 Applications to Linear Models
+
+**中文讲解**：统计学中的**回归分析**（regression）——用一条线/曲线/曲面拟合数据——本质上就是 6.5 节的最小二乘问题。本节把统计语言翻译成线性代数：**设计矩阵 X、参数向量 β、观测向量 y、残差 ε**——一旦 X 写出，正规方程自动接管。
+
+### 最小二乘直线 The Least-Squares Line
+
+**问题**：给定数据 $(x_1, y_1), \dots, (x_n, y_n)$，求直线 $y = \beta_0 + \beta_1x$ 使**残差平方和**
+
+$$\sum (y_j - \beta_0 - \beta_1 x_j)^2$$
+
+最小（"最小二乘"名字的由来：minimize the sum of squares）。
+
+**翻译成 6.5 节语言**：方程 $y_j = \beta_0 + \beta_1 x_j$（$j=1,\dots,n$）构成 $n$ 方程 2 未知量系统——通常无解。写成矩阵形式
+
+$$\mathbf{y} = X\boldsymbol\beta + \boldsymbol\epsilon$$
+
+$$X = \begin{bmatrix} 1 & x_1 \\
+\vdots & \vdots \\
+1 & x_n \end{bmatrix}, \qquad \boldsymbol\beta = \begin{bmatrix} \beta_0 \\
+\beta_1 \end{bmatrix}, \qquad \boldsymbol\epsilon = \begin{bmatrix} \epsilon_1 \\
+\vdots \\
+\epsilon_n \end{bmatrix} = \mathbf{y} - X\boldsymbol\beta \ (\text{残差向量})$$
+
+**X 叫设计矩阵（design matrix）**。最小二乘直线 = 使 $\|\boldsymbol\epsilon\|$ 最小的 $\hat{\boldsymbol\beta}$——正规方程
+
+$$X^TX\hat{\boldsymbol\beta} = X^T\mathbf{y} \tag{1}$$
+
+![FIGURE 1 拟合直线](img/fig66_1_fitting_line.png)
+
+*FIGURE 1 Fitting a line to experimental data. 图1 拟合的几何：数据点 (xⱼ, yⱼ) 与直线上预测点 (xⱼ, β₀+β₁xⱼ) 的竖直差距 = 残差 εⱼ；最小二乘让残差平方和最小*
+
+**例1（Example 1，完整实战）**：求数据 $(2,1), (5,2), (7,3), (8,3)$ 的最小二乘直线。
+
+**解**：
+
+$$X = \begin{bmatrix} 1 & 2 \\
+1 & 5 \\
+1 & 7 \\
+1 & 8 \end{bmatrix}, \qquad \mathbf{y} = \begin{bmatrix} 1 \\
+2 \\
+3 \\
+3 \end{bmatrix}$$
+
+$$X^TX = \begin{bmatrix} 4 & 22 \\
+22 & 142 \end{bmatrix}, \qquad X^T\mathbf{y} = \begin{bmatrix} 9 \\
+57 \end{bmatrix}$$
+
+列无关（$x_j$ 不全相同）⇒ 可逆：
+
+$$\hat{\boldsymbol\beta} = (X^TX)^{-1}X^T\mathbf{y} = \frac{1}{84}\begin{bmatrix} 142 & -22 \\
+-22 & 4 \end{bmatrix}\begin{bmatrix} 9 \\
+57 \end{bmatrix} = \frac{1}{84}\begin{bmatrix} 24 \\
+30 \end{bmatrix} = \begin{bmatrix} 2/7 \\
+5/14 \end{bmatrix}$$
+
+**最小二乘直线**：
+
+$$\boxed{y = \frac{2}{7} + \frac{5}{14}x} \tag{FIGURE 2}$$
+
+![FIGURE 2 最小二乘直线](img/fig66_2_least_squares_line.png)
+
+*FIGURE 2 The least-squares line y = 2/7 + 5/14 x. 图2 例1 的结果：直线穿过数据的"重心趋势"，四个残差（竖直虚线）平方和最小*
+
+> **均值偏差形式（mean-deviation form）**：令 $\bar{x} = \frac{1}{n}\sum x_j$，把数据中心化 $x^* = x - \bar{x}$，则设计矩阵的两列 **$X^* = [\mathbf{1}\ \ \mathbf{x}^*]$ 正交**（$n\bar{x}^* = 0$）——由 6.5 例4 的捷径，$\hat{\beta}_1 = \frac{\mathbf{x}^*\cdot\mathbf{y}}{\mathbf{x}^*\cdot\mathbf{x}^*}$ 一行算出（统计学斜率公式的矩阵形态）。
+
+### 一般线性模型 The General Linear Model
+
+**关键洞察**：只要模型对参数**线性**，任何曲线/曲面拟合都是同一个抽象问题
+
+$$y_j = \beta_0 f_0(x_j) + \cdots + \beta_k f_k(x_j) + \epsilon_j \tag{2}$$
+
+设计矩阵的第 $j$ 行 = $[f_0(x_j) \cdots f_k(x_j)]$。写定 $X$ 后，正规方程 $X^TX\hat{\boldsymbol\beta} = X^T\mathbf{y}$ 一视同仁地解决一切。
+
+**例2（Example 2，抛物线）**：拟合 $y = \beta_0 + \beta_1x + \beta_2x^2$，数据 $(x_1,y_1), \dots, (x_n,y_n)$：
+
+$$X = \begin{bmatrix} 1 & x_1 & x_1^2 \\
+\vdots & \vdots & \vdots \\
+1 & x_n & x_n^2 \end{bmatrix}, \qquad \boldsymbol\beta = \begin{bmatrix} \beta_0 \\
+\beta_1 \\
+\beta_2 \end{bmatrix}$$
+
+**例3（Example 3，三次曲线）**：$y = \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3$，X 加一列 $x_j^3$——**"多项式回归"只是设计矩阵加列**。
+
+**例4（Example 4，最小二乘平面——多元回归）**：用平面 $y = \beta_0 + \beta_1u + \beta_2v$ 拟合 $(u_j, v_j, y_j)$，$j=1,\dots,n$：
+
+$$X = \begin{bmatrix} 1 & u_1 & v_1 \\
+\vdots & \vdots & \vdots \\
+1 & u_n & v_n \end{bmatrix}, \qquad \mathbf{y} = \begin{bmatrix} y_1 \\
+\vdots \\
+y_n \end{bmatrix}$$
+
+一般曲面 $y = \beta_0 + \beta_1u + \beta_2v + \beta_3u^2 + \beta_4uv + \beta_5v^2$ 同理（6.6 公式 5）——统计学"交互项""二次项"在矩阵语言里只是列。
+
+### 统计视角的注记
+
+- **残差向量** $\boldsymbol\epsilon = \mathbf{y} - X\hat{\boldsymbol\beta}$ 正交于 $\operatorname{Col} X$（正规方程的几何翻译）——它携带"模型未解释"的信息。
+- 统计软件报告的 $R^2$、标准误等，皆由 $\|\boldsymbol\epsilon\|$ 与 $X$ 的 QR 分解导出。
+
+### 练习精选（Practice/Exercises 亮点）
+
+**练习 14（回归直线过质心）**：任何最小二乘直线必过点 $(\bar{x}, \bar{y})$——因为正规方程第一行 $\mathbf{1}^TX\hat{\boldsymbol\beta} = \mathbf{1}^T\mathbf{y}$ 即 $n(\hat{\beta}_0 + \hat{\beta}_1\bar{x}) = n\bar{y}$ ⇒ $\hat{\beta}_0 + \hat{\beta}_1\bar{x} = \bar{y}$。（图2 中直线确实穿过数据重心附近——可检验拟合代码是否正确。）
+
+**练习 13**：用最小二乘直线拟合并计算 $X$、$X^T\mathbf{y}$、解正规方程——巩固流程。
+
+### 6.6 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 设计矩阵 X | 每一行 = 基函数在数据点的取值；直线 [1 xⱼ]、抛物线 [1 xⱼ xⱼ²] |
+| 一般线性模型 | y = Xβ + ε；一切曲线/曲面拟合统一为正规方程 |
+| 例1 | 四点拟合完整实战：β̂ = (2/7, 5/14)，直线 y = 2/7 + (5/14)x |
+| 均值偏差形式 | 中心化后列正交，斜率一行公式 |
+| 多元回归 | 平面/曲面 = 设计矩阵加列 |
+| 练习14 | 回归直线必过 (x̄, ȳ)——正规方程第一行的直接推论 |
+
+> **本节精髓**：线性代数把统计学"回归"从公式记忆升华为**统一框架**——直线、抛物线、平面、交互模型，全是 $X\boldsymbol\beta \approx \mathbf{y}$ 的最小二乘解。这也是数据科学（机器学习特征工程、神经网络线性层）的共同语言。下一节 6.7 把内积推广到**函数空间**（$\mathbb{C}[a,b]$ 上的积分内积），为 6.8 节的傅里叶级数做准备。
+
+---
