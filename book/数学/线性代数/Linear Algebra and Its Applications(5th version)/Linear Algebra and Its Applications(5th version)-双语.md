@@ -6702,3 +6702,105 @@ $$\mathbf{c} = \frac{1}{4}(1,0,1) + \frac{1}{2}(1,.4,1) + \frac{1}{4}(.6,0,1) = 
 > **本节精髓**：重心坐标是"仿射基下的坐标"——把重心力学（1827）与 GPU 渲染（21 世纪）统一在同一个线性系统里。符号判别（全正 = 内部）是计算几何的瑞士军刀。下一节 8.3 引入**凸组合**（权重非负的仿射组合）——单纯形、Carathéodory 定理，以及线性规划可行域的几何。
 
 ---
+---
+
+## 8.3 凸组合 Convex Combinations
+
+**中文讲解**：把仿射组合的"权和 = 1"再加一条"**权重非负**"，就得到**凸组合**——几何上，凸包是"包含所有点且没有凹陷"的最小集合。这是线性规划（第 9 章）与计算机图形学（Bézier 曲线）的共同语言。
+
+### 凸组合与凸集
+
+**定义**：$\mathbf{v}_1, \dots, \mathbf{v}_p$ 的**凸组合（convex combination）**是权和为 1 且**所有权非负**的线性组合：
+
+$$\mathbf{y} = c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p, \qquad c_1 + \cdots + c_p = 1,\quad c_i \geq 0$$
+
+$$\operatorname{conv} S = S \text{ 中点的所有凸组合}$$
+
+**例1（Example 1，快速判别）**：$S = \{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}$ 为 8.2 例2 的正交三向量。
+
+- $\mathbf{p}_1 = \frac{1}{3}(\mathbf{v}_1 + \mathbf{v}_2 + \mathbf{v}_3)$：权和 1 且权全正 ⇒ $\mathbf{p}_1 \in \operatorname{conv} S$
+- $\mathbf{p}_2$（8.2 例2 中的点）：$\notin \operatorname{Span} S$ ⇒ $\notin \operatorname{aff} S$ ⇒ **更不在** $\operatorname{conv} S$
+
+（**包含关系**：$\operatorname{conv} S \subseteq \operatorname{aff} S \subseteq \operatorname{Span} S$——凸包最小！）
+
+**定义**：$S$ 是**凸集（convex set）**，若对任意 $\mathbf{p}, \mathbf{q} \in S$，**线段** $\overline{\mathbf{p}\mathbf{q}}$ 全在 $S$ 中：
+
+$$(1 - t)\mathbf{p} + t\mathbf{q} \in S \quad (0 \leq t \leq 1)$$
+
+**直觉**：凸集没有"凹陷"——任意两点的视线不穿出集合（FIGURE 1）。
+
+![FIGURE 1 凸集](img/fig83_1_convex_sets.png)
+
+*FIGURE 1 Convex and nonconvex sets. 图1 凸与非凸：左两图任意两点线段都在集合内（凸）；右图存在两点连线跑出集合（非凸）*
+
+**THEOREM 7（凸 ⟺ 含自身凸包）**：
+> $S$ 凸 ⟺ $S$ 中任意点集的凸组合仍在 $S$ 中，即 **$S$ 凸 ⟺ $S = \operatorname{conv} S$**。
+
+（归纳证明同 8.1 定理 2：线段 ⇒ 三点 ⇒ 任意多点。）
+
+> **凸包 = 最小凸集**：$\operatorname{conv} S$ = 包含 $S$ 的所有凸集的交集——"把 $S$ 填满成没有凹陷"。
+
+**例2（Example 2，标准单纯形）**：$S = \{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$（$\mathbb{R}^3$ 标准基）：
+
+$$\operatorname{conv} S = \left\{c_1\mathbf{e}_1 + c_2\mathbf{e}_2 + c_3\mathbf{e}_3 : c_i \geq 0,\ \textstyle\sum c_i = 1\right\} = \{(c_1, c_2, c_3) : c_i \geq 0,\ c_1+c_2+c_3 = 1\}$$
+
+即**第一象限中的三角形面**（2 维单纯形）——三顶点为 $(1,0,0), (0,1,0), (0,0,1)$。
+
+**例3（Example 3，抛物线的凸包）**：$S = \{(x, x^2) : x \in \mathbb{R}\}$（抛物线上的点集）。凸包不是曲线本身，而是**抛物线上方的整个区域** $\{(x, y) : y \geq x^2\}$——因为曲线上任意两点的线段（割线）都在曲线之上，逐步填满整个上区域（FIGURE 3）。
+
+![FIGURE 3 抛物线凸包](img/fig83_3_parabola_conv.png)
+
+*FIGURE 3 conv S. 图3 例3：抛物线 $y = x^2$ 上点的凸包 = 抛物线上方的整个阴影区域（凸包"填满凹陷"）*
+
+### THEOREM（Carathéodory 定理，1907）
+
+> 若 $S \subseteq \mathbb{R}^n$ 非空，则 $\operatorname{conv} S$ 中**每个点**都可表示为 $S$ 中 **$n+1$ 个或更少**点的凸组合。
+
+**证明（消元思想，极妙）**：设 $\mathbf{p}$ 是 $S$ 中 $m > n+1$ 个点的凸组合（权和 1，全正）。则齐次形式向量组 $\{\tilde{\mathbf{v}}_1, \dots, \tilde{\mathbf{v}}_m\} \subseteq \mathbb{R}^{n+1}$ 必**线性相关**（$m > n+1$）：
+
+$$a_1\tilde{\mathbf{v}}_1 + \cdots + a_m\tilde{\mathbf{v}}_m = \mathbf{0}, \quad \sum a_i = 0 \tag{3}$$
+
+设 $b_i = c_i - t a_i$：$\sum b_i = 1$，且当 $t$ 足够小时 $b_i \geq 0$。取
+
+$$t = \min\left\{\frac{c_i}{a_i} : a_i > 0\right\}$$
+
+则至少一个 $b_i = 0$——**消去了一个点**！若剩余仍超 $n+1$ 个，重复此过程。∎
+
+> **直觉**：凸组合中"多余"的点（超过 n+1 个必仿射相关）可用其余点的非负组合替代——这是 8.2 仿射无关的自然推论（n+1 是仿射无关集的最大点数）。
+
+**例2（证明的数值演示）**：$S = \{(1,0), (2,3), (5,4), (3,0)\}$，$\mathbf{p} = (10/3, 5/2)$。
+
+$$\mathbf{p} = \frac{1}{4}\mathbf{v}_1 + \frac{1}{6}\mathbf{v}_2 + \frac{1}{2}\mathbf{v}_3 + \frac{1}{12}\mathbf{v}_4 \tag{2}$$
+
+四点仿射相关（$\mathbb{R}^2$ 中超过 3 点必相关）：
+
+$$-5\mathbf{v}_1 + 4\mathbf{v}_2 - 3\mathbf{v}_3 + 4\mathbf{v}_4 = \mathbf{0} \tag{3}$$
+
+(3) 中正系数是 $a_2 = 4$（对应 $c_2 = 1/6$）与 $a_4 = 4$（对应 $c_4 = 1/12$）。比值：$\frac{1/6}{4} = \frac{1}{24} > \frac{1/12}{4} = \frac{1}{48}$——取 $t = \frac{1}{48}$（消 $a_4$ 项，即消去 $\mathbf{v}_4$）：
+
+$$b_1 = \frac{1}{4} + \frac{5}{48} = \frac{17}{48}, \qquad b_2 = \frac{1}{6} - \frac{4}{48} = \frac{4}{48}, \qquad b_3 = \frac{1}{2} + \frac{3}{48} = \frac{27}{48}$$
+
+$$\mathbf{p} = \frac{17}{48}\mathbf{v}_1 + \frac{4}{48}\mathbf{v}_2 + \frac{27}{48}\mathbf{v}_3 \quad \left(\text{权和} \frac{48}{48} = 1 \checkmark\right)$$
+
+**3 个点的凸组合**——Carathéodory 定理（$n+1 = 3$）保证可达！
+
+> **单纯形（simplex）**：$d+1$ 个仿射无关点的凸包 = $d$ 维单纯形（0 维 = 点、1 维 = 线段、2 维 = 三角形、3 维 = 四面体）。它是"最简单"的 d 维凸集，线性规划可行域的基本构件。
+
+### Bézier 预告（练习 23-24）
+
+**二次 Bézier 曲线** $g(t) = (1-t)f_0(t) + t f_1(t)$（$f_0, f_1$ 是控制点间的线段）在 $t \in [0,1]$ 时是 $\{\mathbf{p}_0, \mathbf{p}_1, \mathbf{p}_2\}$ 的**凸组合**——因此整条曲线落在控制点三角形的凸包内！（8.6 节详述）这是字体设计（PostScript/TrueType）稳定可控的数学原因。
+
+### 8.3 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| 凸组合 | 仿射组合 + 权非负（conv S ⊆ aff S ⊆ Span S） |
+| 凸集 / Theorem 7 | 两点线段不出集合 ⟺ S = conv S |
+| 凸包 conv S | 最小凸集 = 所有包含 S 凸集的交集（"填满凹陷"） |
+| Carathéodory | conv S 每点 = 至多 n+1 个点的凸组合（消元证明） |
+| 例2/例3 | 单纯形三角形面 / 抛物线上方区域 |
+| Bézier 预告 | 控制点凸包包住整条曲线 |
+
+> **本节精髓**：凸性把"没有凹陷"这个几何直觉代数化，Carathéodory 定理用仿射无关（8.2）给出维数上限——凸包的点永远只需要 n+1 个"原料"。这解释了为什么线性规划（第 9 章）的最优解必在顶点（单纯形的角）取得，也预告了 Bézier 曲线的凸包性质。下一节 8.4 研究**超平面**——把 $\mathbb{R}^n$ 切成两半的 n−1 维 flat，线性规划约束的几何形态。
+
+---
