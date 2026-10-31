@@ -1519,7 +1519,7 @@ $$AB = \begin{bmatrix} \text{col}_1(A) & \text{col}_2(A) & \cdots & \text{col}_n
 \vdots \\
 \text{row}_n(B) \end{bmatrix} = \text{col}_1(A)\,\text{row}_1(B) + \cdots + \text{col}_n(A)\,\text{row}_n(B)$$
 
-**证明（小白版）**：$\text{col}_k(A)\,\text{row}_k(B)$ 的 $(i,j)$ 元是 $a_{ik}b_{kj}$。对 $k$ 求和：$a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}$——这正是行-列法则给出的 $AB$ 的 $(i,j)$ 元 ✓
+**证明（小白版）**：$\text{col}_k(A)\ \text{row}_k(B)$ 的 $(i,j)$ 元是 $a_{ik}b_{kj}$。对 $k$ 求和：$a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}$——这正是行-列法则给出的 $AB$ 的 $(i,j)$ 元 ✓
 
 **数值注记**：计算机中 AB 的列-行展开把 $A$ 和 $B$ 切成小块，只把小矩阵送进高速内存相乘——这是处理**超大规模矩阵**的标准技术（见本节末尾注记：某线性规划问题矩阵有 837 行、51 块列、每块约 25 万列！）。
 
@@ -1932,7 +1932,7 @@ $$SA = \begin{bmatrix} .75 & 0 \\
 
 **中文讲解**：平移 $(x, y) \mapsto (x+h, y+k)$ **不是线性变换**（它把原点挪走了），无法用 2×2 矩阵表示。标准技巧：把平面点"升级"成三维**齐次坐标**：
 
-$$(x, y) \;\longleftrightarrow\; (x, y, 1)$$
+$$(x, y) \ \longleftrightarrow\  (x, y, 1)$$
 
 平移就能用 3×3 矩阵实现了：
 
@@ -2662,7 +2662,7 @@ $$AB = \begin{bmatrix} 25 & 20 \\
 
 **中文讲解**：把 $\det A$ 看作其中**某一列**的函数（其余列固定），它满足：
 
-$$T(c\mathbf{x}) = c\,T(\mathbf{x}), \qquad T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})$$
+$$T(c\mathbf{x}) = c\ T(\mathbf{x}), \qquad T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})$$
 
 即对该列是**线性函数**（性质 (2) 是 Theorem 3(c) 的列版，(3) 可由余因子展开证明）。注意：这只是**对单列**线性，不是整体线性——再次印证 $\det(A+B) \neq \det A + \det B$。
 
@@ -2775,7 +2775,7 @@ $$A_2(\mathbf{b}) = \begin{bmatrix} 3s & 4 \\
 
 $$x_1 = \frac{4s+2}{3(s+2)(s-2)}, \qquad x_2 = \frac{-3s-24}{3(s+2)(s-2)} = \frac{-(s+8)}{(s+2)(s-2)}$$
 
-**回代验证**：$3s\,x_1 + 2x_2 = \dfrac{s(4s+2) - 2(s+8)}{s^2-4} = \dfrac{4s^2-16}{s^2-4} = 4$ ✓；$6x_1 + s\,x_2 = \dfrac{2(4s+2) - s(s+8)}{s^2-4} = \dfrac{4-s^2}{s^2-4} = -1$ ✓
+**回代验证**：$3s\ x_1 + 2x_2 = \dfrac{s(4s+2) - 2(s+8)}{s^2-4} = \dfrac{4s^2-16}{s^2-4} = 4$ ✓；$6x_1 + s\ x_2 = \dfrac{2(4s+2) - s(s+8)}{s^2-4} = \dfrac{4-s^2}{s^2-4} = -1$ ✓
 
 > **工程价值**：克拉默法则在**符号计算**（矩阵含参数，如本例的 s）时非常有用——它能给出解的显式公式，让工程师看清参数如何影响解。但数值计算中（具体数字），行化简远比克拉默法则高效（n 阶要算 n+1 个行列式！）。
 
@@ -2897,7 +2897,7 @@ $$p(t) = a_0 + a_1 t + a_2 t^2$$
 
 （注意"次数 ≤ n"——包括次数更小的，如常数多项式。）
 
-**例6（Example 6，函数空间 $\mathbb{C}[a, b]$）**：定义在闭区间 $[a, b]$ 上的**实值连续函数**全体，按"逐点相加" $(f + g)(t) = f(t) + g(t)$、"逐点缩放" $(cf)(t) = c\,f(t)$。连续函数的和与倍数仍连续，故封闭性满足。这是泛函分析的出发点。
+**例6（Example 6，函数空间 $\mathbb{C}[a, b]$）**：定义在闭区间 $[a, b]$ 上的**实值连续函数**全体，按"逐点相加" $(f + g)(t) = f(t) + g(t)$、"逐点缩放" $(cf)(t) = c\ f(t)$。连续函数的和与倍数仍连续，故封闭性满足。这是泛函分析的出发点。
 
 **例5（Example 5，离散信号空间）**：定义在整数集上的实值"双无穷序列" $\{y_k\}$（$k \in \mathbb{Z}$）——模拟离散时间信号。加法、数乘均**逐点**进行（图 4 可视化一个离散信号）。这是**数字信号处理**的数学舞台。
 
@@ -3000,7 +3000,7 @@ $$\operatorname{Nul} A = \{\mathbf{x} : \mathbf{x} \in \mathbb{R}^n,\ A\mathbf{x
 
 （等价表述：$m$ 个方程 $n$ 个未知量的齐次线性方程组的解集是 $\mathbb{R}^n$ 的子空间。）
 
-**证明**：完全复制 2.8 定理 13 的三步（$\mathbf{0} \in \operatorname{Nul} A$；$A(\mathbf{u}+\mathbf{v}) = A\mathbf{u} + A\mathbf{v} = \mathbf{0}$；$A(c\mathbf{u}) = c\,A\mathbf{u} = \mathbf{0}$）。注意**不要求 $A$ 是方阵**！∎
+**证明**：完全复制 2.8 定理 13 的三步（$\mathbf{0} \in \operatorname{Nul} A$；$A(\mathbf{u}+\mathbf{v}) = A\mathbf{u} + A\mathbf{v} = \mathbf{0}$；$A(c\mathbf{u}) = c\ A\mathbf{u} = \mathbf{0}$）。注意**不要求 $A$ 是方阵**！∎
 
 **例2（Example 2，隐式描述转显式）**：设 $H = \{(a, b, c, d) \in \mathbb{R}^4 : a - 2b + 5c = d,\ c - a = b\}$。判断 $H$ 是否是子空间。
 
@@ -3577,7 +3577,7 @@ $$[\mathbf{x}]_{\mathcal{C}} = \begin{bmatrix} 4 & -6 \\
 
 > 设 $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$、$\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_n\}$ 是向量空间 $V$ 的两组基。则存在唯一 $n \times n$ 矩阵 $P_{\mathcal{C} \leftarrow \mathcal{B}}$ 使
 
-> $$[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C} \leftarrow \mathcal{B}}\, [\mathbf{x}]_{\mathcal{B}} \tag{4}$$
+> $$[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C} \leftarrow \mathcal{B}}\  [\mathbf{x}]_{\mathcal{B}} \tag{4}$$
 
 > $P_{\mathcal{C} \leftarrow \mathcal{B}}$ 的列 = $\mathcal{B}$ 中各向量的 $\mathcal{C}$-坐标：
 
@@ -4186,7 +4186,7 @@ $$[T]_{\mathcal{B}} = \begin{bmatrix} [T(\mathbf{b}_1)]_{\mathcal{B}} & \cdots &
 
 **公式 (5)**：
 
-$$[T(\mathbf{x})]_{\mathcal{B}} = [T]_{\mathcal{B}}\,[\mathbf{x}]_{\mathcal{B}}$$
+$$[T(\mathbf{x})]_{\mathcal{B}} = [T]_{\mathcal{B}}\ [\mathbf{x}]_{\mathcal{B}}$$
 
 **例2（Example 2）**：微分算子 $D: \mathbb{P}_2 \to \mathbb{P}_2$，$D(p) = p'$。求相对 $\mathcal{B} = \{1, t, t^2\}$ 的 $[D]_{\mathcal{B}}$。
 
@@ -4324,7 +4324,7 @@ $$\mathbf{x}_k = c_1(.8 - .6i)^k\mathbf{v}_1 + c_2(.8 + .6i)^k\mathbf{v}_2$$
 
 **中文讲解**：实矩阵的特征方程是**实系数**多项式。实系数多项式的复根必成**共轭对**出现。因此：
 
-**基本事实**：若实矩阵 $A$ 有复特征值 $\lambda = a + bi$，则 $\overline{\lambda} = a - bi$ 也是特征值，且对应特征向量互为共轭：$A\overline{\mathbf{v}} = \overline{\lambda}\,\overline{\mathbf{v}}$。
+**基本事实**：若实矩阵 $A$ 有复特征值 $\lambda = a + bi$，则 $\overline{\lambda} = a - bi$ 也是特征值，且对应特征向量互为共轭：$A\overline{\mathbf{v}} = \overline{\lambda}\ \overline{\mathbf{v}}$。
 
 ### 核心构造 C = [a −b; b a] 例7
 
@@ -4885,7 +4885,7 @@ $$W^\perp = \{\mathbf{z} \in \mathbb{R}^n : \mathbf{z} \cdot \mathbf{w} = 0 \tex
 
 **公式 (2)**：非零向量 $\mathbf{u}, \mathbf{v}$ 的夹角 $\vartheta$：
 
-$$\mathbf{u}\cdot\mathbf{v} = \|\mathbf{u}\|\,\|\mathbf{v}\|\cos\vartheta$$
+$$\mathbf{u}\cdot\mathbf{v} = \|\mathbf{u}\|\ \|\mathbf{v}\|\cos\vartheta$$
 
 **验证**：余弦定理 $\|\mathbf{u}-\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\|\mathbf{u}\|\|\mathbf{v}\|\cos\vartheta$ 与展开式对比即得（FIGURE 9）。
 
@@ -5087,7 +5087,7 @@ $$\hat{\mathbf{y}} = \frac{9}{30}\mathbf{u}_1 + \frac{3}{6}\mathbf{u}_2 = \begin
 ### 投影的性质
 
 - $\mathbf{y} \in W$ ⟹ $\operatorname{proj}_W \mathbf{y} = \mathbf{y}$（基下坐标公式与 Theorem 5 一致，6.2 节已证）
-- 线性性：$\operatorname{proj}_W(c\mathbf{u} + \mathbf{v}) = c\,\operatorname{proj}_W\mathbf{u} + \operatorname{proj}_W\mathbf{v}$
+- 线性性：$\operatorname{proj}_W(c\mathbf{u} + \mathbf{v}) = c\ \operatorname{proj}_W\mathbf{u} + \operatorname{proj}_W\mathbf{v}$
 - $\mathbb{R}^n = W \oplus W^\perp$：直和分解（存在性 = Theorem 8，唯一性已证）
 
 ### 最佳逼近定理 THEOREM 9
@@ -5307,7 +5307,7 @@ $$A^T(\mathbf{b} - A\hat{\mathbf{x}}) = \mathbf{0} \tag{2}$$
 
 **正规方程（Normal Equations）(3)**：
 
-$$\boxed{A^TA\,\hat{\mathbf{x}} = A^T\mathbf{b}}$$
+$$\boxed{A^TA\ \hat{\mathbf{x}} = A^T\mathbf{b}}$$
 
 **THEOREM 13**：
 > 方程组 $A\mathbf{x} = \mathbf{b}$ 的**最小二乘解集 = 正规方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ 的解集**（该集合非空）。
@@ -5685,7 +5685,7 @@ $$\hat{p} = \operatorname{proj}_{\mathbb{P}_2} p = \frac{8}{5}p_0 + \frac{0}{10}
 **THEOREM 16（柯西-施瓦茨不等式 Cauchy–Schwarz Inequality）**：
 > 内积空间 $V$ 中任意 $\mathbf{u}, \mathbf{v}$：
 
-> $$|\langle\mathbf{u}, \mathbf{v}\rangle| \leq \|\mathbf{u}\|\,\|\mathbf{v}\| \tag{4}$$
+> $$|\langle\mathbf{u}, \mathbf{v}\rangle| \leq \|\mathbf{u}\|\ \|\mathbf{v}\| \tag{4}$$
 
 **证明**：对任意标量 $t$：
 
@@ -5710,14 +5710,14 @@ $$4\langle\mathbf{u}, \mathbf{v}\rangle^2 - 4\|\mathbf{u}\|^2\|\mathbf{v}\|^2 \l
 
 **关键例子**：对 $f, g \in \mathbb{C}[a, b]$（$[a,b]$ 上实值连续函数），定义**积分内积**
 
-$$\langle f, g\rangle = \int_a^b f(t)\,g(t)\,dt$$
+$$\langle f, g\rangle = \int_a^b f(t)\ g(t)\ dt$$
 
-**为什么是内积**（由黎曼和逼近）：把 $[a,b]$ $n$ 等分，取样点 $t_1, \dots, t_n$。$\mathbb{R}^n$ 的点积 $\sum f(t_j)g(t_j)\Delta t$ 随 $n \to \infty$ 趋于 $\int_a^b fg\,dt$——$\mathbb{R}^n$ 内积的连续极限！公理 1-3 逐条成立；公理 4：$\langle f, f\rangle = \int f^2 \geq 0$，且连续函数 $\int f^2 = 0 ⟹ f = 0$（练习 36）。
+**为什么是内积**（由黎曼和逼近）：把 $[a,b]$ $n$ 等分，取样点 $t_1, \dots, t_n$。$\mathbb{R}^n$ 的点积 $\sum f(t_j)g(t_j)\Delta t$ 随 $n \to \infty$ 趋于 $\int_a^b fg\ dt$——$\mathbb{R}^n$ 内积的连续极限！公理 1-3 逐条成立；公理 4：$\langle f, f\rangle = \int f^2 \geq 0$，且连续函数 $\int f^2 = 0 ⟹ f = 0$（练习 36）。
 
-**例9（Example 9，积分内积下的 Gram-Schmidt）**：$V = \mathbb{C}[0,1]$，$W = \mathbb{P}_2$，基 $p_1 = 1, p_2 = 2t - 1, p_3 = 12t^2$，内积 $\langle f, g\rangle = \int_0^1 fg\,dt$。
+**例9（Example 9，积分内积下的 Gram-Schmidt）**：$V = \mathbb{C}[0,1]$，$W = \mathbb{P}_2$，基 $p_1 = 1, p_2 = 2t - 1, p_3 = 12t^2$，内积 $\langle f, g\rangle = \int_0^1 fg\ dt$。
 
 - $\langle p_2, q_1\rangle = \int_0^1(2t-1)dt = 0$ —— 已正交，$q_2 = p_2 = 2t - 1$
-- $\langle p_3, q_1\rangle = \int_0^1 12t^2\,dt = 4$, $\langle q_1, q_1\rangle = 1$；$\langle p_3, q_2\rangle = \int_0^1 12t^2(2t-1)dt = 2$, $\langle q_2, q_2\rangle = \int_0^1(2t-1)^2 dt = \frac{1}{3}$
+- $\langle p_3, q_1\rangle = \int_0^1 12t^2\ dt = 4$, $\langle q_1, q_1\rangle = 1$；$\langle p_3, q_2\rangle = \int_0^1 12t^2(2t-1)dt = 2$, $\langle q_2, q_2\rangle = \int_0^1(2t-1)^2 dt = \frac{1}{3}$
 
 $$\operatorname{proj}_W p_3 = \frac{4}{1}q_1 + \frac{2}{1/3}q_2 = 4q_1 + 6q_2$$
 
@@ -5803,23 +5803,23 @@ $$\{1,\ \cos t,\ \cos 2t,\ \dots,\ \cos nt,\ \sin t,\ \sin 2t,\ \dots,\ \sin nt\
 
 是**正交集**！验证示例：
 
-$$\int_0^{2\pi}\cos mt\cos nt\,dt = 0 \ (m \neq n), \qquad \int_0^{2\pi}\cos^2 mt\,dt = \pi, \qquad \int_0^{2\pi}1\,dt = 2\pi$$
+$$\int_0^{2\pi}\cos mt\cos nt\ dt = 0 \ (m \neq n), \qquad \int_0^{2\pi}\cos^2 mt\ dt = \pi, \qquad \int_0^{2\pi}1\ dt = 2\pi$$
 
 （积化和差公式：$\cos mt\cos nt = \frac{1}{2}[\cos(m+n)t + \cos(m-n)t]$，$m \neq n$ 时各项积分为 0。）
 
 **傅里叶系数（正交基下的坐标公式直接给出）**：
 
-$$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}f(t)\,dt, \qquad a_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\cos kt\,dt, \qquad b_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\sin kt\,dt$$
+$$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}f(t)\ dt, \qquad a_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\cos kt\ dt, \qquad b_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\sin kt\ dt$$
 
 **例4（Example 4，完整实战）**：求 $f(t) = t$（$0 \leq t \leq 2\pi$）的 n 阶傅里叶逼近。
 
 **解**：
 
-$$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}t\,dt = \pi$$
+$$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}t\ dt = \pi$$
 
-$$a_k = \frac{1}{\pi}\int_0^{2\pi}t\cos kt\,dt = \frac{1}{\pi}\left[\frac{1}{k^2}\cos kt + \frac{t}{k}\sin kt\right]_0^{2\pi} = \mathbf{0}$$
+$$a_k = \frac{1}{\pi}\int_0^{2\pi}t\cos kt\ dt = \frac{1}{\pi}\left[\frac{1}{k^2}\cos kt + \frac{t}{k}\sin kt\right]_0^{2\pi} = \mathbf{0}$$
 
-$$b_k = \frac{1}{\pi}\int_0^{2\pi}t\sin kt\,dt = \frac{1}{\pi}\left[\frac{1}{k^2}\sin kt - \frac{t}{k}\cos kt\right]_0^{2\pi} = -\frac{2}{k}$$
+$$b_k = \frac{1}{\pi}\int_0^{2\pi}t\sin kt\ dt = \frac{1}{\pi}\left[\frac{1}{k^2}\sin kt - \frac{t}{k}\cos kt\right]_0^{2\pi} = -\frac{2}{k}$$
 
 **n 阶傅里叶逼近**：
 
@@ -6963,7 +6963,7 @@ $$\{(0,0), (7,0), (3,5), (5,3), (0,6)\}$$
 
 **$d$ 维单纯形 $S^d$** 的归纳构造：
 
-$$S^0 = \{\mathbf{v}_1\}, \qquad S^k = \operatorname{conv}\{\mathbf{v}_1, \dots, \mathbf{v}_{k+1}\} = \bigcup_{\mathbf{x} \in S^{k-1}} \overline{\mathbf{x}\,\mathbf{v}_{k+1}}$$
+$$S^0 = \{\mathbf{v}_1\}, \qquad S^k = \operatorname{conv}\{\mathbf{v}_1, \dots, \mathbf{v}_{k+1}\} = \bigcup_{\mathbf{x} \in S^{k-1}} \overline{\mathbf{x}\ \mathbf{v}_{k+1}}$$
 
 （$k-1$ 维单纯形上各点与 $\mathbf{v}_{k+1}$ 的线段之并——"以锥扫掠"）。
 
@@ -7131,7 +7131,7 @@ $$|z| = \sqrt{a^2 + b^2}, \qquad |z|^2 = z\bar{z} = a^2 + b^2$$
 3. $|wz| = |w||z|$（模的乘性——旋转缩放保持，5.5 节要用！）
 4. $\overline{\bar{z}} = z$
 5. $z$ 为实数 ⟺ $\bar{z} = z$；$z$ 为纯虚数 ⟺ $\bar{z} = -z$
-6. $z + \bar{z} = 2\,\mathrm{Re}\, z$；$z - \bar{z} = 2i\,\mathrm{Im}\, z$
+6. $z + \bar{z} = 2\ \mathrm{Re}\  z$；$z - \bar{z} = 2i\ \mathrm{Im}\  z$
 
 **除法（有理化技巧）**：
 
@@ -7173,7 +7173,7 @@ $$wz = |w||z|\big[\cos(\vartheta + \varphi) + i\sin(\vartheta + \varphi)\big]$$
 
 **特例：乘以 i（FIGURE 5）**——$|i| = 1$、$\arg i = \frac{\pi}{2}$，故 **乘 i = 旋转 90°**：
 
-$$(3 + i)\,i = -1 + 3i \qquad (\text{旋转 } \tfrac{\pi}{2})$$
+$$(3 + i)\ i = -1 + 3i \qquad (\text{旋转 } \tfrac{\pi}{2})$$
 
 ![乘 i 旋转](img/figappB_mult_by_i.png)
 
