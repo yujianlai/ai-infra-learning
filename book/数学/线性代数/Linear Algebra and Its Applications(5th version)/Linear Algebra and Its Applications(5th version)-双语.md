@@ -6991,3 +6991,104 @@ $$S^0 = \{\mathbf{v}_1\}, \qquad S^k = \operatorname{conv}\{\mathbf{v}_1, \dots,
 > **本节精髓**：多胞形 = "有限半空间的交" = "有限点的凸包"（两幅面孔），顶点 = n 个独立约束的交点。线性规划的全部几何浓缩为一句：**最优解必在某个顶点**——单纯形法（9.3 节）正是沿顶点高效跳向最优的算法。下一节 8.6 走向曲线：**Bézier 曲线与曲面**——de Casteljau 算法（逐次线性插值的数值稳定性）与几何连续性，计算机字体设计的数学收官。
 
 ---
+---
+
+## 8.6 曲线与曲面 Curves and Surfaces
+
+**中文讲解**：本章收官献给**计算机字体与 CAD 的数学**——Bézier 曲线。与船工的"样条"（自然三次样条，全局调整牵动全身）不同，Bézier 曲线（Pierre Bézier，雷诺公司，1962）实现**局部控制**：移动一个控制点只影响曲线的一段。全部构造只用第 1 章的工具：**线性组合与凸组合**。
+
+### 二次与三次 Bézier 曲线 Quadratic and Cubic Bézier Curves
+
+**定义**：给定点 $\mathbf{p}_0, \mathbf{p}_1, \mathbf{p}_2, \dots$（控制点），$0 \leq t \leq 1$：
+
+$$\mathbf{w}(t) = (1-t)^2\mathbf{p}_0 + 2t(1-t)\mathbf{p}_1 + t^2\mathbf{p}_2 \tag{1}$$
+
+$$\mathbf{x}(t) = (1-t)^3\mathbf{p}_0 + 3t(1-t)^2\mathbf{p}_1 + 3t^2(1-t)\mathbf{p}_2 + t^3\mathbf{p}_3 \tag{2}$$
+
+称为**二次/三次 Bézier 曲线**（FIGURE 1）。
+
+![FIGURE 1 Bézier 曲线](img/fig86_1_bezier_curves.png)
+
+*FIGURE 1 Quadratic and cubic Bézier curves. 图1 二次（左，3 控制点）与三次（右，4 控制点）Bézier 曲线：曲线过首末控制点，但被中间点"拉扯"——权 $(1-t)^2, 2t(1-t), t^2$ 恰是二项分布（总和 1、非负）*
+
+**基本性质**：
+1. $\mathbf{w}(0) = \mathbf{p}_0$, $\mathbf{w}(1) = \mathbf{p}_2$——过首末控制点；中间点一般不在曲线上
+2. **凸包性质**：曲线在控制点的凸包内（8.3 节凸组合的直接推论——权非负且和为 1！）
+3. **线性变换保持**：对曲线施加矩阵 $A$ = 对控制点施加 $A$（$\mathbf{0} \leq t \leq 1$ 时 $A\mathbf{x}(t) = \sum (\cdots) A\mathbf{p}_i$）——旋转/缩放/剪切曲线只需变换控制点，渲染极快
+4. **切向量**：对 (1) 求导（逐项求导），
+
+$$\mathbf{w}'(0) = 2(\mathbf{p}_1 - \mathbf{p}_0), \qquad \mathbf{w}'(1) = 2(\mathbf{p}_2 - \mathbf{p}_1)$$
+
+**起点切线方向 = 首段控制边方向，终点切线方向 = 末段控制边方向**——控制多边形"框住"曲线的切线行为。
+
+### 连续性：G⁰/G¹/C¹
+
+**G⁰（几何连续）**：两段曲线在连接点 $\mathbf{p}_2$ 重合即可（允许"拐角"，FIGURE 2）。
+
+**G¹（一阶几何连续）**：连接点处两切向量**同向**（长度可不同）：
+
+$$\mathbf{y}'(0) = k\mathbf{x}'(1) \quad (k > 0) \quad \Longleftrightarrow \quad \mathbf{p}_3 - \mathbf{p}_2 = k(\mathbf{p}_2 - \mathbf{p}_1)$$
+
+即 $\mathbf{p}_2$ 落在线段 $\overline{\mathbf{p}_1\mathbf{p}_3}$ 之间（8.2 例2）。
+
+**C¹（一阶参数连续）**：切向量**完全相等**（方向 + 长度）：
+
+$$\mathbf{p}_2 = \frac{\mathbf{p}_1 + \mathbf{p}_3}{2} \quad (\text{恰为 } \mathbf{p}_1\mathbf{p}_3 \text{ 中点！})$$
+
+![FIGURE 3 G¹ 与 C¹](img/fig86_3_continuity.png)
+
+*FIGURE 3 (a) G¹ continuity and (b) C¹ continuity. 图3 (a) G¹：连接点处切线同向但长度不同；(b) C¹：切向量相等（$\mathbf{p}_2$ 是中点）——视觉几乎无差，G¹ 更灵活（形状不受参数化速度影响）*
+
+> **设计哲学**：曲线形状只依赖几何（方向），不依赖参数化速度（模长）——所以工业标准用 **G¹**（视觉上光滑即可），C¹ 只是 G¹ 的特例。Bézier 调整"把手"（切线方向）正是 G¹ 思想的体现。
+
+### 矩阵形式与 Bézier 双三次曲面
+
+**矩阵形式 (4)**：
+
+$$\mathbf{x}(t) = G\mathbf{u}(t) = \underbrace{\begin{bmatrix} \mathbf{p}_0 & \mathbf{p}_1 & \mathbf{p}_2 & \mathbf{p}_3 \end{bmatrix}}_{G\ (\text{几何矩阵})}\underbrace{\begin{bmatrix} 1 & -3 & 3 & -1 \\
+-3 & 6 & -3 & 0 \\
+3 & -3 & 0 & 0 \\
+1 & 0 & 0 & 0 \end{bmatrix}}_{M_B\ (\text{Bézier 基矩阵})}\begin{bmatrix} 1 \\
+t \\
+t^2 \\
+t^3 \end{bmatrix}$$
+
+**Bézier 双三次曲面片**：先沿 $t$ 方向对 4 条曲线做 (4)，再对结果沿 $s$ 方向插值——得**张量积**
+
+$$\mathbf{x}(s, t) = \mathbf{u}(s)^T M_B^T G M_B \mathbf{u}(t) \tag{5}$$
+
+16 个控制点 $G$（4×4 网格）张成一片光滑曲面——PostScript 字体（一个字符 = 若干曲面片的并）与汽车车身设计的标准。
+
+### 细分：de Casteljau 算法 Subdivision
+
+**问题**：直接在曲线上取点需算高次多项式——数值不稳。**de Casteljau 思想**：用**逐次中点**（线性插值）替代。
+
+**中点细分公式**：对三次曲线在 $t = \frac{1}{2}$ 处一分为二，新控制点：
+
+$$3(\mathbf{q}_1 - \mathbf{q}_0) = \mathbf{y}'(0) = \tfrac{1}{2}\mathbf{x}'(0) = \tfrac{3}{2}(\mathbf{p}_1 - \mathbf{p}_0) \tag{12}$$
+$$3(\mathbf{q}_3 - \mathbf{q}_2) = \mathbf{y}'(1) = \tfrac{1}{2}\mathbf{x}'(.5) = \tfrac{3}{4}(-\mathbf{p}_0 - \mathbf{p}_1 + \mathbf{p}_2 + \mathbf{p}_3) \tag{13}$$
+
+**几何构造（FIGURE 9）**：$\mathbf{q}_1, \mathbf{r}_2$ 是中点，$\mathbf{q}_2$ 是 $\mathbf{p}_1\mathbf{p}_2$ 中点……层层取中点得 $\mathbf{q}_3 = \mathbf{r}_0 = \mathbf{x}(.5)$。**只用中点 = 只用加减乘 ½ = 极致数值稳定**——现代曲线渲染的标准。
+
+![FIGURE 9 细分结构](img/fig86_9_subdivision.png)
+
+*FIGURE 9 Geometric structure of new control points. 图9 de Casteljau 细分的几何结构：左段控制点 $\mathbf{q}_0 = \mathbf{p}_0, \mathbf{q}_1, \mathbf{q}_2, \mathbf{q}_3$ 与右段 $\mathbf{r}_0 = \mathbf{q}_3, \mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3 = \mathbf{p}_3$——全由原始控制点的中点链构成*
+
+### B-样条（B-splines）
+
+Bézier 曲线的"局部控制版"：每段曲线只由相邻 4 个控制点决定（移动 $\mathbf{p}_i$ 只影响相邻两段）。基函数加权（如 $1/6$ 因子的均匀 B-样条）使曲线逼近控制多边形但不穿过端点——CAD 自由曲面的工业主力。
+
+### 8.6 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Bézier 曲线 (1)(2) | 控制点的二项分布凸组合：过首末点、在凸包内、线性变换保持 |
+| 切向量 | w′(0)=2(p₁−p₀)、w′(1)=2(p₂−p₁)——控制边定切线 |
+| G⁰/G¹/C¹ | 重合 / 切线同向 / 切向量全等；G¹: p₂ 在线段内，C¹: p₂ 是中点 |
+| 矩阵形式 (4) | x(t) = G M_B u(t)；曲面片 = 张量积 (5) |
+| de Casteljau | 逐次中点细分：只用 ½ 的数值稳定算法 |
+| B-样条 | 局部控制的 Bézier 推广（CAD 主力） |
+
+> **第 8 章收官精髓**：从仿射组合（8.1）到 Bézier 曲线（8.6），一条主线贯穿——**复杂形状 = 简单元素（凸组合、线性插值）的受控叠加**。这是线性代数从"解方程"走向"设计世界"的完整旅程：字体、汽车、飞机的形状，归根结底都是权与组合。
+
+---
