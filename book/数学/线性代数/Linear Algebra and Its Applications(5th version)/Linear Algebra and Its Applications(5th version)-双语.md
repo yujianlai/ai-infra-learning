@@ -5601,3 +5601,168 @@ $$f(t) = \frac{a_0}{2} + \sum_{m=1}^{\infty}(a_m\cos mt + b_m\sin mt)$$
 > **第 6 章收官精髓**：正交性是贯穿线性代数后半部的金线：内积（6.1）→ 正交基（6.2）→ 投影与最佳逼近（6.3）→ 造正交基的算法（6.4）→ 回归应用（6.5-6.6）→ 抽象内积空间（6.7）→ 傅里叶级数（6.8）。NAD 平差、GPS 导航、MP3 压缩、信号频谱——同一套几何，遍地开花。下一章进入**第 7 章 对称矩阵与二次型**：正交对角化、二次型、SVD（奇异值分解）——全书的巅峰与收官。
 
 ---
+---
+
+# 第七章 对称矩阵与二次型
+# Chapter 7 Symmetric Matrices and Quadratic Forms
+
+**导入例子：多光谱图像处理**
+**INTRODUCTORY EXAMPLE: Multichannel Image Processing**
+
+Landsat 卫星每 16 天覆盖地球表面几乎每一平方公里，传感器同时记录**七个波段**的图像（三个可见光 + 四个红外/热波段）。分析城市扩张、土壤湿度、森林火灾损害……但七通道数据冗余巨大。Earth Satellite 公司处理 224 个波段时，数据量爆炸——**主成分分析（PCA）** 用对称矩阵的特征值/特征向量把数据压缩到 15 个"主成分"，第一个主成分就保留了 Nevada 地区 93.5% 的场景方差。本章的主角——**对称矩阵的正交对角化**——正是 PCA 与奇异值分解（SVD）的理论基石。
+
+---
+
+## 7.1 对称矩阵的对角化 Diagonalization of Symmetric Matrices
+
+**中文讲解**：对称矩阵（$A^T = A$）是应用中最常见的矩阵类——协方差矩阵、刚度矩阵、图的拉普拉斯矩阵皆属此类。它有一个惊人的性质：**必可正交对角化**——不仅能对角化（第 5 章），还能用**正交矩阵** $P$（$P^{-1} = P^T$）完成。几何意义：对称变换总可以看成"沿互相垂直的方向各自伸缩"。
+
+### 对称矩阵与例2
+
+**定义**：$A^T = A$ 的方阵（对角元任意，其余关于主对角线成对相等）。
+
+**例2（Example 2，先睹为快）**：对角化 $A = \begin{bmatrix} 6 & -2 & -1 \\
+-2 & 6 & -1 \\
+-1 & -1 & 5 \end{bmatrix}$。
+
+**解**：特征方程
+
+$$\det(A - \lambda I) = -\lambda^3 + 17\lambda^2 - 90\lambda + 144 = -(\lambda - 8)(\lambda - 6)(\lambda - 3)$$
+
+特征值 8, 6, 3 互不相同，各自特征向量：
+
+$$\lambda = 8: \ \mathbf{v}_1 = (-1, 1, 0); \qquad \lambda = 6: \ \mathbf{v}_2 = (-1, -1, 2); \qquad \lambda = 3: \ \mathbf{v}_3 = (1, 1, 1)$$
+
+**奇迹**：三个向量两两正交！（$\mathbf{v}_1\cdot\mathbf{v}_2 = 0$, $\mathbf{v}_1\cdot\mathbf{v}_3 = 0$, $\mathbf{v}_2\cdot\mathbf{v}_3 = 0$ ✓✓✓）
+
+单位化（$P^{-1} = P^T$ 的便利）：
+
+$$P = \begin{bmatrix} -1/\sqrt{2} & -1/\sqrt{6} & 1/\sqrt{3} \\
+1/\sqrt{2} & -1/\sqrt{6} & 1/\sqrt{3} \\
+0 & 2/\sqrt{6} & 1/\sqrt{3} \end{bmatrix}, \qquad D = \begin{bmatrix} 8 & 0 & 0 \\
+0 & 6 & 0 \\
+0 & 0 & 3 \end{bmatrix}, \qquad A = PDP^T$$
+
+### THEOREM 1（不同特征值 ⟹ 正交特征向量）
+
+> 若 $A$ 对称，则**对应于不同特征值的特征向量必正交**。
+
+**证明**（四步等式链，极美）：设 $A\mathbf{v}_1 = \lambda_1\mathbf{v}_1$, $A\mathbf{v}_2 = \lambda_2\mathbf{v}_2$, $\lambda_1 \neq \lambda_2$。
+
+$$\lambda_1\mathbf{v}_1\cdot\mathbf{v}_2 = (\lambda_1\mathbf{v}_1)^T\mathbf{v}_2 = (A\mathbf{v}_1)^T\mathbf{v}_2 = \mathbf{v}_1^TA^T\mathbf{v}_2 \overset{A^T = A}{=} \mathbf{v}_1^T(A\mathbf{v}_2) = \mathbf{v}_1^T(\lambda_2\mathbf{v}_2) = \lambda_2\mathbf{v}_1\cdot\mathbf{v}_2$$
+
+故 $(\lambda_1 - \lambda_2)\mathbf{v}_1\cdot\mathbf{v}_2 = 0$，而 $\lambda_1 - \lambda_2 \neq 0$，故 $\mathbf{v}_1\cdot\mathbf{v}_2 = 0$。∎
+
+### 正交对角化 Orthogonal Diagonalization
+
+**定义**：$n \times n$ 矩阵 $A$ 称为**可正交对角化（orthogonally diagonalizable）**的，若存在**正交矩阵** $P$（$P^{-1} = P^T$）与对角阵 $D$ 使
+
+$$A = PDP^T = PDP^{-1} \tag{1}$$
+
+需要 $n$ 个**标准正交**的特征向量。若 (1) 成立，则
+
+$$A^T = (PDP^T)^T = P^{TT}D^TP^T = PD^TP^T = PDP^T = A$$
+
+——**A 必对称！**
+
+**THEOREM 2（谱定理的雏形）**：
+> $A$ 可正交对角化 ⟺ $A$ 对称。
+
+（"⟹"已证；"⟸"的证明困难得多，教材从略，主要思想在 Theorem 3 后说明。）
+
+### 例3（Example 3，重根 + 特征空间内 Gram-Schmidt）
+
+$$A = \begin{bmatrix} 3 & -2 & 4 \\
+-2 & 6 & 2 \\
+4 & 2 & 3 \end{bmatrix}$$
+
+特征方程（展开）给出特征值 **7（二重）** 与 **−2**。
+
+**特征空间 λ = 7**（二维）：解 $(A - 7I)\mathbf{x} = \mathbf{0}$ 得基
+
+$$\mathbf{v}_1 = (1, 0, 1), \qquad \mathbf{v}_2 = (-1, 4, 1)$$
+
+（$\mathbf{v}_1 \perp \mathbf{v}_2$ 不成立：$\mathbf{v}_1\cdot\mathbf{v}_2 = -1 + 0 + 1 = 0$ ✓ 碰巧已正交！若不正交则 Gram-Schmidt，如 6.4 节。）
+
+**特征空间 λ = −2**（一维）：$\mathbf{v}_3 = (-2, -1, 2)$。
+
+由 Theorem 1，$\mathbf{v}_3$ 自动与 $\mathbf{v}_1, \mathbf{v}_2$ 正交——跨特征空间的正交性**免费**，只需在每个特征空间内部搞正交。
+
+单位化：
+
+$$P = \begin{bmatrix} 1/\sqrt{2} & -1/\sqrt{18} & -2/3 \\
+0 & 4/\sqrt{18} & -1/3 \\
+1/\sqrt{2} & 1/\sqrt{18} & 2/3 \end{bmatrix}, \qquad D = \begin{bmatrix} 7 & 0 & 0 \\
+0 & 7 & 0 \\
+0 & 0 & -2 \end{bmatrix}$$
+
+**验算**：$A = PDP^T$ ✓（$A$ 的迹 $12 = 7+7-2$ ✓，$\det A = -98 = 7\cdot 7 \cdot (-2)$ ✓）
+
+### 谱定理 THEOREM 3（Spectral Theorem）
+
+> $n \times n$ 对称矩阵 $A$ 具有下列性质：
+> a. 有 $n$ 个**实**特征值（计重数）
+> b. 每个特征值的**特征空间维数 = 代数重数**（由 Theorem 5.3-7，这正说明 A 可对角化）
+> c. 特征空间两两正交（Theorem 1）
+> d. **A 可正交对角化**
+
+**例3 的注记**：λ = 7 重数 2、特征空间二维——不是巧合，是谱定理的性质 b！
+
+### 谱分解 Spectral Decomposition
+
+设 $A = PDP^T$，$P = [\mathbf{u}_1 \cdots \mathbf{u}_n]$ 的列是标准正交特征向量。由 2.4 节**列-行展开**（Theorem 10）：
+
+$$A = PD P^T = \begin{bmatrix} \lambda_1\mathbf{u}_1 & \cdots & \lambda_n\mathbf{u}_n \end{bmatrix}\begin{bmatrix} \mathbf{u}_1^T \\
+\vdots \\
+\mathbf{u}_n^T \end{bmatrix} = \lambda_1\mathbf{u}_1\mathbf{u}_1^T + \cdots + \lambda_n\mathbf{u}_n\mathbf{u}_n^T \tag{2}$$
+
+称为 $A$ 的**谱分解（spectral decomposition）**——按特征值把 $A$ 拆成 $n$ 个**秩 1** 投影矩阵 $\mathbf{u}_j\mathbf{u}_j^T$ 的加权和（$\mathbf{u}_j\mathbf{u}_j^T\mathbf{x}$ = $\mathbf{x}$ 在 $\operatorname{Span}\{\mathbf{u}_j\}$ 上的正交投影，练习 35）。
+
+**例4（Example 4）**：$A = \begin{bmatrix} 7 & 2 \\
+2 & 4 \end{bmatrix} = \begin{bmatrix} 2/\sqrt{5} & -1/\sqrt{5} \\
+1/\sqrt{5} & 2/\sqrt{5} \end{bmatrix}\begin{bmatrix} 8 & 0 \\
+0 & 3 \end{bmatrix}\begin{bmatrix} 2/\sqrt{5} & 1/\sqrt{5} \\
+-1/\sqrt{5} & 2/\sqrt{5} \end{bmatrix}$
+
+记 $\mathbf{u}_1 = (2,1)/\sqrt{5}$, $\mathbf{u}_2 = (-1,2)/\sqrt{5}$：
+
+$$A = 8\mathbf{u}_1\mathbf{u}_1^T + 3\mathbf{u}_2\mathbf{u}_2^T$$
+
+**验算**：
+
+$$8\mathbf{u}_1\mathbf{u}_1^T = \frac{8}{5}\begin{bmatrix} 4 & 2 \\
+2 & 1 \end{bmatrix} = \begin{bmatrix} 32/5 & 16/5 \\
+16/5 & 8/5 \end{bmatrix}, \qquad 3\mathbf{u}_2\mathbf{u}_2^T = \frac{3}{5}\begin{bmatrix} 1 & -2 \\
+-2 & 4 \end{bmatrix} = \begin{bmatrix} 3/5 & -6/5 \\
+-6/5 & 12/5 \end{bmatrix}$$
+
+$$8\mathbf{u}_1\mathbf{u}_1^T + 3\mathbf{u}_2\mathbf{u}_2^T = \begin{bmatrix} 7 & 2 \\
+2 & 4 \end{bmatrix} = A \checkmark$$
+
+### 数值注记
+
+对称矩阵的特征算法用**正交相似变换**序列——对角元快速收敛到特征值，且正交性防止误差累积（5.2 节注记的呼应）。**非对称**矩阵不可能有全套正交特征向量，但算法仍能给出相当准确的特征值，只是求特征向量需要非正交技术。
+
+### 练习精选（Practice Problems）
+
+**题1**：$A$ 对称 ⟹ $A^2$ 对称。
+
+**解**：$(A^2)^T = (AA)^T = A^TA^T = AA = A^2$ ∎（其实 $A^k$ 对一切 $k$ 对称。）
+
+**题2**：$A$ 可正交对角化 ⟹ $A^2$ 亦可。
+
+**解**：$A = PDP^T$ ⇒ $A^2 = PD^2P^T$，$D^2$ 仍对角、$P$ 仍正交 ∎。（注意：**谱被平方**：$\lambda \to \lambda^2$——幂迭代中 A² 的谱分布更利于算法，5.8 节思想。）
+
+### 7.1 小结
+
+| 概念 | 一句话理解 |
+|---|---|
+| Theorem 1 | 对称 + 特征值不同 ⟹ 特征向量自动正交 |
+| Theorem 2 | 可正交对角化 ⟺ 对称 |
+| Theorem 3（谱定理） | 对称矩阵：实特征值 + 特征空间维数=重数 + 可正交对角化 |
+| 谱分解 (2) | A = Σλⱼuⱼuⱼᵀ：按特征值拆成秩 1 投影的加权和 |
+| 例3/例4 | 重根的处理 + 谱分解验算完整实战 |
+
+> **本节精髓**：对称矩阵是"最完美的矩阵"——特征值全实、特征向量可取标准正交、谱分解把矩阵拆成相互垂直的秩 1 投影。下一节 7.2 把这套理论用于**二次型** $Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}$（椭圆、双曲面的代数化身），7.3 节解决**约束优化**（瑞利商），7.4 节 SVD 把谱定理推广到任意矩阵——全书巅峰。
+
+---
