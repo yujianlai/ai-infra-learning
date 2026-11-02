@@ -1132,8 +1132,7 @@ $$A^{-1} = \frac{1}{ad-bc}\begin{bmatrix} d & -b \\
 
 **行列式登场**：量 $ad - bc$ 称为 $A$ 的**行列式（determinant）**，记作 $\det A = ad - bc$。定理 4 说：**2×2 矩阵 $A$ 可逆 ⟺ $\det A \neq 0$**。
 
-**例2（Example 2）**：求 $A = \begin{bmatrix} 3 & 4 \\
-5 & 6 \end{bmatrix}$ 的逆。
+**例2（Example 2）**：求 $A = \begin{bmatrix} 3 & 4 \\ 5 & 6 \end{bmatrix}$ 的逆。
 
 $$\det A = 3(6) - 4(5) = -2 \neq 0 \Rightarrow A \text{ 可逆}$$
 
@@ -1176,8 +1175,7 @@ $$
 \end{aligned}
 $$
 
-即 $A\mathbf{x} = \mathbf{b}$，$\mathbf{b} = \begin{bmatrix} 3 \\
-7 \end{bmatrix}$，所以
+即 $A\mathbf{x} = \mathbf{b}$，$\mathbf{b} = \begin{bmatrix} 3 \\ 7 \end{bmatrix}$，所以
 
 $$\mathbf{x} = A^{-1}\mathbf{b} = \begin{bmatrix} -3 & 2 \\
 5/2 & -3/2 \end{bmatrix}\begin{bmatrix} 3 \\
@@ -1256,9 +1254,7 @@ $$E_1 = \begin{bmatrix} 1 & 0 & 0 \\
 
 > 对增广矩阵 $[A\ \ I]$ 做行化简。若 $A$ 行等价于 $I$，则 $[A\ \ I]$ 行等价于 $[I\ \ A^{-1}]$；否则 $A$ 不可逆。
 
-**例7（Example 7）**：求 $A = \begin{bmatrix} 0 & 1 & 2 \\
-1 & 0 & 3 \\
-4 & -3 & 8 \end{bmatrix}$ 的逆（若存在）。
+**例7（Example 7）**：求 $A = \begin{bmatrix} 0 & 1 & 2 \\ 1 & 0 & 3 \\ 4 & -3 & 8 \end{bmatrix}$ 的逆（若存在）。
 
 $$
 \left[\begin{array}{ccc|ccc} 0 & 1 & 2 & 1 & 0 & 0 \\
@@ -1530,8 +1526,7 @@ $$AB = \begin{bmatrix} \text{col}_1(A) & \text{col}_2(A) & \cdots & \text{col}_n
 $$A = \begin{bmatrix} A_{11} & A_{12} \\
 0 & A_{22} \end{bmatrix}$$
 
-的**分块上三角矩阵**（$A_{11}$ 是 $p \times p$，$A_{22}$ 是 $q \times q$），求逆有简洁公式。设逆矩阵也按同法分块 $B = \begin{bmatrix} B_{11} & B_{12} \\
-B_{21} & B_{22} \end{bmatrix}$，则
+的**分块上三角矩阵**（$A_{11}$ 是 $p \times p$，$A_{22}$ 是 $q \times q$），求逆有简洁公式。设逆矩阵也按同法分块 $B = \begin{bmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{bmatrix}$，则
 
 $$AB = \begin{bmatrix} A_{11} & A_{12} \\
 0 & A_{22} \end{bmatrix}\begin{bmatrix} B_{11} & B_{12} \\
@@ -1562,9 +1557,7 @@ $$\begin{bmatrix} A_{11} & A_{12} \\
 0 & A_{22} \end{bmatrix}^{-1} = \begin{bmatrix} A_{11}^{-1} & -A_{11}^{-1}A_{12}A_{22}^{-1} \\
 0 & A_{22}^{-1} \end{bmatrix}$$
 
-> **对照 2×2 三角矩阵**：$\begin{bmatrix} a & b \\
-0 & d \end{bmatrix}^{-1} = \frac{1}{ad}\begin{bmatrix} d & -b \\
-0 & a \end{bmatrix}$——形式完全一致，分块公式是它的"矩阵版"！
+> **对照 2×2 三角矩阵**：$\begin{bmatrix} a & b \\ 0 & d \end{bmatrix}^{-1} = \frac{1}{ad}\begin{bmatrix} d & -b \\ 0 & a \end{bmatrix}$——形式完全一致，分块公式是它的"矩阵版"！
 
 **分块对角矩阵（block diagonal）**：主对角块之外全是零块。它可逆 ⟺ **每个对角块都可逆**（练习 13、14）。
 
@@ -1775,9 +1768,7 @@ $$C = \begin{bmatrix} .50 & .40 & .20 \\
 .20 & .30 & .10 \\
 .10 & .10 & .30 \end{bmatrix}$$
 
-**例2（Example 2）**：最终需求 $\mathbf{d} = \begin{bmatrix} 50 \\
-30 \\
-20 \end{bmatrix}$，求生产水平 $\mathbf{x}$。
+**例2（Example 2）**：最终需求 $\mathbf{d} = \begin{bmatrix} 50 \\ 30 \\ 20 \end{bmatrix}$，求生产水平 $\mathbf{x}$。
 
 方程 $(I - C)\mathbf{x} = \mathbf{d}$，系数矩阵：
 
@@ -1898,8 +1889,7 @@ $$D = \begin{bmatrix} 0 & .5 & .5 & 6 & 6 & 5.5 & 5.5 & 0 \\
 
 *FIGURE 1 Regular N. 图1 原来的大写字母 N（8 个顶点）*
 
-用剪切矩阵 $A = \begin{bmatrix} 1 & .25 \\
-0 & 1 \end{bmatrix}$ 左乘 $D$，得剪切后的 N（FIGURE 2）：
+用剪切矩阵 $A = \begin{bmatrix} 1 & .25 \\ 0 & 1 \end{bmatrix}$ 左乘 $D$，得剪切后的 N（FIGURE 2）：
 
 $$AD = \begin{bmatrix} 1 & .25 \\
 0 & 1 \end{bmatrix}\begin{bmatrix} 0 & .5 & .5 & 6 & 6 & 5.5 & 5.5 & 0 \\
@@ -1912,8 +1902,7 @@ $$AD = \begin{bmatrix} 1 & .25 \\
 
 *FIGURE 2 Slanted N. 图2 剪切后的斜体 N*
 
-**例2（Example 2，复合变换）**：FIGURE 2 的 N 有点太宽，补偿办法：再做一个**缩放变换** $S = \begin{bmatrix} .75 & 0 \\
-0 & 1 \end{bmatrix}$（x 坐标乘 .75）。复合变换矩阵 = **乘积**（顺序：先剪切、后缩放 = $S$ 在左）：
+**例2（Example 2，复合变换）**：FIGURE 2 的 N 有点太宽，补偿办法：再做一个**缩放变换** $S = \begin{bmatrix} .75 & 0 \\ 0 & 1 \end{bmatrix}$（x 坐标乘 .75）。复合变换矩阵 = **乘积**（顺序：先剪切、后缩放 = $S$ 在左）：
 
 $$SA = \begin{bmatrix} .75 & 0 \\
 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & .25 \\
@@ -2218,13 +2207,7 @@ c_p \end{bmatrix}$$
 
 称为 $\mathbf{x}$ 的 **$\mathcal{B}$-坐标向量（coordinate vector）**。
 
-**例1（Example 1）**：设 $\mathbf{v}_1 = \begin{bmatrix} 3 \\
-6 \\
-2 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} -1 \\
-0 \\
-1 \end{bmatrix}$, $\mathbf{x} = \begin{bmatrix} 3 \\
-12 \\
-7 \end{bmatrix}$, $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2\}$。判断 $\mathbf{x}$ 是否在 $H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中，若是，求 $[\mathbf{x}]_{\mathcal{B}}$。
+**例1（Example 1）**：设 $\mathbf{v}_1 = \begin{bmatrix} 3 \\ 6 \\ 2 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}$, $\mathbf{x} = \begin{bmatrix} 3 \\ 12 \\ 7 \end{bmatrix}$, $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2\}$。判断 $\mathbf{x}$ 是否在 $H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中，若是，求 $[\mathbf{x}]_{\mathcal{B}}$。
 
 **解**：$\mathbf{x} \in H$ ⟺ 向量方程 $c_1\mathbf{v}_1 + c_2\mathbf{v}_2 = \mathbf{x}$ 相容：
 
@@ -2302,15 +2285,9 @@ $$\operatorname{rank} A = \dim \operatorname{Col} A$$
 
 **解**：先找基——行化简 $A = [\mathbf{v}_1\ \mathbf{v}_2\ \mathbf{v}_3]$ 发现列相关（$\mathbf{v}_3$ 可由前两列表示），主元列 2 个 ⇒ $\dim H = 2$。
 
-**题2**：$\mathcal{B} = \left\{\begin{bmatrix} -1 \\
-2 \end{bmatrix}, \begin{bmatrix} -2 \\
-1 \end{bmatrix}\right\}$ 是 $\mathbb{R}^2$ 的基，若 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
-2 \end{bmatrix}$，求 $\mathbf{x}$。
+**题2**：$\mathcal{B} = \left\{\begin{bmatrix} -1 \\ 2 \end{bmatrix}, \begin{bmatrix} -2 \\ 1 \end{bmatrix}\right\}$ 是 $\mathbb{R}^2$ 的基，若 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$，求 $\mathbf{x}$。
 
-**解**：$\mathbf{x} = 3\mathbf{b}_1 + 2\mathbf{b}_2 = 3\begin{bmatrix} -1 \\
-2 \end{bmatrix} + 2\begin{bmatrix} -2 \\
-1 \end{bmatrix} = \begin{bmatrix} -7 \\
-8 \end{bmatrix}$
+**解**：$\mathbf{x} = 3\mathbf{b}_1 + 2\mathbf{b}_2 = 3\begin{bmatrix} -1 \\ 2 \end{bmatrix} + 2\begin{bmatrix} -2 \\ 1 \end{bmatrix} = \begin{bmatrix} -7 \\ 8 \end{bmatrix}$
 
 **题3**：$\mathbb{R}^3$ 可能含有 4 维子空间吗？
 
@@ -2550,9 +2527,7 @@ $$\det A = (-1)^r \cdot \det U = (-1)^r \cdot (u_{11}u_{22}\cdots u_{nn})$$
 
 因为 $U$ 是三角矩阵，$\det U$ = 对角元乘积。又因为行替换不改变行列式、每次交换添一个负号。
 
-**例1（Example 1）**：求 $\det A$，$A = \begin{bmatrix} 1 & -4 & 2 \\
--2 & 8 & -9 \\
--1 & 7 & 0 \end{bmatrix}$。
+**例1（Example 1）**：求 $\det A$，$A = \begin{bmatrix} 1 & -4 & 2 \\ -2 & 8 & -9 \\ -1 & 7 & 0 \end{bmatrix}$。
 
 **解**（列1消元——**行替换，行列式不变**）：
 
@@ -2578,10 +2553,7 @@ $$\det A = -\begin{vmatrix} 1 & -4 & 2 \\
 * & -2 & * \\
 * & 3 & * \end{vmatrix}$$
 
-**例2（Example 2）**：求 $\det A$，$A = \begin{bmatrix} 2 & -8 & 6 & 8 \\
-3 & -9 & 5 & 10 \\
--3 & 0 & 1 & -2 \\
-1 & -4 & 0 & 6 \end{bmatrix}$。
+**例2（Example 2）**：求 $\det A$，$A = \begin{bmatrix} 2 & -8 & 6 & 8 \\ 3 & -9 & 5 & 10 \\ -3 & 0 & 1 & -2 \\ 1 & -4 & 0 & 6 \end{bmatrix}$。
 
 **解**（先提公因子 2，避免分数）：
 
@@ -2645,9 +2617,7 @@ $$\det A^T = \det A$$
 
 > $$\det(AB) = (\det A)(\det B)$$
 
-**例5（Example 5，验证）**：$A = \begin{bmatrix} 6 & 1 \\
-3 & 2 \end{bmatrix}$, $B = \begin{bmatrix} 4 & 3 \\
-1 & 2 \end{bmatrix}$。
+**例5（Example 5，验证）**：$A = \begin{bmatrix} 6 & 1 \\ 3 & 2 \end{bmatrix}$, $B = \begin{bmatrix} 4 & 3 \\ 1 & 2 \end{bmatrix}$。
 
 $$AB = \begin{bmatrix} 25 & 20 \\
 14 & 13 \end{bmatrix}, \qquad \det AB = 25(13) - 20(14) = 45$$
@@ -2799,10 +2769,8 @@ $$x_1 = \frac{4s+2}{3(s+2)(s-2)}, \qquad x_2 = \frac{-3s-24}{3(s+2)(s-2)} = \fra
 > 若 $A$ 是 ${}2 \times 2$ 矩阵，$A$ 的列确定的平行四边形面积为 $|\det A|$；若 $A$ 是 ${}3 \times 3$ 矩阵，$A$ 的列确定的平行六面体体积为 $|\det A|$。
 
 **证明思路（2×2）**：分三种情况。
-1. $A$ **对角** $\begin{bmatrix} a & 0 \\
-0 & d \end{bmatrix}$：矩形，面积 = $|ad| = |\det A|$ ✓
-2. $A$ 只有**一个非对角元非零**（如 $\begin{bmatrix} a & 0 \\
-c & d \end{bmatrix}$）：图 2 的"剪切"不改变面积（两平行四边形同底等高），仍有面积 = $|ad| = |\det A|$ ✓
+1. $A$ **对角** $\begin{bmatrix} a & 0 \\ 0 & d \end{bmatrix}$：矩形，面积 = $|ad| = |\det A|$ ✓
+2. $A$ 只有**一个非对角元非零**（如 $\begin{bmatrix} a & 0 \\ c & d \end{bmatrix}$）：图 2 的"剪切"不改变面积（两平行四边形同底等高），仍有面积 = $|ad| = |\det A|$ ✓
 
 ![FIGURE 2 等积平行四边形](img/fig33_2_equal_area_parallelograms.png)
 
@@ -2818,8 +2786,7 @@ c & d \end{bmatrix}$）：图 2 的"剪切"不改变面积（两平行四边形�
 
 *FIGURE 5 Translating a parallelogram does not change its area. 图5 平移平行四边形不改变面积（例4的技巧）*
 
-由相邻顶点 $(0,0)$、$(2,5)$、$(6,1)$ 构成矩阵 $A = \begin{bmatrix} 2 & 6 \\
-5 & 1 \end{bmatrix}$：
+由相邻顶点 $(0,0)$、$(2,5)$、$(6,1)$ 构成矩阵 $A = \begin{bmatrix} 2 & 6 \\ 5 & 1 \end{bmatrix}$：
 
 $$\text{面积} = |\det A| = |2 - 30| = |-28| = \mathbf{28}$$
 
@@ -2987,14 +2954,9 @@ b \end{bmatrix} = a\begin{bmatrix} 1 \\
 
 $$\operatorname{Nul} A = \{\mathbf{x} : \mathbf{x} \in \mathbb{R}^n,\ A\mathbf{x} = \mathbf{0}\} \subseteq \mathbb{R}^n$$
 
-**例1（Example 1，验证向量属于 Nul A）**：设 $A = \begin{bmatrix} 1 & -3 & -2 \\
--5 & 9 & 1 \end{bmatrix}$, $\mathbf{u} = \begin{bmatrix} 5 \\
-3 \\
--2 \end{bmatrix}$。判断 $\mathbf{u} \in \operatorname{Nul} A$？
+**例1（Example 1，验证向量属于 Nul A）**：设 $A = \begin{bmatrix} 1 & -3 & -2 \\ -5 & 9 & 1 \end{bmatrix}$, $\mathbf{u} = \begin{bmatrix} 5 \\ 3 \\ -2 \end{bmatrix}$。判断 $\mathbf{u} \in \operatorname{Nul} A$？
 
-**解**：算 $A\mathbf{u} = \begin{bmatrix} 5 - 9 + 4 \\
--25 + 27 - 2 \end{bmatrix} = \begin{bmatrix} 0 \\
-0 \end{bmatrix} = \mathbf{0}$ ✓ 故 $\mathbf{u} \in \operatorname{Nul} A$。
+**解**：算 $A\mathbf{u} = \begin{bmatrix} 5 - 9 + 4 \\ -25 + 27 - 2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} = \mathbf{0}$ ✓ 故 $\mathbf{u} \in \operatorname{Nul} A$。
 
 **THEOREM 2**：$m \times n$ 矩阵 $A$ 的零空间是 $\mathbb{R}^n$ 的子空间。
 
@@ -3013,8 +2975,7 @@ a - 2b + 5c - d &= 0 \\
 \end{aligned}
 $$
 
-系数矩阵 $A = \begin{bmatrix} 1 & -2 & 5 & -1 \\
--1 & -1 & 1 & 0 \end{bmatrix}$，则 $H = \operatorname{Nul} A$，由 Theorem 2 是子空间 ∎
+系数矩阵 $A = \begin{bmatrix} 1 & -2 & 5 & -1 \\ -1 & -1 & 1 & 0 \end{bmatrix}$，则 $H = \operatorname{Nul} A$，由 Theorem 2 是子空间 ∎
 
 > **方法论**：判断"由线性方程条件定义的集合"是否为子空间——把条件改写成**齐次**方程组，证明它就是某矩阵的零空间。注意条件必须全是"= 0"型（等号右边不能有非零常数，否则不过原点，不是子空间）。
 
@@ -3046,9 +3007,7 @@ a + b \\
 1 \\
 0 \end{bmatrix}$$
 
-故 $W = \operatorname{Col} A$，$A = \begin{bmatrix} 6 & -1 \\
-1 & 1 \\
--7 & 0 \end{bmatrix}$，是子空间 ∎
+故 $W = \operatorname{Col} A$，$A = \begin{bmatrix} 6 & -1 \\ 1 & 1 \\ -7 & 0 \end{bmatrix}$，是子空间 ∎
 
 > **方法论**：证明"由线性参数式定义的集合"为子空间——把参数式拆成**列向量的线性组合**，说明它是某矩阵的列空间。
 
@@ -3062,9 +3021,7 @@ a + b \\
 | 求基 | 行化简 + 参数向量形式 | **A 的主元列**（2.8 定理 14） |
 | 维数 | 自由变量数 = $n - \operatorname{rank} A$ | 主元列数 = $\operatorname{rank} A$ |
 
-**例5（Example 5，空间归属判断）**：$A = \begin{bmatrix} 2 & 4 & -2 & 1 \\
--2 & -5 & 7 & 3 \\
-3 & 7 & -8 & 6 \end{bmatrix}$（${}3 \times 4$）。
+**例5（Example 5，空间归属判断）**：$A = \begin{bmatrix} 2 & 4 & -2 & 1 \\ -2 & -5 & 7 & 3 \\ 3 & 7 & -8 & 6 \end{bmatrix}$（${}3 \times 4$）。
 a. 若 $\operatorname{Col} A$ 是子空间，属于哪个空间？$\operatorname{Nul} A$ 呢？
 b. 求 $\operatorname{Col} A$ 与 $\operatorname{Nul} A$ 中各一个非零向量（若存在）。
 
@@ -3240,10 +3197,7 @@ c_n \end{bmatrix} \in \mathbb{R}^n$$
 
 称为 $\mathbf{x}$ 的 **$\mathcal{B}$-坐标向量**。
 
-**例1（Example 1）**：设 $\mathbf{b}_1 = \begin{bmatrix} 2 \\
-1 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -1 \\
-1 \end{bmatrix}$, $\mathbf{x} = \begin{bmatrix} 4 \\
-5 \end{bmatrix}$，$\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2\}$。求 $[\mathbf{x}]_{\mathcal{B}}$。
+**例1（Example 1）**：设 $\mathbf{b}_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$, $\mathbf{x} = \begin{bmatrix} 4 \\ 5 \end{bmatrix}$，$\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2\}$。求 $[\mathbf{x}]_{\mathcal{B}}$。
 
 **解**：解 $c_1\mathbf{b}_1 + c_2\mathbf{b}_2 = \mathbf{x}$：
 
@@ -3251,10 +3205,7 @@ $$\begin{bmatrix} 2 & -1 & 4 \\
 1 & 1 & 5 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 3 \\
 0 & 1 & 2 \end{bmatrix}$$
 
-故 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
-2 \end{bmatrix}$。**验证**：${}3\mathbf{b}_1 + 2\mathbf{b}_2 = \begin{bmatrix} 6-2 \\
-3+2 \end{bmatrix} = \begin{bmatrix} 4 \\
-5 \end{bmatrix}$ ✓
+故 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$。**验证**：${}3\mathbf{b}_1 + 2\mathbf{b}_2 = \begin{bmatrix} 6-2 \\ 3+2 \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \end{bmatrix}$ ✓
 
 **图形直觉（FIGURE 1 vs FIGURE 2）**：同一向量 $\mathbf{x}$，在标准坐标纸上看是 $(4,5)$，在 $\mathcal{B}$-坐标纸（沿 $\mathbf{b}_1, \mathbf{b}_2$ 方向画网格）上看是 $(3,2)$——**换基 = 换坐标纸**：
 
@@ -3271,10 +3222,7 @@ $$\begin{bmatrix} 2 & -1 & 4 \\
 $$P_{\mathcal{B}} = \begin{bmatrix} \mathbf{b}_1 & \mathbf{b}_2 \end{bmatrix} = \begin{bmatrix} 2 & -1 \\
 1 & 1 \end{bmatrix}$$
 
-则 $P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 2 & -1 \\
-1 & 1 \end{bmatrix}\begin{bmatrix} 3 \\
-2 \end{bmatrix} = \begin{bmatrix} 4 \\
-5 \end{bmatrix} = \mathbf{x}$ ✓
+则 $P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 2 & -1 \\ 1 & 1 \end{bmatrix}\begin{bmatrix} 3 \\ 2 \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \end{bmatrix} = \mathbf{x}$ ✓
 
 **核心公式 (4)**：
 
@@ -3414,9 +3362,7 @@ $$3 + 2t = 2(4 + t + 5t^2) - 5(1 + 2t^2)$$
 - $\dim \operatorname{Nul} A$ = $A\mathbf{x} = \mathbf{0}$ 的**自由变量个数**
 - $\dim \operatorname{Col} A$ = $A$ 的**主元列个数** = $\operatorname{rank} A$
 
-**例5（Example 5）**：求 $A = \begin{bmatrix} -3 & 6 & -1 & 1 & -7 \\
-1 & -2 & 2 & 3 & -1 \\
-2 & -4 & 5 & 8 & -4 \end{bmatrix}$ 的子空间维数。
+**例5（Example 5）**：求 $A = \begin{bmatrix} -3 & 6 & -1 & 1 & -7 \\ 1 & -2 & 2 & 3 & -1 \\ 2 & -4 & 5 & 8 & -4 \end{bmatrix}$ 的子空间维数。
 
 **解**：4.2 节例 3 已算过：RREF 有 2 个主元列、3 个自由变量，故
 
@@ -3450,10 +3396,7 @@ $$\dim \operatorname{Col} A = 2, \qquad \dim \operatorname{Nul} A = 3$$
 
 $$\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \dots, \mathbf{r}_m\} \subseteq \mathbb{R}^n$$
 
-**例1（Example 1）**：$A = \begin{bmatrix} -2 & -5 & 8 & 0 & -17 \\
-1 & 3 & -5 & 1 & 5 \\
-3 & 11 & -19 & 7 & 1 \\
-1 & 7 & -13 & 5 & -3 \end{bmatrix}$，$\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3, \mathbf{r}_4\}$（$\mathbb{R}^5$ 的子空间）。
+**例1（Example 1）**：$A = \begin{bmatrix} -2 & -5 & 8 & 0 & -17 \\ 1 & 3 & -5 & 1 & 5 \\ 3 & 11 & -19 & 7 & 1 \\ 1 & 7 & -13 & 5 & -3 \end{bmatrix}$，$\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3, \mathbf{r}_4\}$（$\mathbb{R}^5$ 的子空间）。
 
 **求 Row A 的基（THEOREM 13）**：
 > 若两个矩阵**行等价**，则它们的行空间相同；进一步，**阶梯形的非零行**构成其行空间的一组基。
@@ -3497,9 +3440,7 @@ b. 6×9 矩阵 $A$ 能有 $\dim \operatorname{Nul} A = 2$ 吗？——$\operator
 | $\operatorname{Col} A$ | $\mathbb{R}^m$（值域） | $\operatorname{rank} A$ |
 | $\operatorname{Nul} A^T$ | $\mathbb{R}^m$（值域） | $m - \operatorname{rank} A$ |
 
-**例4（Example 4，完整计算）**：$A = \begin{bmatrix} 3 & 0 & -1 \\
-3 & 0 & -1 \\
-4 & 0 & 5 \end{bmatrix}$。
+**例4（Example 4，完整计算）**：$A = \begin{bmatrix} 3 & 0 & -1 \\ 3 & 0 & -1 \\ 4 & 0 & 5 \end{bmatrix}$。
 
 - $\operatorname{Nul} A = \operatorname{Span}\{(0,1,0)\}$（$x_2$ 轴）：$\dim = 1$
 - $\operatorname{Row} A = x_1x_3$ 平面（$x_2 = 0$）：$\dim = 2$
@@ -3550,8 +3491,7 @@ FIGURE 1 中同一向量 $\mathbf{x}$，在 $\mathcal{B}$-坐标纸上读作 $\m
 
 $$\mathbf{b}_1 = 4\mathbf{c}_1 + \mathbf{c}_2, \qquad \mathbf{b}_2 = -6\mathbf{c}_1 + \mathbf{c}_2 \tag{1}$$
 
-且 $\mathbf{x} = 3\mathbf{b}_1 + \mathbf{b}_2$（即 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
-1 \end{bmatrix}$）。求 $[\mathbf{x}]_{\mathcal{C}}$。
+且 $\mathbf{x} = 3\mathbf{b}_1 + \mathbf{b}_2$（即 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\ 1 \end{bmatrix}$）。求 $[\mathbf{x}]_{\mathcal{C}}$。
 
 **解**：对 $\mathbf{x}$ 施加 $\mathcal{C}$-坐标映射（线性变换，保线性组合）：
 
@@ -3562,9 +3502,7 @@ $$[\mathbf{x}]_{\mathcal{C}} = [3\mathbf{b}_1 + \mathbf{b}_2]_{\mathcal{C}} = 3[
 $$[\mathbf{x}]_{\mathcal{C}} = \begin{bmatrix} [\mathbf{b}_1]_{\mathcal{C}} & [\mathbf{b}_2]_{\mathcal{C}} \end{bmatrix}\begin{bmatrix} 3 \\
 1 \end{bmatrix} \tag{3}$$
 
-由 (1)：$[\mathbf{b}_1]_{\mathcal{C}} = \begin{bmatrix} 4 \\
-1 \end{bmatrix}$, $[\mathbf{b}_2]_{\mathcal{C}} = \begin{bmatrix} -6 \\
-1 \end{bmatrix}$，代入：
+由 (1)：$[\mathbf{b}_1]_{\mathcal{C}} = \begin{bmatrix} 4 \\ 1 \end{bmatrix}$, $[\mathbf{b}_2]_{\mathcal{C}} = \begin{bmatrix} -6 \\ 1 \end{bmatrix}$，代入：
 
 $$[\mathbf{x}]_{\mathcal{C}} = \begin{bmatrix} 4 & -6 \\
 1 & 1 \end{bmatrix}\begin{bmatrix} 3 \\
@@ -3600,11 +3538,7 @@ $$(P_{\mathcal{C} \leftarrow \mathcal{B}})^{-1} = P_{\mathcal{B} \leftarrow \mat
 
 $$[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C}}^{-1}\mathbf{x} = P_{\mathcal{C}}^{-1}P_{\mathcal{B}}[\mathbf{x}]_{\mathcal{B}} \quad \Rightarrow \quad P_{\mathcal{C} \leftarrow \mathcal{B}} = P_{\mathcal{C}}^{-1}P_{\mathcal{B}}$$
 
-**例2（Example 2，标准流程）**：$\mathbf{b}_1 = \begin{bmatrix} -9 \\
-1 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -5 \\
--1 \end{bmatrix}$, $\mathbf{c}_1 = \begin{bmatrix} 1 \\
--4 \end{bmatrix}$, $\mathbf{c}_2 = \begin{bmatrix} 3 \\
--5 \end{bmatrix}$。求 $P_{\mathcal{C} \leftarrow \mathcal{B}}$。
+**例2（Example 2，标准流程）**：$\mathbf{b}_1 = \begin{bmatrix} -9 \\ 1 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -5 \\ -1 \end{bmatrix}$, $\mathbf{c}_1 = \begin{bmatrix} 1 \\ -4 \end{bmatrix}$, $\mathbf{c}_2 = \begin{bmatrix} 3 \\ -5 \end{bmatrix}$。求 $P_{\mathcal{C} \leftarrow \mathcal{B}}$。
 
 **解**：设 $[\mathbf{b}_1]_{\mathcal{C}} = (x_1, x_2)$，即 $x_1\mathbf{c}_1 + x_2\mathbf{c}_2 = \mathbf{b}_1$。两列同时解：
 
@@ -3612,16 +3546,11 @@ $$\begin{bmatrix} \mathbf{c}_1 & \mathbf{c}_2 & \mathbf{b}_1 & \mathbf{b}_2 \end
 -4 & -5 & 1 & -1 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 6 & 4 \\
 0 & 1 & -5 & -3 \end{bmatrix}$$
 
-故 $P_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{bmatrix} 6 & 4 \\
--5 & -3 \end{bmatrix}$（右半即所求）
+故 $P_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{bmatrix} 6 & 4 \\ -5 & -3 \end{bmatrix}$（右半即所求）
 
 > **效率提示**：直接行化简 $[P_{\mathcal{C}}\ \ P_{\mathcal{B}}] \sim [I\ \ P_{\mathcal{C}}^{-1}P_{\mathcal{B}}]$——一步同时算出 $P_{\mathcal{C}}^{-1}$ 和乘积，比先求逆再相乘快（2.2 节练习 12 的算法）。
 
-**例3（Example 3，利用逆矩阵反向翻译）**：$\mathbf{b}_1 = \begin{bmatrix} 1 \\
--3 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -2 \\
-4 \end{bmatrix}$, $\mathbf{c}_1 = \begin{bmatrix} -7 \\
-9 \end{bmatrix}$, $\mathbf{c}_2 = \begin{bmatrix} -5 \\
-7 \end{bmatrix}$。
+**例3（Example 3，利用逆矩阵反向翻译）**：$\mathbf{b}_1 = \begin{bmatrix} 1 \\ -3 \end{bmatrix}$, $\mathbf{b}_2 = \begin{bmatrix} -2 \\ 4 \end{bmatrix}$, $\mathbf{c}_1 = \begin{bmatrix} -7 \\ 9 \end{bmatrix}$, $\mathbf{c}_2 = \begin{bmatrix} -5 \\ 7 \end{bmatrix}$。
 
 a. 求 $P_{\mathcal{B} \leftarrow \mathcal{C}}$：
 
@@ -3678,10 +3607,7 @@ $$A\mathbf{x} = \lambda\mathbf{x}$$
 
 > ⚠️ **特征向量必须非零**：零向量平凡满足 $A\mathbf{0} = \lambda\mathbf{0}$，无信息量。但**特征值可以为 0**！
 
-**例1（Example 1，验证）**：设 $A = \begin{bmatrix} 1 & 6 \\
-5 & 2 \end{bmatrix}$，$\mathbf{u} = \begin{bmatrix} 6 \\
--5 \end{bmatrix}$, $\mathbf{v} = \begin{bmatrix} 3 \\
--2 \end{bmatrix}$。$\mathbf{u}$ 和 $\mathbf{v}$ 是 $A$ 的特征向量吗？
+**例1（Example 1，验证）**：设 $A = \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix}$，$\mathbf{u} = \begin{bmatrix} 6 \\ -5 \end{bmatrix}$, $\mathbf{v} = \begin{bmatrix} 3 \\ -2 \end{bmatrix}$。$\mathbf{u}$ 和 $\mathbf{v}$ 是 $A$ 的特征向量吗？
 
 **解**：
 
@@ -3710,8 +3636,7 @@ $$\lambda \text{ 的特征空间} = \operatorname{Nul}(A - \lambda I)$$
 
 **验证思路**：$A\mathbf{x} = \lambda\mathbf{x} \iff (A - \lambda I)\mathbf{x} = \mathbf{0}$——所以特征空间就是矩阵 $A - \lambda I$ 的零空间（Theorem 4.2-2 保证是子空间）。
 
-**例2（Example 2，求特征空间）**：证明 7 是 $A = \begin{bmatrix} 1 & 6 \\
-5 & 2 \end{bmatrix}$ 的特征值，并求其特征向量。
+**例2（Example 2，求特征空间）**：证明 7 是 $A = \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix}$ 的特征值，并求其特征向量。
 
 **解**：计算
 
@@ -3722,10 +3647,7 @@ $$A - 7I = \begin{bmatrix} 1 & 6 \\
 
 $A - 7I$ 的列相关（第二列 = −第一列）⇒ 不可逆 ⇒ $\operatorname{Nul}(A-7I) \neq \{\mathbf{0}\}$ ⇒ 存在非零 $\mathbf{x}$ 使 $(A-7I)\mathbf{x} = \mathbf{0}$，即 $A\mathbf{x} = 7\mathbf{x}$ ∎
 
-解齐次方程组：$\begin{bmatrix} -6 & 6 \\
-5 & -5 \end{bmatrix} \sim \begin{bmatrix} 1 & -1 \\
-0 & 0 \end{bmatrix}$，得 $x_1 = x_2$，通解 $x_2\begin{bmatrix} 1 \\
-1 \end{bmatrix}$。
+解齐次方程组：$\begin{bmatrix} -6 & 6 \\ 5 & -5 \end{bmatrix} \sim \begin{bmatrix} 1 & -1 \\ 0 & 0 \end{bmatrix}$，得 $x_1 = x_2$，通解 $x_2\begin{bmatrix} 1 \\ 1 \end{bmatrix}$。
 
 $$\text{7 的特征空间} = \operatorname{Span}\left\{\begin{bmatrix} 1 \\
 1 \end{bmatrix}\right\}$$
@@ -3738,9 +3660,7 @@ $$\text{7 的特征空间} = \operatorname{Span}\left\{\begin{bmatrix} 1 \\
 
 *FIGURE 1 Eigenspaces for $\lambda = -4$ and $\lambda = 7$. 图1 例2 的两个特征空间：A 在两条特征线上分别做 ×7 和 ×(−4) 的缩放（负值含方向反转）*
 
-**例3（Example 3，三维特征空间）**：求 $A = \begin{bmatrix} 4 & -1 & 6 \\
-2 & 1 & 6 \\
-2 & -1 & 8 \end{bmatrix}$ 对应 $\lambda = 2$ 的特征空间。
+**例3（Example 3，三维特征空间）**：求 $A = \begin{bmatrix} 4 & -1 & 6 \\ 2 & 1 & 6 \\ 2 & -1 & 8 \end{bmatrix}$ 对应 $\lambda = 2$ 的特征空间。
 
 **解**：
 
@@ -3750,9 +3670,7 @@ $$A - 2I = \begin{bmatrix} 2 & -1 & 6 \\
 0 & 0 & 1 \\
 0 & 0 & 0 \end{bmatrix} \Rightarrow x_2 = 2x_1,\ x_3 = 0\ (x_1 \text{ 自由})$$
 
-通解：$x_1\begin{bmatrix} 1/2 \\
-1 \\
-0 \end{bmatrix}$。特征空间基为 $\{(1/2, 1, 0)\}$，也可取 $\{(1, 2, 0)\}$——**特征空间是二维的！**（FIGURE 2 中 A 在此平面上做 ×2 的"膨胀"）
+通解：$x_1\begin{bmatrix} 1/2 \\ 1 \\ 0 \end{bmatrix}$。特征空间基为 $\{(1/2, 1, 0)\}$，也可取 $\{(1, 2, 0)\}$——**特征空间是二维的！**（FIGURE 2 中 A 在此平面上做 ×2 的"膨胀"）
 
 ![FIGURE 2 特征空间上的膨胀](img/fig51_2_dilation_eigenspace.png)
 
@@ -3816,8 +3734,7 @@ $$\lambda \text{ 是 } A \text{ 的特征值} \iff (A - \lambda I)\mathbf{x} = \
 
 **定义**：标量方程 $\det(A - \lambda I) = 0$ 称为 $A$ 的**特征方程（characteristic equation）**。
 
-**例1（Example 1，求特征值）**：求 $A = \begin{bmatrix} 2 & 3 \\
-3 & -6 \end{bmatrix}$ 的特征值。
+**例1（Example 1，求特征值）**：求 $A = \begin{bmatrix} 2 & 3 \\ 3 & -6 \end{bmatrix}$ 的特征值。
 
 **解**：
 
@@ -3828,9 +3745,7 @@ $$\det(A - \lambda I) = \begin{vmatrix} 2 - \lambda & 3 \\
 
 $$\lambda = 3, \qquad \lambda = -7$$
 
-**验证**：$\det(A - 3I) = \begin{vmatrix} -1 & 3 \\
-3 & -9 \end{vmatrix} = 9 - 9 = 0$ ✓；$\det(A + 7I) = \begin{vmatrix} 9 & 3 \\
-3 & 1 \end{vmatrix} = 9 - 9 = 0$ ✓
+**验证**：$\det(A - 3I) = \begin{vmatrix} -1 & 3 \\ 3 & -9 \end{vmatrix} = 9 - 9 = 0$ ✓；$\det(A + 7I) = \begin{vmatrix} 9 & 3 \\ 3 & 1 \end{vmatrix} = 9 - 9 = 0$ ✓
 
 ### IMT 再添两员 (s)(t)
 
@@ -3843,9 +3758,7 @@ $$\lambda = 3, \qquad \lambda = -7$$
 
 *FIGURE 1 The parallelepiped determined by the columns of A. 图1 A 的列确定的平行六面体：体积 = |det A|（特征值 0 意味着体积坍缩为零）*
 
-**例2（Example 2，两种化简殊途同归）**：求 $\det A$，$A = \begin{bmatrix} 1 & 5 & 0 \\
-2 & 4 & -1 \\
-0 & -2 & 0 \end{bmatrix}$。
+**例2（Example 2，两种化简殊途同归）**：求 $\det A$，$A = \begin{bmatrix} 1 & 5 & 0 \\ 2 & 4 & -1 \\ 0 & -2 & 0 \end{bmatrix}$。
 
 **解**（两种行化简都得 $-2$）：
 $$\begin{vmatrix} 1 & 5 & 0 \\
@@ -3868,10 +3781,7 @@ $$\begin{vmatrix} 1 & 5 & 0 \\
 
 **定义**：$\det(A - \lambda I)$ 展开后是 $\lambda$ 的 $n$ 次多项式（首项 $(-1)^n\lambda^n$），称为 $A$ 的**特征多项式（characteristic polynomial）**。特征方程的次数 = 特征值的个数（计重数）。
 
-**例3（Example 3，上三角阵）**：$A = \begin{bmatrix} 5 & -2 & 6 & -1 \\
-0 & 3 & -8 & 0 \\
-0 & 0 & 5 & 4 \\
-0 & 0 & 0 & 1 \end{bmatrix}$ 的特征方程：
+**例3（Example 3，上三角阵）**：$A = \begin{bmatrix} 5 & -2 & 6 & -1 \\ 0 & 3 & -8 & 0 \\ 0 & 0 & 5 & 4 \\ 0 & 0 & 0 & 1 \end{bmatrix}$ 的特征方程：
 
 $$\det(A - \lambda I) = (5-\lambda)^2(3-\lambda)(1-\lambda) = 0$$
 
@@ -3907,23 +3817,17 @@ $$\det(B - \lambda I) = \det(P^{-1})\det(A - \lambda I)\det(P) = \det(A - \lambd
 （用了 $\det(P^{-1}) = 1/\det P$ 与 $\det(P^{-1})\det(P) = 1$）∎
 
 > ⚠️ **两条警告**：
-> 1. **相同特征值 ≠ 相似**！如 $\begin{bmatrix} 2 & 1 \\
-> 0 & 2 \end{bmatrix}$ 与 $\begin{bmatrix} 2 & 0 \\
-> 0 & 2 \end{bmatrix}$ 特征值相同（都是 2,2）但不相似（后者是 2I，只与自己相似：$P^{-1}(2I)P = 2I$）
+> 1. **相同特征值 ≠ 相似**！如 $\begin{bmatrix} 2 & 1 \\ > 0 & 2 \end{bmatrix}$ 与 $\begin{bmatrix} 2 & 0 \\ > 0 & 2 \end{bmatrix}$ 特征值相同（都是 2,2）但不相似（后者是 2I，只与自己相似：$P^{-1}(2I)P = 2I$）
 > 2. **相似 ≠ 行等价**！行等价 = 左乘初等矩阵（$EA$）；相似 = 左乘 $P^{-1}$ 右乘 $P$（$P^{-1}AP$）——结构完全不同
 
 ### 应用：动力系统（例5）
 
-**例5（Example 5，城市人口迁移）**：设 $A = \begin{bmatrix} .95 & .03 \\
-.05 & .97 \end{bmatrix}$ 为人口迁移矩阵（每年 5% 迁出城市、3% 迁入），$\mathbf{x}_0 = \begin{bmatrix} .60 \\
-.40 \end{bmatrix}$（初始城乡人口）。求 $\mathbf{x}_k = A^k\mathbf{x}_0$ 的长期行为。
+**例5（Example 5，城市人口迁移）**：设 $A = \begin{bmatrix} .95 & .03 \\ .05 & .97 \end{bmatrix}$ 为人口迁移矩阵（每年 5% 迁出城市、3% 迁入），$\mathbf{x}_0 = \begin{bmatrix} .60 \\ .40 \end{bmatrix}$（初始城乡人口）。求 $\mathbf{x}_k = A^k\mathbf{x}_0$ 的长期行为。
 
 **解**：
 **第1步 特征值**：$\det(A - \lambda I) = \lambda^2 - 1.92\lambda + .92 = (\lambda - 1)(\lambda - .92)$，特征值 1 与 0.92
 
-**第2步 特征向量**：$\lambda = 1$：$(A - I)\mathbf{x} = 0$ → $\mathbf{v}_1 = \begin{bmatrix} 3 \\
-5 \end{bmatrix}$；$\lambda = .92$：$\mathbf{v}_2 = \begin{bmatrix} 1 \\
--1 \end{bmatrix}$
+**第2步 特征向量**：$\lambda = 1$：$(A - I)\mathbf{x} = 0$ → $\mathbf{v}_1 = \begin{bmatrix} 3 \\ 5 \end{bmatrix}$；$\lambda = .92$：$\mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
 
 **第3步 分解初值**：$\mathbf{x}_0 = c_1\mathbf{v}_1 + c_2\mathbf{v}_2$ 解得 $c_1 = .125$, $c_2 = .225$
 
@@ -3933,8 +3837,7 @@ $$\mathbf{x}_k = A^k\mathbf{x}_0 = .125\ (1)^k\mathbf{v}_1 + .225\ (.92)^k\mathb
 5 \end{bmatrix} + .225\ (.92)^k\begin{bmatrix} 1 \\
 -1 \end{bmatrix}$$
 
-**长期行为**：$(.92)^k \to 0$，故 $\mathbf{x}_k \to .125\mathbf{v}_1 = \begin{bmatrix} .375 \\
-.625 \end{bmatrix}$——**稳态**：城市 37.5%、乡村 62.5%
+**长期行为**：$(.92)^k \to 0$，故 $\mathbf{x}_k \to .125\mathbf{v}_1 = \begin{bmatrix} .375 \\ .625 \end{bmatrix}$——**稳态**：城市 37.5%、乡村 62.5%
 
 > **马尔可夫链视角**：$A$ 的每列和为 1 ⇒ $\lambda = 1$ 必为特征值（为什么？练习可见），稳态即对应特征向量——4.9 节马尔可夫链的理论预告。
 
@@ -3964,10 +3867,7 @@ $$A^k = PD^kP^{-1}$$
 
 ### 引入：A^k 的显式公式
 
-**例1（Example 1）**：设 $A = \begin{bmatrix} 7 & 2 \\
--4 & 1 \end{bmatrix}$，已知 $A = PDP^{-1}$，其中 $P = \begin{bmatrix} 1 & 1 \\
--1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} 5 & 0 \\
-0 & 3 \end{bmatrix}$。求 $A^k$ 的公式。
+**例1（Example 1）**：设 $A = \begin{bmatrix} 7 & 2 \\ -4 & 1 \end{bmatrix}$，已知 $A = PDP^{-1}$，其中 $P = \begin{bmatrix} 1 & 1 \\ -1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix}$。求 $A^k$ 的公式。
 
 **解**：2×2 逆矩阵公式：
 
@@ -4008,9 +3908,7 @@ $A = PDP^{-1} \iff AP = PD \iff A\mathbf{v}_i = \lambda_i\mathbf{v}_i$（$i = 1.
 
 ### 对角化四步法（例3 完整实战）
 
-**例3（Example 3）**：对角化 $A = \begin{bmatrix} 1 & 3 & 3 \\
--3 & -5 & -3 \\
-3 & 3 & 1 \end{bmatrix}$（若可能）。
+**例3（Example 3）**：对角化 $A = \begin{bmatrix} 1 & 3 & 3 \\ -3 & -5 & -3 \\ 3 & 3 & 1 \end{bmatrix}$（若可能）。
 
 **Step 1：求特征值**。特征方程（5.2 节方法）：
 
@@ -4019,14 +3917,8 @@ $$\det(A - \lambda I) = -\lambda^3 - 3\lambda^2 + 4 = -(\lambda - 1)(\lambda + 2
 特征值：$\lambda_1 = 1$，$\lambda_2 = \lambda_3 = -2$（二重）
 
 **Step 2：求特征空间的基**。
-- $\lambda = 1$：$(A - I)\mathbf{x} = 0$ → 基 $\mathbf{v}_1 = \begin{bmatrix} 1 \\
--1 \\
-1 \end{bmatrix}$
-- $\lambda = -2$：$(A + 2I)\mathbf{x} = 0$，**两个**自由变量 → 基 $\mathbf{v}_2 = \begin{bmatrix} -1 \\
-1 \\
-0 \end{bmatrix}$, $\mathbf{v}_3 = \begin{bmatrix} -1 \\
-0 \\
-1 \end{bmatrix}$
+- $\lambda = 1$：$(A - I)\mathbf{x} = 0$ → 基 $\mathbf{v}_1 = \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}$
+- $\lambda = -2$：$(A + 2I)\mathbf{x} = 0$，**两个**自由变量 → 基 $\mathbf{v}_2 = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}$, $\mathbf{v}_3 = \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}$
 
 **Step 3：组装 P**（列顺序任意）：
 
@@ -4048,9 +3940,7 @@ $$AP = \begin{bmatrix} 1 & 2 & 2 \\
 
 ### 不可对角化的例子 THEOREM 6 & 例4
 
-**例4（Example 4，对照组）**：$A = \begin{bmatrix} 2 & 4 & 3 \\
--4 & -6 & -3 \\
-3 & 3 & 1 \end{bmatrix}$。特征方程与例 3 **完全相同**：$\lambda = 1, -2, -2$。但：
+**例4（Example 4，对照组）**：$A = \begin{bmatrix} 2 & 4 & 3 \\ -4 & -6 & -3 \\ 3 & 3 & 1 \end{bmatrix}$。特征方程与例 3 **完全相同**：$\lambda = 1, -2, -2$。但：
 
 - $\lambda = 1$：特征空间只有一维，$\mathbf{v}_1 = (1, -1, 1)$
 - $\lambda = -2$：特征空间也只有一维，$\mathbf{v}_2 = (-1, 1, 0)$
@@ -4064,9 +3954,7 @@ $$AP = \begin{bmatrix} 1 & 2 & 2 \\
 
 （证明：不同特征值的特征向量无关——Theorem 5.1-2；无关特征向量够 n 个——Theorem 5。∎）
 
-**例5（Example 5）**：上三角矩阵 $A = \begin{bmatrix} 5 & -8 & 1 \\
-0 & 0 & 7 \\
-0 & 0 & -2 \end{bmatrix}$。特征值 = 对角元 5, 0, −2——三个互不相同，由 Theorem 6 立得可对角化（无需算特征向量）。
+**例5（Example 5）**：上三角矩阵 $A = \begin{bmatrix} 5 & -8 & 1 \\ 0 & 0 & 7 \\ 0 & 0 & -2 \end{bmatrix}$。特征值 = 对角元 5, 0, −2——三个互不相同，由 Theorem 6 立得可对角化（无需算特征向量）。
 
 ### 重根情形 THEOREM 7
 
@@ -4106,11 +3994,9 @@ $$P = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \mathbf{v}_3 & \mathbf{v}_4 
 
 ### 练习精选（Practice Problems）
 
-**题1**：$A = \begin{bmatrix} 4 & -3 \\
-2 & -1 \end{bmatrix}$，求 $A^8$。
+**题1**：$A = \begin{bmatrix} 4 & -3 \\ 2 & -1 \end{bmatrix}$，求 $A^8$。
 
-**解**：$\lambda^2 - 3\lambda + 2 = (\lambda-1)(\lambda-2)$；特征向量 $\mathbf{v}_1 = (1,1)$（λ=1）、$\mathbf{v}_2 = (3,2)$（λ=2）。$P = \begin{bmatrix} 1 & 3 \\
-1 & 2 \end{bmatrix}$, $D = \operatorname{diag}(1,2)$。
+**解**：$\lambda^2 - 3\lambda + 2 = (\lambda-1)(\lambda-2)$；特征向量 $\mathbf{v}_1 = (1,1)$（λ=1）、$\mathbf{v}_2 = (3,2)$（λ=2）。$P = \begin{bmatrix} 1 & 3 \\ 1 & 2 \end{bmatrix}$, $D = \operatorname{diag}(1,2)$。
 
 $$A^8 = PD^8P^{-1} = \begin{bmatrix} 1 & 3 \\
 1 & 2 \end{bmatrix}\begin{bmatrix} 1 & 0 \\
@@ -4118,8 +4004,7 @@ $$A^8 = PD^8P^{-1} = \begin{bmatrix} 1 & 3 \\
 1 & -1 \end{bmatrix} = \begin{bmatrix} 766 & -765 \\
 510 & -509 \end{bmatrix}$$
 
-**题2**：$A = \begin{bmatrix} -3 & 12 \\
--2 & 7 \end{bmatrix}$，$\mathbf{v}_1 = (3,1)$、$\mathbf{v}_2 = (2,1)$ 是特征向量，直接对角化。
+**题2**：$A = \begin{bmatrix} -3 & 12 \\ -2 & 7 \end{bmatrix}$，$\mathbf{v}_1 = (3,1)$、$\mathbf{v}_2 = (2,1)$ 是特征向量，直接对角化。
 
 **解**：由 $A\mathbf{v}_1 = (3,1)$、$A\mathbf{v}_2 = 2(2,1)$ 读出 $\lambda_1 = 1$, $\lambda_2 = 2$：
 
@@ -4211,16 +4096,12 @@ $$[D]_{\mathcal{B}} = \begin{bmatrix} 0 & 1 & 0 \\
 
 **一句话总结**：**对角化 = 换到特征向量基，让变换的矩阵变成对角阵。**
 
-**例3（Example 3）**：$A = \begin{bmatrix} 7 & 2 \\
--4 & 1 \end{bmatrix}$，$T(\mathbf{x}) = A\mathbf{x}$。由 5.3 节已知 $A = PDP^{-1}$，$P = \begin{bmatrix} 1 & 1 \\
--1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} 5 & 0 \\
-0 & 3 \end{bmatrix}$。特征向量基 $\mathcal{B} = \{(1,-1), (1,-2)\}$，则
+**例3（Example 3）**：$A = \begin{bmatrix} 7 & 2 \\ -4 & 1 \end{bmatrix}$，$T(\mathbf{x}) = A\mathbf{x}$。由 5.3 节已知 $A = PDP^{-1}$，$P = \begin{bmatrix} 1 & 1 \\ -1 & -2 \end{bmatrix}$, $D = \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix}$。特征向量基 $\mathcal{B} = \{(1,-1), (1,-2)\}$，则
 
 $$[T]_{\mathcal{B}} = P^{-1}AP = D = \begin{bmatrix} 5 & 0 \\
 0 & 3 \end{bmatrix}$$
 
-**例4（Example 4，不可对角化但仍有简化）**：$A = \begin{bmatrix} 4 & -9 \\
-4 & -8 \end{bmatrix}$，特征多项式 $(\lambda + 2)^2$——λ=−2 二重，不可对角化。但取任意方便基如 $\mathcal{B} = \{(3,2), (2,1)\}$：
+**例4（Example 4，不可对角化但仍有简化）**：$A = \begin{bmatrix} 4 & -9 \\ 4 & -8 \end{bmatrix}$，特征多项式 $(\lambda + 2)^2$——λ=−2 二重，不可对角化。但取任意方便基如 $\mathcal{B} = \{(3,2), (2,1)\}$：
 
 $$[T]_{\mathcal{B}} = P^{-1}AP = \begin{bmatrix} -1 & 2 \\
 2 & -3 \end{bmatrix}\begin{bmatrix} -6 & -1 \\
@@ -4256,13 +4137,11 @@ $$[T]_{\mathcal{B}} = P^{-1}AP = \begin{bmatrix} -1 & 2 \\
 
 ## 5.5 复特征值 Complex Eigenvalues
 
-**中文讲解**：到目前为止我们一直在实数域 $\mathbb{R}$ 中工作。但看一个最朴素的变换——旋转 $A = \begin{bmatrix} 0 & -1 \\
-1 & 0 \end{bmatrix}$（逆时针 90°）：**任何向量都被转了方向**，没有实特征向量！然而旋转明明是个简单变换——问题不在变换，而在数域。把数域扩大到复数 $\mathbb{C}$，一切豁然开朗。
+**中文讲解**：到目前为止我们一直在实数域 $\mathbb{R}$ 中工作。但看一个最朴素的变换——旋转 $A = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}$（逆时针 90°）：**任何向量都被转了方向**，没有实特征向量！然而旋转明明是个简单变换——问题不在变换，而在数域。把数域扩大到复数 $\mathbb{C}$，一切豁然开朗。
 
 ### 旋转矩阵的特征值 例1
 
-**例1（Example 1）**：求 $A = \begin{bmatrix} 0 & -1 \\
-1 & 0 \end{bmatrix}$ 的特征值。
+**例1（Example 1）**：求 $A = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}$ 的特征值。
 
 **解**：特征方程 $\lambda^2 + 1 = 0$——在实数域无解，在复数域：
 
@@ -4275,17 +4154,13 @@ $$(A - iI)\mathbf{x} = \begin{bmatrix} -i & -1 \\
 x_2 \end{bmatrix} = \begin{bmatrix} 0 \\
 0 \end{bmatrix} \Rightarrow -ix_1 = x_2$$
 
-取 $\mathbf{x} = \begin{bmatrix} 1 \\
--i \end{bmatrix}$（或任意非零倍数）✓ 验证：$A\mathbf{x} = \begin{bmatrix} i \\
-1 \end{bmatrix} = i\begin{bmatrix} 1 \\
--i \end{bmatrix}$ ✓
+取 $\mathbf{x} = \begin{bmatrix} 1 \\ -i \end{bmatrix}$（或任意非零倍数）✓ 验证：$A\mathbf{x} = \begin{bmatrix} i \\ 1 \end{bmatrix} = i\begin{bmatrix} 1 \\ -i \end{bmatrix}$ ✓
 
 > **复数必需**：特征方程在实数域可能无解（如 λ²+1=0），但**n 次多项式在 ℂ 恒有 n 个根**（代数学基本定理）——ℂ 是"完备"的数域。特征值为 ±i 表示"旋转 90°"这种纯旋转没有实方向，但复方向 (1, ∓i) 上它表现为 ×(±i)（旋转 90° 恰是乘以 i！）。
 
 ### 例2：带复特征值的 2×2
 
-**例2（Example 2）**：$A = \begin{bmatrix} .5 & -.6 \\
-.75 & 1.1 \end{bmatrix}$ 的特征值？
+**例2（Example 2）**：$A = \begin{bmatrix} .5 & -.6 \\ .75 & 1.1 \end{bmatrix}$ 的特征值？
 
 **解**：$\lambda^2 - 1.6\lambda + 1 = 0$，求根公式：
 
@@ -4303,8 +4178,7 @@ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\
 $$\mathbf{v}_1 = \begin{bmatrix} -2 - 4i \\
 5 \end{bmatrix}$$
 
-由对称性（见下），$\lambda = .8 + .6i$ 的特征向量为 $\mathbf{v}_2 = \begin{bmatrix} -2 + 4i \\
-5 \end{bmatrix} = \overline{\mathbf{v}}_1$
+由对称性（见下），$\lambda = .8 + .6i$ 的特征向量为 $\mathbf{v}_2 = \begin{bmatrix} -2 + 4i \\ 5 \end{bmatrix} = \overline{\mathbf{v}}_1$
 
 ### 例3：迭代的椭圆轨道
 
@@ -4328,8 +4202,7 @@ $$\mathbf{x}_k = c_1(.8 - .6i)^k\mathbf{v}_1 + c_2(.8 + .6i)^k\mathbf{v}_2$$
 
 ### 核心构造 C = [a −b; b a] 例7
 
-**例7（Example 7，复数的本质）**：矩阵 $C = \begin{bmatrix} a & -b \\
-b & a \end{bmatrix}$ 的特征值？
+**例7（Example 7，复数的本质）**：矩阵 $C = \begin{bmatrix} a & -b \\ b & a \end{bmatrix}$ 的特征值？
 
 **解**：$\lambda^2 - 2a\lambda + (a^2 + b^2) = 0$，$\lambda = a \pm bi$。
 
@@ -4374,9 +4247,7 @@ $$AP = \begin{bmatrix} -.8 & -2.4 \\
 
 ### 例9：3×3 的分块结构
 
-**例9（Example 9）**：$A = \begin{bmatrix} .8 & -.6 & 0 \\
-.6 & .8 & 0 \\
-0 & 0 & 1.07 \end{bmatrix}$——左上 2×2 块是旋转缩放（λ = .8±.6i，r=1），右下 1.07 是沿 x₃ 的拉伸。
+**例9（Example 9）**：$A = \begin{bmatrix} .8 & -.6 & 0 \\ .6 & .8 & 0 \\ 0 & 0 & 1.07 \end{bmatrix}$——左上 2×2 块是旋转缩放（λ = .8±.6i，r=1），右下 1.07 是沿 x₃ 的拉伸。
 
 - $x_3 = 0$ 平面：**不变平面**（A 把它旋进自己），其上纯旋转
 - 一般轨道：平面内旋转 + 沿 x₃ 指数增长（${}1.07^k$）→ **螺旋上升**
@@ -4439,8 +4310,7 @@ $$\mathbf{x}_{k+1} \approx \lambda_1\mathbf{x}_k \ (\text{ eventually}), \qquad 
 
 **吸引子（Attractor，两个 |λ| < 1）**：所有轨道趋向原点。
 
-**例2（Example 2）**：$A = \begin{bmatrix} .8 & 0 \\
-0 & .64 \end{bmatrix}$，λ = .8, .64。
+**例2（Example 2）**：$A = \begin{bmatrix} .8 & 0 \\ 0 & .64 \end{bmatrix}$，λ = .8, .64。
 
 $$\mathbf{x}_k = c_1(.8)^k\mathbf{v}_1 + c_2(.64)^k\mathbf{v}_2$$
 
@@ -4452,8 +4322,7 @@ $$\mathbf{x}_k = c_1(.8)^k\mathbf{v}_1 + c_2(.64)^k\mathbf{v}_2$$
 
 **排斥子（Repeller，两个 |λ| > 1）**：所有轨道远离原点（例3：A = diag(1.44, 1.2)，轨迹向外）。
 
-**鞍点（Saddle，一个 |λ| > 1 一个 |λ| < 1）**：例4：$A = \begin{bmatrix} 2 & 0 \\
-0 & .5 \end{bmatrix}$。
+**鞍点（Saddle，一个 |λ| > 1 一个 |λ| < 1）**：例4：$A = \begin{bmatrix} 2 & 0 \\ 0 & .5 \end{bmatrix}$。
 
 $$\mathbf{x}_k = c_1 2^k\begin{bmatrix} 1 \\
 0 \end{bmatrix} + c_2 (.5)^k\begin{bmatrix} 0 \\
@@ -4470,8 +4339,7 @@ $$\mathbf{y}_{k+1} = P^{-1}A\mathbf{x}_k = P^{-1}AP\mathbf{y}_k = D\mathbf{y}_k$
 
 ### 复特征值：螺旋轨道
 
-**例7（Example 7，例5 矩阵的修订版）**：$A = \begin{bmatrix} .8 & .5 \\
--.1 & 1.0 \end{bmatrix}$，特征值 $.9 \pm .2i$。
+**例7（Example 7，例5 矩阵的修订版）**：$A = \begin{bmatrix} .8 & .5 \\ -.1 & 1.0 \end{bmatrix}$，特征值 $.9 \pm .2i$。
 
 **模**：$r = \sqrt{.81 + .04} = \sqrt{.85} \approx .92 < 1$ → **螺旋吸引子**（每步旋转 + 缩放 .92，轨道内旋趋于原点，FIGURE 5）
 
@@ -4531,8 +4399,7 @@ $$\mathbf{x}'(t) = A\mathbf{x}(t) \tag{1}$$
 
 **基本事实**：方程 (1) 的全部解构成一个**向量空间**（线性组合的导数 = 导数的线性组合）——解任何具体初值问题，只需找一组**基本解系**（基），再匹配初值。
 
-**解耦热身**：若 $A = D = \begin{bmatrix} 3 & 0 \\
-0 & -5 \end{bmatrix}$（对角），两个分量各自独立：
+**解耦热身**：若 $A = D = \begin{bmatrix} 3 & 0 \\ 0 & -5 \end{bmatrix}$（对角），两个分量各自独立：
 
 $$x_1' = 3x_1 \Rightarrow x_1 = c_1 e^{3t}, \qquad x_2' = -5x_2 \Rightarrow x_2 = c_2 e^{-5t}$$
 
@@ -4544,13 +4411,9 @@ $$\mathbf{x}(t) = c_1\mathbf{v}_1e^{\lambda_1 t} + c_2\mathbf{v}_2e^{\lambda_2 t
 
 ### 例1（Example 1，RC 电路）
 
-电路模型给出 $A = \begin{bmatrix} -1.5 & .5 \\
-1 & -1 \end{bmatrix}$，初值 $\mathbf{x}(0) = \begin{bmatrix} 5 \\
-4 \end{bmatrix}$（两个电容的初始电压）。
+电路模型给出 $A = \begin{bmatrix} -1.5 & .5 \\ 1 & -1 \end{bmatrix}$，初值 $\mathbf{x}(0) = \begin{bmatrix} 5 \\ 4 \end{bmatrix}$（两个电容的初始电压）。
 
-**特征值/向量**：$\lambda_1 = -.5$, $\mathbf{v}_1 = \begin{bmatrix} 1 \\
-2 \end{bmatrix}$；$\lambda_2 = -2$, $\mathbf{v}_2 = \begin{bmatrix} -1 \\
-1 \end{bmatrix}$
+**特征值/向量**：$\lambda_1 = -.5$, $\mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$；$\lambda_2 = -2$, $\mathbf{v}_2 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$
 
 **通解**：
 
@@ -4558,10 +4421,7 @@ $$\mathbf{x}(t) = c_1\begin{bmatrix} 1 \\
 2 \end{bmatrix}e^{-.5t} + c_2\begin{bmatrix} -1 \\
 1 \end{bmatrix}e^{-2t}$$
 
-**匹配初值**：$c_1\begin{bmatrix} 1 \\
-2 \end{bmatrix} + c_2\begin{bmatrix} -1 \\
-1 \end{bmatrix} = \begin{bmatrix} 5 \\
-4 \end{bmatrix}$，解得 $c_1 = 3$, $c_2 = -2$：
+**匹配初值**：$c_1\begin{bmatrix} 1 \\ 2 \end{bmatrix} + c_2\begin{bmatrix} -1 \\ 1 \end{bmatrix} = \begin{bmatrix} 5 \\ 4 \end{bmatrix}$，解得 $c_1 = 3$, $c_2 = -2$：
 
 $$\mathbf{x}(t) = 3\begin{bmatrix} 1 \\
 2 \end{bmatrix}e^{-.5t} - 2\begin{bmatrix} -1 \\
@@ -4576,8 +4436,7 @@ $$\mathbf{x}(t) = 3\begin{bmatrix} 1 \\
 
 ### 例2（Example 2，鞍点）
 
-$A = \begin{bmatrix} 4 & -5 \\
--2 & 1 \end{bmatrix}$：$\lambda_1 = 6$（$\mathbf{v}_1 = (-5, 2)$），$\lambda_2 = -1$（$\mathbf{v}_2 = (1, 1)$）。通解
+$A = \begin{bmatrix} 4 & -5 \\ -2 & 1 \end{bmatrix}$：$\lambda_1 = 6$（$\mathbf{v}_1 = (-5, 2)$），$\lambda_2 = -1$（$\mathbf{v}_2 = (1, 1)$）。通解
 
 $$\mathbf{x}(t) = c_1\begin{bmatrix} -5 \\
 2 \end{bmatrix}e^{6t} + c_2\begin{bmatrix} 1 \\
@@ -4617,8 +4476,7 @@ $$A = \begin{bmatrix} -R_2/L & -1/L \\
 $$A = \begin{bmatrix} -2 & -2.5 \\
 10 & -2 \end{bmatrix}, \qquad \lambda = -2 \pm 5i$$
 
-取 $\lambda = -2 + 5i$ 的特征向量 $\mathbf{v} = \begin{bmatrix} i \\
-2 \end{bmatrix}$（Re $\mathbf{v} = (0,2)$, Im $\mathbf{v} = (1,0)$），由 (7)：
+取 $\lambda = -2 + 5i$ 的特征向量 $\mathbf{v} = \begin{bmatrix} i \\ 2 \end{bmatrix}$（Re $\mathbf{v} = (0,2)$, Im $\mathbf{v} = (1,0)$），由 (7)：
 
 $$\mathbf{x}_1(t) = \begin{bmatrix} i \\
 2 \end{bmatrix}e^{-2t}(\cos 5t + i\sin 5t)$$
@@ -4627,8 +4485,7 @@ $$\Rightarrow\ \mathbf{y}_1(t) = \begin{bmatrix} -\sin 5t \\
 2\cos 5t \end{bmatrix}e^{-2t}, \qquad \mathbf{y}_2(t) = \begin{bmatrix} \cos 5t \\
 2\sin 5t \end{bmatrix}e^{-2t}$$
 
-**通解** $\mathbf{x} = c_1\mathbf{y}_1 + c_2\mathbf{y}_2$；初值 $\mathbf{x}(0) = \begin{bmatrix} 3 \\
-3 \end{bmatrix}$ 给出 $c_1 = 1.5$, $c_2 = 3$：
+**通解** $\mathbf{x} = c_1\mathbf{y}_1 + c_2\mathbf{y}_2$；初值 $\mathbf{x}(0) = \begin{bmatrix} 3 \\ 3 \end{bmatrix}$ 给出 $c_1 = 1.5$, $c_2 = 3$：
 
 $$\begin{bmatrix} i_L(t) \\
 v_C(t) \end{bmatrix} = \begin{bmatrix} -1.5\sin 5t + 3\cos 5t \\
@@ -4682,8 +4539,7 @@ $$\mathbf{x}_k \approx c_1\lambda_1^k\mathbf{v}_1 \quad \text{方向} \to \mathb
 
 **每乘一次 A，其余方向被 $\lambda_1$ "碾压"一层**——这就是"幂"法的名字来源。
 
-**例1（Example 1）**：$A = \begin{bmatrix} 1.8 & .8 \\
-.2 & 1.2 \end{bmatrix}$，$\mathbf{v}_1 = (4, 1)$。取 $\mathbf{x}_0 = (1, 0)$ 迭代：
+**例1（Example 1）**：$A = \begin{bmatrix} 1.8 & .8 \\ .2 & 1.2 \end{bmatrix}$，$\mathbf{v}_1 = (4, 1)$。取 $\mathbf{x}_0 = (1, 0)$ 迭代：
 
 | $k$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -4706,9 +4562,7 @@ $\mathbf{x}_k \to (1, .25)$，正是 $\mathbf{v}_1 = (4,1)$ 的方向！（FIGUR
 
 **为什么 μk 逼近 λ1**：当 $\mathbf{x}_k \approx \mathbf{v}_1$ 时，$A\mathbf{x}_k \approx \lambda_1\mathbf{x}_k$——最大分量比 ≈ λ1。
 
-**例2（Example 2）**：$A = \begin{bmatrix} 6 & 5 \\
-1 & 2 \end{bmatrix}$，$\mathbf{x}_0 = \begin{bmatrix} 0 \\
-1 \end{bmatrix}$，k = 5 时停止：
+**例2（Example 2）**：$A = \begin{bmatrix} 6 & 5 \\ 1 & 2 \end{bmatrix}$，$\mathbf{x}_0 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$，k = 5 时停止：
 
 | $k$ | 0 | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|---|
@@ -4964,9 +4818,7 @@ $$0 = (\mathbf{y} - \alpha\mathbf{u})\cdot\mathbf{u} = \mathbf{y}\cdot\mathbf{u}
 
 $$\hat{\mathbf{y}} = \operatorname{proj}_L \mathbf{y} = \frac{\mathbf{y}\cdot\mathbf{u}}{\mathbf{u}\cdot\mathbf{u}}\mathbf{u}, \qquad \mathbf{z} = \mathbf{y} - \hat{\mathbf{y}} \perp \mathbf{u}$$
 
-**例3（Example 3）**：$\mathbf{y} = \begin{bmatrix} 7 \\
-6 \end{bmatrix}$, $\mathbf{u} = \begin{bmatrix} 4 \\
-2 \end{bmatrix}$。求 $\mathbf{y}$ 在 $\operatorname{Span}\{\mathbf{u}\}$ 上的投影。
+**例3（Example 3）**：$\mathbf{y} = \begin{bmatrix} 7 \\ 6 \end{bmatrix}$, $\mathbf{u} = \begin{bmatrix} 4 \\ 2 \end{bmatrix}$。求 $\mathbf{y}$ 在 $\operatorname{Span}\{\mathbf{u}\}$ 上的投影。
 
 **解**：$\mathbf{y}\cdot\mathbf{u} = 40$, $\mathbf{u}\cdot\mathbf{u} = 20$
 
@@ -5020,9 +4872,7 @@ $$U^{-1} = U^T$$
 
 **例6（Example 6）**：例 5 的 $\mathbf{v}_1, \mathbf{v}_2$ 为列构成 $U$，验证 $\|U\mathbf{x}\| = \|\mathbf{x}\|$ 对任意 $\mathbf{x}$（旋转/反射变换的性质）。
 
-**例8（Example 8）**：$U = \begin{bmatrix} 1/\sqrt{11} & -1/\sqrt{6} & -1/\sqrt{66} \\
-1/\sqrt{11} & 2/\sqrt{6} & -4/\sqrt{66} \\
-1/\sqrt{11} & 1/\sqrt{6} & 7/\sqrt{66} \end{bmatrix}$ 是正交矩阵（验证 $U^TU = I$）。
+**例8（Example 8）**：$U = \begin{bmatrix} 1/\sqrt{11} & -1/\sqrt{6} & -1/\sqrt{66} \\ 1/\sqrt{11} & 2/\sqrt{6} & -4/\sqrt{66} \\ 1/\sqrt{11} & 1/\sqrt{6} & 7/\sqrt{66} \end{bmatrix}$ 是正交矩阵（验证 $U^TU = I$）。
 
 ### 6.2 小结
 
@@ -5412,18 +5262,13 @@ $$\|\mathbf{b} - A\hat{\mathbf{x}}\| = \sqrt{4 + 16 + 64} = \sqrt{84}$$
 
 ### 例4（Example 4，列正交的捷径）
 
-$A = \begin{bmatrix} 1 & -6 \\
-1 & -2 \\
-1 & 1 \\
-1 & 7 \end{bmatrix}$（两列正交！），$\mathbf{b} = (-1, 2, 1, 6)$。
+$A = \begin{bmatrix} 1 & -6 \\ 1 & -2 \\ 1 & 1 \\ 1 & 7 \end{bmatrix}$（两列正交！），$\mathbf{b} = (-1, 2, 1, 6)$。
 
 **解**：直接投影（6.3 公式 2）：
 
 $$\hat{\mathbf{b}} = \frac{\mathbf{b}\cdot\mathbf{a}_1}{\mathbf{a}_1\cdot\mathbf{a}_1}\mathbf{a}_1 + \frac{\mathbf{b}\cdot\mathbf{a}_2}{\mathbf{a}_2\cdot\mathbf{a}_2}\mathbf{a}_2 = \frac{8}{4}\mathbf{a}_1 + \frac{45}{90}\mathbf{a}_2$$
 
-**一眼读出** $\hat{\mathbf{x}} = \begin{bmatrix} 8/4 \\
-45/90 \end{bmatrix} = \begin{bmatrix} 2 \\
-1/2 \end{bmatrix}$——正交列时无需解正规方程，权重即投影系数。（回归分析中常见这种结构，6.6 节展开。）
+**一眼读出** $\hat{\mathbf{x}} = \begin{bmatrix} 8/4 \\ 45/90 \end{bmatrix} = \begin{bmatrix} 2 \\ 1/2 \end{bmatrix}$——正交列时无需解正规方程，权重即投影系数。（回归分析中常见这种结构，6.6 节展开。）
 
 ### QR 分解解法 THEOREM 15
 
@@ -5444,10 +5289,7 @@ $R$ 可逆，左乘 $R^{-1}$ 即得 (6)。∎
 
 $$R\hat{\mathbf{x}} = Q^T\mathbf{b} \tag{7}$$
 
-**例5（Example 5，QR 实战）**：$A = \begin{bmatrix} 1 & 3 & 5 \\
-1 & 1 & 0 \\
-1 & 1 & 2 \\
-1 & 3 & 3 \end{bmatrix}$, $\mathbf{b} = (3,5,7,-3)$。已知 QR 分解（由 6.4 节方法求得）：
+**例5（Example 5，QR 实战）**：$A = \begin{bmatrix} 1 & 3 & 5 \\ 1 & 1 & 0 \\ 1 & 1 & 2 \\ 1 & 3 & 3 \end{bmatrix}$, $\mathbf{b} = (3,5,7,-3)$。已知 QR 分解（由 6.4 节方法求得）：
 
 $$Q^T\mathbf{b} = \begin{bmatrix} 6 \\
 -6 \\
@@ -5469,9 +5311,7 @@ $$\hat{\mathbf{x}} = \begin{bmatrix} 10 \\
 
 ### 练习精选（Practice Problems）
 
-**题1**：$A = \begin{bmatrix} 1 & -3 & -3 \\
-1 & 5 & 1 \\
-1 & 7 & 2 \end{bmatrix}$, $\mathbf{b} = (5, -3, -5)$。求最小二乘解。
+**题1**：$A = \begin{bmatrix} 1 & -3 & -3 \\ 1 & 5 & 1 \\ 1 & 7 & 2 \end{bmatrix}$, $\mathbf{b} = (5, -3, -5)$。求最小二乘解。
 
 **解**：正规方程化简后第三行全零——$A$ 的列相关（$\mathbf{a}_3 = -\frac{3}{2}\mathbf{a}_1 + \frac{1}{2}\mathbf{a}_2$），解集为
 
@@ -5871,9 +5711,7 @@ Landsat 卫星每 16 天覆盖地球表面几乎每一平方公里，传感器�
 
 **定义**：$A^T = A$ 的方阵（对角元任意，其余关于主对角线成对相等）。
 
-**例2（Example 2，先睹为快）**：对角化 $A = \begin{bmatrix} 6 & -2 & -1 \\
--2 & 6 & -1 \\
--1 & -1 & 5 \end{bmatrix}$。
+**例2（Example 2，先睹为快）**：对角化 $A = \begin{bmatrix} 6 & -2 & -1 \\ -2 & 6 & -1 \\ -1 & -1 & 5 \end{bmatrix}$。
 
 **解**：特征方程
 
@@ -5968,11 +5806,7 @@ $$A = PD P^T = \begin{bmatrix} \lambda_1\mathbf{u}_1 & \cdots & \lambda_n\mathbf
 
 称为 $A$ 的**谱分解（spectral decomposition）**——按特征值把 $A$ 拆成 $n$ 个**秩 1** 投影矩阵 $\mathbf{u}_j\mathbf{u}_j^T$ 的加权和（$\mathbf{u}_j\mathbf{u}_j^T\mathbf{x}$ = $\mathbf{x}$ 在 $\operatorname{Span}\{\mathbf{u}_j\}$ 上的正交投影，练习 35）。
 
-**例4（Example 4）**：$A = \begin{bmatrix} 7 & 2 \\
-2 & 4 \end{bmatrix} = \begin{bmatrix} 2/\sqrt{5} & -1/\sqrt{5} \\
-1/\sqrt{5} & 2/\sqrt{5} \end{bmatrix}\begin{bmatrix} 8 & 0 \\
-0 & 3 \end{bmatrix}\begin{bmatrix} 2/\sqrt{5} & 1/\sqrt{5} \\
--1/\sqrt{5} & 2/\sqrt{5} \end{bmatrix}$
+**例4（Example 4）**：$A = \begin{bmatrix} 7 & 2 \\ 2 & 4 \end{bmatrix} = \begin{bmatrix} 2/\sqrt{5} & -1/\sqrt{5} \\ 1/\sqrt{5} & 2/\sqrt{5} \end{bmatrix}\begin{bmatrix} 8 & 0 \\ 0 & 3 \end{bmatrix}\begin{bmatrix} 2/\sqrt{5} & 1/\sqrt{5} \\ -1/\sqrt{5} & 2/\sqrt{5} \end{bmatrix}$
 
 记 $\mathbf{u}_1 = (2,1)/\sqrt{5}$, $\mathbf{u}_2 = (-1,2)/\sqrt{5}$：
 
@@ -6032,8 +5866,7 @@ $$Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x} \tag{1}$$
 
 **例（a）**：$A = \operatorname{diag}(4, 3)$：$Q = 4x_1^2 + 3x_2^2$（无交叉项）
 
-**例（b）**：$A = \begin{bmatrix} 3 & -2 \\
--2 & 7 \end{bmatrix}$：
+**例（b）**：$A = \begin{bmatrix} 3 & -2 \\ -2 & 7 \end{bmatrix}$：
 
 $$Q = 3x_1^2 - \underbrace{2(-2)}_{\text{交叉项 }-4x_1x_2}x_1x_2 + 7x_2^2 = 3x_1^2 - 4x_1x_2 + 7x_2^2$$
 
@@ -6060,8 +5893,7 @@ $$\mathbf{u}_1 = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 \\
 1 \end{bmatrix}, \qquad \mathbf{u}_2 = \frac{1}{\sqrt{5}}\begin{bmatrix} -1 \\
 2 \end{bmatrix}$$
 
-取 $P = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 & -1 \\
-1 & 2 \end{bmatrix}$，作替换 $\mathbf{x} = P\mathbf{y}$：
+取 $P = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 & -1 \\ 1 & 2 \end{bmatrix}$，作替换 $\mathbf{x} = P\mathbf{y}$：
 
 $$Q = \mathbf{x}^TA\mathbf{x} = \mathbf{y}^TD\mathbf{y} = 3y_1^2 - 7y_2^2 \tag{交叉项消失！}$$
 
@@ -6083,8 +5915,7 @@ $A$ **非对角**时（有交叉项），图形是**旋转后**的圆锥曲线�
 
 *FIGURE 3 An ellipse and a hyperbola not in standard position. 图3 旋转后的椭圆 (a) 5x₁²−4x₁x₂+5x₂²=48 与双曲线 (b) x₁²−8x₁x₂−5x₂²=16：新坐标轴 y₁、y₂（P 的列方向）即主轴，图形在新系中标准*
 
-**例5（Example 5，椭圆转正）**：${}5x_1^2 - 4x_1x_2 + 5x_2^2 = 48$。矩阵 $A = \begin{bmatrix} 5 & -2 \\
--2 & 5 \end{bmatrix}$，特征值 3 与 7，
+**例5（Example 5，椭圆转正）**：${}5x_1^2 - 4x_1x_2 + 5x_2^2 = 48$。矩阵 $A = \begin{bmatrix} 5 & -2 \\ -2 & 5 \end{bmatrix}$，特征值 3 与 7，
 
 $$\mathbf{u}_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\
 1 \end{bmatrix}, \quad \mathbf{u}_2 = \frac{1}{\sqrt{2}}\begin{bmatrix} -1 \\
@@ -6171,8 +6002,7 @@ $= -\lambda^3 + 18\lambda^2 - 75\lambda + 14$
 
 ### 例1/例2（对角阵热身）
 
-**例1（Example 1）**：$A = \begin{bmatrix} 3 & 0 \\
-0 & 7 \end{bmatrix}$, $Q = 3x_1^2 + 7x_2^2$。
+**例1（Example 1）**：$A = \begin{bmatrix} 3 & 0 \\ 0 & 7 \end{bmatrix}$, $Q = 3x_1^2 + 7x_2^2$。
 
 **几何**（FIGURE 1、2）：$z = Q(x_1, x_2)$ 是开口向上的椭圆抛物面；约束 $x_1^2 + x_2^2 = 1$ 是竖直圆柱——**两者的交线**上：
 
@@ -6236,8 +6066,7 @@ $$q(3x_1, 2x_2) = 6x_1x_2 = \begin{bmatrix} x_1 & x_2 \end{bmatrix}\begin{bmatri
 3 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\
 x_2 \end{bmatrix} = Q(\mathbf{x})$$
 
-**第3步：定理 6 出手**。$A = \begin{bmatrix} 0 & 3 \\
-3 & 0 \end{bmatrix}$ 特征值 $\pm3$，对应特征向量 $(1, 1)/\sqrt{2}$（$\lambda = 3$）。最大值 **3**，在 $x_1 = x_2 = 1/\sqrt{2}$ 取得。
+**第3步：定理 6 出手**。$A = \begin{bmatrix} 0 & 3 \\ 3 & 0 \end{bmatrix}$ 特征值 $\pm3$，对应特征向量 $(1, 1)/\sqrt{2}$（$\lambda = 3$）。最大值 **3**，在 $x_1 = x_2 = 1/\sqrt{2}$ 取得。
 
 **回原变量**：
 
@@ -6283,8 +6112,7 @@ $$A = U\Sigma V^T$$
 
 **关键技巧**：$\|A\mathbf{x}\|^2 = (A\mathbf{x})^T(A\mathbf{x}) = \mathbf{x}^T(A^TA)\mathbf{x}$——**$A^TA$ 是对称的！** 第 7 章的全部理论可用。
 
-**例1（Example 1）**：$A = \begin{bmatrix} 4 & 11 & 14 \\
-8 & 7 & -2 \end{bmatrix}$。
+**例1（Example 1）**：$A = \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}$。
 
 $$A^TA = \begin{bmatrix} 80 & 100 & 40 \\
 100 & 170 & 140 \\
@@ -6342,12 +6170,9 @@ $$U\Sigma V^T = [A\mathbf{v}_1 \cdots A\mathbf{v}_r\ \mathbf{0} \cdots \mathbf{0
 
 （$\{\mathbf{v}_1, \dots, \mathbf{v}_r\}$ 是 $\operatorname{Row} A$ 的标准正交基，$\sum_{i=1}^r \mathbf{v}_i\mathbf{v}_i^T$ = 投影到 Row A，对任意 $\mathbf{x}$ 作用等于恒等——见 6.3 定理 10。）∎
 
-**例3（Example 3，三步构造）**：接例 1，$A = \begin{bmatrix} 4 & 11 & 14 \\
-8 & 7 & -2 \end{bmatrix}$。
+**例3（Example 3，三步构造）**：接例 1，$A = \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}$。
 
-**第1步**（V 来自 $A^TA$）：$V = \frac{1}{3}\begin{bmatrix} 1 & 2 & 2 \\
-2 & -2 & 1 \\
-2 & 1 & -2 \end{bmatrix}$（例1 已得）
+**第1步**（V 来自 $A^TA$）：$V = \frac{1}{3}\begin{bmatrix} 1 & 2 & 2 \\ 2 & -2 & 1 \\ 2 & 1 & -2 \end{bmatrix}$（例1 已得）
 
 **第2步**（$\Sigma$ 放奇异值）：
 
@@ -6366,9 +6191,7 @@ $$A = U\Sigma V^T = \frac{1}{\sqrt{10}}\begin{bmatrix} 3 & 1 \\
 2 & -2 & 1 \\
 2 & 1 & -2 \end{bmatrix}\right)^T$$
 
-**例4（Example 4，U 需扩充）**：$A = \begin{bmatrix} 1 & -1 \\
--2 & 2 \\
-2 & -2 \end{bmatrix}$。
+**例4（Example 4，U 需扩充）**：$A = \begin{bmatrix} 1 & -1 \\ -2 & 2 \\ 2 & -2 \end{bmatrix}$。
 
 $$A^TA = \begin{bmatrix} 9 & -9 \\
 -9 & 9 \end{bmatrix} \Rightarrow \lambda = 18, 0; \quad \mathbf{v}_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\
@@ -6675,9 +6498,7 @@ $$\mathbf{v}_1: (1, 0, 1), \qquad \mathbf{v}_2: (1, .4, 1), \qquad \mathbf{v}_3:
 
 **解（两步）**：
 
-**第1步 重心坐标**：解 $\begin{bmatrix} 3 & 4 & 1 & 3 \\
-1 & 3 & 5 & 3 \\
-1 & 1 & 1 & 1 \end{bmatrix}$，得 $(c_1, c_2, c_3) = \left(\frac{1}{4}, \frac{1}{2}, \frac{1}{4}\right)$
+**第1步 重心坐标**：解 $\begin{bmatrix} 3 & 4 & 1 & 3 \\ 1 & 3 & 5 & 3 \\ 1 & 1 & 1 & 1 \end{bmatrix}$，得 $(c_1, c_2, c_3) = \left(\frac{1}{4}, \frac{1}{2}, \frac{1}{4}\right)$
 
 **第2步 颜色插值**：
 
@@ -6836,10 +6657,7 @@ $$H = [f : 12], \qquad H_0 = [f : 0], \qquad H_1 = [f : -9]$$
 
 *FIGURE 2 The plane with normal n. 图2 例1：法向量 n = (3,4) 垂直于平行直线族 H = [f:12]、H₀ = [f:0]、H₁ = [f:−9]——改变 d 只平移直线，不改变方向*
 
-**例2（Example 2，参数化直线）**：$x - 4y = 13$。把 $y$ 当自由变量：$\mathbf{x} = \begin{bmatrix} 13 + 4y \\
-y \end{bmatrix} = \begin{bmatrix} 13 \\
-0 \end{bmatrix} + y\begin{bmatrix} 4 \\
-1 \end{bmatrix} = \mathbf{p} + y\mathbf{q}$——过 $(13, 0)$ 方向 $(4,1)$ 的直线（$\mathbf{n} = (1,-4) \perp \mathbf{q}$ ✓）。
+**例2（Example 2，参数化直线）**：$x - 4y = 13$。把 $y$ 当自由变量：$\mathbf{x} = \begin{bmatrix} 13 + 4y \\ y \end{bmatrix} = \begin{bmatrix} 13 \\ 0 \end{bmatrix} + y\begin{bmatrix} 4 \\ 1 \end{bmatrix} = \mathbf{p} + y\mathbf{q}$——过 $(13, 0)$ 方向 $(4,1)$ 的直线（$\mathbf{n} = (1,-4) \perp \mathbf{q}$ ✓）。
 
 **例3（Example 3，求过两点的直线方程）**：$\mathbf{v}_1 = (1,2)$, $\mathbf{v}_2 = (6,0)$。
 
