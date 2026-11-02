@@ -35,11 +35,11 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 | 节 | 主题 | 核心 |
 |---|---|---|
 | 2.1 | 矩阵运算 | 乘法源于复合变换；无交换律/消去律 |
-| 2.2 | 逆矩阵 | 2×2 公式、det、$[A\ I]\sim[I\ A^{-1}]$ 算法 |
+| 2.2 | 逆矩阵 | 2×2 公式、det、${}[A\ I]\sim[I\ A^{-1}]$ 算法 |
 | 2.3 | 可逆矩阵定理 | **IMT**（12 条等价条件，全书枢纽） |
 | 2.4 | 分块矩阵 | 分块乘法、列-行展开（Theorem 10） |
 | 2.5 | 矩阵分解 | **LU 分解**、前代回代 |
-| 2.6 | 列昂惕夫模型 | $(I-C)^{-1} = I + C + C^2 + \cdots$ |
+| 2.6 | 列昂惕夫模型 | ${}(I-C)^{-1} = I + C + C^2 + \cdots$ |
 | 2.7 | 计算机图形学 | 齐次坐标、复合变换 |
 | 2.8 | 子空间 | Col A、Nul A、基 |
 | 2.9 | 维数与秩 | 秩定理、基定理、IMT (m)-(r) |
@@ -48,7 +48,7 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 | 节 | 主题 | 核心 |
 |---|---|---|
 | 3.1 | 行列式引论 | 余因子展开、三角阵行列式 |
-| 3.2 | 行列式性质 | **可逆 ⟺ det ≠ 0**、$\det(AB) = \det A\det B$ |
+| 3.2 | 行列式性质 | **可逆 ⟺ det ≠ 0**、${}\det(AB) = \det A\det B$ |
 | 3.3 | 克拉默法则与体积 | 伴随矩阵、面积/体积 = \|det A\|、变换伸缩系数 |
 
 ### 第 4 章 向量空间 Vector Spaces
@@ -60,24 +60,24 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 | 4.4 | 坐标系 | 坐标映射 = **同构**（Theorem 8） |
 | 4.5 | 维数 | 所有基大小相同（Theorem 9/10） |
 | 4.6 | 秩 | 秩定理（Thm 14：行秩 = 列秩） |
-| 4.7 | 基的变换 | 换基矩阵 $P_{\mathcal{C}\leftarrow\mathcal{B}}$ |
+| 4.7 | 基的变换 | 换基矩阵 ${}P_{\mathcal{C}\leftarrow\mathcal{B}}$ |
 
 ### 第 5 章 特征值 Eigenvalues and Eigenvectors
 | 节 | 主题 | 核心 |
 |---|---|---|
-| 5.1 | 特征向量与特征值 | $A\mathbf{x} = \lambda\mathbf{x}$、特征空间 |
-| 5.2 | 特征方程 | $\det(A-\lambda I) = 0$、相似、动力系统例 |
-| 5.3 | 对角化 | $A = PDP^{-1}$、四步法、Theorem 5/6/7 |
-| 5.4 | 特征向量与线性变换 | $\mathcal{B}$-矩阵、Theorem 8（相似 = 换基） |
+| 5.1 | 特征向量与特征值 | ${}A\mathbf{x} = \lambda\mathbf{x}$、特征空间 |
+| 5.2 | 特征方程 | ${}\det(A-\lambda I) = 0$、相似、动力系统例 |
+| 5.3 | 对角化 | ${}A = PDP^{-1}$、四步法、Theorem 5/6/7 |
+| 5.4 | 特征向量与线性变换 | ${}\mathcal{B}$-矩阵、Theorem 8（相似 = 换基） |
 | 5.5 | 复特征值 | 旋转 + 缩放本质、Theorem 9 |
 | 5.6 | 离散动力系统 | 支配特征值、吸引子/鞍点、猫头鹰模型 |
-| 5.7 | 微分方程应用 | $\mathbf{x}' = A\mathbf{x}$、螺旋点 |
+| 5.7 | 微分方程应用 | ${}\mathbf{x}' = A\mathbf{x}$、螺旋点 |
 | 5.8 | 迭代估计 | 幂法、逆幂法 |
 
 ### 第 6 章 正交性 Orthogonality and Least Squares
 | 节 | 主题 | 核心 |
 |---|---|---|
-| 6.1 | 内积/长度/正交 | $\mathbf{u}\cdot\mathbf{v} = 0$、Theorem 3（四子空间正交对） |
+| 6.1 | 内积/长度/正交 | ${}\mathbf{u}\cdot\mathbf{v} = 0$、Theorem 3（四子空间正交对） |
 | 6.2 | 正交集 | 坐标一行公式（Thm 5）、正交矩阵 |
 | 6.3 | 正交投影 | 分解定理（Thm 8）、最佳逼近（Thm 9） |
 | 6.4 | Gram-Schmidt | 造正交基、**QR 分解** |
@@ -92,7 +92,7 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 | 7.1 | 对称矩阵对角化 | 谱定理、**谱分解** |
 | 7.2 | 二次型 | 主轴定理、正定性 ⟺ 特征值符号 |
 | 7.3 | 约束优化 | 最值 = 特征值、瑞利商、PCA 原理 |
-| 7.4 | **奇异值分解 SVD** | $A = U\Sigma V^T$、伪逆、Eckart-Young（全书巅峰） |
+| 7.4 | **奇异值分解 SVD** | ${}A = U\Sigma V^T$、伪逆、Eckart-Young（全书巅峰） |
 
 ### 第 8 章 向量空间的几何（在线章节）The Geometry of Vector Spaces
 | 节 | 主题 | 核心 |
@@ -113,26 +113,26 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 
 | 定理 | 内容一句话 | 章节 |
 |---|---|---|
-| Thm 2 (1.2) | 相容 ⟺ 无 $[0\cdots0\ b]$ 行；自由变量 ⟺ 无穷解 | 1.2 |
-| Thm 3 (1.4) | $A\mathbf{x}=\mathbf{b}$ = 向量方程 = 方程组（三合一） | 1.4 |
-| Thm 4 (2.2) | 2×2 逆公式 + $\det A = ad - bc$ | 2.2 |
+| Thm 2 (1.2) | 相容 ⟺ 无 ${}[0\cdots0\ b]$ 行；自由变量 ⟺ 无穷解 | 1.2 |
+| Thm 3 (1.4) | ${}A\mathbf{x}=\mathbf{b}$ = 向量方程 = 方程组（三合一） | 1.4 |
+| Thm 4 (2.2) | 2×2 逆公式 + ${}\det A = ad - bc$ | 2.2 |
 | **IMT (2.3)** | 可逆 ⟺ 行等价 I ⟺ 列无关 ⟺ ...（12 条） | 2.3 |
-| Thm 10 (2.4) | $AB$ = 列-行外积之和 | 2.4 |
-| 秩定理 (2.9/4.6) | $\operatorname{rank} A + \dim\operatorname{Nul} A = n$ | 2.9 |
-| Thm 3 (6.1) | $(\operatorname{Row} A)^\perp = \operatorname{Nul} A$ | 6.1 |
-| Thm 5 (6.2) | 正交基坐标 $c_j = \mathbf{y}\cdot\mathbf{u}_j/\mathbf{u}_j\cdot\mathbf{u}_j$ | 6.2 |
-| Thm 9 (6.3) | 最佳逼近：$\hat{\mathbf{y}} = \operatorname{proj}_W\mathbf{y}$ 最近 | 6.3 |
-| Thm 13 (6.5) | 最小二乘 ⟺ 正规方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ | 6.5 |
-| Thm 16 (6.7) | 柯西-施瓦茨 $|\langle\mathbf{u},\mathbf{v}\rangle| \leq \|\mathbf{u}\|\|\mathbf{v}\|$ | 6.7 |
+| Thm 10 (2.4) | ${}AB$ = 列-行外积之和 | 2.4 |
+| 秩定理 (2.9/4.6) | ${}\operatorname{rank} A + \dim\operatorname{Nul} A = n$ | 2.9 |
+| Thm 3 (6.1) | ${}(\operatorname{Row} A)^\perp = \operatorname{Nul} A$ | 6.1 |
+| Thm 5 (6.2) | 正交基坐标 ${}c_j = \mathbf{y}\cdot\mathbf{u}_j/\mathbf{u}_j\cdot\mathbf{u}_j$ | 6.2 |
+| Thm 9 (6.3) | 最佳逼近：${}\hat{\mathbf{y}} = \operatorname{proj}_W\mathbf{y}$ 最近 | 6.3 |
+| Thm 13 (6.5) | 最小二乘 ⟺ 正规方程 ${}A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ | 6.5 |
+| Thm 16 (6.7) | 柯西-施瓦茨 ${}|\langle\mathbf{u},\mathbf{v}\rangle| \leq \|\mathbf{u}\|\|\mathbf{v}\|$ | 6.7 |
 | 谱定理 (7.1) | 对称 ⟺ 可正交对角化（实特征值 + 正交特征向量基） | 7.1 |
-| 主轴定理 (7.2) | 正交替换消交叉项：$Q = \lambda_1y_1^2 + \cdots$ | 7.2 |
-| Thm 6 (7.3) | $\max_{\|\mathbf{x}\|=1}\mathbf{x}^TA\mathbf{x} = \lambda_{\max}$ | 7.3 |
-| **SVD (7.4)** | $A = U\Sigma V^T$：任意矩阵的终极分解 | 7.4 |
+| 主轴定理 (7.2) | 正交替换消交叉项：${}Q = \lambda_1y_1^2 + \cdots$ | 7.2 |
+| Thm 6 (7.3) | ${}\max_{\|\mathbf{x}\|=1}\mathbf{x}^TA\mathbf{x} = \lambda_{\max}$ | 7.3 |
+| **SVD (7.4)** | ${}A = U\Sigma V^T$：任意矩阵的终极分解 | 7.4 |
 | Eckart-Young | 截断 SVD = 最佳秩 k 近似 | 7.4 |
 
 ## 四、IMT 完整版（2.3 + 2.9 + 4.x + 5.2 + 7.4，24 条等价条件）
 
-$A$（$n \times n$）可逆 ⟺ **(a)** $A$ 可逆 ⟺ **(b)** $A \sim I_n$ ⟺ **(c)** n 个主元 ⟺ **(d)** $A\mathbf{x}=\mathbf{0}$ 仅平凡解 ⟺ **(e)** 列无关 ⟺ **(f)** $\mathbf{x}\mapsto A\mathbf{x}$ 一对一 ⟺ **(g)** $A\mathbf{x}=\mathbf{b}$ 对每个 $\mathbf{b}$ 有解 ⟺ **(h)** 列张成 $\mathbb{R}^n$ ⟺ **(i)** $\mathbf{x}\mapsto A\mathbf{x}$ 映上 ⟺ **(j,k)** 存在 $C,D$ 使 $CA=I$、$AD=I$ ⟺ **(l)** $A^T$ 可逆 ⟺ **(m)** 列构成基 ⟺ **(n)** $\operatorname{Col} A = \mathbb{R}^n$ ⟺ **(o)** $\dim\operatorname{Col} A = n$ ⟺ **(p)** $\operatorname{rank} A = n$ ⟺ **(q)** $\operatorname{Nul} A = \{\mathbf{0}\}$ ⟺ **(r)** $\dim\operatorname{Nul} A = 0$ ⟺ **(s,t)** 0 非特征值、$\det A \neq 0$ ⟺ **(u-x)** $(\operatorname{Col} A)^\perp = \{\mathbf{0}\}$、$(\operatorname{Nul} A)^\perp = \mathbb{R}^n$、$\operatorname{Row} A = \mathbb{R}^n$、n 个非零奇异值
+${}A$（${}n \times n$）可逆 ⟺ **(a)** ${}A$ 可逆 ⟺ **(b)** ${}A \sim I_n$ ⟺ **(c)** n 个主元 ⟺ **(d)** ${}A\mathbf{x}=\mathbf{0}$ 仅平凡解 ⟺ **(e)** 列无关 ⟺ **(f)** ${}\mathbf{x}\mapsto A\mathbf{x}$ 一对一 ⟺ **(g)** ${}A\mathbf{x}=\mathbf{b}$ 对每个 ${}\mathbf{b}$ 有解 ⟺ **(h)** 列张成 ${}\mathbb{R}^n$ ⟺ **(i)** ${}\mathbf{x}\mapsto A\mathbf{x}$ 映上 ⟺ **(j,k)** 存在 ${}C,D$ 使 ${}CA=I$、${}AD=I$ ⟺ **(l)** ${}A^T$ 可逆 ⟺ **(m)** 列构成基 ⟺ **(n)** ${}\operatorname{Col} A = \mathbb{R}^n$ ⟺ **(o)** ${}\dim\operatorname{Col} A = n$ ⟺ **(p)** ${}\operatorname{rank} A = n$ ⟺ **(q)** ${}\operatorname{Nul} A = \{\mathbf{0}\}$ ⟺ **(r)** ${}\dim\operatorname{Nul} A = 0$ ⟺ **(s,t)** 0 非特征值、${}\det A \neq 0$ ⟺ **(u-x)** ${}(\operatorname{Col} A)^\perp = \{\mathbf{0}\}$、${}(\operatorname{Nul} A)^\perp = \mathbb{R}^n$、${}\operatorname{Row} A = \mathbb{R}^n$、n 个非零奇异值
 
 ## 五、插图清单（img/ 目录，43 张）
 
