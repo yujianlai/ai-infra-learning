@@ -27,7 +27,7 @@
 
 | 概念 | 一句话 |
 |---|---|
-| 矩阵乘法 | ${}(AB)_{ij}$ = A 第 i 行 · B 第 j 列；源于复合变换 |
+| 矩阵乘法 | (AB)_{ij} = A 第 i 行 · B 第 j 列；源于复合变换 |
 | 两大怪脾气 | 无交换律、无消去律 |
 | 2×2 逆 | ${}A^{-1} = \frac{1}{ad-bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$ ， ${}\det A = ad-bc$ |
 | 求逆算法 | ${}[A\ |\ I] \sim [I\ |\ A^{-1}]$ |
@@ -35,8 +35,8 @@
 | 初等矩阵 | 左乘 = 行变换；均可逆 |
 | 分块乘法 | 块当数用；A 列分法 = B 行分法 |
 | 列-行展开 | ${}AB = \sum_k \text{col}_k(A)\ \text{row}_k(B)$ |
-| LU 分解 | ${}A = LU$ （L 单位下三角存倍数）；存在 ⟺ 消元不换行；解方程：前代 + 回代 |
-| 列昂惕夫 | ${}(I-C)\mathbf{x} = \mathbf{d}$ ； ${}(I-C)^{-1} \approx I + C + C^2 + \cdots$ |
+| LU 分解 | A = LU （L 单位下三角存倍数）；存在 ⟺ 消元不换行；解方程：前代 + 回代 |
+| 列昂惕夫 | ${}(I-C)\mathbf{x} = \mathbf{d}$ ； (I-C)^{-1} ≈ I + C + C^2 + ⋯ |
 | 子空间 | 含零向量、对加法/数乘封闭 |
 | Col A | 各列张成； ${}\mathbf{b} \in \operatorname{Col} A$ ⟺ ${}A\mathbf{x}=\mathbf{b}$ 有解 |
 | Nul A | ${}A\mathbf{x}=\mathbf{0}$ 解集 |
@@ -60,7 +60,7 @@
 | ${}\det(AB)$ | ${}= \det A \cdot \det B$ ； ${}\det A^{-1} = 1/\det A$ |
 | ⚠️ 警示 | ${}\det(A+B) \neq \det A + \det B$ |
 | 面积/体积 | 平行四边形/六面体 = ${}\|\det A\|$ |
-| 变换伸缩 | ${}T(S)$ 面积 = ${}\|\det A\| \times$ S 面积 |
+| 变换伸缩 | T(S) 面积 = ${}\|\det A\| \times$ S 面积 |
 | 克拉默法则 | ${}x_i = \det A_i(\mathbf{b}) / \det A$ （符号计算美，数值少用） |
 | 伴随矩阵 | ${}A^{-1} = \operatorname{adj}A / \det A$ |
 
@@ -92,13 +92,13 @@
 | 0 是特征值 ⟺ | A 不可逆 |
 | Theorem 2 (5.1) | 不同特征值的特征向量无关 |
 | 代数重数 | 特征多项式根的重数 |
-| 相似 | ${}B = P^{-1}AP$ ：同特征值（Theorem 4）；同特征值 ≠ 相似 |
-| **对角化** | ${}A = PDP^{-1}$ ⟺ n 个无关特征向量 ⟺ Σ特征空间维数 = n（Theorem 5/7） |
+| 相似 | B = P^{-1}AP ：同特征值（Theorem 4）；同特征值 ≠ 相似 |
+| **对角化** | A = PDP^{-1} ⟺ n 个无关特征向量 ⟺ Σ特征空间维数 = n（Theorem 5/7） |
 | 对角化四步 | 特征值 → 特征向量 → 组 P → 组 D（对应！验算 AP=PD） |
-| ${}A^k$ | ${}= PD^kP^{-1}$ |
+| ${}A^k$ | = PD^kP^{-1} |
 | B-矩阵 | ${}[T]_{\mathcal{B}} = P^{-1}AP$ ：相似 = 同变换不同基（Theorem 8） |
 | 复特征值 | ${}a \pm bi$ ⟺ 旋转 φ + 缩放 r；共轭成对 |
-| Theorem 9 (5.5) | ${}A = PCP^{-1}$ ， ${}C = \begin{bmatrix} a & -b \\ b & a \end{bmatrix}$ ， ${}P = [\operatorname{Re}\mathbf{v}\ \operatorname{Im}\mathbf{v}]$ |
+| Theorem 9 (5.5) | A = PCP^{-1} ， ${}C = \begin{bmatrix} a & -b \\ b & a \end{bmatrix}$ ， ${}P = [\operatorname{Re}\mathbf{v}\ \operatorname{Im}\mathbf{v}]$ |
 | 动力系统 | ${}\mathbf{x}_k = \sum c_j\lambda_j^k\mathbf{v}_j$ ；支配特征值定长期 |
 | 吸引子/鞍点 | 两 \|λ\| < 1 / 一小一大；r=1 椭圆；复特征值 r<1 螺旋入 |
 | 微分方程 | ${}\mathbf{x}' = A\mathbf{x}$ 通解 ${}= \sum c_j\mathbf{v}_je^{\lambda_j t}$ |
@@ -113,11 +113,11 @@
 | 勾股定理 | ${}\mathbf{u}\perp\mathbf{v}$ ⟺ ${}\|\mathbf{u}+\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2$ |
 | 正交基坐标 | ${}c_j = \mathbf{y}\cdot\mathbf{u}_j / \mathbf{u}_j\cdot\mathbf{u}_j$ （一行公式！） |
 | 投影公式 | ${}\operatorname{proj}_L\mathbf{y} = \frac{\mathbf{y}\cdot\mathbf{u}}{\mathbf{u}\cdot\mathbf{u}}\mathbf{u}$ |
-| 正交矩阵 | 列标准正交 ⟺ ${}U^TU = I$ ⟺ ${}U^{-1} = U^T$ ；保长度保角度 |
+| 正交矩阵 | 列标准正交 ⟺ U^TU = I ⟺ U^{-1} = U^T ；保长度保角度 |
 | 分解定理 | ${}\mathbf{y} = \hat{\mathbf{y}} + \mathbf{z}$ （ ${}\hat{\mathbf{y}} \in W$ 、 ${}\mathbf{z} \in W^\perp$ ）唯一 |
 | **最佳逼近** | ${}\hat{\mathbf{y}} = \operatorname{proj}_W\mathbf{y}$ 是 W 中最近点（勾股定理证明） |
 | Gram-Schmidt | ${}\mathbf{v}_{k+1} = \mathbf{x}_{k+1} - \operatorname{proj}_{W_k}\mathbf{x}_{k+1}$ |
-| QR 分解 | ${}A = QR$ （Q 正交列、R 上三角）； ${}R = Q^TA$ |
+| QR 分解 | A = QR （Q 正交列、R 上三角）； R = Q^TA |
 | **正规方程** | ${}A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$ （最小二乘 ⟺ 此解，Thm 13） |
 | 唯一性 | ⟺ A 列无关 ⟺ ${}A^TA$ 可逆 |
 | QR 解 LS | 解 ${}R\hat{\mathbf{x}} = Q^T\mathbf{b}$ （回代，稳定） |
@@ -139,7 +139,7 @@
 | **SVD** | ${}A = U\Sigma V^T$ （任意矩阵！） |
 | 奇异值 | ${}\sigma_i = \sqrt{\lambda_i(A^TA)}$ ；rank = 非零 σ 数 |
 | 四子空间 | Row A = span{v₁..vᵣ}、Nul A = span{vᵣ₊₁..}、Col A = span{u₁..uᵣ}、Nul Aᵀ = span{uᵣ₊₁..} |
-| 伪逆 | ${}A^+ = V_rD^{-1}U_r^T$ ； ${}\hat{\mathbf{x}} = A^+\mathbf{b}$ 最小范数 LS 解 |
+| 伪逆 | A^+ = V_rD^{-1}U_r^T ； ${}\hat{\mathbf{x}} = A^+\mathbf{b}$ 最小范数 LS 解 |
 | Eckart-Young | 截断 SVD = 最佳秩 k 近似（图像压缩/降噪/PCA） |
 
 ## 第 8 章 向量空间的几何
@@ -172,7 +172,7 @@
 
 **特征/对角化**
 - 特征方程： ${}\det(A - \lambda I) = 0$
-- ${}A^k = PD^kP^{-1}$ ； ${}\det A = \prod\lambda_i$ ； ${}\operatorname{tr} A = \sum\lambda_i$
+- A^k = PD^kP^{-1} ； ${}\det A = \prod\lambda_i$ ； ${}\operatorname{tr} A = \sum\lambda_i$
 
 **正交/最小二乘**
 - 投影： ${}\operatorname{proj}_W\mathbf{y} = UU^T\mathbf{y}$ （标准正交基）
