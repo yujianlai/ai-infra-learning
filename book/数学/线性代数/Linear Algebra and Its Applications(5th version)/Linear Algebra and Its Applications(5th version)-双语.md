@@ -128,7 +128,7 @@ $$
 
 - **系数矩阵（coefficient matrix）**：只装未知数的系数
 - **增广矩阵（augmented matrix）**：系数矩阵右边再加一列常数项
-- **规模（size）**：${}m \times n$ 表示 ${}m$ 行 ${}n$ 列。上面的增广矩阵是 ${}3 \times 4$。
+- **规模（size）**：m × n 表示 ${}m$ 行 ${}n$ 列。上面的增广矩阵是 ${}3 \times 4$。
 
 ### 解线性方程组：消元思想
 
@@ -680,7 +680,7 @@ $$
 
 ### 定义：矩阵乘向量 DEFINITION
 
-若 ${}A$ 是 ${}m \times n$ 矩阵，列为 ${}\mathbf{a}_1, \dots, \mathbf{a}_n$，${}\mathbf{x}$ 在 ${}\mathbb{R}^n$ 中，则 ${}A$ 与 ${}\mathbf{x}$ 的**乘积（product）**记作 ${}A\mathbf{x}$，是 ${}A$ 的各列以 ${}\mathbf{x}$ 中对应元素为权的**线性组合**：
+若 ${}A$ 是 m × n 矩阵，列为 ${}\mathbf{a}_1, \dots, \mathbf{a}_n$，${}\mathbf{x}$ 在 ${}\mathbb{R}^n$ 中，则 ${}A$ 与 ${}\mathbf{x}$ 的**乘积（product）**记作 ${}A\mathbf{x}$，是 ${}A$ 的各列以 ${}\mathbf{x}$ 中对应元素为权的**线性组合**：
 
 $$
 A\mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n \end{bmatrix} \begin{bmatrix} x_1 \\
@@ -689,7 +689,7 @@ x_2 \\
 x_n \end{bmatrix} = x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n
 $$
 
-> 注意：${}A\mathbf{x}$ 只有当 ${}A$ 的**列数**等于 ${}\mathbf{x}$ 的**分量个数**时才有定义（即 ${}\mathbf{x} \in \mathbb{R}^n$，${}A$ 是 ${}m\times n$）。
+> 注意：${}A\mathbf{x}$ 只有当 ${}A$ 的**列数**等于 ${}\mathbf{x}$ 的**分量个数**时才有定义（即 ${}\mathbf{x} \in \mathbb{R}^n$，${}A$ 是 m × n）。
 
 **例1（Example 1）**：
 
@@ -743,7 +743,7 @@ $$
 
 ### THEOREM 4（${}A\mathbf{x}=\mathbf{b}$ 有解的等价条件）
 
-设 ${}A$ 是 ${}m \times n$ 矩阵，则下列命题**逻辑等价**（同真同假）：
+设 ${}A$ 是 m × n 矩阵，则下列命题**逻辑等价**（同真同假）：
 1. 对每个 ${}\mathbf{b} \in \mathbb{R}^m$，${}A\mathbf{x} = \mathbf{b}$ 都有解
 2. ${}\mathbb{R}^m$ 中每个 ${}\mathbf{b}$ 都是 ${}A$ 各列的线性组合
 3. ${}A$ 的各列**张成** ${}\mathbb{R}^m$（${}\operatorname{Span}\{\mathbf{a}_1,\dots,\mathbf{a}_n\} = \mathbb{R}^m$）
@@ -782,7 +782,7 @@ $$
 
 ### 单位矩阵 Identity Matrix
 
-主对角线（从左上到右下）全为 1、其余全为 0 的 ${}n\times n$ 矩阵叫**单位矩阵（identity matrix）**，记作 ${}I_n$。例如：
+主对角线（从左上到右下）全为 1、其余全为 0 的 n × n 矩阵叫**单位矩阵（identity matrix）**，记作 ${}I_n$。例如：
 
 $$
 I_3 = \begin{bmatrix} 1 & 0 & 0 \\
@@ -794,7 +794,7 @@ $$
 
 ### THEOREM 5（矩阵乘法的代数性质）
 
-设 ${}A$ 是 ${}m\times n$ 矩阵，${}\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$，${}c$ 是标量：
+设 ${}A$ 是 m × n 矩阵，${}\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$，${}c$ 是标量：
 1. ${}A(\mathbf{u}+\mathbf{v}) = A\mathbf{u} + A\mathbf{v}$（分配律）
 2. ${}A(c\mathbf{u}) = c(A\mathbf{u})$（数乘交换）
 
@@ -978,7 +978,7 @@ $$
 
 ### 矩阵的加法与数乘 Sums and Scalar Multiples
 
-**定义（与向量完全类似）**：两个**同规模**（同样 ${}m\times n$）的矩阵相加，就是对应元素相加；矩阵乘标量 ${}r$，就是每个元素乘 ${}r$。
+**定义（与向量完全类似）**：两个**同规模**（同样 m × n）的矩阵相加，就是对应元素相加；矩阵乘标量 ${}r$，就是每个元素乘 ${}r$。
 
 **例1（Example 1）**：
 
@@ -1017,7 +1017,7 @@ $${}A(B\mathbf{x}) = (AB)\mathbf{x}$$
 
 *FIGURE 3 Multiplication by ${}AB$. 图3 复合变换 = 乘以一个矩阵 ${}AB$*
 
-**定义（列的视角）**：若 ${}A$ 是 ${}m\times n$ 矩阵，${}B$ 是 ${}n\times p$ 矩阵，${}B$ 的列为 ${}\mathbf{b}_1,\dots,\mathbf{b}_p$，则乘积 ${}AB$ 是 ${}m\times p$ 矩阵，其**各列是 ${}A$ 分别乘 ${}B$ 的各列**：
+**定义（列的视角）**：若 ${}A$ 是 m × n 矩阵，${}B$ 是 n × p 矩阵，${}B$ 的列为 ${}\mathbf{b}_1,\dots,\mathbf{b}_p$，则乘积 ${}AB$ 是 m × p 矩阵，其**各列是 ${}A$ 分别乘 ${}B$ 的各列**：
 
 $${}AB = A\begin{bmatrix} \mathbf{b}_1 & \mathbf{b}_2 & \cdots & \mathbf{b}_p \end{bmatrix} = \begin{bmatrix} A\mathbf{b}_1 & A\mathbf{b}_2 & \cdots & A\mathbf{b}_p \end{bmatrix}$$
 
@@ -1094,11 +1094,11 @@ $$\begin{bmatrix} 2 & -3 \\
 
 ### 定义：可逆矩阵 DEFINITION
 
-${}n \times n$ 矩阵 ${}A$ 称为**可逆的（invertible）**，若存在 ${}n \times n$ 矩阵 ${}C$ 使
+n × n 矩阵 ${}A$ 称为**可逆的（invertible）**，若存在 n × n 矩阵 ${}C$ 使
 
 $${}CA = I \quad \text{且} \quad AC = I$$
 
-其中 ${}I = I_n$ 是 ${}n \times n$ 单位矩阵。这个 ${}C$ 由 ${}A$ **唯一决定**（证明：若 ${}B$ 也是逆，则 ${}B = BI = B(AC) = (BA)C = IC = C$），称为 ${}A$ 的逆，记作 ${}A^{-1}$：
+其中 ${}I = I_n$ 是 n × n 单位矩阵。这个 ${}C$ 由 ${}A$ **唯一决定**（证明：若 ${}B$ 也是逆，则 ${}B = BI = B(AC) = (BA)C = IC = C$），称为 ${}A$ 的逆，记作 ${}A^{-1}$：
 
 $${}A^{-1}A = I \quad \text{且} \quad AA^{-1} = I$$
 
@@ -1144,7 +1144,7 @@ $$A^{-1} = \frac{1}{-2}\begin{bmatrix} 6 & -4 \\
 
 **中文讲解**：可逆矩阵在解方程时的作用，相当于"数的倒数解一元一次方程"。
 
-> 若 ${}A$ 是可逆 ${}n \times n$ 矩阵，则对每个 ${}\mathbf{b} \in \mathbb{R}^n$，方程 ${}A\mathbf{x} = \mathbf{b}$ 有**唯一解** ${}\mathbf{x} = A^{-1}\mathbf{b}$。
+> 若 ${}A$ 是可逆 n × n 矩阵，则对每个 ${}\mathbf{b} \in \mathbb{R}^n$，方程 ${}A\mathbf{x} = \mathbf{b}$ 有**唯一解** ${}\mathbf{x} = A^{-1}\mathbf{b}$。
 
 **证明（小白版）**：存在性：代入 ${}\mathbf{x} = A^{-1}\mathbf{b}$，得 ${}A(A^{-1}\mathbf{b}) = (AA^{-1})\mathbf{b} = I\mathbf{b} = \mathbf{b}$ ✓。唯一性：若 ${}A\mathbf{u} = \mathbf{b}$，两边左乘 ${}A^{-1}$：${}A^{-1}A\mathbf{u} = A^{-1}\mathbf{b} \Rightarrow I\mathbf{u} = A^{-1}\mathbf{b} \Rightarrow \mathbf{u} = A^{-1}\mathbf{b}$，即任何解都必等于 ${}A^{-1}\mathbf{b}$。
 
@@ -1188,7 +1188,7 @@ $$\mathbf{x} = A^{-1}\mathbf{b} = \begin{bmatrix} -3 & 2 \\
 
 a. 若 ${}A$ 可逆，则 ${}A^{-1}$ 也可逆，且 ${}(A^{-1})^{-1} = A$
 
-b. 若 ${}A, B$ 都是 ${}n \times n$ 可逆矩阵，则 ${}AB$ 也可逆，且**逆的顺序反过来**：
+b. 若 ${}A, B$ 都是 n × n 可逆矩阵，则 ${}AB$ 也可逆，且**逆的顺序反过来**：
 
 $${}(AB)^{-1} = B^{-1}A^{-1}$$
 
@@ -1196,7 +1196,7 @@ c. 若 ${}A$ 可逆，则 ${}A^T$ 也可逆，且 ${}(A^T)^{-1} = (A^{-1})^T$
 
 > **直觉记忆 (b)**：穿衣与脱衣——先穿袜子再穿鞋，脱的时候必须先鞋后袜（顺序反转）。这条"**穿脱衣法则**"在全书反复出现。
 
-推广：任意 ${}n \times n$ 可逆矩阵的乘积仍可逆，逆 = 各逆矩阵按**相反顺序**的乘积。
+推广：任意 n × n 可逆矩阵的乘积仍可逆，逆 = 各逆矩阵按**相反顺序**的乘积。
 
 ### 初等矩阵 Elementary Matrices
 
@@ -1230,7 +1230,7 @@ d & e & f \\
 
 ### THEOREM 7（初等矩阵与行变换的桥梁）
 
-> 若对 ${}m \times n$ 矩阵 ${}A$ 施行一次初等行变换，所得矩阵等于 ${}EA$，其中 ${}E$ 是对 ${}I_m$ 施行**同一行变换**得到的初等矩阵。
+> 若对 m × n 矩阵 ${}A$ 施行一次初等行变换，所得矩阵等于 ${}EA$，其中 ${}E$ 是对 ${}I_m$ 施行**同一行变换**得到的初等矩阵。
 
 **推论**：每个初等矩阵 ${}E$ 都可逆，且 ${}E^{-1}$ 就是把 ${}E$ 变回 ${}I$ 的那个行变换对应的初等矩阵（行变换可逆 ⇒ 初等矩阵可逆）。
 
@@ -1246,7 +1246,7 @@ $$E_1 = \begin{bmatrix} 1 & 0 & 0 \\
 
 ### THEOREM 8（可逆 ⟺ 行等价于单位矩阵）
 
-> ${}n \times n$ 矩阵 ${}A$ 可逆，**当且仅当** ${}A$ 行等价于 ${}I_n$。此时，任何把 ${}A$ 化简到 ${}I_n$ 的初等行变换序列，同时把 ${}I_n$ 变成 ${}A^{-1}$。
+> n × n 矩阵 ${}A$ 可逆，**当且仅当** ${}A$ 行等价于 ${}I_n$。此时，任何把 ${}A$ 化简到 ${}I_n$ 的初等行变换序列，同时把 ${}I_n$ 变成 ${}A^{-1}$。
 
 **这就是求逆矩阵的算法来源**：把 ${}A$ 和 ${}I$ 并排，对 ${}[A\ \ I]$ 行化简——左边变成 ${}I$ 的同时，右边自动变成 ${}A^{-1}$。
 
@@ -1330,11 +1330,11 @@ $${}A\mathbf{x} = \mathbf{e}_1, \qquad A\mathbf{x} = \mathbf{e}_2, \qquad \cdots
 
 ### THE INVERTIBLE MATRIX THEOREM（可逆矩阵定理）
 
-> 设 ${}A$ 是 ${}n \times n$ 矩阵，则下列命题**逻辑等价**（同真同假）：
+> 设 ${}A$ 是 n × n 矩阵，则下列命题**逻辑等价**（同真同假）：
 >
 > a. ${}A$ 是**可逆矩阵**
 >
-> b. ${}A$ **行等价于** ${}n \times n$ 单位矩阵 ${}I_n$
+> b. ${}A$ **行等价于** n × n 单位矩阵 ${}I_n$
 >
 > c. ${}A$ 有 ${}n$ 个**主元位置**
 >
@@ -1350,9 +1350,9 @@ $${}A\mathbf{x} = \mathbf{e}_1, \qquad A\mathbf{x} = \mathbf{e}_2, \qquad \cdots
 >
 > i. 线性变换 ${}\mathbf{x} \mapsto A\mathbf{x}$ 是**映上（onto）**的
 >
-> j. 存在 ${}n \times n$ 矩阵 ${}C$ 使 ${}CA = I$
+> j. 存在 n × n 矩阵 ${}C$ 使 ${}CA = I$
 >
-> k. 存在 ${}n \times n$ 矩阵 ${}D$ 使 ${}AD = I$
+> k. 存在 n × n 矩阵 ${}D$ 使 ${}AD = I$
 >
 > l. ${}A^T$ 是**可逆矩阵**
 
@@ -1362,7 +1362,7 @@ $${}A\mathbf{x} = \mathbf{e}_1, \qquad A\mathbf{x} = \mathbf{e}_2, \qquad \cdots
 
 *FIGURE 1 The connections between the statements of the Invertible Matrix Theorem. 图1 IMT 各命题间的等价关系：左边圆圈是证明主干 (c)⇒(d)⇒(j)⇒(a)⇒(b)⇒(c)*
 
-> **小白使用指南**：IMT 的威力在于"一证全证"。做题时只需验证**最容易验证**的一条（通常是对 ${}A$ 行化简看主元数），就能调用其余 11 条的全部结论。注意 **IMT 只对 ${}n \times n$ 方阵成立**！
+> **小白使用指南**：IMT 的威力在于"一证全证"。做题时只需验证**最容易验证**的一条（通常是对 ${}A$ 行化简看主元数），就能调用其余 11 条的全部结论。注意 **IMT 只对 n × n 方阵成立**！
 
 **警告**：2.4 节定理 9 会把 (g)、(h)、(i) 推广到**任何矩阵**（不必是方阵）——那是"存在性定理"，但 (d)、(e)、(f) 的对应推广**不成立**。
 
@@ -1405,7 +1405,7 @@ A 有 **3 个主元**（命题 (c) 成立）⇒ **A 可逆**，且 IMT 其余命
 
 ### 例（补充练习，选自 2.3 Exercises 风格）
 
-**判断题**："若 ${}A, B$ 是 ${}n \times n$ 矩阵且 ${}AB$ 可逆，则 ${}A$ 可逆。"——**True**。
+**判断题**："若 ${}A, B$ 是 n × n 矩阵且 ${}AB$ 可逆，则 ${}A$ 可逆。"——**True**。
 
 **证明**：${}AB$ 可逆 ⇒ 存在 ${}C$ 使 ${}C(AB) = I$ ⇒ ${}(CA)B = I$。由定理 9 推论，${}B$ 可逆且 ${}B^{-1} = CA$；再由 2.1 定理 6，${}A = C^{-1}B^{-1}$…… 更简洁：${}AB$ 可逆 ⇒ ${}AB$ 有 ${}n$ 个主元（IMT (c)）⇒ ${}A$ 必有 ${}n$ 个主元（${}A$ 的列数 = ${}n$，行化简 ${}A$ 时不可能比 ${}AB$ 的秩更多……用 ${}(AB)x=0$ 只有平凡解 ⇒ ${}Bx=0$ 时 ${}A(Bx)=0$ ⇒ ${}Bx=0$…… 故 ${}B$ 列无关 ⇒ ${}B$ 可逆 ⇒ ${}A = (AB)B^{-1}$ 可逆 ✓）。
 
@@ -1416,7 +1416,7 @@ A 有 **3 个主元**（命题 (c) 成立）⇒ **A 可逆**，且 IMT 其余命
 | **IMT** | 12 条等价命题"一荣俱荣、一损俱损"，验证最易的一条即可调用全部 |
 | 验证首选 | 行化简到阶梯形，数主元是否 = ${}n$（命题 (c)） |
 | 方阵特权 | 单侧逆 ${}CA=I$ ⇒ 双侧逆，${}C = A^{-1}$ |
-| 使用前提 | **必须是 ${}n \times n$ 方阵**！非方阵请用 1.4 定理 4 与 2.4 定理 9 |
+| 使用前提 | **必须是 n × n 方阵**！非方阵请用 1.4 定理 4 与 2.4 定理 9 |
 
 > **本节精髓**：IMT 是线性代数的"**总开关**"——它把"解方程"（d, g）、"向量关系"（e, h）、"变换性质"（f, i）、"矩阵运算"（a, j, k, l）、"行化简"（b, c）五大主题统一在"可逆"这一个概念之下。后续学习每章新概念（行列式、秩、特征值、对角化），请养成习惯问自己："这给 IMT 的清单添了哪一条等价条件？"
 
@@ -1526,7 +1526,7 @@ $$AB = \begin{bmatrix} \text{col}_1(A) & \text{col}_2(A) & \cdots & \text{col}_n
 $$A = \begin{bmatrix} A_{11} & A_{12} \\
 0 & A_{22} \end{bmatrix}$$
 
-的**分块上三角矩阵**（${}A_{11}$ 是 ${}p \times p$，${}A_{22}$ 是 ${}q \times q$），求逆有简洁公式。设逆矩阵也按同法分块 ${}B = \begin{bmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{bmatrix}$，则
+的**分块上三角矩阵**（${}A_{11}$ 是 p × p，${}A_{22}$ 是 q × q），求逆有简洁公式。设逆矩阵也按同法分块 ${}B = \begin{bmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{bmatrix}$，则
 
 $$AB = \begin{bmatrix} A_{11} & A_{12} \\
 0 & A_{22} \end{bmatrix}\begin{bmatrix} B_{11} & B_{12} \\
@@ -1588,7 +1588,7 @@ $$\begin{bmatrix} A_{11} & A_{12} \\
 
 ### 为什么需要 LU 分解？（动机）
 
-设 ${}A$ 是 ${}n \times n$ 可逆矩阵。解单个 ${}A\mathbf{x} = \mathbf{b}$ 用行化简；但工程中常见**同一 ${}A$、25 个不同右端 ${}\mathbf{b}_1, \dots, \mathbf{b}_{25}$** 的场景（波音论文：机翼设计迭代）。做法：
+设 ${}A$ 是 n × n 可逆矩阵。解单个 ${}A\mathbf{x} = \mathbf{b}$ 用行化简；但工程中常见**同一 ${}A$、25 个不同右端 ${}\mathbf{b}_1, \dots, \mathbf{b}_{25}$** 的场景（波音论文：机翼设计迭代）。做法：
 
 $${}[A\ \ \mathbf{b}_1\ \ \mathbf{b}_2\ \ \cdots\ \ \mathbf{b}_{25}] \sim [I\ \ \mathbf{x}_1\ \ \mathbf{x}_2\ \ \cdots\ \ \mathbf{x}_{25}]$$
 
@@ -1600,11 +1600,11 @@ $${}[A\ \ \mathbf{b}_1\ \ \mathbf{b}_2\ \ \cdots\ \ \mathbf{b}_{25}] \sim [I\ \ 
 2. 解 ${}U\mathbf{x} = \mathbf{y}$（${}U$ 上三角，**回代** back substitution，快！）
 3. 得 ${}A\mathbf{x} = LU\mathbf{x} = L\mathbf{y} = \mathbf{b}$ ✓
 
-**运算量对比**：${}n \times n$ 矩阵行化简约 ${}2n^3/3$ flops；而三角求解只需 ${}n^2$ flops。25 个右端项：行化简方案 ≈ ${}25 \times 2n^3/3$，LU 方案 ≈ ${}2n^3/3 + 25 \times 2n^2$——**省出一个数量级**！
+**运算量对比**：n × n 矩阵行化简约 ${}2n^3/3$ flops；而三角求解只需 ${}n^2$ flops。25 个右端项：行化简方案 ≈ ${}25 \times 2n^3/3$，LU 方案 ≈ ${}2n^3/3 + 25 \times 2n^2$——**省出一个数量级**！
 
 ### LU 分解的存在性 THEOREM（关键限制）
 
-> **基本定理**：若 ${}n \times n$ 矩阵 ${}A$ 可以**只用行替换**（row replacement）**不做行交换**就化为阶梯形 ${}U$，则 ${}A = LU$ 成立，其中 ${}L$ 是**单位下三角矩阵**（对角线全 1、对角线以下存"消元倍数"）。
+> **基本定理**：若 n × n 矩阵 ${}A$ 可以**只用行替换**（row replacement）**不做行交换**就化为阶梯形 ${}U$，则 ${}A = LU$ 成立，其中 ${}L$ 是**单位下三角矩阵**（对角线全 1、对角线以下存"消元倍数"）。
 >
 > **一句话：LU 分解存在 ⟺ 消元过程中不需要换行。**
 
@@ -2031,7 +2031,7 @@ $${}c\mathbf{u} = (cs_1)\mathbf{v}_1 + (cs_2)\mathbf{v}_2 \in H$$
 
 ### 列空间 Column Space of a Matrix
 
-**定义**：${}m \times n$ 矩阵 ${}A$ 的**列空间** ${}\operatorname{Col} A$ 是其各列所有线性组合构成的集合：
+**定义**：m × n 矩阵 ${}A$ 的**列空间** ${}\operatorname{Col} A$ 是其各列所有线性组合构成的集合：
 
 $${}\operatorname{Col} A = \operatorname{Span}\{\mathbf{a}_1, \dots, \mathbf{a}_n\}$$
 
@@ -2065,11 +2065,11 @@ $$
 
 ### 零空间 Null Space of a Matrix
 
-**定义**：${}m \times n$ 矩阵 ${}A$ 的**零空间** ${}\operatorname{Nul} A$ 是齐次方程 ${}A\mathbf{x} = \mathbf{0}$ 的**全部解**构成的集合：
+**定义**：m × n 矩阵 ${}A$ 的**零空间** ${}\operatorname{Nul} A$ 是齐次方程 ${}A\mathbf{x} = \mathbf{0}$ 的**全部解**构成的集合：
 
 $${}\operatorname{Nul} A = \{\mathbf{x} \in \mathbb{R}^n : A\mathbf{x} = \mathbf{0}\}$$
 
-**THEOREM 13**：${}m \times n$ 矩阵 ${}A$ 的零空间是 ${}\mathbb{R}^n$ 的子空间。
+**THEOREM 13**：m × n 矩阵 ${}A$ 的零空间是 ${}\mathbb{R}^n$ 的子空间。
 
 **证明**：
 1. 零向量：${}A\mathbf{0} = \mathbf{0}$，故 ${}\mathbf{0} \in \operatorname{Nul} A$
@@ -2259,7 +2259,7 @@ $${}\operatorname{rank} A = \dim \operatorname{Col} A$$
 
 ### IMT 续篇（可逆矩阵定理 (m)–(r)）
 
-> 设 ${}A$ 是 ${}n \times n$ 矩阵，下列命题各自等价于"${}A$ 可逆"（接 2.3 节的 (a)–(l)）：
+> 设 ${}A$ 是 n × n 矩阵，下列命题各自等价于"${}A$ 可逆"（接 2.3 节的 (a)–(l)）：
 >
 > m. ${}A$ 的各列构成 ${}\mathbb{R}^n$ 的一组**基**
 >
@@ -2321,7 +2321,7 @@ $${}\operatorname{rank} A = \dim \operatorname{Col} A$$
 
 ## 3.1 行列式引论 Introduction to Determinants
 
-**中文讲解**：2.2 节我们知道：2×2 矩阵 ${}A$ 可逆 ⟺ ${}\det A = a_{11}a_{22} - a_{12}a_{21} \neq 0$。本节把这个有用的事实推广到 ${}n \times n$ 矩阵。思路很"线性代数"：**观察 3×3 可逆矩阵行化简时什么量必然非零**——这个量就是行列式。
+**中文讲解**：2.2 节我们知道：2×2 矩阵 ${}A$ 可逆 ⟺ ${}\det A = a_{11}a_{22} - a_{12}a_{21} \neq 0$。本节把这个有用的事实推广到 n × n 矩阵。思路很"线性代数"：**观察 3×3 可逆矩阵行化简时什么量必然非零**——这个量就是行列式。
 
 ### 从行化简"发现" 3×3 行列式
 
@@ -2366,9 +2366,9 @@ $$A = \begin{bmatrix} 1 & -2 & 5 & 0 \\
 
 （划掉第 3 行、第 2 列）
 
-### ${}n \times n$ 行列式的递归定义
+### n × n 行列式的递归定义
 
-**DEFINITION**：${}n \times n$ 矩阵 ${}A = [a_{ij}]$ 的行列式是如下 ${}n$ 项之和（沿**第一行**展开），符号正负交替：
+**DEFINITION**：n × n 矩阵 ${}A = [a_{ij}]$ 的行列式是如下 ${}n$ 项之和（沿**第一行**展开），符号正负交替：
 
 $${}\det A = a_{11}\det A_{11} - a_{12}\det A_{12} + \cdots + (-1)^{1+n}a_{1n}\det A_{1n} = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det A_{1j}$$
 
@@ -2412,7 +2412,7 @@ $$\begin{bmatrix} + & - & + & \cdots \\
 \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$
 
 **THEOREM 1（任意行/列展开）**：
-> ${}n \times n$ 矩阵 ${}A$ 的行列式可按**任意一行**展开：
+> n × n 矩阵 ${}A$ 的行列式可按**任意一行**展开：
 
 > $${}\det A = a_{i1}C_{i1} + a_{i2}C_{i2} + \cdots + a_{in}C_{in}$$
 
@@ -2517,7 +2517,7 @@ a_{31} & a_{32} & a_{33} \end{vmatrix} = (a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31
 >
 > c. **行倍乘**（某行 × k）：行列式变为 **k 倍**（${}\det = k\cdot$原值）
 
-**验证方法**：对 2×2 用公式 ${}\det = ad - bc$ 逐一验证（练习 19–24）；${}n \times n$ 情形用数学归纳法证明。
+**验证方法**：对 2×2 用公式 ${}\det = ad - bc$ 逐一验证（练习 19–24）；n × n 情形用数学归纳法证明。
 
 ### 行化简求行列式（标准策略）
 
@@ -2613,7 +2613,7 @@ $${}\det A^T = \det A$$
 
 ### 行列式与矩阵乘积 THEOREM 6（乘法性质）
 
-> 若 ${}A, B$ 是 ${}n \times n$ 矩阵，则
+> 若 ${}A, B$ 是 n × n 矩阵，则
 
 > $${}\det(AB) = (\det A)(\det B)$$
 
@@ -2691,10 +2691,10 @@ $$\det A = (-2)(1)\begin{vmatrix} 0 & 5 \\
 
 **背景**：若 ${}A$ 可逆，${}A\mathbf{x} = \mathbf{b}$ 的解 ${}\mathbf{x} = A^{-1}\mathbf{b}$。把 2.2 的伴随矩阵公式代入、按分量展开，每个 ${}x_i$ 都是**两个行列式的商**——这就是克拉默法则。
 
-**记号**：对 ${}n \times n$ 矩阵 ${}A$ 和 ${}\mathbf{b} \in \mathbb{R}^n$，${}A_i(\mathbf{b})$ 表示"把 ${}A$ 的第 ${}i$ 列换成 ${}\mathbf{b}$"得到的矩阵。
+**记号**：对 n × n 矩阵 ${}A$ 和 ${}\mathbf{b} \in \mathbb{R}^n$，${}A_i(\mathbf{b})$ 表示"把 ${}A$ 的第 ${}i$ 列换成 ${}\mathbf{b}$"得到的矩阵。
 
 **THEOREM 7（Cramer's Rule）**：
-> 设 ${}A$ 是可逆 ${}n \times n$ 矩阵。对任意 ${}\mathbf{b} \in \mathbb{R}^n$，方程 ${}A\mathbf{x} = \mathbf{b}$ 的唯一解 ${}\mathbf{x}$ 的分量为
+> 设 ${}A$ 是可逆 n × n 矩阵。对任意 ${}\mathbf{b} \in \mathbb{R}^n$，方程 ${}A\mathbf{x} = \mathbf{b}$ 的唯一解 ${}\mathbf{x}$ 的分量为
 
 > $${}x_i = \frac{\det A_i(\mathbf{b})}{\det A}, \qquad i = 1, 2, \dots, n$$
 
@@ -2868,7 +2868,7 @@ $${}p(t) = a_0 + a_1 t + a_2 t^2$$
 
 **例5（Example 5，离散信号空间）**：定义在整数集上的实值"双无穷序列" ${}\{y_k\}$（${}k \in \mathbb{Z}$）——模拟离散时间信号。加法、数乘均**逐点**进行（图 4 可视化一个离散信号）。这是**数字信号处理**的数学舞台。
 
-> **其他重要例子**（教材列举）：全体 ${}m \times n$ 矩阵、全体实值函数……线性代数在几何、分析、工程等一切"可加可缩放"的对象上通行无阻。
+> **其他重要例子**（教材列举）：全体 m × n 矩阵、全体实值函数……线性代数在几何、分析、工程等一切"可加可缩放"的对象上通行无阻。
 
 ### 子空间 Subspaces
 
@@ -2950,7 +2950,7 @@ b \end{bmatrix} = a\begin{bmatrix} 1 \\
 
 ### 零空间 The Null Space
 
-**定义**：${}m \times n$ 矩阵 ${}A$ 的**零空间**是齐次方程 ${}A\mathbf{x} = \mathbf{0}$ 的**全部解**：
+**定义**：m × n 矩阵 ${}A$ 的**零空间**是齐次方程 ${}A\mathbf{x} = \mathbf{0}$ 的**全部解**：
 
 $${}\operatorname{Nul} A = \{\mathbf{x} : \mathbf{x} \in \mathbb{R}^n,\ A\mathbf{x} = \mathbf{0}\} \subseteq \mathbb{R}^n$$
 
@@ -2958,7 +2958,7 @@ $${}\operatorname{Nul} A = \{\mathbf{x} : \mathbf{x} \in \mathbb{R}^n,\ A\mathbf
 
 **解**：算 ${}A\mathbf{u} = \begin{bmatrix} 5 - 9 + 4 \\ -25 + 27 - 2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} = \mathbf{0}$ ✓ 故 ${}\mathbf{u} \in \operatorname{Nul} A$。
 
-**THEOREM 2**：${}m \times n$ 矩阵 ${}A$ 的零空间是 ${}\mathbb{R}^n$ 的子空间。
+**THEOREM 2**：m × n 矩阵 ${}A$ 的零空间是 ${}\mathbb{R}^n$ 的子空间。
 
 （等价表述：${}m$ 个方程 ${}n$ 个未知量的齐次线性方程组的解集是 ${}\mathbb{R}^n$ 的子空间。）
 
@@ -2987,7 +2987,7 @@ $$
 
 ### 列空间 The Column Space
 
-**定义**：${}m \times n$ 矩阵 ${}A$ 的**列空间**是其各列所有线性组合之集：
+**定义**：m × n 矩阵 ${}A$ 的**列空间**是其各列所有线性组合之集：
 
 $${}\operatorname{Col} A = \operatorname{Span}\{\mathbf{a}_1, \dots, \mathbf{a}_n\} \subseteq \mathbb{R}^m$$
 
@@ -3107,7 +3107,7 @@ $${}\mathbf{p}_3 = 4\mathbf{p}_1 - \mathbf{p}_2$$
 1. ${}\mathcal{B}$ 是**线性无关**集
 2. ${}\mathcal{B}$ **张成** ${}V$（${}\operatorname{Span}\mathcal{B} = V$）
 
-**例4（Example 4，可逆矩阵的列 = 基）**：${}n \times n$ 可逆矩阵 ${}A$ 的列构成 ${}\mathbb{R}^n$ 的基——因为可逆 ⟺ 列线性无关（IMT-e）且张成 ${}\mathbb{R}^n$（IMT-h）。这正是 IMT 的另一种表述！
+**例4（Example 4，可逆矩阵的列 = 基）**：n × n 可逆矩阵 ${}A$ 的列构成 ${}\mathbb{R}^n$ 的基——因为可逆 ⟺ 列线性无关（IMT-e）且张成 ${}\mathbb{R}^n$（IMT-h）。这正是 IMT 的另一种表述！
 
 **例5（Example 5，${}\mathbb{R}^n$ 的标准基）**：
 
@@ -3392,7 +3392,7 @@ $${}\dim \operatorname{Col} A = 2, \qquad \dim \operatorname{Nul} A = 3$$
 
 ### 行空间 The Row Space
 
-**定义**：${}m \times n$ 矩阵 ${}A$ 的**行空间**是其各行（看作 ${}\mathbb{R}^n$ 中的向量）所有线性组合之集：
+**定义**：m × n 矩阵 ${}A$ 的**行空间**是其各行（看作 ${}\mathbb{R}^n$ 中的向量）所有线性组合之集：
 
 $${}\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \dots, \mathbf{r}_m\} \subseteq \mathbb{R}^n$$
 
@@ -3415,7 +3415,7 @@ $${}\operatorname{Row} A = \operatorname{Span}\{\mathbf{r}_1, \dots, \mathbf{r}_
 ### 秩定理 THEOREM 14
 
 **THEOREM 14（Rank Theorem）**：
-> ${}m \times n$ 矩阵 ${}A$：
+> m × n 矩阵 ${}A$：
 >
 > $${}\dim \operatorname{Col} A = \dim \operatorname{Row} A = \operatorname{rank} A = \text{主元数}$$
 >
@@ -3431,7 +3431,7 @@ b. 6×9 矩阵 ${}A$ 能有 ${}\dim \operatorname{Nul} A = 2$ 吗？——${}\op
 
 ### 四大子空间全景 THEOREM + FIGURE 1
 
-对 ${}m \times n$ 矩阵 ${}A$，四个基本子空间及其正交关系：
+对 m × n 矩阵 ${}A$，四个基本子空间及其正交关系：
 
 | 子空间 | 位置 | 维数 |
 |---|---|---|
@@ -3513,7 +3513,7 @@ $$[\mathbf{x}]_{\mathcal{C}} = \begin{bmatrix} 4 & -6 \\
 
 ### 换基定理 THEOREM 15
 
-> 设 ${}\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$、${}\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_n\}$ 是向量空间 ${}V$ 的两组基。则存在唯一 ${}n \times n$ 矩阵 ${}P_{\mathcal{C} \leftarrow \mathcal{B}}$ 使
+> 设 ${}\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$、${}\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_n\}$ 是向量空间 ${}V$ 的两组基。则存在唯一 n × n 矩阵 ${}P_{\mathcal{C} \leftarrow \mathcal{B}}$ 使
 
 > $${}[\mathbf{x}]_{\mathcal{C}} = P_{\mathcal{C} \leftarrow \mathcal{B}}\  [\mathbf{x}]_{\mathcal{B}} \tag{4}$$
 
@@ -3599,7 +3599,7 @@ $${}\mathbf{x}_{k+1} = A\mathbf{x}_k$$
 
 ### 定义 DEFINITION
 
-非零向量 ${}\mathbf{x}$ 称为 ${}n \times n$ 矩阵 ${}A$ 的**特征向量（eigenvector）**，若
+非零向量 ${}\mathbf{x}$ 称为 n × n 矩阵 ${}A$ 的**特征向量（eigenvector）**，若
 
 $${}A\mathbf{x} = \lambda\mathbf{x}$$
 
@@ -3769,7 +3769,7 @@ $$\begin{vmatrix} 1 & 5 & 0 \\
 
 ### 行列式性质总表 THEOREM 3
 
-> 设 ${}A, B$ 是 ${}n \times n$ 矩阵：
+> 设 ${}A, B$ 是 n × n 矩阵：
 >
 > a. ${}A$ 可逆 ⟺ ${}\det A \neq 0$
 > b. ${}\det AB = (\det A)(\det B)$
@@ -3799,14 +3799,14 @@ $${}\lambda^6 - 4\lambda^5 - 12\lambda^4 = \lambda^4(\lambda - 6)(\lambda + 2) =
 
 ### 相似矩阵 Similarity
 
-**定义**：${}n \times n$ 矩阵 ${}A, B$ 称为**相似（similar）**，记 ${}A \sim B$，若存在可逆矩阵 ${}P$ 使
+**定义**：n × n 矩阵 ${}A, B$ 称为**相似（similar）**，记 ${}A \sim B$，若存在可逆矩阵 ${}P$ 使
 
 $${}P^{-1}AP = B \quad \text{或等价地} \quad A = PBP^{-1}$$
 
 **直觉**：相似 = "同一个线性变换在不同基下的矩阵表示"（5.4 节详述）。变换 ${}\mathbf{x} \mapsto A\mathbf{x}$ 与 ${}\mathbf{x} \mapsto B\mathbf{x}$ 本质相同。
 
 **THEOREM 4（相似矩阵同特征值）**：
-> 若 ${}n \times n$ 矩阵 ${}A, B$ 相似，则它们有相同的特征多项式，从而相同的特征值（计重数）。
+> 若 n × n 矩阵 ${}A, B$ 相似，则它们有相同的特征多项式，从而相同的特征值（计重数）。
 
 **证明**：设 ${}B = P^{-1}AP$。
 
@@ -3890,11 +3890,11 @@ $$A^k = PD^kP^{-1} = \begin{bmatrix} 1 & 1 \\
 
 > **幂的要点**：${}A$ 的幂 = 三个固定矩阵夹着 ${}D^k$——计算量与 ${}k$ 无关！
 
-**对角化定义**：${}n \times n$ 矩阵 ${}A$ 称为**可对角化（diagonalizable）**的，若 ${}A$ 相似于对角矩阵，即存在可逆矩阵 ${}P$ 与对角矩阵 ${}D$ 使 ${}A = PDP^{-1}$。
+**对角化定义**：n × n 矩阵 ${}A$ 称为**可对角化（diagonalizable）**的，若 ${}A$ 相似于对角矩阵，即存在可逆矩阵 ${}P$ 与对角矩阵 ${}D$ 使 ${}A = PDP^{-1}$。
 
 ### 对角化定理 THEOREM 5
 
-> ${}n \times n$ 矩阵 ${}A$ **可对角化 ⟺ A 有 n 个线性无关的特征向量**。
+> n × n 矩阵 ${}A$ **可对角化 ⟺ A 有 n 个线性无关的特征向量**。
 >
 > 事实上：${}A = PDP^{-1}$（${}D$ 对角）⟺ ${}P$ 的列是 ${}A$ 的 ${}n$ 个无关特征向量；此时 ${}D$ 的对角元 = 对应的特征值。
 >
@@ -3950,7 +3950,7 @@ $$AP = \begin{bmatrix} 1 & 2 & 2 \\
 > **关键教训**：例3、例4 特征多项式相同，一个可对角化一个不可——**特征值本身不决定可对角化，特征空间的维数才决定**！
 
 **THEOREM 6（充分条件）**：
-> 有 **n 个互不相同特征值** 的 ${}n \times n$ 矩阵必可对角化。
+> 有 **n 个互不相同特征值** 的 n × n 矩阵必可对角化。
 
 （证明：不同特征值的特征向量无关——Theorem 5.1-2；无关特征向量够 n 个——Theorem 5。∎）
 
@@ -3959,7 +3959,7 @@ $$AP = \begin{bmatrix} 1 & 2 & 2 \\
 ### 重根情形 THEOREM 7
 
 **THEOREM 7**：
-> 设 ${}n \times n$ 矩阵 ${}A$ 的互异特征值为 ${}\lambda_1, \dots, \lambda_p$。
+> 设 n × n 矩阵 ${}A$ 的互异特征值为 ${}\lambda_1, \dots, \lambda_p$。
 >
 > a. 每个特征空间的维数 ≤ 对应特征值的代数重数：${}\dim \operatorname{Nul}(A - \lambda_k I) \leq \lambda_k$ 的重数
 >
@@ -4039,7 +4039,7 @@ $$A = \begin{bmatrix} 3 & 2 \\
 
 ### 一般线性变换的矩阵 Matrix of a Linear Transformation
 
-**设定**：${}V$（基 ${}\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$）和 ${}W$（基 ${}\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_m\}$）是向量空间，${}T: V \to W$ 线性。则存在唯一 ${}m \times n$ 矩阵 ${}M$ 使
+**设定**：${}V$（基 ${}\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$）和 ${}W$（基 ${}\mathcal{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_m\}$）是向量空间，${}T: V \to W$ 线性。则存在唯一 m × n 矩阵 ${}M$ 使
 
 $${}[T(\mathbf{x})]_{\mathcal{C}} = M[\mathbf{x}]_{\mathcal{B}} \tag{3}$$
 
@@ -4088,7 +4088,7 @@ $$[D]_{\mathcal{B}} = \begin{bmatrix} 0 & 1 & 0 \\
 ### 对角化的几何本质 THEOREM 8
 
 **THEOREM 8（Diagonal Matrix Representation）**：
-> 设 ${}A = PDP^{-1}$（${}D$ 为 ${}n \times n$ 对角阵），${}T: \mathbb{R}^n \to \mathbb{R}^n$, ${}T(\mathbf{x}) = A\mathbf{x}$。若 ${}\mathcal{B}$ = ${}P$ 的各列构成的 ${}\mathbb{R}^n$ 的基，则 ${}D$ 正是 ${}T$ 的 ${}\mathcal{B}$-矩阵：
+> 设 ${}A = PDP^{-1}$（${}D$ 为 n × n 对角阵），${}T: \mathbb{R}^n \to \mathbb{R}^n$, ${}T(\mathbf{x}) = A\mathbf{x}$。若 ${}\mathcal{B}$ = ${}P$ 的各列构成的 ${}\mathbb{R}^n$ 的基，则 ${}D$ 正是 ${}T$ 的 ${}\mathcal{B}$-矩阵：
 
 > $${}[T]_{\mathcal{B}} = D \tag{6}$$
 
@@ -4523,7 +4523,7 @@ v_C(t) \end{bmatrix} = \begin{bmatrix} -1.5\sin 5t + 3\cos 5t \\
 
 ### 幂法原理 The Power Method
 
-**适用条件**：${}n \times n$ 矩阵 ${}A$ 有**严格支配特征值（strictly dominant eigenvalue）** ${}\lambda_1$：
+**适用条件**：n × n 矩阵 ${}A$ 有**严格支配特征值（strictly dominant eigenvalue）** ${}\lambda_1$：
 
 $${}|\lambda_1| > |\lambda_2| \geq \cdots \geq |\lambda_n|$$
 
@@ -4723,7 +4723,7 @@ $${}W^\perp = \{\mathbf{z} \in \mathbb{R}^n : \mathbf{z} \cdot \mathbf{w} = 0 \t
 即"垂直于整个 ${}W$"的向量全体。${}W^\perp$ 也是子空间（练习 23：含零向量、对加法/数乘封闭）。
 
 **THEOREM 3（四大子空间的正交对）**：
-> 设 ${}A$ 是 ${}m \times n$ 矩阵，则
+> 设 ${}A$ 是 m × n 矩阵，则
 
 > $${}(\operatorname{Row} A)^\perp = \operatorname{Nul} A, \qquad (\operatorname{Col} A)^\perp = \operatorname{Nul} A^T$$
 
@@ -4731,7 +4731,7 @@ $${}W^\perp = \{\mathbf{z} \in \mathbb{R}^n : \mathbf{z} \cdot \mathbf{w} = 0 \t
 
 ![FIGURE 8 四大子空间](img/fig61_8_fundamental_subspaces.png)
 
-*FIGURE 8 The fundamental subspaces determined by an ${}m \times n$ matrix A. 图8 矩阵 A 确定的四大基本子空间：定义域中 Row A ⊥ Nul A；值域中 Col A ⊥ Nul Aᵀ——4.6 节的维数结论现在升级为正交关系*
+*FIGURE 8 The fundamental subspaces determined by an m × n matrix A. 图8 矩阵 A 确定的四大基本子空间：定义域中 Row A ⊥ Nul A；值域中 Col A ⊥ Nul Aᵀ——4.6 节的维数结论现在升级为正交关系*
 
 > **本章路线图**：${}\mathbb{R}^n = W \oplus W^\perp$（6.2 节详证）——正交投影 ${}W$ + 正交互补 ${}W^\perp$ 直和分解整个空间。这正是"离 ${}W$ 最近的点"（6.3 节）与"最小二乘解"（6.5 节）的几何基础。
 
@@ -4854,7 +4854,7 @@ $${}\mathbf{y} = \hat{\mathbf{y}}_1 + \cdots + \hat{\mathbf{y}}_p \tag{3}$$
 **例5（Example 5）**：例 1 的向量单位化：${}\mathbf{v}_1 = \frac{1}{\sqrt{11}}(3,1,1)$, ${}\mathbf{v}_2 = \frac{1}{\sqrt{6}}(-1,2,1)$, ${}\mathbf{v}_3 = \frac{1}{\sqrt{33/2}}(-\frac{1}{2}, -2, \frac{7}{2})$。
 
 **THEOREM 6（正交矩阵的判别）**：
-> ${}m \times n$ 矩阵 ${}U$ 有标准正交列 ⟺ ${}U^TU = I$
+> m × n 矩阵 ${}U$ 有标准正交列 ⟺ ${}U^TU = I$
 
 **证明**：${}U^TU$ 的 ${}(i,j)$ 元 = 列 ${}i$ 与列 ${}j$ 的内积——标准正交 ⟺ 对角元 1、非对角元 0。∎
 
@@ -4863,7 +4863,7 @@ $${}\mathbf{y} = \hat{\mathbf{y}}_1 + \cdots + \hat{\mathbf{y}}_p \tag{3}$$
 $${}U^{-1} = U^T$$
 
 **THEOREM 7（正交变换保长度保角度）**：
-> 设 ${}U$ 是 ${}m \times n$ 标准正交列矩阵，${}\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$：
+> 设 ${}U$ 是 m × n 标准正交列矩阵，${}\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$：
 > a. ${}\|U\mathbf{x}\| = \|\mathbf{x}\|$（长度保持）
 > b. ${}(U\mathbf{x})\cdot(U\mathbf{y}) = \mathbf{x}\cdot\mathbf{y}$（内积/角度保持）
 > c. ${}U\mathbf{x} \perp U\mathbf{y}$ ⟺ ${}\mathbf{x} \perp \mathbf{y}$（正交保持）
@@ -5086,11 +5086,11 @@ $$\mathbf{v}_3 = \mathbf{x}_3 - \operatorname{proj}_{W_2}\mathbf{x}_3 = \begin{b
 ### QR 分解 THEOREM 12
 
 **THEOREM 12（QR 分解）**：
-> 若 ${}m \times n$ 矩阵 ${}A$ 的列**线性无关**，则 ${}A$ 可分解为
+> 若 m × n 矩阵 ${}A$ 的列**线性无关**，则 ${}A$ 可分解为
 
 > $${}A = QR$$
 
-> 其中：${}Q$ 是 ${}m \times n$ 矩阵，列是 ${}\operatorname{Col} A$ 的**标准正交基**；${}R$ 是 ${}n \times n$ **上三角可逆矩阵**，对角元全正。
+> 其中：${}Q$ 是 m × n 矩阵，列是 ${}\operatorname{Col} A$ 的**标准正交基**；${}R$ 是 n × n **上三角可逆矩阵**，对角元全正。
 
 **构造**：
 1. 对 ${}A$ 的列 ${}\mathbf{x}_1, \dots, \mathbf{x}_n$ 做 Gram-Schmidt，得正交集 ${}\{\mathbf{v}_1, \dots, \mathbf{v}_n\}$
@@ -5143,7 +5143,7 @@ $$R = Q^TA = \begin{bmatrix} 2 & 3/2 & 1 \\
 
 ### 最小二乘解的几何
 
-${}A$ 是 ${}m \times n$ 矩阵。${}A\mathbf{x}$ 遍历 ${}\operatorname{Col} A$（${}\mathbb{R}^m$ 的子空间）。${}\mathbf{b}$ 不在其中时，问题转化为：
+${}A$ 是 m × n 矩阵。${}A\mathbf{x}$ 遍历 ${}\operatorname{Col} A$（${}\mathbb{R}^m$ 的子空间）。${}\mathbf{b}$ 不在其中时，问题转化为：
 
 > **求 ${}\mathbf{x} \in \mathbb{R}^n$ 使 ${}\|\mathbf{b} - A\mathbf{x}\| \leq \|\mathbf{b} - A\mathbf{x}'\|$ 对所有 ${}\mathbf{x}'$ 成立**
 
@@ -5273,7 +5273,7 @@ $${}\hat{\mathbf{b}} = \frac{\mathbf{b}\cdot\mathbf{a}_1}{\mathbf{a}_1\cdot\math
 ### QR 分解解法 THEOREM 15
 
 **THEOREM 15**：
-> 设 ${}m \times n$ 矩阵 ${}A$ 列线性无关，${}A = QR$ 为 QR 分解。则对每个 ${}\mathbf{b} \in \mathbb{R}^m$，${}A\mathbf{x} = \mathbf{b}$ 有唯一最小二乘解
+> 设 m × n 矩阵 ${}A$ 列线性无关，${}A = QR$ 为 QR 分解。则对每个 ${}\mathbf{b} \in \mathbb{R}^m$，${}A\mathbf{x} = \mathbf{b}$ 有唯一最小二乘解
 
 > $${}\hat{\mathbf{x}} = R^{-1}Q^T\mathbf{b} \tag{6}$$
 
@@ -5743,7 +5743,7 @@ $${}\lambda_1\mathbf{v}_1\cdot\mathbf{v}_2 = (\lambda_1\mathbf{v}_1)^T\mathbf{v}
 
 ### 正交对角化 Orthogonal Diagonalization
 
-**定义**：${}n \times n$ 矩阵 ${}A$ 称为**可正交对角化（orthogonally diagonalizable）**的，若存在**正交矩阵** ${}P$（${}P^{-1} = P^T$）与对角阵 ${}D$ 使
+**定义**：n × n 矩阵 ${}A$ 称为**可正交对角化（orthogonally diagonalizable）**的，若存在**正交矩阵** ${}P$（${}P^{-1} = P^T$）与对角阵 ${}D$ 使
 
 $${}A = PDP^T = PDP^{-1} \tag{1}$$
 
@@ -5788,7 +5788,7 @@ $$P = \begin{bmatrix} 1/\sqrt{2} & -1/\sqrt{18} & -2/3 \\
 
 ### 谱定理 THEOREM 3（Spectral Theorem）
 
-> ${}n \times n$ 对称矩阵 ${}A$ 具有下列性质：
+> n × n 对称矩阵 ${}A$ 具有下列性质：
 > a. 有 ${}n$ 个**实**特征值（计重数）
 > b. 每个特征值的**特征空间维数 = 代数重数**（由 Theorem 5.3-7，这正说明 A 可对角化）
 > c. 特征空间两两正交（Theorem 1）
@@ -5858,7 +5858,7 @@ $$8\mathbf{u}_1\mathbf{u}_1^T + 3\mathbf{u}_2\mathbf{u}_2^T = \begin{bmatrix} 7 
 
 ### 二次型的定义
 
-**定义**：${}n \times n$ 对称矩阵 ${}A$ 诱导的**二次型（quadratic form）**是函数
+**定义**：n × n 对称矩阵 ${}A$ 诱导的**二次型（quadratic form）**是函数
 
 $${}Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x} \tag{1}$$
 
@@ -5874,7 +5874,7 @@ $${}Q = 3x_1^2 - \underbrace{2(-2)}_{\text{交叉项 }-4x_1x_2}x_1x_2 + 7x_2^2 =
 
 ### 主轴定理 THEOREM 4（Principal Axes Theorem）
 
-> 设 ${}A$ 为对称 ${}n \times n$ 矩阵。则存在正交变量替换 ${}\mathbf{x} = P\mathbf{y}$ 使二次型 ${}\mathbf{x}^TA\mathbf{x}$ 变为**无交叉项**的二次型
+> 设 ${}A$ 为对称 n × n 矩阵。则存在正交变量替换 ${}\mathbf{x} = P\mathbf{y}$ 使二次型 ${}\mathbf{x}^TA\mathbf{x}$ 变为**无交叉项**的二次型
 
 > $${}\mathbf{y}^TD\mathbf{y} = \lambda_1 y_1^2 + \cdots + \lambda_n y_n^2$$
 
@@ -6100,7 +6100,7 @@ Theorem 6 也是**计算最大特征值**的理论基础：瑞利商 ${}R(\mathb
 
 ## 7.4 奇异值分解 The Singular Value Decomposition
 
-**中文讲解**：第 5、7 章的对角化都要求**对称/方阵**——但现实中的数据矩阵几乎都不是。SVD 是谱定理的推广之王：**任意 ${}m \times n$ 矩阵** ${}A$ 都能分解为
+**中文讲解**：第 5、7 章的对角化都要求**对称/方阵**——但现实中的数据矩阵几乎都不是。SVD 是谱定理的推广之王：**任意 m × n 矩阵** ${}A$ 都能分解为
 
 $${}A = U\Sigma V^T$$
 
@@ -6108,7 +6108,7 @@ $${}A = U\Sigma V^T$$
 
 ### 动机：单位球变成椭球
 
-设 ${}A$ 是 ${}m \times n$（${}m \geq n$）。${}A$ 把 ${}\mathbb{R}^n$ 的单位球变成 ${}\mathbb{R}^m$ 中的椭球（FIGURE 1）。问题是：**哪个输入方向 ${}\mathbf{v}_1$ 被拉得最长**？即最大化 ${}\|A\mathbf{x}\|$（${}\|\mathbf{x}\| = 1$）。
+设 ${}A$ 是 m × n（${}m \geq n$）。${}A$ 把 ${}\mathbb{R}^n$ 的单位球变成 ${}\mathbb{R}^m$ 中的椭球（FIGURE 1）。问题是：**哪个输入方向 ${}\mathbf{v}_1$ 被拉得最长**？即最大化 ${}\|A\mathbf{x}\|$（${}\|\mathbf{x}\| = 1$）。
 
 **关键技巧**：${}\|A\mathbf{x}\|^2 = (A\mathbf{x})^T(A\mathbf{x}) = \mathbf{x}^T(A^TA)\mathbf{x}$——**${}A^TA$ 是对称的！** 第 7 章的全部理论可用。
 
@@ -6156,7 +6156,7 @@ $${}\|A\mathbf{v}_i\|^2 = \mathbf{v}_i^TA^TA\mathbf{v}_i = \lambda_i \quad \Righ
 
 ### SVD 分解 THEOREM
 
-> 设 ${}A$ 为 ${}m \times n$ 矩阵，秩 ${}r$。则存在 ${}m \times n$ "对角"矩阵 ${}\Sigma$（对角元 ${}\sigma_1, \dots, \sigma_r$ 及其余为 0）、${}m$ 阶正交阵 ${}U = [\mathbf{u}_1 \cdots \mathbf{u}_m]$、${}n$ 阶正交阵 ${}V = [\mathbf{v}_1 \cdots \mathbf{v}_n]$，使
+> 设 ${}A$ 为 m × n 矩阵，秩 ${}r$。则存在 m × n "对角"矩阵 ${}\Sigma$（对角元 ${}\sigma_1, \dots, \sigma_r$ 及其余为 0）、${}m$ 阶正交阵 ${}U = [\mathbf{u}_1 \cdots \mathbf{u}_m]$、${}n$ 阶正交阵 ${}V = [\mathbf{v}_1 \cdots \mathbf{v}_n]$，使
 
 > $${}A = U\Sigma V^T \tag{3}$$
 
@@ -7035,7 +7035,7 @@ $${}e^{(a+bi)t} = e^{at}(\cos bt + i\sin bt) \quad \Rightarrow \quad \text{实�
 
 > 本附录给出 1.2 节 **Theorem 1（简化阶梯形唯一性）** 的完整证明。这是全书被引用最多的基础性定理之一（行化简的合法性之源），证明本身也是"行等价保列相关性"（4.3 节例 9）思想的精彩示范。
 
-**定理**：每个 ${}m \times n$ 矩阵 ${}A$ 行等价于**唯一**的简化阶梯形矩阵 ${}U$。
+**定理**：每个 m × n 矩阵 ${}A$ 行等价于**唯一**的简化阶梯形矩阵 ${}U$。
 
 **证明框架（三步）**：
 
@@ -7047,7 +7047,7 @@ $${}e^{(a+bi)t} = e^{at}(\cos bt + i\sin bt) \quad \Rightarrow \quad \text{实�
 
 ${}U$ 与 ${}V$ 都行等价于 ${}A$ ⟹ 它们彼此行等价 ⟹ 列相关关系相同 ⟹ **${}U$ 与 ${}V$ 的主元列出现在相同位置**！
 
-**第三步（主元列内容一致）**：若有 ${}r$ 个主元列，则由简化阶梯形的定义，这些列就是 ${}m \times m$ 单位矩阵的前 ${}r$ 列——**${}U$ 与 ${}V$ 的主元列逐列相等**。
+**第三步（主元列内容一致）**：若有 ${}r$ 个主元列，则由简化阶梯形的定义，这些列就是 m × m 单位矩阵的前 ${}r$ 列——**${}U$ 与 ${}V$ 的主元列逐列相等**。
 
 **第四步（非主元列一致）**：任取 ${}U$ 的非主元列（第 ${}j$ 列）。它要么是零列，要么是**其左侧主元列的线性组合**（因为那些主元列构成第 ${}j$ 列左侧列空间的一组基）。无论哪种情况，都存在一个第 ${}j$ 个分量为 1 的向量 ${}\mathbf{x}$ 使
 
