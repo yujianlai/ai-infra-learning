@@ -39,7 +39,7 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 | 2.3 | 可逆矩阵定理 | **IMT**（12 条等价条件，全书枢纽） |
 | 2.4 | 分块矩阵 | 分块乘法、列-行展开（Theorem 10） |
 | 2.5 | 矩阵分解 | **LU 分解**、前代回代 |
-| 2.6 | 列昂惕夫模型 | ${}(I-C)^{-1} = I + C + C^2 + \cdots$ |
+| 2.6 | 列昂惕夫模型 | (I-C)^{-1} = I + C + C^2 + ⋯ |
 | 2.7 | 计算机图形学 | 齐次坐标、复合变换 |
 | 2.8 | 子空间 | Col A、Nul A、基 |
 | 2.9 | 维数与秩 | 秩定理、基定理、IMT (m)-(r) |
@@ -67,7 +67,7 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 |---|---|---|
 | 5.1 | 特征向量与特征值 | ${}A\mathbf{x} = \lambda\mathbf{x}$、特征空间 |
 | 5.2 | 特征方程 | ${}\det(A-\lambda I) = 0$、相似、动力系统例 |
-| 5.3 | 对角化 | ${}A = PDP^{-1}$、四步法、Theorem 5/6/7 |
+| 5.3 | 对角化 | A = PDP^{-1}、四步法、Theorem 5/6/7 |
 | 5.4 | 特征向量与线性变换 | ${}\mathcal{B}$-矩阵、Theorem 8（相似 = 换基） |
 | 5.5 | 复特征值 | 旋转 + 缩放本质、Theorem 9 |
 | 5.6 | 离散动力系统 | 支配特征值、吸引子/鞍点、猫头鹰模型 |
@@ -132,7 +132,7 @@ Ax = b      逆/秩/行列式  向量空间/基   特征值        内积/投影
 
 ## 四、IMT 完整版（2.3 + 2.9 + 4.x + 5.2 + 7.4，24 条等价条件）
 
-${}A$（n × n）可逆 ⟺ **(a)** ${}A$ 可逆 ⟺ **(b)** ${}A \sim I_n$ ⟺ **(c)** n 个主元 ⟺ **(d)** ${}A\mathbf{x}=\mathbf{0}$ 仅平凡解 ⟺ **(e)** 列无关 ⟺ **(f)** ${}\mathbf{x}\mapsto A\mathbf{x}$ 一对一 ⟺ **(g)** ${}A\mathbf{x}=\mathbf{b}$ 对每个 ${}\mathbf{b}$ 有解 ⟺ **(h)** 列张成 ${}\mathbb{R}^n$ ⟺ **(i)** ${}\mathbf{x}\mapsto A\mathbf{x}$ 映上 ⟺ **(j,k)** 存在 ${}C,D$ 使 ${}CA=I$、${}AD=I$ ⟺ **(l)** ${}A^T$ 可逆 ⟺ **(m)** 列构成基 ⟺ **(n)** ${}\operatorname{Col} A = \mathbb{R}^n$ ⟺ **(o)** ${}\dim\operatorname{Col} A = n$ ⟺ **(p)** ${}\operatorname{rank} A = n$ ⟺ **(q)** ${}\operatorname{Nul} A = \{\mathbf{0}\}$ ⟺ **(r)** ${}\dim\operatorname{Nul} A = 0$ ⟺ **(s,t)** 0 非特征值、${}\det A \neq 0$ ⟺ **(u-x)** ${}(\operatorname{Col} A)^\perp = \{\mathbf{0}\}$、${}(\operatorname{Nul} A)^\perp = \mathbb{R}^n$、${}\operatorname{Row} A = \mathbb{R}^n$、n 个非零奇异值
+${}A$（n × n）可逆 ⟺ **(a)** ${}A$ 可逆 ⟺ **(b)** ${}A \sim I_n$ ⟺ **(c)** n 个主元 ⟺ **(d)** ${}A\mathbf{x}=\mathbf{0}$ 仅平凡解 ⟺ **(e)** 列无关 ⟺ **(f)** ${}\mathbf{x}\mapsto A\mathbf{x}$ 一对一 ⟺ **(g)** ${}A\mathbf{x}=\mathbf{b}$ 对每个 ${}\mathbf{b}$ 有解 ⟺ **(h)** 列张成 ${}\mathbb{R}^n$ ⟺ **(i)** ${}\mathbf{x}\mapsto A\mathbf{x}$ 映上 ⟺ **(j,k)** 存在 ${}C,D$ 使 CA=I、AD=I ⟺ **(l)** ${}A^T$ 可逆 ⟺ **(m)** 列构成基 ⟺ **(n)** ${}\operatorname{Col} A = \mathbb{R}^n$ ⟺ **(o)** ${}\dim\operatorname{Col} A = n$ ⟺ **(p)** ${}\operatorname{rank} A = n$ ⟺ **(q)** ${}\operatorname{Nul} A = \{\mathbf{0}\}$ ⟺ **(r)** ${}\dim\operatorname{Nul} A = 0$ ⟺ **(s,t)** 0 非特征值、${}\det A \neq 0$ ⟺ **(u-x)** ${}(\operatorname{Col} A)^\perp = \{\mathbf{0}\}$、${}(\operatorname{Nul} A)^\perp = \mathbb{R}^n$、${}\operatorname{Row} A = \mathbb{R}^n$、n 个非零奇异值
 
 ## 五、插图清单（img/ 目录，43 张）
 
