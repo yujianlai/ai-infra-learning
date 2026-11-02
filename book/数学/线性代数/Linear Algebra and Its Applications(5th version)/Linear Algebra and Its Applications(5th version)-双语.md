@@ -128,7 +128,7 @@ $$
 
 - **系数矩阵（coefficient matrix）**：只装未知数的系数
 - **增广矩阵（augmented matrix）**：系数矩阵右边再加一列常数项
-- **规模（size）**：$m \times n$ 表示 $m$ 行 $n$ 列。上面的增广矩阵是 $3 \times 4$。
+- **规模（size）**：$m \times n$ 表示 $m$ 行 $n$ 列。上面的增广矩阵是 ${}3 \times 4$。
 
 ### 解线性方程组：消元思想
 
@@ -169,7 +169,7 @@ $$
 0 & 10 & -10 & 10 \end{array}\right]
 $$
 
-第3步：用第2行消去第3行的 $10x_2$。第3行 += (−10)×第2行，得 $30x_3 = -30$，再 × $\frac{1}{30}$：
+第3步：用第2行消去第3行的 ${}10x_2$。第3行 += (−10)×第2行，得 ${}30x_3 = -30$，再 × $\frac{1}{30}$：
 
 $$
 \left[\begin{array}{rrrr} 1 & -2 & 1 & 0 \\
@@ -185,7 +185,7 @@ $$
 0 & 0 & 1 & -1 \end{array}\right] \ \Rightarrow\  x_1 = 1,\quad x_2 = 0,\quad x_3 = -1
 $$
 
-**验证**：$1(1) - 2(0) + 1(-1) = 0$；$2(0) - 8(-1) = 8$；$5(1) - 5(-1) = 10$
+**验证**：${}1(1) - 2(0) + 1(-1) = 0$；${}2(0) - 8(-1) = 8$；${}5(1) - 5(-1) = 10$
 
 **几何意义**：每个方程在三维空间中确定一个平面，三个平面交于唯一点 $(1, 0, -1)$：
 
@@ -221,7 +221,7 @@ $$
 0 & 0 & 0 & 15 \end{array}\right] \ \Rightarrow\  0 = 15 \ \text{矛盾！}
 $$
 
-最后一行 $0 = 15$ 是 $0x_1+0x_2+0x_3=15$ 的简写，永远不成立。**系统不相容（无解）**。
+最后一行 ${}0 = 15$ 是 ${}0x_1+0x_2+0x_3=15$ 的简写，永远不成立。**系统不相容（无解）**。
 
 ![三平面无公共点](img/fig04_planes_no_point.png)
 
@@ -240,7 +240,7 @@ $$
 $$
 
 代入 $x_1=3, x_2=4, x_3=-2$：
-- $5(3)-(4)+2(-2) = 15-4-4 = 7$ 成立
+- ${}5(3)-(4)+2(-2) = 15-4-4 = 7$ 成立
 - $-2(3)+6(4)+9(-2) = -6+24-18 = 0$ 成立
 - $-7(3)+5(4)-3(-2) = -21+20+6 = 5 \neq -7$ 不成立
 
@@ -256,7 +256,7 @@ $$
 $$
 -6x_1 + 3x_2 = k
 $$
-第2行 += 3×第1行，得 $0 = k + 3h$。**当且仅当 $k + 3h = 0$ 时系统相容**。
+第2行 += 3×第1行，得 ${}0 = k + 3h$。**当且仅当 $k + 3h = 0$ 时系统相容**。
 
 **练习题 1**：
 $$
@@ -266,7 +266,7 @@ $$
 $$
 -2x_1 - 7x_2 = -5
 $$
-第2行 += 2×第1行：$3x_2 = 9 \Rightarrow x_2 = 3$，回代 $x_1 = 7 - 15 = -8$。**解：$(-8, 3)$**
+第2行 += 2×第1行：${}3x_2 = 9 \Rightarrow x_2 = 3$，回代 $x_1 = 7 - 15 = -8$。**解：$(-8, 3)$**
 
 ---
 
@@ -419,7 +419,7 @@ $$
 
 **回代（Back-Substitution）**：计算机程序通常只化到（非简化）阶梯形，再用回代求解：从最下方的方程解出最后一个基本变量，逐层向上代入。手算时教材建议**统一使用简化阶梯形**，矩阵格式能大幅减少出错。
 
-**数值注记**：化到阶梯形约需 $2n^3/3$ 次浮点运算（flops），而继续化到简化阶梯形最多只需 $n^2$ 次——前向阶段远比后向阶段耗时。
+**数值注记**：化到阶梯形约需 ${}2n^3/3$ 次浮点运算（flops），而继续化到简化阶梯形最多只需 $n^2$ 次——前向阶段远比后向阶段耗时。
 
 ### 存在性与唯一性定理 THEOREM 2
 
@@ -548,7 +548,7 @@ $$
 5. $c(\mathbf{u}+\mathbf{v}) = c\mathbf{u}+c\mathbf{v}$（分配律）
 6. $(c+d)\mathbf{u} = c\mathbf{u}+d\mathbf{u}$（分配律）
 7. $c(d\mathbf{u}) = (cd)\mathbf{u}$（数乘结合律）
-8. $1\mathbf{u} = \mathbf{u}$（单位元）
+8. ${}1\mathbf{u} = \mathbf{u}$（单位元）
 
 **减法**：$\mathbf{u}-\mathbf{v} = \mathbf{u}+(-\mathbf{v})$，几何上就是从 $\mathbf{v}$ 的终点指向 $\mathbf{u}$ 终点的箭头：
 
@@ -568,7 +568,7 @@ $$
 
 > 英文原文：Given vectors $\mathbf{v}_1, \dots, \mathbf{v}_p$ in $\mathbb{R}^n$ and given scalars $c_1, \dots, c_p$, the vector $\mathbf{y} = c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p$ is called a **linear combination** of $\mathbf{v}_1, \dots, \mathbf{v}_p$ with **weights** $c_1, \dots, c_p$. Note that weights in a linear combination can be any real numbers, including zero.
 
-**例2（Example 2）**：设 $\mathbf{v}_1 = \begin{bmatrix} -1 \\\\ 1 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} 2 \\\\ 1 \end{bmatrix}$，求 $\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2$、$0\mathbf{v}_1$、$1.5\mathbf{v}_1 - 2\mathbf{v}_2$。
+**例2（Example 2）**：设 $\mathbf{v}_1 = \begin{bmatrix} -1 \\\\ 1 \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} 2 \\\\ 1 \end{bmatrix}$，求 $\frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2$、${}0\mathbf{v}_1$、${}1.5\mathbf{v}_1 - 2\mathbf{v}_2$。
 
 $$
 \frac{1}{2}\mathbf{v}_1 + \mathbf{v}_2 = \begin{bmatrix} -1/2+2 \\
@@ -651,7 +651,7 @@ $$
 0 & 0 & -2 \end{array}\right]
 $$
 
-第三行 $0 = -2$ 矛盾，**无解**——$\mathbf{b}$ 不在 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中。
+第三行 ${}0 = -2$ 矛盾，**无解**——$\mathbf{b}$ 不在 $\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 中。
 
 **例6（Example 6，几何判断）**：设 $\mathbf{u}, \mathbf{v}$ 是 $\mathbb{R}^3$ 中向量，判断 $\operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$ 是什么样的集合。
 
@@ -707,7 +707,7 @@ $$
 6 \end{bmatrix}
 $$
 
-**例2（Example 2）**：把线性组合 $3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$ 写成矩阵乘向量：设 $A = [\mathbf{v}_1\ \mathbf{v}_2\ \mathbf{v}_3]$，$\mathbf{x} = (3, -5, 7)$，则 $A\mathbf{x} = 3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$。
+**例2（Example 2）**：把线性组合 ${}3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$ 写成矩阵乘向量：设 $A = [\mathbf{v}_1\ \mathbf{v}_2\ \mathbf{v}_3]$，$\mathbf{x} = (3, -5, 7)$，则 $A\mathbf{x} = 3\mathbf{v}_1 - 5\mathbf{v}_2 + 7\mathbf{v}_3$。
 
 ### THEOREM 3（矩阵方程、向量方程、方程组三合一）
 
@@ -923,7 +923,7 @@ $$
 
 *FIGURE 4 The translated line. 图4 非齐次解集 = 齐次解集平移后的直线*
 
-**例3（Example 3）**：单个方程 $10x_1 - 3x_2 - 2x_3 = 0$ 的解集。把 $x_1$ 用自由变量表示：$x_1 = .3x_2 + .2x_3$，
+**例3（Example 3）**：单个方程 ${}10x_1 - 3x_2 - 2x_3 = 0$ 的解集。把 $x_1$ 用自由变量表示：$x_1 = .3x_2 + .2x_3$，
 
 $$
 \mathbf{x} = \begin{bmatrix} .3x_2 + .2x_3 \\
@@ -935,7 +935,7 @@ x_3 \end{bmatrix} = x_2\begin{bmatrix} .3 \\
 1 \end{bmatrix} = x_2\mathbf{u} + x_3\mathbf{v}
 $$
 
-解集是 $\operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$（过原点的平面）。对非齐次版本 $10x_1 - 3x_2 - 2x_3 = b$（$b\neq 0$），解集是**平行平面** $\mathbf{p} + \operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$。
+解集是 $\operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$（过原点的平面）。对非齐次版本 ${}10x_1 - 3x_2 - 2x_3 = b$（$b\neq 0$），解集是**平行平面** $\mathbf{p} + \operatorname{Span}\{\mathbf{u}, \mathbf{v}\}$。
 
 **几何关系总结**：
 
@@ -1069,7 +1069,7 @@ $$\begin{bmatrix} 2 & -3 \\
 -4 & 6 \end{bmatrix} \begin{bmatrix} 3 \\
 2 \end{bmatrix} = \begin{bmatrix} 2 & -3 \\
 -4 & 6 \end{bmatrix} \begin{bmatrix} 6 \\
-4 \end{bmatrix} \;\text{但}\; \begin{bmatrix} 3 \\
+4 \end{bmatrix} \ \text{但}\  \begin{bmatrix} 3 \\
 2 \end{bmatrix} \neq \begin{bmatrix} 6 \\
 4 \end{bmatrix}$$
 
@@ -1090,7 +1090,7 @@ $$\begin{bmatrix} 2 & -3 \\
 
 ## 2.2 逆矩阵 The Inverse of a Matrix
 
-**中文讲解**：数的"倒数"概念推广到矩阵。回忆：5 的乘法逆元是 $5^{-1} = \frac{1}{5}$，满足 $5^{-1} \cdot 5 = 1$ 且 $5 \cdot 5^{-1} = 1$。矩阵推广需要**两个**方程都成立（因为矩阵乘法**不交换**），而且只有**方阵**才谈逆矩阵。
+**中文讲解**：数的"倒数"概念推广到矩阵。回忆：5 的乘法逆元是 ${}5^{-1} = \frac{1}{5}$，满足 ${}5^{-1} \cdot 5 = 1$ 且 ${}5 \cdot 5^{-1} = 1$。矩阵推广需要**两个**方程都成立（因为矩阵乘法**不交换**），而且只有**方阵**才谈逆矩阵。
 
 ### 定义：可逆矩阵 DEFINITION
 
@@ -1184,7 +1184,7 @@ $$\mathbf{x} = A^{-1}\mathbf{b} = \begin{bmatrix} -3 & 2 \\
 7 \end{bmatrix} = \begin{bmatrix} 5 \\
 -3 \end{bmatrix}$$
 
-**验证**：$3(5) + 4(-3) = 3$ ✓；$5(5) + 6(-3) = 7$ ✓
+**验证**：${}3(5) + 4(-3) = 3$ ✓；${}5(5) + 6(-3) = 7$ ✓
 
 ### THEOREM 6（逆矩阵的三条运算律）
 
@@ -1405,7 +1405,7 @@ A 有 **3 个主元**（命题 (c) 成立）⇒ **A 可逆**，且 IMT 其余命
 | 列向量 | 列线性无关（e）且张成 $\mathbb{R}^n$（h） | 列相关或张不满 |
 | 线性变换 | 既一对一（f）又映上（i） | 至少破坏其一 |
 | 行列式 | $\det A \neq 0$（第3章） | $\det A = 0$ |
-| 特征值 | $0$ **不是**特征值（第5章） | $0$ 是特征值 |
+| 特征值 | ${}0$ **不是**特征值（第5章） | ${}0$ 是特征值 |
 
 ### 例（补充练习，选自 2.3 Exercises 风格）
 
@@ -1440,7 +1440,7 @@ A = \begin{bmatrix} 3 & 0 & -1 & 5 & 9 & -2 \\
 A_{21} & A_{22} & A_{23} \end{bmatrix}
 $$
 
-按 $2 \times 3$ 分块，各子矩阵为：
+按 ${}2 \times 3$ 分块，各子矩阵为：
 
 $$A_{11} = \begin{bmatrix} 3 & 0 & -1 \\
 -5 & 2 & 4 \end{bmatrix}, \qquad A_{12} = \begin{bmatrix} 5 & 9 \\
@@ -1483,7 +1483,7 @@ A_{21} & A_{22} \end{bmatrix}, \qquad B = \begin{bmatrix} 6 & 4 \\
 B_2 \end{bmatrix}
 $$
 
-$A$ 的 5 列分成 $3+2$，$B$ 的 5 行也分成 $3+2$——**分法匹配**，可以分块相乘：
+$A$ 的 5 列分成 ${}3+2$，$B$ 的 5 行也分成 ${}3+2$——**分法匹配**，可以分块相乘：
 
 $$AB = \begin{bmatrix} A_{11}B_1 + A_{12}B_2 \\
 A_{21}B_1 + A_{22}B_2 \end{bmatrix} = \begin{bmatrix} -5 & 4 \\
@@ -1517,7 +1517,7 @@ $$A_{11}B_1 + A_{12}B_2 = \begin{bmatrix} 15 & 12 \\
 $$AB = \begin{bmatrix} \text{col}_1(A) & \text{col}_2(A) & \cdots & \text{col}_n(A) \end{bmatrix} \begin{bmatrix} \text{row}_1(B) \\
 \text{row}_2(B) \\
 \vdots \\
-\text{row}_n(B) \end{bmatrix} = \text{col}_1(A)\,\text{row}_1(B) + \cdots + \text{col}_n(A)\,\text{row}_n(B)$$
+\text{row}_n(B) \end{bmatrix} = \text{col}_1(A)\ \text{row}_1(B) + \cdots + \text{col}_n(A)\ \text{row}_n(B)$$
 
 **证明（小白版）**：$\text{col}_k(A)\ \text{row}_k(B)$ 的 $(i,j)$ 元是 $a_{ik}b_{kj}$。对 $k$ 求和：$a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}$——这正是行-列法则给出的 $AB$ 的 $(i,j)$ 元 ✓
 
@@ -1607,7 +1607,7 @@ $$[A\ \ \mathbf{b}_1\ \ \mathbf{b}_2\ \ \cdots\ \ \mathbf{b}_{25}] \sim [I\ \ \m
 2. 解 $U\mathbf{x} = \mathbf{y}$（$U$ 上三角，**回代** back substitution，快！）
 3. 得 $A\mathbf{x} = LU\mathbf{x} = L\mathbf{y} = \mathbf{b}$ ✓
 
-**运算量对比**：$n \times n$ 矩阵行化简约 $2n^3/3$ flops；而三角求解只需 $n^2$ flops。25 个右端项：行化简方案 ≈ $25 \times 2n^3/3$，LU 方案 ≈ $2n^3/3 + 25 \times 2n^2$——**省出一个数量级**！
+**运算量对比**：$n \times n$ 矩阵行化简约 ${}2n^3/3$ flops；而三角求解只需 $n^2$ flops。25 个右端项：行化简方案 ≈ ${}25 \times 2n^3/3$，LU 方案 ≈ ${}2n^3/3 + 25 \times 2n^2$——**省出一个数量级**！
 
 ### LU 分解的存在性 THEOREM（关键限制）
 
@@ -1663,7 +1663,7 @@ $$A_1 \sim \begin{bmatrix} 2 & 4 & -1 & 5 & -2 \\
 0 & 0 & 0 & \mathbf{2} & 1 \\
 0 & 0 & 0 & 4 & 7 \end{bmatrix} = A_2$$
 
-**第3列（主元列为第4列）**：主元 2 下方条目 $4$，$4/2 = 2$，填入 $L(4,3) = 2$。
+**第3列（主元列为第4列）**：主元 2 下方条目 ${}4$，${}4/2 = 2$，填入 $L(4,3) = 2$。
 
 **行变换**：R4 += −2R3：
 
@@ -1720,7 +1720,7 @@ $$
 | $A = LU$ | 消元过程存档：$L$ 存倍数、$U$ 存阶梯形 |
 | 存在条件 | 消元**不需换行**（否则要 $PA = LU$） |
 | 解方程三步 | 前代 $L\mathbf{y} = \mathbf{b}$ → 回代 $U\mathbf{x} = \mathbf{y}$ |
-| 效率 | $n^2$ vs $2n^3/3$，多右端问题时完胜行化简 |
+| 效率 | $n^2$ vs ${}2n^3/3$，多右端问题时完胜行化简 |
 | 填 $L$ 口诀 | 主元除高亮，对角填 1 |
 
 > **本节精髓**：LU 分解把"一次昂贵的消元"与"多次廉价的求解"分离——这正是数值线性代数"**分解优先于求逆**"原则的第一个实例。第 7 章的 QR 分解、SVD 都是同一思想的升级版。
@@ -1892,7 +1892,7 @@ x_2 \end{bmatrix} = \begin{bmatrix} 20 \\
 $$D = \begin{bmatrix} 0 & .5 & .5 & 6 & 6 & 5.5 & 5.5 & 0 \\
 0 & 0 & 6.42 & 0 & 8 & 8 & 1.58 & 8 \end{bmatrix}$$
 
-> **几何观察**：左竖条宽 0.5（x 从 0 到 .5），右竖条宽 0.5（x 从 5.5 到 6）；对角线从左竖条上端 $(.5, 6.42)$ 连到右竖条下端 $(5.5, 1.58)$——注意 $6.42 + 1.58 = 8$，对角线端点关于中线 $y = 4$ 对称，这是精心设计的标准 N。
+> **几何观察**：左竖条宽 0.5（x 从 0 到 .5），右竖条宽 0.5（x 从 5.5 到 6）；对角线从左竖条上端 $(.5, 6.42)$ 连到右竖条下端 $(5.5, 1.58)$——注意 ${}6.42 + 1.58 = 8$，对角线端点关于中线 $y = 4$ 对称，这是精心设计的标准 N。
 
 ![FIGURE 1 原来的 N](img/fig27_1_letter_N.png)
 
@@ -1906,7 +1906,7 @@ $$AD = \begin{bmatrix} 1 & .25 \\
 0 & 0 & 6.42 & 0 & 8 & 8 & 1.58 & 8 \end{bmatrix} = \begin{bmatrix} 0 & .5 & 2.105 & 6 & 8 & 7.5 & 5.895 & 2 \\
 0 & 0 & 6.42 & 0 & 8 & 8 & 1.58 & 8 \end{bmatrix}$$
 
-**逐个验证**（剪切 = x 坐标加 0.25 倍 y 坐标）：$.5 + .25(6.42) = 2.105$ ✓；$6 + .25(8) = 8$ ✓；$5.5 + .25(8) = 7.5$ ✓；$5.5 + .25(1.58) = 5.895$ ✓；$0 + .25(8) = 2$ ✓
+**逐个验证**（剪切 = x 坐标加 0.25 倍 y 坐标）：$.5 + .25(6.42) = 2.105$ ✓；${}6 + .25(8) = 8$ ✓；${}5.5 + .25(8) = 7.5$ ✓；${}5.5 + .25(1.58) = 5.895$ ✓；${}0 + .25(8) = 2$ ✓
 
 ![FIGURE 2 剪切后的 N](img/fig27_2_slanted_N.png)
 
@@ -1966,7 +1966,7 @@ $$R_z(\gamma) = \begin{bmatrix} \cos\gamma & -\sin\gamma & 0 \\
 
 ### 透视投影 Perspective Projection
 
-**中文讲解**：三维场景显示到二维屏幕 = 投影。近大远小的透视效果，用**齐次坐标 + 除以深度**实现。标准透视投影矩阵（投影中心在 z 轴上、屏幕为 xy 平面）作用后，齐次坐标的第 4 个分量变为 $1 - z/d$，最后"归一化"（各分量同除以它）：
+**中文讲解**：三维场景显示到二维屏幕 = 投影。近大远小的透视效果，用**齐次坐标 + 除以深度**实现。标准透视投影矩阵（投影中心在 z 轴上、屏幕为 xy 平面）作用后，齐次坐标的第 4 个分量变为 ${}1 - z/d$，最后"归一化"（各分量同除以它）：
 
 $$\begin{bmatrix} 1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 \\
@@ -1977,9 +1977,9 @@ z \\
 1 \end{bmatrix} = \begin{bmatrix} x \\
 y \\
 0 \\
-1 - z/d \end{bmatrix} \;\longrightarrow\; \left(\frac{x}{1-z/d},\ \frac{y}{1-z/d},\ 0\right)$$
+1 - z/d \end{bmatrix} \ \longrightarrow\  \left(\frac{x}{1-z/d},\ \frac{y}{1-z/d},\ 0\right)$$
 
-**直觉**：$z$ 越大（越远），除数 $1 - z/d$ 越大，投影点越靠近原点——**近大远小**自动实现。计算机图形学中"摄像机在内、投影在外"的奇观（例：1997 年北卡罗来纳大学虚拟现实项目，观察者移动、投影实时跟随），都是这条公式的工程实现。
+**直觉**：$z$ 越大（越远），除数 ${}1 - z/d$ 越大，投影点越靠近原点——**近大远小**自动实现。计算机图形学中"摄像机在内、投影在外"的奇观（例：1997 年北卡罗来纳大学虚拟现实项目，观察者移动、投影实时跟随），都是这条公式的工程实现。
 
 ### 2.7 小结
 
@@ -2014,7 +2014,7 @@ c. 对 $H$ 中任意 $\mathbf{u}$ 和任意标量 $c$，**数乘** $c\mathbf{u}$
 
 **例1（Example 1）**：若 $\mathbf{v}_1, \mathbf{v}_2 \in \mathbb{R}^n$，则 $H = \operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$ 是 $\mathbb{R}^n$ 的子空间。
 
-**验证**：零向量在 $H$ 中（$0\mathbf{v}_1 + 0\mathbf{v}_2$ 是线性组合）；任取 $\mathbf{u} = s_1\mathbf{v}_1 + s_2\mathbf{v}_2$、$\mathbf{v} = t_1\mathbf{v}_1 + t_2\mathbf{v}_2$，则
+**验证**：零向量在 $H$ 中（${}0\mathbf{v}_1 + 0\mathbf{v}_2$ 是线性组合）；任取 $\mathbf{u} = s_1\mathbf{v}_1 + s_2\mathbf{v}_2$、$\mathbf{v} = t_1\mathbf{v}_1 + t_2\mathbf{v}_2$，则
 
 $$\mathbf{u} + \mathbf{v} = (s_1+t_1)\mathbf{v}_1 + (s_2+t_2)\mathbf{v}_2 \in H$$
 
@@ -2026,7 +2026,7 @@ $$c\mathbf{u} = (cs_1)\mathbf{v}_1 + (cs_2)\mathbf{v}_2 \in H$$
 
 *FIGURE 1 Span{v1, v2} as a plane through the origin. 图1 张成集是过原点的平面（子空间的典型形象）*
 
-**例3（Example 3，反例）**：**不过原点的直线 $L$ 不是子空间**——它不含零向量，破坏性质 (a)；而且看图就知道：$L$ 上两向量之和可能跑出 $L$（$\mathbf{u}+\mathbf{v}$ 不在 $L$ 上），倍数也可能跑出（$2\mathbf{w}$ 不在 $L$ 上）——加法、数乘都不封闭！
+**例3（Example 3，反例）**：**不过原点的直线 $L$ 不是子空间**——它不含零向量，破坏性质 (a)；而且看图就知道：$L$ 上两向量之和可能跑出 $L$（$\mathbf{u}+\mathbf{v}$ 不在 $L$ 上），倍数也可能跑出（${}2\mathbf{w}$ 不在 $L$ 上）——加法、数乘都不封闭！
 
 ![FIGURE 2 非子空间直线](img/fig28_2_line_not_subspace.png)
 
@@ -2415,7 +2415,7 @@ $$
 -2 & 0 \end{bmatrix} - 5\cdot\det\begin{bmatrix} 2 & -1 \\
 0 & 0 \end{bmatrix} + 0\cdot\det\begin{bmatrix} 2 & 4 \\
 0 & -2 \end{bmatrix} \\
-&= 1\,(0 - 2) - 5\,(0 - 0) + 0\,(-4 - 0) = -2
+&= 1\ (0 - 2) - 5\ (0 - 0) + 0\ (-4 - 0) = -2
 \end{aligned}
 $$
 
@@ -2452,7 +2452,7 @@ $$\begin{bmatrix} + & - & + & \cdots \\
 $$
 \begin{aligned}
 \det A &= a_{31}C_{31} + a_{32}C_{32} + a_{33}C_{33} \\
-&= 0 - (-2)\,(-1)^{3+2}\det\begin{bmatrix} 1 & 0 \\
+&= 0 - (-2)\ (-1)^{3+2}\det\begin{bmatrix} 1 & 0 \\
 2 & -1 \end{bmatrix} + 0 \\
 &= 2\cdot(-1) = -2
 \end{aligned}
@@ -2495,7 +2495,7 @@ $$\det A = 3 \cdot 2 \cdot \det\begin{bmatrix} 1 & 5 & 0 \\
 
 ### 数值注记（为什么需要更快的算法）
 
-按今天的标准，25×25 矩阵算小的。但用余因子展开算 25 阶行列式：**需要超过 $25!$ 次乘法**，而 $25! \approx 1.5 \times 10^{25}$。哪怕计算机每秒做一万亿次乘法，也要运行 **50 万年**！好在 3.2 节将发现行列式与行化简的深刻联系，给出实用算法。
+按今天的标准，25×25 矩阵算小的。但用余因子展开算 25 阶行列式：**需要超过 ${}25!$ 次乘法**，而 ${}25! \approx 1.5 \times 10^{25}$。哪怕计算机每秒做一万亿次乘法，也要运行 **50 万年**！好在 3.2 节将发现行列式与行化简的深刻联系，给出实用算法。
 
 ### 练习精选与技巧警示
 
@@ -2603,7 +2603,7 @@ $$= 2\begin{vmatrix} 1 & -4 & 3 & 4 \\
 0 & 0 & -3 & 2 \end{vmatrix} = 2\begin{vmatrix} 1 & -4 & 3 & 4 \\
 0 & 3 & -4 & -2 \\
 0 & 0 & -6 & 2 \\
-0 & 0 & 0 & 1 \end{vmatrix} = 2\,(1)(3)(-6)(1) = \mathbf{-36}$$
+0 & 0 & 0 & 1 \end{vmatrix} = 2\ (1)(3)(-6)(1) = \mathbf{-36}$$
 
 （最后一步：第4行 += −1/2×第3行，造出三角阵。）
 
@@ -2652,7 +2652,7 @@ $$\det A^T = \det A$$
 $$AB = \begin{bmatrix} 25 & 20 \\
 14 & 13 \end{bmatrix}, \qquad \det AB = 25(13) - 20(14) = 45$$
 
-而 $\det A = 9$, $\det B = 5$, $9 \times 5 = 45 = \det AB$ ✓
+而 $\det A = 9$, $\det B = 5$, ${}9 \times 5 = 45 = \det AB$ ✓
 
 > ⚠️ **常见误解**：$\det(A + B) \neq \det A + \det B$（一般不成立）！行列式保持**乘法**结构，但**不保持加法**结构。（练习 45 的数值实验会让你确信这一点。）
 
@@ -2668,7 +2668,7 @@ $$T(c\mathbf{x}) = c\ T(\mathbf{x}), \qquad T(\mathbf{u} + \mathbf{v}) = T(\math
 
 ### 数值注记
 
-1. 实践中的行列式基本由**行化简**计算：n 阶只需约 $2n^3/3$ flops（LU 分解顺带得出），而余因子展开需要超过 $n!$ 次运算。
+1. 实践中的行列式基本由**行化简**计算：n 阶只需约 ${}2n^3/3$ flops（LU 分解顺带得出），而余因子展开需要超过 $n!$ 次运算。
 2. 若已知 LU 分解 $A = LU$（L 单位下三角、U 上三角），则 $\det A = \det U$ = U 的对角元乘积——分解一次，行列式立得。
 3. 大规模**稀疏矩阵**（大量零元）有专门算法，手算也务必利用零元 + 展开（见例 4 演示的组合策略）。
 
@@ -2695,7 +2695,7 @@ $$\det A = \begin{vmatrix} 0 & 1 & 2 & -1 \\
 再按第一列展开：
 
 $$\det A = (-2)(1)\begin{vmatrix} 0 & 5 \\
--3 & 1 \end{vmatrix} = -2\,(0 - (-15)) = \mathbf{-30}$$
+-3 & 1 \end{vmatrix} = -2\ (0 - (-15)) = \mathbf{-30}$$
 
 ### 3.2 小结
 
@@ -2775,7 +2775,7 @@ $$A_2(\mathbf{b}) = \begin{bmatrix} 3s & 4 \\
 
 $$x_1 = \frac{4s+2}{3(s+2)(s-2)}, \qquad x_2 = \frac{-3s-24}{3(s+2)(s-2)} = \frac{-(s+8)}{(s+2)(s-2)}$$
 
-**回代验证**：$3s\ x_1 + 2x_2 = \dfrac{s(4s+2) - 2(s+8)}{s^2-4} = \dfrac{4s^2-16}{s^2-4} = 4$ ✓；$6x_1 + s\ x_2 = \dfrac{2(4s+2) - s(s+8)}{s^2-4} = \dfrac{4-s^2}{s^2-4} = -1$ ✓
+**回代验证**：${}3s\ x_1 + 2x_2 = \dfrac{s(4s+2) - 2(s+8)}{s^2-4} = \dfrac{4s^2-16}{s^2-4} = 4$ ✓；${}6x_1 + s\ x_2 = \dfrac{2(4s+2) - s(s+8)}{s^2-4} = \dfrac{4-s^2}{s^2-4} = -1$ ✓
 
 > **工程价值**：克拉默法则在**符号计算**（矩阵含参数，如本例的 s）时非常有用——它能给出解的显式公式，让工程师看清参数如何影响解。但数值计算中（具体数字），行化简远比克拉默法则高效（n 阶要算 n+1 个行列式！）。
 
@@ -2789,14 +2789,14 @@ $$x_1 = \frac{4s+2}{3(s+2)(s-2)}, \qquad x_2 = \frac{-3s-24}{3(s+2)(s-2)} = \fra
 
 *FIGURE 1 Area = |ad|. 图1 矩形面积 = |ad|（行列式几何意义的起点）*
 
-**3×3 情形**：$A = [\mathbf{u}\ \ \mathbf{v}\ \ \mathbf{w}]$（$3 \times 3$），$\mathbf{u}, \mathbf{v}, \mathbf{w}$ 确定的**平行六面体体积为 $|\det A|$**（FIGURE 3：长方体体积 |abc| 是特例）。
+**3×3 情形**：$A = [\mathbf{u}\ \ \mathbf{v}\ \ \mathbf{w}]$（${}3 \times 3$），$\mathbf{u}, \mathbf{v}, \mathbf{w}$ 确定的**平行六面体体积为 $|\det A|$**（FIGURE 3：长方体体积 |abc| 是特例）。
 
 ![FIGURE 3 体积公式](img/fig33_3_volume_box.png)
 
 *FIGURE 3 Volume = |abc|. 图3 长方体体积 = |abc|（三阶行列式 = 体积）*
 
 **THEOREM 9（面积/体积公式）**：
-> 若 $A$ 是 $2 \times 2$ 矩阵，$A$ 的列确定的平行四边形面积为 $|\det A|$；若 $A$ 是 $3 \times 3$ 矩阵，$A$ 的列确定的平行六面体体积为 $|\det A|$。
+> 若 $A$ 是 ${}2 \times 2$ 矩阵，$A$ 的列确定的平行四边形面积为 $|\det A|$；若 $A$ 是 ${}3 \times 3$ 矩阵，$A$ 的列确定的平行六面体体积为 $|\det A|$。
 
 **证明思路（2×2）**：分三种情况。
 1. $A$ **对角** $\begin{bmatrix} a & 0 \\
@@ -2825,7 +2825,7 @@ $$\text{面积} = |\det A| = |2 - 30| = |-28| = \mathbf{28}$$
 
 ### 线性变换与面积 THEOREM 10（变换的伸缩系数）
 
-> 设 $T: \mathbb{R}^2 \to \mathbb{R}^2$ 是由 $2 \times 2$ 矩阵 $A$ 确定的线性变换。若 $S$ 是 $\mathbb{R}^2$ 中面积有限的区域，则
+> 设 $T: \mathbb{R}^2 \to \mathbb{R}^2$ 是由 ${}2 \times 2$ 矩阵 $A$ 确定的线性变换。若 $S$ 是 $\mathbb{R}^2$ 中面积有限的区域，则
 
 > $$\{T(S)\text{ 的面积}\} = |\det A| \cdot \{S\text{ 的面积}\}$$
 
@@ -2881,7 +2881,7 @@ $$\text{面积} = |\det A| = |2 - 30| = |-28| = \mathbf{28}$$
 7. $c(\mathbf{u} + \mathbf{v}) = c\mathbf{u} + c\mathbf{v}$（分配律）
 8. $(c + d)\mathbf{u} = c\mathbf{u} + d\mathbf{u}$（分配律）
 9. $c(d\mathbf{u}) = (cd)\mathbf{u}$（数乘结合律）
-10. $1\mathbf{u} = \mathbf{u}$（单位元）
+10. ${}1\mathbf{u} = \mathbf{u}$（单位元）
 
 > **要点**：公理 1、6 是"封闭性"要求（运算结果必须留在 $V$ 中），其余 8 条是"运算规则"。**$V$ 中的元素叫向量，但完全可以不是"数组"**——可以是函数、多项式、信号、矩阵、甚至箭头。
 
@@ -3009,7 +3009,7 @@ $$\operatorname{Nul} A = \{\mathbf{x} : \mathbf{x} \in \mathbb{R}^n,\ A\mathbf{x
 $$
 \begin{aligned}
 a - 2b + 5c - d &= 0 \\
--a - b + c \quad\;\; &= 0
+-a - b + c \quad\ \  &= 0
 \end{aligned}
 $$
 
@@ -3018,7 +3018,7 @@ $$
 
 > **方法论**：判断"由线性方程条件定义的集合"是否为子空间——把条件改写成**齐次**方程组，证明它就是某矩阵的零空间。注意条件必须全是"= 0"型（等号右边不能有非零常数，否则不过原点，不是子空间）。
 
-**Nul A 的显式描述（例3）**：与 2.8 节例 6 完全相同的 $3 \times 5$ 矩阵，行化简 + 参数向量形式给出基 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$——**解 $A\mathbf{x} = \mathbf{0}$ 的标准流程自动产生 Nul A 的基**（第 5 章会反复用到这个事实）。
+**Nul A 的显式描述（例3）**：与 2.8 节例 6 完全相同的 ${}3 \times 5$ 矩阵，行化简 + 参数向量形式给出基 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$——**解 $A\mathbf{x} = \mathbf{0}$ 的标准流程自动产生 Nul A 的基**（第 5 章会反复用到这个事实）。
 
 ![FIGURE 1 Nul A 映到零点](img/fig42_1_nul_mapped_to_zero.png)
 
@@ -3064,7 +3064,7 @@ a + b \\
 
 **例5（Example 5，空间归属判断）**：$A = \begin{bmatrix} 2 & 4 & -2 & 1 \\
 -2 & -5 & 7 & 3 \\
-3 & 7 & -8 & 6 \end{bmatrix}$（$3 \times 4$）。
+3 & 7 & -8 & 6 \end{bmatrix}$（${}3 \times 4$）。
 a. 若 $\operatorname{Col} A$ 是子空间，属于哪个空间？$\operatorname{Nul} A$ 呢？
 b. 求 $\operatorname{Col} A$ 与 $\operatorname{Nul} A$ 中各一个非零向量（若存在）。
 
@@ -3099,7 +3099,7 @@ $$[A\ \ \mathbf{0}] \sim \begin{bmatrix} 1 & 0 & 9 & 0 & 0 \\
 
 **例8（Example 8，微分算子的核）**：设 $\mathbb{P}_2$ 中 $T(p) = p'$（求导）。$\ker T$ = 导数为零的多项式 = **全体常数多项式**；$\operatorname{range} T = \mathbb{P}_1$（次数 ≤ 1 的多项式）。
 
-**例9（Example 9，微分方程的解空间）**：设 $C[a,b]$ 中 $T(f) = 3f'' + 4f' - 2f$（$f''$ 表示二阶导）。$\ker T$ = 满足 $3f'' + 4f' - 2f = 0$ 的全体函数——**这是一个齐次线性微分方程的解集，是子空间**（叠加原理！）。而 $T(f) = 5$ 这类非齐次方程的解集**不是**子空间（是子空间的平移）。
+**例9（Example 9，微分方程的解空间）**：设 $C[a,b]$ 中 $T(f) = 3f'' + 4f' - 2f$（$f''$ 表示二阶导）。$\ker T$ = 满足 ${}3f'' + 4f' - 2f = 0$ 的全体函数——**这是一个齐次线性微分方程的解集，是子空间**（叠加原理！）。而 $T(f) = 5$ 这类非齐次方程的解集**不是**子空间（是子空间的平移）。
 
 ### 4.2 小结
 
@@ -3134,7 +3134,7 @@ $$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_p\mathbf{v}_p = \mathbf{0}$$
 
 $$\mathbf{p}_3 = 4\mathbf{p}_1 - \mathbf{p}_2$$
 
-（即 $4\mathbf{p}_1 - \mathbf{p}_2 - \mathbf{p}_3 = \mathbf{0}$，存在非平凡组合）。
+（即 ${}4\mathbf{p}_1 - \mathbf{p}_2 - \mathbf{p}_3 = \mathbf{0}$，存在非平凡组合）。
 
 **例2（Example 2，函数空间的无关性）**：在 $C[0, 1]$（$[0,1]$ 上连续函数空间）中：
 
@@ -3167,12 +3167,12 @@ $$\mathcal{E} = \{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$$
 $$\{1,\ t,\ t^2,\ \dots,\ t^n\}$$
 
 是 $\mathbb{P}_n$ 的基。**验证**：
-1. **张成**：任何次数 ≤ n 的多项式都是 $1, t, \dots, t^n$ 的线性组合（按定义！）
+1. **张成**：任何次数 ≤ n 的多项式都是 ${}1, t, \dots, t^n$ 的线性组合（按定义！）
 2. **无关**：若 $c_0 + c_1 t + \cdots + c_n t^n = \mathbf{0}$（零多项式，即对所有 $t$ 取值为 0），则必有 $c_0 = \cdots = c_n = 0$——因为**非零的 n 次多项式至多 n 个根**，而这个多项式有无穷多个根。
 
 ![FIGURE 2 P₂的标准基](img/fig43_2_standard_basis_P2.png)
 
-*FIGURE 2 The standard basis for $\mathbb{P}_2$. 图2 $\mathbb{P}_2$ 的标准基：$1, t, t^2$ 三个"坐标方向"*
+*FIGURE 2 The standard basis for $\mathbb{P}_2$. 图2 $\mathbb{P}_2$ 的标准基：${}1, t, t^2$ 三个"坐标方向"*
 
 ### 张成集定理 The Spanning Set Theorem（基的存在性构造）
 
@@ -3252,7 +3252,7 @@ $$\begin{bmatrix} 2 & -1 & 4 \\
 0 & 1 & 2 \end{bmatrix}$$
 
 故 $[\mathbf{x}]_{\mathcal{B}} = \begin{bmatrix} 3 \\
-2 \end{bmatrix}$。**验证**：$3\mathbf{b}_1 + 2\mathbf{b}_2 = \begin{bmatrix} 6-2 \\
+2 \end{bmatrix}$。**验证**：${}3\mathbf{b}_1 + 2\mathbf{b}_2 = \begin{bmatrix} 6-2 \\
 3+2 \end{bmatrix} = \begin{bmatrix} 4 \\
 5 \end{bmatrix}$ ✓
 
@@ -3305,7 +3305,7 @@ $$\mathbf{x} \mapsto [\mathbf{x}]_{\mathcal{B}}$$
 
 **例5（Example 5）**：$\mathbb{P}_3$（次数 ≤ 3 的多项式）同构于 $\mathbb{R}^4$。映射：
 
-$$a_0 + a_1 t + a_2 t^2 + a_3 t^3 \;\mapsto\; \begin{bmatrix} a_0 \\
+$$a_0 + a_1 t + a_2 t^2 + a_3 t^3 \ \mapsto\  \begin{bmatrix} a_0 \\
 a_1 \\
 a_2 \\
 a_3 \end{bmatrix}$$
@@ -3316,7 +3316,7 @@ a_3 \end{bmatrix}$$
 
 *FIGURE 6 The space $\mathbb{P}_3$ is isomorphic to $\mathbb{R}^4$. 图6 手机上显示的多项式 $a_0 + a_1 t + a_2 t^2 + a_3 t^3$，在笔记本电脑上变成坐标向量——同一对象，两种表示*
 
-**例6（Example 6，坐标向量验证书相关性）**：用坐标向量验证 $\mathbb{P}_2$ 中三个多项式 $1 + 2t^2$、$4 + t + 5t^2$、$3 + 2t$ 线性相关。
+**例6（Example 6，坐标向量验证书相关性）**：用坐标向量验证 $\mathbb{P}_2$ 中三个多项式 ${}1 + 2t^2$、${}4 + t + 5t^2$、${}3 + 2t$ 线性相关。
 
 **解**：相对标准基 $\{1, t, t^2\}$，坐标向量分别为 $(1,0,2)$、$(4,1,5)$、$(3,2,0)$。拼成矩阵行化简：
 
@@ -3368,7 +3368,7 @@ $$3 + 2t = 2(4 + t + 5t^2) - 5(1 + 2t^2)$$
 
 **定义**：
 - 若 $V$ 由**有限个**向量的基张成，则 $V$ 称为**有限维（finite-dimensional）**，$V$ 的**维数** $\dim V$ = 基中向量的个数
-- **零空间** $\{\mathbf{0}\}$ 的维数定义为 $0$
+- **零空间** $\{\mathbf{0}\}$ 的维数定义为 ${}0$
 - 若 $V$ 不由有限集张成，则称**无限维（infinite-dimensional）**
 
 **例1（Example 1）**：
@@ -3506,7 +3506,7 @@ b. 6×9 矩阵 $A$ 能有 $\dim \operatorname{Nul} A = 2$ 吗？——$\operator
 - $\operatorname{Col} A = \{x_1 - x_2 = 0\}$ 平面：$\dim = 2$
 - $\operatorname{Nul} A^T = \operatorname{Span}\{(1,-1,0)\}$（垂直于 Col A 的方向）：$\dim = 1$
 
-验证秩定理：$2 + 1 = 3$ ✓（两边都是）FIGURE 1 画出全景：
+验证秩定理：${}2 + 1 = 3$ ✓（两边都是）FIGURE 1 画出全景：
 
 ![FIGURE 1 四大子空间](img/fig46_1_four_subspaces.png)
 
@@ -3929,8 +3929,8 @@ $$\det(B - \lambda I) = \det(P^{-1})\det(A - \lambda I)\det(P) = \det(A - \lambd
 
 **第4步 显式解**：
 
-$$\mathbf{x}_k = A^k\mathbf{x}_0 = .125\,(1)^k\mathbf{v}_1 + .225\,(.92)^k\mathbf{v}_2 = .125\begin{bmatrix} 3 \\
-5 \end{bmatrix} + .225\,(.92)^k\begin{bmatrix} 1 \\
+$$\mathbf{x}_k = A^k\mathbf{x}_0 = .125\ (1)^k\mathbf{v}_1 + .225\ (.92)^k\mathbf{v}_2 = .125\begin{bmatrix} 3 \\
+5 \end{bmatrix} + .225\ (.92)^k\begin{bmatrix} 1 \\
 -1 \end{bmatrix}$$
 
 **长期行为**：$(.92)^k \to 0$，故 $\mathbf{x}_k \to .125\mathbf{v}_1 = \begin{bmatrix} .375 \\
@@ -4379,7 +4379,7 @@ $$AP = \begin{bmatrix} -.8 & -2.4 \\
 0 & 0 & 1.07 \end{bmatrix}$——左上 2×2 块是旋转缩放（λ = .8±.6i，r=1），右下 1.07 是沿 x₃ 的拉伸。
 
 - $x_3 = 0$ 平面：**不变平面**（A 把它旋进自己），其上纯旋转
-- 一般轨道：平面内旋转 + 沿 x₃ 指数增长（$1.07^k$）→ **螺旋上升**
+- 一般轨道：平面内旋转 + 沿 x₃ 指数增长（${}1.07^k$）→ **螺旋上升**
 
 ### 5.5 小结
 
@@ -4410,7 +4410,7 @@ $$\mathbf{x}_0 = c_1\mathbf{v}_1 + \cdots + c_n\mathbf{v}_n \quad \Rightarrow \q
 
 $$\begin{aligned}
 O_{k+1} &= .5O_k + .4R_k \\
-R_{k+1} &= -p\,O_k + 1.1R_k
+R_{k+1} &= -p\ O_k + 1.1R_k
 \end{aligned} \quad \Rightarrow \quad \mathbf{x}_{k+1} = A\mathbf{x}_k, \quad A = \begin{bmatrix} .5 & .4 \\
 -p & 1.1 \end{bmatrix}$$
 
@@ -4435,7 +4435,7 @@ $$\mathbf{x}_{k+1} \approx \lambda_1\mathbf{x}_k \ (\text{ eventually}), \qquad 
 
 ### 吸引子、排斥子、鞍点 Attractors, Repellers, Saddles
 
-对 $2 \times 2$ 可对角化系统，按两个特征值的模分类：
+对 ${}2 \times 2$ 可对角化系统，按两个特征值的模分类：
 
 **吸引子（Attractor，两个 |λ| < 1）**：所有轨道趋向原点。
 
@@ -4459,7 +4459,7 @@ $$\mathbf{x}_k = c_1 2^k\begin{bmatrix} 1 \\
 0 \end{bmatrix} + c_2 (.5)^k\begin{bmatrix} 0 \\
 1 \end{bmatrix}$$
 
-- $c_1 \neq 0$：$2^k$ 主导，轨道无限远离（大部分初值）
+- $c_1 \neq 0$：${}2^k$ 主导，轨道无限远离（大部分初值）
 - $c_1 = 0$（初值恰在 $\mathbf{v}_2$ 轴上）：$(.5)^k \to 0$，轨道被吸向原点——**鞍点：一个方向吸引、另一个方向排斥**
 
 **换元解耦（Change of Variable）**：令 $\mathbf{y}_k = P^{-1}\mathbf{x}_k$（换到特征向量基），则
@@ -4744,7 +4744,7 @@ $$(A - \alpha I)\mathbf{v} = (\lambda - \alpha)\mathbf{v} \quad \Rightarrow \qua
 >    c. $\mathbf{x}_{k+1} = (1/\mu_k)\mathbf{y}_k$
 > 3. $\nu_k = \alpha + \frac{1}{\mu_k} \to \lambda$（靠近 α 的那个特征值）
 
-**例3（Example 3）**：估计某 3×3 矩阵的**最小特征值**。取 α = 1.9 启动逆幂法，几步即得 $\nu_k \approx 1.95$（精确到六位小数）。α 越接近真值，$1/(\lambda-\alpha)$ 越"支配"，收敛越快。
+**例3（Example 3）**：估计某 3×3 矩阵的**最小特征值**。取 α = 1.9 启动逆幂法，几步即得 $\nu_k \approx 1.95$（精确到六位小数）。α 越接近真值，${}1/(\lambda-\alpha)$ 越"支配"，收敛越快。
 
 ### 数值注记
 
@@ -4858,7 +4858,7 @@ $$\|\mathbf{u}+\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 + 2\mathbf{u
 **THEOREM 2（勾股定理 Pythagorean Theorem）**：
 > $\mathbf{u} \perp \mathbf{v}$ ⟺ $\|\mathbf{u} + \mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2$
 
-（证明即上面的计算：交叉项 $2\mathbf{u}\cdot\mathbf{v}$ 消失。直角三角形的代数版！）
+（证明即上面的计算：交叉项 ${}2\mathbf{u}\cdot\mathbf{v}$ 消失。直角三角形的代数版！）
 
 ### 正交互补 Orthogonal Complements
 
@@ -5342,7 +5342,7 @@ $$\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b} = \frac{1}{84}\begin{bmatrix} 5 & 
 168 \end{bmatrix} = \begin{bmatrix} 1 \\
 2 \end{bmatrix}$$
 
-**验证**：$A\hat{\mathbf{x}} = (4, 4, 3)$。$A^T(\mathbf{b} - A\hat{\mathbf{x}}) = A^T(-2, -4, 8)^T$：第一列 $4(-2)+0+8 = 0$ ✓；第二列 $0+2(-4)+8 = 0$ ✓
+**验证**：$A\hat{\mathbf{x}} = (4, 4, 3)$。$A^T(\mathbf{b} - A\hat{\mathbf{x}}) = A^T(-2, -4, 8)^T$：第一列 ${}4(-2)+0+8 = 0$ ✓；第二列 ${}0+2(-4)+8 = 0$ ✓
 
 ### 例2（Example 2，多解情形）
 
@@ -5640,7 +5640,7 @@ y_n \end{bmatrix}$$
 
 **例1（Example 1，赋权内积）**：$\mathbb{R}^2$ 上定义 $\langle\mathbf{u}, \mathbf{v}\rangle = 4u_1v_1 + 5u_2v_2$。
 
-**验证**：4 条公理显然满足（正定性：$4u_1^2 + 5u_2^2 = 0 ⟺ u_1 = u_2 = 0$）。这是一个**赋权内积**——加权最小二乘问题使用这种内积（权重 4、5 反映数据可信度差异）。
+**验证**：4 条公理显然满足（正定性：${}4u_1^2 + 5u_2^2 = 0 ⟺ u_1 = u_2 = 0$）。这是一个**赋权内积**——加权最小二乘问题使用这种内积（权重 4、5 反映数据可信度差异）。
 
 **例2（Example 2，求值内积）**：$\mathbb{P}_n$（次数 ≤ n 的多项式）上，取 $n+1$ 个互异点 $t_0, \dots, t_n$，定义
 
@@ -5811,7 +5811,7 @@ $$\int_0^{2\pi}\cos mt\cos nt\ dt = 0 \ (m \neq n), \qquad \int_0^{2\pi}\cos^2 m
 
 $$\frac{a_0}{2} = \frac{1}{2\pi}\int_0^{2\pi}f(t)\ dt, \qquad a_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\cos kt\ dt, \qquad b_k = \frac{1}{\pi}\int_0^{2\pi}f(t)\sin kt\ dt$$
 
-**例4（Example 4，完整实战）**：求 $f(t) = t$（$0 \leq t \leq 2\pi$）的 n 阶傅里叶逼近。
+**例4（Example 4，完整实战）**：求 $f(t) = t$（${}0 \leq t \leq 2\pi$）的 n 阶傅里叶逼近。
 
 **解**：
 
@@ -5946,7 +5946,7 @@ $$P = \begin{bmatrix} 1/\sqrt{2} & -1/\sqrt{18} & -2/3 \\
 0 & 7 & 0 \\
 0 & 0 & -2 \end{bmatrix}$$
 
-**验算**：$A = PDP^T$ ✓（$A$ 的迹 $12 = 7+7-2$ ✓，$\det A = -98 = 7\cdot 7 \cdot (-2)$ ✓）
+**验算**：$A = PDP^T$ ✓（$A$ 的迹 ${}12 = 7+7-2$ ✓，$\det A = -98 = 7\cdot 7 \cdot (-2)$ ✓）
 
 ### 谱定理 THEOREM 3（Spectral Theorem）
 
@@ -6083,7 +6083,7 @@ $A$ **非对角**时（有交叉项），图形是**旋转后**的圆锥曲线�
 
 *FIGURE 3 An ellipse and a hyperbola not in standard position. 图3 旋转后的椭圆 (a) 5x₁²−4x₁x₂+5x₂²=48 与双曲线 (b) x₁²−8x₁x₂−5x₂²=16：新坐标轴 y₁、y₂（P 的列方向）即主轴，图形在新系中标准*
 
-**例5（Example 5，椭圆转正）**：$5x_1^2 - 4x_1x_2 + 5x_2^2 = 48$。矩阵 $A = \begin{bmatrix} 5 & -2 \\
+**例5（Example 5，椭圆转正）**：${}5x_1^2 - 4x_1x_2 + 5x_2^2 = 48$。矩阵 $A = \begin{bmatrix} 5 & -2 \\
 -2 & 5 \end{bmatrix}$，特征值 3 与 7，
 
 $$\mathbf{u}_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\
@@ -6091,7 +6091,7 @@ $$\mathbf{u}_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\
 1 \end{bmatrix}, \qquad P = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & -1 \\
 1 & 1 \end{bmatrix}$$
 
-替换后得标准形 $3y_1^2 + 7y_2^2 = 48$，即 $\frac{y_1^2}{16} + \frac{y_2^2}{48/7} = 1$——**椭圆**（FIGURE 3a），长轴沿 $y_2$。
+替换后得标准形 ${}3y_1^2 + 7y_2^2 = 48$，即 $\frac{y_1^2}{16} + \frac{y_2^2}{48/7} = 1$——**椭圆**（FIGURE 3a），长轴沿 $y_2$。
 
 ### 二次型的分类 THEOREM 5
 
@@ -6121,7 +6121,7 @@ $$A = \begin{bmatrix} 3 & 4 & -2 \\
 4 & 6 & -2 \\
 -2 & -2 & 9 \end{bmatrix}$$
 
-特征值为 **5, 2, −1**——有正有负 ⇒ **不定**！（沿特征向量 $(-2, 0, 1)$ 方向 $Q = -1 < 0$：$3(4) + 0 + 9(1) + 8(0) - 4(-2) - 0 = 12 + 9 + 8 = 29$?? 重新算：$Q(-2,0,1) = 3(4) + 0 + 9(1) + 0 - 4(-2)(1) - 0 = 12 + 9 + 8 = 29 > 0$。教材说 $Q(-2,0,1) = -1$。让我核对：交叉项 $-4x_1x_3 = -4(-2)(1) = +8$，$-4x_2x_3 = 0$，$8x_1x_2 = 0$。$12 + 9 + 8 = 29$。矛盾！）
+特征值为 **5, 2, −1**——有正有负 ⇒ **不定**！（沿特征向量 $(-2, 0, 1)$ 方向 $Q = -1 < 0$：${}3(4) + 0 + 9(1) + 8(0) - 4(-2) - 0 = 12 + 9 + 8 = 29$?? 重新算：$Q(-2,0,1) = 3(4) + 0 + 9(1) + 0 - 4(-2)(1) - 0 = 12 + 9 + 8 = 29 > 0$。教材说 $Q(-2,0,1) = -1$。让我核对：交叉项 $-4x_1x_3 = -4(-2)(1) = +8$，$-4x_2x_3 = 0$，${}8x_1x_2 = 0$。${}12 + 9 + 8 = 29$。矛盾！）
 
 **修正**：教材中的向量应是 $(2, 0, -1)$ 方向（取反）：$Q(2,0,-1) = 12 + 9 - 4(2)(-1) = 12+9+8 = 29$？也不对。让我直接算 $\lambda = -1$ 的特征向量：解 $(A + I)\mathbf{x} = 0$：
 
@@ -6131,7 +6131,7 @@ $$\begin{bmatrix} 4 & 4 & -2 \\
 0 & 3 & 0 \\
 0 & 0 & 9 \end{bmatrix}$$
 
-第三行 $9x_3 = 0$ ⇒ $x_3 = 0$；第二行 $3x_2 = 0$ ⇒ $x_2 = 0$；第一行 $2x_1 + 0 - 0 = 0$ ⇒ $x_1 = 0$？零解？那 $-1$ 不是特征值……让我重算特征多项式。$\det(A - \lambda I)$：A = [3 4 -2; 4 6 -2; -2 -2 9]。$\det = 3(54 - \lambda(15 - \lambda) - 4) - 4(36 - 9\lambda - 4\lambda + \lambda^2 \cdot ...)$ 直接展开太繁，用另一法：$\det(A - \lambda I) = -\lambda^3 + 18\lambda^2 - 88\lambda + 115$？算：trace = 18，$5+2-1 = 6 \neq 18$？！5+2+(-1) = 6 ≠ 18。所以特征值不是 5,2,-1！
+第三行 ${}9x_3 = 0$ ⇒ $x_3 = 0$；第二行 ${}3x_2 = 0$ ⇒ $x_2 = 0$；第一行 ${}2x_1 + 0 - 0 = 0$ ⇒ $x_1 = 0$？零解？那 $-1$ 不是特征值……让我重算特征多项式。$\det(A - \lambda I)$：A = [3 4 -2; 4 6 -2; -2 -2 9]。$\det = 3(54 - \lambda(15 - \lambda) - 4) - 4(36 - 9\lambda - 4\lambda + \lambda^2 \cdot ...)$ 直接展开太繁，用另一法：$\det(A - \lambda I) = -\lambda^3 + 18\lambda^2 - 88\lambda + 115$？算：trace = 18，${}5+2-1 = 6 \neq 18$？！5+2+(-1) = 6 ≠ 18。所以特征值不是 5,2,-1！
 
 让我正确计算。$\det(A - \lambda I)$：
 $= (3-\lambda)[(6-\lambda)(9-\lambda) - 4] - 4[4(9-\lambda) - 4] + (-2)[4(-2) - (6-\lambda)(-2)]$
@@ -6211,7 +6211,7 @@ $$\mathbf{x}^TA\mathbf{x} = \mathbf{y}^TD\mathbf{y} = \lambda_1y_1^2 + \cdots + 
 
 **THEOREM 7（二维情形）**：$Q$ 在 $\mathbf{x}^T\mathbf{u}_1 = 0$ 下的最大值 = 第二大特征值 $\lambda_2$，在 $\mathbf{u}_2$ 处取得。
 
-**例4（Example 4）**：$Q = 9x_1^2 + 4x_2^2 + 3x_3^2$，$\mathbf{u}_1 = (1,0,0)$（$\lambda_1 = 9$）。约束 $\mathbf{x}\perp\mathbf{u}_1$ 即 $x_1 = 0$，问题变为 $4x_2^2 + 3x_3^2$ 在 $x_2^2 + x_3^2 = 1$ 上的最大 = **4**，在 $(0,1,0)$ 取得。
+**例4（Example 4）**：$Q = 9x_1^2 + 4x_2^2 + 3x_3^2$，$\mathbf{u}_1 = (1,0,0)$（$\lambda_1 = 9$）。约束 $\mathbf{x}\perp\mathbf{u}_1$ 即 $x_1 = 0$，问题变为 ${}4x_2^2 + 3x_3^2$ 在 $x_2^2 + x_3^2 = 1$ 上的最大 = **4**，在 $(0,1,0)$ 取得。
 
 **THEOREM 8（一般情形）**：
 > 设 $A$ 对称，特征值 $\lambda_1 \leq \cdots \leq \lambda_n$，对应单位特征向量 $\mathbf{u}_1, \dots, \mathbf{u}_n$。则 $\lambda_k$ = $Q(\mathbf{x})$ 在约束
@@ -6224,7 +6224,7 @@ $$\mathbf{x}^TA\mathbf{x} = \mathbf{y}^TD\mathbf{y} = \lambda_1y_1^2 + \cdots + 
 
 ### 例5（Example 5，县政工程预算分配）
 
-县政府规划公共工程：**道路桥梁**与**公园休闲**两类项目，预算约束 $4x^2 + 9y^2 \leq 36$（$x$ = 百英里道路，$y$ = 百英亩公园），**效用函数** $q(x, y) = xy$ 衡量公众满意度。求最优分配。
+县政府规划公共工程：**道路桥梁**与**公园休闲**两类项目，预算约束 ${}4x^2 + 9y^2 \leq 36$（$x$ = 百英里道路，$y$ = 百英亩公园），**效用函数** $q(x, y) = xy$ 衡量公众满意度。求最优分配。
 
 **解（三步换元）**：
 
@@ -6243,7 +6243,7 @@ x_2 \end{bmatrix} = Q(\mathbf{x})$$
 
 $$x = 3x_1 = \frac{3}{\sqrt{2}} \approx 2.1 \text{（百英里）}, \qquad y = 2x_2 = \sqrt{2} \approx 1.4 \text{（百英亩）}$$
 
-**经济学解读**（FIGURE 4）：最优解在**约束曲线 $4x^2 + 9y^2 = 36$ 与最高无差异曲线 $q = 3$ 相切**处——与 $\mathbf{u}_1$ 方向成 45° 的分配比例。
+**经济学解读**（FIGURE 4）：最优解在**约束曲线 ${}4x^2 + 9y^2 = 36$ 与最高无差异曲线 $q = 3$ 相切**处——与 $\mathbf{u}_1$ 方向成 45° 的分配比例。
 
 ![FIGURE 4 无差异曲线](img/fig73_4_indifference_curves.png)
 
@@ -6509,7 +6509,7 @@ $$\mathbf{y} - \mathbf{v}_1 = (c_1 - 1)\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots +
 $$\begin{bmatrix} 1 & 0 & -3 & 3 \\
 3 & 1 & 0 & -1 \end{bmatrix} \sim \cdots \Rightarrow \begin{cases} c_2 = 3 + 3c_4 \\ c_3 = -10 - 9c_4 \\ c_1 = 8 + 5c_4 \end{cases} \ (c_4 \text{ 自由})$$
 
-**特解**（$c_4 = 0$）：$\mathbf{y} = 8\mathbf{v}_1 + 3\mathbf{v}_2 - 10\mathbf{v}_3 + 0\mathbf{v}_4$（权和 $8+3-10+0 = 1$ ✓，验证 $8(1,2)+3(2,5)-10(1,3) = (4,1)$ ✓）
+**特解**（$c_4 = 0$）：$\mathbf{y} = 8\mathbf{v}_1 + 3\mathbf{v}_2 - 10\mathbf{v}_3 + 0\mathbf{v}_4$（权和 ${}8+3-10+0 = 1$ ✓，验证 ${}8(1,2)+3(2,5)-10(1,3) = (4,1)$ ✓）
 
 （$c_4 = 1$ 得另一解 $\mathbf{y} = 13\mathbf{v}_1 + 6\mathbf{v}_2 - 19\mathbf{v}_3 + \mathbf{v}_4$ ✓——仿射组合一般不唯一！）
 
@@ -6843,7 +6843,7 @@ y \end{bmatrix} = \begin{bmatrix} 13 \\
 
 **例3（Example 3，求过两点的直线方程）**：$\mathbf{v}_1 = (1,2)$, $\mathbf{v}_2 = (6,0)$。
 
-**解**：平移集 $\mathbf{v}_2 - \mathbf{v}_1 = (5,-2)$；法向量须满足 $\mathbf{n}\cdot(5,-2) = 0$。**观察得** $\mathbf{n} = (2,5)$（$10 - 10 = 0$ ✓）。$d = f(\mathbf{v}_1) = 2(1) + 5(2) = 12$。
+**解**：平移集 $\mathbf{v}_2 - \mathbf{v}_1 = (5,-2)$；法向量须满足 $\mathbf{n}\cdot(5,-2) = 0$。**观察得** $\mathbf{n} = (2,5)$（${}10 - 10 = 0$ ✓）。$d = f(\mathbf{v}_1) = 2(1) + 5(2) = 12$。
 
 $$\boxed{2x + 5y = 12} \qquad (\text{验算 } f(\mathbf{v}_2) = 12 \checkmark)$$
 
@@ -6999,7 +6999,7 @@ $$S^0 = \{\mathbf{v}_1\}, \qquad S^k = \operatorname{conv}\{\mathbf{v}_1, \dots,
 
 ### 二次与三次 Bézier 曲线 Quadratic and Cubic Bézier Curves
 
-**定义**：给定点 $\mathbf{p}_0, \mathbf{p}_1, \mathbf{p}_2, \dots$（控制点），$0 \leq t \leq 1$：
+**定义**：给定点 $\mathbf{p}_0, \mathbf{p}_1, \mathbf{p}_2, \dots$（控制点），${}0 \leq t \leq 1$：
 
 $$\mathbf{w}(t) = (1-t)^2\mathbf{p}_0 + 2t(1-t)\mathbf{p}_1 + t^2\mathbf{p}_2 \tag{1}$$
 
@@ -7076,7 +7076,7 @@ $$3(\mathbf{q}_3 - \mathbf{q}_2) = \mathbf{y}'(1) = \tfrac{1}{2}\mathbf{x}'(.5) 
 
 ### B-样条（B-splines）
 
-Bézier 曲线的"局部控制版"：每段曲线只由相邻 4 个控制点决定（移动 $\mathbf{p}_i$ 只影响相邻两段）。基函数加权（如 $1/6$ 因子的均匀 B-样条）使曲线逼近控制多边形但不穿过端点——CAD 自由曲面的工业主力。
+Bézier 曲线的"局部控制版"：每段曲线只由相邻 4 个控制点决定（移动 $\mathbf{p}_i$ 只影响相邻两段）。基函数加权（如 ${}1/6$ 因子的均匀 B-样条）使曲线逼近控制多边形但不穿过端点——CAD 自由曲面的工业主力。
 
 ### 8.6 小结
 
@@ -7147,7 +7147,7 @@ $$\frac{1 + 2i}{3 + 5i} = \frac{(1+2i)(3-5i)}{3^2+5^2} = \frac{13 + i}{34} = \fr
 
 复数 $z = a + bi$ ↔ 复平面（complex plane）的点 $(a, b)$（横轴实部、纵轴虚部）：
 
-- **共轭 = 关于实轴的镜像反射**（$3+i \leftrightarrow 3-i$）
+- **共轭 = 关于实轴的镜像反射**（${}3+i \leftrightarrow 3-i$）
 - **加法 = 向量加法**（平行四边形法则，FIGURE 2）
 - **模 = 到原点的距离**
 
